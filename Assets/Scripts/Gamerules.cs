@@ -31,5 +31,7 @@ public class Gamerules : MonoBehaviour {
         public int lifeLimit;
         [Range(0,100)]
         public float timeLimit;
+
+        
     }
 }

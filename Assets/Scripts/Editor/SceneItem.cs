@@ -4,10 +4,10 @@ using System.Collections;
 
 public class SceneItem : Editor {
 
-    [MenuItem("Open Scenes/Test Scenes/TestScene_01")]
+    [MenuItem("Open Scenes/Test Scenes/TestScene_Movement")]
 	public static void OpenTestScene_01()
     {
-        OpenScene("Test Scenes/TestScene_01");
+        OpenScene("Test Scenes/TestScene_Movement");
     }
 
     [MenuItem("Open Scenes/Test Scenes/TestScene_02")]
