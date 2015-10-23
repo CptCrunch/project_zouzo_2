@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     public string playerAxis;
     private bool mirror = true;
 
-    public bool grounded;
+    private bool grounded;
 
     private Rigidbody2D rb2d;
 
@@ -17,31 +17,48 @@ public class PlayerController : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
 	}
 
-    float test;
-
 	void FixedUpdate () {
+        Movement();
+    }
+
+    void Movement()
+    {
         float move = Input.GetAxis(playerAxis + "_Horizontal");
-        //if (Mathf.Abs(move) < 0.2)
-        //{
-        //    test = move;
-        //    Debug.Log(move);
-        //    move = 0;
-        //}
         rb2d.velocity = new Vector2(move * speed, rb2d.velocity.y);
 
-            if (move > 0 && !mirror)
+        if (Input.GetButtonDown(playerAxis + "_Jump") && grounded) { 
+            rb2d.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
+        }
+
+        if (move > 0 && !mirror)
+        {
+            Flip();
+        }
+        else
+        {
+            if (move < 0 && mirror)
             {
                 Flip();
             }
-            else
-            {
-                if (move < 0 && mirror)
-                {
-                    Flip();
-                }
-            }
-        
-	}
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        Debug.Log(other.transform.tag);
+        if(other.transform.tag == "Ground")
+        {
+            grounded = true;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.transform.tag == "Ground")
+        {
+            grounded = false;
+        }
+    }
 
     void Flip()
     {
