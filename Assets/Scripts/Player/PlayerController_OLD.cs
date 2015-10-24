@@ -17,13 +17,14 @@ public class PlayerController : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
 	}
 
-	void FixedUpdate () {
+    void FixedUpdate () {
         Movement();
-    }
+	}
 
     void Movement()
     {
         float move = Input.GetAxis(playerAxis + "_Horizontal");
+
         rb2d.velocity = new Vector2(move * speed, rb2d.velocity.y);
 
         if (Input.GetButtonDown(playerAxis + "_Jump") && grounded) { 
@@ -34,27 +35,23 @@ public class PlayerController : MonoBehaviour {
         {
             Flip();
         }
-        else
+        else if(move < 0 && mirror)
         {
-            if (move < 0 && mirror)
-            {
-                Flip();
-            }
+            Flip();
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnCollisionEnter2D(Collision2D _other)
     {
-        Debug.Log(other.transform.tag);
-        if(other.transform.tag == "Ground")
+        if(_other.transform.tag == "Ground")
         {
             grounded = true;
         }
     }
 
-    void OnCollisionExit2D(Collision2D other)
+    void OnCollisionExit2D(Collision2D _other)
     {
-        if (other.transform.tag == "Ground")
+        if (_other.transform.tag == "Ground")
         {
             grounded = false;
         }
