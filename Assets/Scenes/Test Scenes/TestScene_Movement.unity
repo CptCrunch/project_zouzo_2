@@ -397,7 +397,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 924336506}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.13999999, y: 2, z: .0118408203}
+  m_LocalPosition: {x: 11.6800003, y: 2, z: .0118408203}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -526,7 +526,7 @@ GameObject:
   - 114: {fileID: 1275418037}
   - 114: {fileID: 1275418036}
   m_Layer: 0
-  m_Name: Player_1_New (1)
+  m_Name: 'Player_2_New '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -640,7 +640,7 @@ GameObject:
   - 23: {fileID: 1531286254}
   - 61: {fileID: 1531286253}
   m_Layer: 8
-  m_Name: Quad (1)
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -714,7 +714,7 @@ GameObject:
   - 23: {fileID: 2009567424}
   - 61: {fileID: 2009567423}
   m_Layer: 8
-  m_Name: Quad (2)
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
