@@ -5,16 +5,16 @@ using System.Collections.Generic;
 
 public class SceneItem : Editor {
 
-    [MenuItem("Open Scenes/Test Scenes/TestScene_Movement")]
+    [MenuItem("Open Scenes/Test Scenes/TestScene_01_Movement")]
 	public static void OpenTestScene_01()
     {
-        OpenScene("Test Scenes/TestScene_Movement");
+        OpenScene("Test Scenes/TestScene_01_Movement");
     }
 
-    [MenuItem("Open Scenes/Test Scenes/TestScene_02")]
+    [MenuItem("Open Scenes/Test Scenes/TestScene_02_Platforms")]
     public static void OpenTestScene_02()
     {
-        OpenScene("Test Scenes/TestScene_02");
+        OpenScene("Test Scenes/TestScene_02_Platforms");
     }
 
     [MenuItem("Open Scenes/Main Menu")]

@@ -8,4 +8,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Test Scenes/TestScene_Movement.unity
   - enabled: 1
-    path: Assets/Scenes/Test Scenes/TestScene_02.unity
+    path: Assets/Scenes/Test Scenes/TestScene_02_Platforms.unity
