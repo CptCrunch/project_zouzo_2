@@ -3,19 +3,19 @@ using System.Collections;
 
 public class Controller2D : RaycastController
 {
-
+    #region Variables
     float maxClimbAngle = 80;
     float maxDescendAngle = 80;
 
     public CollisionInfo collisions;
     [HideInInspector]
     public Vector2 playerInput;
+    #endregion
 
     public override void Start()
     {
         base.Start();
         collisions.faceDir = 1;
-
     }
 
     public void Move(Vector3 velocity, bool standingOnPlatform)

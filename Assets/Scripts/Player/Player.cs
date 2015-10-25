@@ -4,31 +4,39 @@ using System.Collections;
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour
 {
+    #region Variables
+    float moveSpeed = 6;
+    Controller2D controller;
+    [Tooltip("Define Controller: P1, P2, P3, P4, KB")]
+    public string playerAxis;
 
+    #region Jumping
+    [Header ("Jumping:")]
     public float maxJumpHeight = 4;
     public float minJumpHeight = 1;
+    [Tooltip("Time it takes to jump (Used to calculate gravity)")]
     public float timeToJumpApex = .4f;
+
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
-    float moveSpeed = 6;
-
-    public Vector2 wallJumpClimb;
-    public Vector2 wallJumpOff;
-    public Vector2 wallLeap;
-
-    public float wallSlideSpeedMax = 3;
-    public float wallStickTime = .25f;
-    float timeToWallUnstick;
-
     float gravity;
     float maxJumpVelocity;
     float minJumpVelocity;
     Vector3 velocity;
     float velocityXSmoothing;
+    #endregion
 
-    Controller2D controller;
+    #region Walljump & Sliding
+    [Header("Wall Jumping & Sliding:")]
+    public Vector2 wallJumpClimb;
+    public Vector2 wallJumpOff;
+    public Vector2 wallLeap;
+    public float wallSlideSpeedMax = 3;
+    public float wallStickTime = .25f;
 
-    public string playerAxis;
+    float timeToWallUnstick;
+    #endregion
+    #endregion
 
     void Start()
     {
@@ -40,7 +48,12 @@ public class Player : MonoBehaviour
         print("Gravity: " + gravity + "  Jump Velocity: " + maxJumpVelocity);
     }
 
-    void Update()
+    void FixedUpdate()
+    {
+        Movement();
+    }
+
+    void Movement()
     {
         Vector2 input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
         int wallDirX = (controller.collisions.left) ? -1 : 1;
@@ -81,8 +94,6 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown(playerAxis + "_Jump"))
         {
-            print(playerAxis + "_Jump");
-
             if (wallSliding)
             {
                 if (wallDirX == input.x)
@@ -108,7 +119,6 @@ public class Player : MonoBehaviour
         }
         if (Input.GetButtonUp(playerAxis + "_Jump"))
         {
-            print(playerAxis + "_Jump");
             if (velocity.y > minJumpVelocity)
             {
                 velocity.y = minJumpVelocity;
@@ -123,6 +133,5 @@ public class Player : MonoBehaviour
         {
             velocity.y = 0;
         }
-
     }
 }

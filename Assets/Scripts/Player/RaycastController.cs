@@ -4,10 +4,14 @@ using System.Collections;
 [RequireComponent(typeof(BoxCollider2D))]
 public class RaycastController : MonoBehaviour
 {
+    #region Variables
+    [Tooltip ("Choose the layer to stand on")]
     public LayerMask collisionMask;
 
     public const float skinWidth = .015f;
+    [HideInInspector]
     public int horizontalRayCount = 4;
+    [HideInInspector]
     public int verticalRayCount = 4;
 
     [HideInInspector]
@@ -18,6 +22,7 @@ public class RaycastController : MonoBehaviour
     [HideInInspector]
     public BoxCollider2D collider;
     public RaycastOrigins raycastOrigins;
+    #endregion
 
     public virtual void Awake()
     {

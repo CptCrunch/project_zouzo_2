@@ -2,20 +2,20 @@
 using System.Collections;
 
 [RequireComponent (typeof (Rigidbody2D))]
-public class PlayerController : MonoBehaviour {
+public class PlayerController_OLD : MonoBehaviour {
 
     public float speed = 11f;
     public float jumpPower = 150f;
     public string playerAxis;
     private bool mirror = true;
 
-    private bool grounded;
+    public bool grounded;
 
     private Rigidbody2D rb2d;
 
 	void Start () {
         rb2d = GetComponent<Rigidbody2D>();
-	}
+    }
 
     void FixedUpdate () {
         Movement();
@@ -27,7 +27,8 @@ public class PlayerController : MonoBehaviour {
 
         rb2d.velocity = new Vector2(move * speed, rb2d.velocity.y);
 
-        if (Input.GetButtonDown(playerAxis + "_Jump") && grounded) { 
+        if (Input.GetButtonDown(playerAxis + "_Jump") && grounded)
+        {
             rb2d.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
         }
 
