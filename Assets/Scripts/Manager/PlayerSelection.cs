@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,6 +8,7 @@ public class PlayerSelection : MonoBehaviour {
     public List<string> controller = new List<string>();
     private bool p1, p2, p3, p4, kb;
     public int levelToLoad;
+    public Text[] playerText = new Text[4];
 
     void Update()
     {
@@ -41,6 +43,12 @@ public class PlayerSelection : MonoBehaviour {
             {
                 Application.LoadLevel(levelToLoad);
             }
+        }
+
+        for(int i = 0; i < controller.Count; i++)
+        {
+            playerText[i].color = Color.green;
+            playerText[i].text = controller[i] + " Connected";
         }
 
         Gamerules._instance.playerAmmount = controller.Count;
