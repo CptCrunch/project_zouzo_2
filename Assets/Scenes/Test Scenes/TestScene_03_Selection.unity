@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: []
-  levelToLoad: 1
+  levelToLoad: 3
 --- !u!4 &1587908094
 Transform:
   m_ObjectHideFlags: 0

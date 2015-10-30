@@ -17,24 +17,39 @@ public class Gamerules : MonoBehaviour {
     [Range(0,100)]
     public float damageModifier;
     public Gamemode[] gameModeList = new Gamemode[2];
-    public GameObject playerPrefab;
-    public Transform[] playerSpawn = new Transform[4];
+
+    //Player/Controller Selection
+    [Header("Player Selection")]
+    public GameObject[] playerPrefab = new GameObject[4];
+    private GameObject[] playerSpawn = new GameObject[4];
+    [Tooltip("Spawnpoints must have this given tag")]
+    public string spawnTag;
     #endregion
 
     void Awake()
     {
+        //Dont destroy the object on load of a new level
         DontDestroyOnLoad(gameObject);
+
         if (_instance == null) { _instance = this; }
     }
     
-    //Create All Player
+    //Create All Player when the level loads
     void OnLevelWasLoaded()
     {
+        //Get all objecticts with the given tag
+        playerSpawn = GameObject.FindGameObjectsWithTag(spawnTag);
+
+        int random;
+
         if (playerAmmount > 0)
         {
             for (int i = 0; i < playerAmmount; i++)
             {
-                GameObject go = Instantiate(playerPrefab, playerSpawn[i].position, Quaternion.identity) as GameObject;
+                //For a random spawnpoint for each player
+                random = Random.Range(0, playerSpawn.Length);
+
+                GameObject go = Instantiate(playerPrefab[i], playerSpawn[random].transform.position, Quaternion.identity) as GameObject;
                 go.GetComponent<Player>().playerAxis = "P" + (i + 1);
                 go.name = "P" + (i + 1) + "_Player";
             }

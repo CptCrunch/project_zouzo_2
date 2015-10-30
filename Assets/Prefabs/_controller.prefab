@@ -51,12 +51,12 @@ MonoBehaviour:
   - name: Time Limit
     lifeLimit: 0
     timeLimit: 60
-  playerPrefab: {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
-  playerSpawn:
-  - {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
-  - {fileID: 461336, guid: 17ebddeef7063a14fae06c58ceb2db86, type: 2}
-  - {fileID: 461336, guid: 47661e7f071059d4f9e5e9e12ab86c31, type: 2}
-  - {fileID: 0}
+  playerPrefab:
+  - {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+  - {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+  - {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+  - {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+  spawnTag: Player Spawn
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -30,9 +30,14 @@ public class PlayerSelection : MonoBehaviour {
             if (!p4) { controller.Add("P4"); p4 = true; }
         }
 
-        if(Input.GetKeyDown(KeyCode.Joystick1Button7) || Input.GetKeyDown(KeyCode.Joystick2Button7) || Input.GetKeyDown(KeyCode.Joystick3Button7) || Input.GetKeyDown(KeyCode.Joystick4Button7) || Input.GetKeyDown(KeyCode.Backspace))
+        if (Input.GetKeyDown(KeyCode.LeftControl)) 
         {
-            if (p1 || p2 || p3 || p4)
+            if (!kb) { controller.Add("KB"); kb = true; }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Joystick1Button7) || Input.GetKeyDown(KeyCode.Joystick2Button7) || Input.GetKeyDown(KeyCode.Joystick3Button7) || Input.GetKeyDown(KeyCode.Joystick4Button7) || Input.GetKeyDown(KeyCode.A))
+        {
+            if (p1 || p2 || p3 || p4 || kb)
             {
                 Application.LoadLevel(levelToLoad);
             }

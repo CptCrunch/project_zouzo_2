@@ -11,3 +11,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Test Scenes/TestScene_02_Platforms.unity
   - enabled: 1
     path: Assets/Scenes/Test Scenes/TestScene_03_Selection.unity
+  - enabled: 1
+    path: Assets/Scenes/Test Scenes/TestScene_03_Selection.unity
