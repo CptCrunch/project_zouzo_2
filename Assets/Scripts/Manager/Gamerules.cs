@@ -40,18 +40,21 @@ public class Gamerules : MonoBehaviour {
         //Get all objecticts with the given tag
         playerSpawn = GameObject.FindGameObjectsWithTag(spawnTag);
 
-        int random;
-
         if (playerAmmount > 0)
         {
             for (int i = 0; i < playerAmmount; i++)
             {
-                //For a random spawnpoint for each player
-                random = Random.Range(0, playerSpawn.Length);
+                GameObject go = Instantiate(playerPrefab[i], playerSpawn[Random.Range(0, playerSpawn.Length)].transform.position, Quaternion.identity) as GameObject;
 
-                GameObject go = Instantiate(playerPrefab[i], playerSpawn[random].transform.position, Quaternion.identity) as GameObject;
-                go.GetComponent<Player>().playerAxis = "P" + (i + 1);
-                go.name = "P" + (i + 1) + "_Player";
+                if (PlayerSelection._instance.controller[i] == "KB") 
+                {
+                    go.GetComponent<Player>().playerAxis = "KB";
+                    go.name = "KB_Player";
+                } else
+                {
+                    go.GetComponent<Player>().playerAxis = "P" + (i + 1);
+                    go.name = "P" + (i + 1) + "_Player";
+                }
             }
         }
     }
