@@ -17,6 +17,12 @@ public class SceneItem : Editor {
         OpenScene("Test Scenes/TestScene_02_Platforms");
     }
 
+    [MenuItem("Open Scenes/Test Scenes/TestScene_03_Selection")]
+    public static void OpenTestScene_03()
+    {
+        OpenScene("Test Scenes/TestScene_03_Selection");
+    }
+
     [MenuItem("Open Scenes/Main Menu")]
     public static void MainMenu()
     {

@@ -289,7 +289,6 @@ GameObject:
   - 92: {fileID: 959119506}
   - 124: {fileID: 959119505}
   - 81: {fileID: 959119504}
-  - 114: {fileID: 959119509}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -364,29 +363,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &959119509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 959119503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 976bae19c6eb6c94f987156ea5f2e99e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerAmmount: 1
-  abilityLimit: 0
-  itemSpawnrate: 0
-  timeDeathSpawn: 0
-  damageModifier: 0
-  gameModeList:
-  - name: Life Limit
-    lifeLimit: 5
-    timeLimit: 0
-  - name: Time Limit
-    lifeLimit: 0
-    timeLimit: 60
 --- !u!1001 &1073081198
 Prefab:
   m_ObjectHideFlags: 0

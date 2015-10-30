@@ -7,8 +7,8 @@ public class Gamerules : MonoBehaviour {
 
     #region Gamerules Variable
     [Header("Game Rules")]
-    [Range (1,4)]
-    public int playerAmmount = 1;
+    [Range (0,4)]
+    public int playerAmmount = 0;
     [Tooltip("Defines the maximal use of an ability")]
     public uint abilityLimit;
     public float itemSpawnrate;
@@ -17,11 +17,28 @@ public class Gamerules : MonoBehaviour {
     [Range(0,100)]
     public float damageModifier;
     public Gamemode[] gameModeList = new Gamemode[2];
+    public GameObject playerPrefab;
+    public Transform[] playerSpawn = new Transform[4];
     #endregion
 
     void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         if (_instance == null) { _instance = this; }
+    }
+    
+    //Create All Player
+    void OnLevelWasLoaded()
+    {
+        if (playerAmmount > 0)
+        {
+            for (int i = 0; i < playerAmmount; i++)
+            {
+                GameObject go = Instantiate(playerPrefab, playerSpawn[i].position, Quaternion.identity) as GameObject;
+                go.GetComponent<Player>().playerAxis = "P" + (i + 1);
+                go.name = "P" + (i + 1) + "_Player";
+            }
+        }
     }
 
     [System.Serializable]
@@ -31,7 +48,5 @@ public class Gamerules : MonoBehaviour {
         public int lifeLimit;
         [Range(0,100)]
         public float timeLimit;
-
-        
     }
 }
