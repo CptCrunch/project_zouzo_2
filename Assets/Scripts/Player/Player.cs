@@ -5,8 +5,9 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
     #region Variables
-    float moveSpeed = 6;
-    Controller2D controller;
+    public float moveSpeed = 6;
+    [HideInInspector]
+    public Controller2D controller;
     [Tooltip("Define Controller: P1, P2, P3, P4, KB")]
     public string playerAxis;
 
@@ -22,7 +23,8 @@ public class Player : MonoBehaviour
     float gravity;
     float maxJumpVelocity;
     float minJumpVelocity;
-    Vector3 velocity;
+    [HideInInspector]
+    public Vector3 velocity;
     float velocityXSmoothing;
     #endregion
 
@@ -36,6 +38,13 @@ public class Player : MonoBehaviour
 
     float timeToWallUnstick;
     #endregion
+
+    #region Condition Variables
+    [HideInInspector]
+    public bool stunned = false;
+    //[HideInInspector]
+    public bool knockUp = false;
+    #endregion
     #endregion
 
     void Start()
@@ -45,12 +54,16 @@ public class Player : MonoBehaviour
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
-        print("Gravity: " + gravity + "  Jump Velocity: " + maxJumpVelocity);
+
+        //print("Gravity: " + gravity + "  Jump Velocity: " + maxJumpVelocity);
     }
 
     void FixedUpdate()
     {
-        Movement();
+        if (!stunned)
+        {
+            Movement();
+        }
     }
 
     void Movement()
@@ -59,10 +72,13 @@ public class Player : MonoBehaviour
         int wallDirX = (controller.collisions.left) ? -1 : 1;
 
         float targetVelocityX = input.x * moveSpeed;
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
-
+        if (!knockUp)
+        {
+            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+        }
+         
         bool wallSliding = false;
-        if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
+        if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0 && !knockUp)
         {
             wallSliding = true;
 
@@ -89,9 +105,8 @@ public class Player : MonoBehaviour
             {
                 timeToWallUnstick = wallStickTime;
             }
-
         }
-
+  
         if (Input.GetButtonDown(playerAxis + "_Jump"))
         {
             if (wallSliding)
@@ -125,7 +140,6 @@ public class Player : MonoBehaviour
             }
         }
 
-
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime, input);
 
@@ -133,5 +147,10 @@ public class Player : MonoBehaviour
         {
             velocity.y = 0;
         }
+    }
+
+    void JumpingUo()
+    {
+
     }
 }

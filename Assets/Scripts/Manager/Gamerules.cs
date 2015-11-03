@@ -49,11 +49,30 @@ public class Gamerules : MonoBehaviour {
                 if (PlayerSelection._instance.controller[i] == "KB") 
                 {
                     go.GetComponent<Player>().playerAxis = "KB";
-                    go.name = "KB_Player";
-                } else
+                    go.name = "KB_Player"; 
+                } 
+                if(PlayerSelection._instance.controller[i] == "P1")
                 {
-                    go.GetComponent<Player>().playerAxis = "P" + (i + 1);
-                    go.name = "P" + (i + 1) + "_Player";
+                    go.GetComponent<Player>().playerAxis = "P1";
+                    go.name = "P1_Player";
+                }
+
+                if(PlayerSelection._instance.controller[i] == "P2")
+                {
+                    go.GetComponent<Player>().playerAxis = "P2";
+                    go.name = "P2_Player";
+                }
+
+                if(PlayerSelection._instance.controller[i] == "P3")
+                {
+                    go.GetComponent<Player>().playerAxis = "P3";
+                    go.name = "P3_Player";
+                }
+
+                if(PlayerSelection._instance.controller[i] == "P4")
+                {
+                    go.GetComponent<Player>().playerAxis = "P4";
+                    go.name = "P4_Player";
                 }
             }
         }
