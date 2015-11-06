@@ -52,11 +52,23 @@ MonoBehaviour:
     lifeLimit: 0
     timeLimit: 60
   playerPrefab:
-  - {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
-  - {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
-  - {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
-  - {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+  - {fileID: 148546, guid: a4b39bed764cfa6418ea16d03dbeb90c, type: 2}
+  - {fileID: 148546, guid: a4b39bed764cfa6418ea16d03dbeb90c, type: 2}
+  - {fileID: 148546, guid: a4b39bed764cfa6418ea16d03dbeb90c, type: 2}
+  - {fileID: 148546, guid: a4b39bed764cfa6418ea16d03dbeb90c, type: 2}
   spawnTag: Player Spawn
+  connectedControllers: []
+  testPlayers:
+  - name: Controller 1
+    color: {r: .91911763, g: .195988342, b: .195988342, a: 0}
+  - name: Controller 2
+    color: {r: .288628876, g: .26794982, b: .867647052, a: 0}
+  - name: Controller 3
+    color: {r: .926470578, g: .837018192, b: .115808822, a: 0}
+  - name: Controller 4
+    color: {r: .438085526, g: .889705896, b: .294387996, a: 0}
+  - name: Keyboard
+    color: {r: .360294104, g: .360294104, b: .360294104, a: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

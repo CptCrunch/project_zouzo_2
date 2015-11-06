@@ -136,6 +136,10 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: -.567662895
       objectReference: {fileID: 0}
+    - target: {fileID: 2334680, guid: 44ade9fdad45f894288f81179cb320f4, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c6b119254913fdd48a81bc491ee5fb2e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 44ade9fdad45f894288f81179cb320f4, type: 2}
   m_IsPrefabParent: 0
@@ -190,6 +194,10 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: .596887112
       objectReference: {fileID: 0}
+    - target: {fileID: 2334680, guid: 44ade9fdad45f894288f81179cb320f4, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c6b119254913fdd48a81bc491ee5fb2e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 44ade9fdad45f894288f81179cb320f4, type: 2}
   m_IsPrefabParent: 0
@@ -447,7 +455,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1 &1671458963
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,7 +623,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_BackGroundColor: {r: .654411793, g: .828397632, b: 1, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -759,6 +767,10 @@ Prefab:
       propertyPath: verticalRayCount
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2396442, guid: 0ab9df1fdf1cccc48b3376838357c843, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7aca3fec9fb6dff4ba3ce13d74618c0d, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0ab9df1fdf1cccc48b3376838357c843, type: 2}
   m_IsPrefabParent: 0
@@ -813,6 +825,10 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: .400000185
       objectReference: {fileID: 0}
+    - target: {fileID: 2347168, guid: d8d2362582218ae468d74b9b53b01886, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c6b119254913fdd48a81bc491ee5fb2e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d8d2362582218ae468d74b9b53b01886, type: 2}
   m_IsPrefabParent: 0

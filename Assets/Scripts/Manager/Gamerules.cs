@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Gamerules : MonoBehaviour {
 
@@ -24,6 +25,11 @@ public class Gamerules : MonoBehaviour {
     private GameObject[] playerSpawn = new GameObject[4];
     [Tooltip("Spawnpoints must have this given tag")]
     public string spawnTag;
+
+    //Testing 
+    [HideInInspector]
+    public List<string> connectedControllers = new List<string>();
+    public TestPlayer[] testPlayers = new TestPlayer[5];
     #endregion
 
     void Awake()
@@ -48,34 +54,70 @@ public class Gamerules : MonoBehaviour {
 
                 if (PlayerSelection._instance.controller[i] == "KB") 
                 {
-                    go.GetComponent<Player>().playerAxis = "KB";
-                    go.name = "KB_Player"; 
+                    ChangeAxis("KB", go);
                 } 
                 if(PlayerSelection._instance.controller[i] == "P1")
                 {
-                    go.GetComponent<Player>().playerAxis = "P1";
-                    go.name = "P1_Player";
+                    ChangeAxis("P1", go);
                 }
 
                 if(PlayerSelection._instance.controller[i] == "P2")
                 {
-                    go.GetComponent<Player>().playerAxis = "P2";
-                    go.name = "P2_Player";
+                    ChangeAxis("P2", go);
                 }
 
                 if(PlayerSelection._instance.controller[i] == "P3")
                 {
-                    go.GetComponent<Player>().playerAxis = "P3";
-                    go.name = "P3_Player";
+                    ChangeAxis("P3", go);
                 }
 
                 if(PlayerSelection._instance.controller[i] == "P4")
                 {
-                    go.GetComponent<Player>().playerAxis = "P4";
-                    go.name = "P4_Player";
+                    ChangeAxis("P4", go);
                 }
             }
         }
+    }
+
+    private void ChangeAxis(string axis, GameObject obj)
+    {
+        obj.GetComponent<Player>().playerAxis = axis;
+        obj.name = axis + "_Player";
+
+        switch(axis)
+        {
+            case "P1":
+                obj.GetComponent<Renderer>().material.color = testPlayers[0].color;
+                obj.GetComponentInChildren<TextMesh>().text = testPlayers[0].name;
+                break;
+
+            case "P2":
+                obj.GetComponent<Renderer>().material.color = testPlayers[1].color;
+                obj.GetComponentInChildren<TextMesh>().text = testPlayers[1].name;
+                break;
+
+            case "P3":
+                obj.GetComponent<Renderer>().material.color = testPlayers[2].color;
+                obj.GetComponentInChildren<TextMesh>().text = testPlayers[2].name;
+                break;
+
+            case "P4":
+                obj.GetComponent<Renderer>().material.color = testPlayers[3].color;
+                obj.GetComponentInChildren<TextMesh>().text = testPlayers[3].name;
+                break;
+
+            case "KB":
+                obj.GetComponent<Renderer>().material.color = testPlayers[4].color;
+                obj.GetComponentInChildren<TextMesh>().text = testPlayers[4].name;
+                break;
+        }       
+    }
+    
+    [System.Serializable]
+    public class TestPlayer
+    {
+        public string name;
+        public Color color;
     }
 
     [System.Serializable]

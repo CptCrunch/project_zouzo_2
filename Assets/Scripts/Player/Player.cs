@@ -148,9 +148,4 @@ public class Player : MonoBehaviour
             velocity.y = 0;
         }
     }
-
-    void JumpingUo()
-    {
-
-    }
 }

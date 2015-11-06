@@ -199,117 +199,21 @@ Prefab:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerColors.Array.data[1].r
-      value: .83088237
-      objectReference: {fileID: 0}
+      propertyPath: playerPrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
     - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerColors.Array.data[1].g
-      value: .171064034
-      objectReference: {fileID: 0}
+      propertyPath: playerPrefab.Array.data[1]
+      value: 
+      objectReference: {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
     - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerColors.Array.data[1].b
-      value: .171064034
-      objectReference: {fileID: 0}
+      propertyPath: playerPrefab.Array.data[2]
+      value: 
+      objectReference: {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
     - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerColors.Array.data[2].r
-      value: .240376323
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerColors.Array.data[2].g
-      value: .321607143
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerColors.Array.data[2].b
-      value: .860294104
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerColors.Array.data[3].r
-      value: .325854242
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerColors.Array.data[3].g
-      value: .904411793
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerColors.Array.data[3].b
-      value: .353784651
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerColors.Array.data[0].r
-      value: .41911763
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerColors.Array.data[0].g
-      value: .41911763
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerColors.Array.data[0].b
-      value: .41911763
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerDefine.Array.data[0].name
-      value: Keyboard
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerDefine.Array.data[0].color.r
-      value: .838235259
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerDefine.Array.data[0].color.g
-      value: .838235259
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerDefine.Array.data[0].color.b
-      value: .838235259
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerDefine.Array.data[1].color.r
-      value: .83088237
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerDefine.Array.data[1].color.g
-      value: .311580896
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerDefine.Array.data[1].color.b
-      value: .311580896
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerDefine.Array.data[1].name
-      value: Controller 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerDefine.Array.data[2].color.r
-      value: .28897509
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerDefine.Array.data[2].color.g
-      value: .22188583
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerDefine.Array.data[2].color.b
-      value: .79411763
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerDefine.Array.data[2].name
-      value: Controller 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerDefine.Array.data[3].color.r
-      value: .161980987
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerDefine.Array.data[3].color.g
-      value: .786764741
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerDefine.Array.data[3].color.b
-      value: .269702345
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: playerDefine.Array.data[3].name
-      value: Controller 3
-      objectReference: {fileID: 0}
+      propertyPath: playerPrefab.Array.data[3]
+      value: 
+      objectReference: {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
   m_IsPrefabParent: 0
