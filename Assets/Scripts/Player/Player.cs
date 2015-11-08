@@ -11,6 +11,15 @@ public class Player : MonoBehaviour
     [Tooltip("Define Controller: P1, P2, P3, P4, KB")]
     public string playerAxis;
 
+    #region Player Vitals
+    private LivingEntity playerVitals;
+
+    [Header("Player Vitals:")]
+    public float maxHealth;
+    public string name;
+    public float basicAttackDamage;
+    #endregion
+
     #region Jumping
     [Header ("Jumping:")]
     public float maxJumpHeight = 4;
@@ -42,7 +51,7 @@ public class Player : MonoBehaviour
     #region Condition Variables
     [HideInInspector]
     public bool stunned = false;
-    //[HideInInspector]
+    [HideInInspector]
     public bool knockUp = false;
     #endregion
 
@@ -58,6 +67,8 @@ public class Player : MonoBehaviour
         controller = GetComponent<Controller2D>();
         _animator = GetComponent<Animator>();
 
+        playerVitals = new LivingEntity(maxHealth, name, basicAttackDamage * (Gamerules._instance.damageModifier / 100));
+
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
@@ -72,19 +83,7 @@ public class Player : MonoBehaviour
             Movement();
         }
 
-        if(Input.GetKey(KeyCode.X))
-        {
-            if(!death)
-            {
-                _animator.SetBool("Death", death);
-                death = true;
-            } else
-            {
-                _animator.SetBool("Death", death);
-                death = false;
-            }
-        }
-
+        #region Flipping
         if (Input.GetAxis(playerAxis + "_Horizontal") > 0 && !mirror)
         {
             Flip();
@@ -93,6 +92,7 @@ public class Player : MonoBehaviour
         {
             Flip();
         }
+        #endregion
     }
 
     void Movement()
@@ -200,4 +200,5 @@ public class Player : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
     }
+
 }

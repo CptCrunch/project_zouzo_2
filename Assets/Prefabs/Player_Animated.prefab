@@ -109,7 +109,7 @@ Animator:
   m_GameObject: {fileID: 183932}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3bdcf7931c6a9bb4a8ac522f7a228012, type: 2}
+  m_Controller: {fileID: 9100000, guid: 98c5e2753b67742469c17a8bc07fc973, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -183,9 +183,12 @@ MonoBehaviour:
   moveSpeed: 6
   controller: {fileID: 0}
   playerAxis: KB
+  maxHealth: 10
+  name: 
+  basicAttackDamage: 5
   maxJumpHeight: 4
   minJumpHeight: 1
-  timeToJumpApex: .400000006
+  timeToJumpApex: .5
   velocity: {x: 0, y: 0, z: 0}
   wallJumpClimb: {x: 8.5, y: 17}
   wallJumpOff: {x: 8.5, y: 7}
@@ -218,7 +221,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300012, guid: d1090fce9ea55764c9e66e437783737b, type: 3}
+  m_Sprite: {fileID: 21300016, guid: f6915ce763f4b9245b850c0fb904ac60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

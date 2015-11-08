@@ -15,7 +15,7 @@ public class Gamerules : MonoBehaviour {
     public float itemSpawnrate;
     [Tooltip("Time between player death and spawn")]
     public float timeDeathSpawn;
-    [Range(0,100)]
+    [Range(0,200), Tooltip("In Percent (100% = normal Damage")]
     public float damageModifier;
     public Gamemode[] gameModeList = new Gamemode[2];
 
