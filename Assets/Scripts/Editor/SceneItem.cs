@@ -29,6 +29,12 @@ public class SceneItem : Editor {
         OpenScene("Test Scenes/TestScene_04_AfterSelection");
     }
 
+    [MenuItem("Open Scenes/Test Scenes/TestScene_05_Animations")]
+    public static void OpenTestScene_05()
+    {
+        OpenScene("Test Scenes/TestScene_05_Animations");
+    }
+
     [MenuItem("Open Scenes/Main Menu")]
     public static void MainMenu()
     {

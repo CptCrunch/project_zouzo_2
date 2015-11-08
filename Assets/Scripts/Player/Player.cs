@@ -45,11 +45,18 @@ public class Player : MonoBehaviour
     //[HideInInspector]
     public bool knockUp = false;
     #endregion
+
+    #region Animations 
+    private Animator _animator;
+    private bool mirror = false;
+    private bool death = false;
+    #endregion
     #endregion
 
     void Start()
     {
         controller = GetComponent<Controller2D>();
+        _animator = GetComponent<Animator>();
 
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -64,17 +71,41 @@ public class Player : MonoBehaviour
         {
             Movement();
         }
+
+        if(Input.GetKey(KeyCode.X))
+        {
+            if(!death)
+            {
+                _animator.SetBool("Death", death);
+                death = true;
+            } else
+            {
+                _animator.SetBool("Death", death);
+                death = false;
+            }
+        }
+
+        if (Input.GetAxis(playerAxis + "_Horizontal") > 0 && !mirror)
+        {
+            Flip();
+        }
+        else if (Input.GetAxis(playerAxis + "_Horizontal") < 0 && mirror)
+        {
+            Flip();
+        }
     }
 
     void Movement()
     {
         Vector2 input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
+        _animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw(playerAxis + "_Horizontal")));
         int wallDirX = (controller.collisions.left) ? -1 : 1;
 
         float targetVelocityX = input.x * moveSpeed;
         if (!knockUp)
         {
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+            
         }
          
         bool wallSliding = false;
@@ -129,7 +160,9 @@ public class Player : MonoBehaviour
             }
             if (controller.collisions.below)
             {
+                _animator.SetTrigger("Jump");
                 velocity.y = maxJumpVelocity;
+               
             }
         }
         if (Input.GetButtonUp(playerAxis + "_Jump"))
@@ -140,12 +173,31 @@ public class Player : MonoBehaviour
             }
         }
 
+        if(velocity.y < -0.1)
+        {
+            _animator.SetTrigger("Fall");
+        }
+
+        if(velocity.y == 0)
+        {
+            _animator.SetTrigger("Land");
+        }
+
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime, input);
 
         if (controller.collisions.above || controller.collisions.below)
         {
             velocity.y = 0;
+
         }
+    }
+
+    void Flip()
+    {
+        mirror = !mirror;
+        Vector2 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
 }
