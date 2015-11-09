@@ -12,7 +12,10 @@ public class LivingEntity
     private float basicAttackDamage;
 
     public LivingEntity(float maxHealth, string name, float basicAttackDamage) {
-        this.maxHealth = maxHealth;
+        if (Gamerules._instance.playerMaxHealth == 0)
+        {
+            this.maxHealth = maxHealth;
+        } else { this.maxHealth = Gamerules._instance.playerMaxHealth; }
         this.currHealth = maxHealth;
         this.name = name;
         this.basicAttackDamage = basicAttackDamage;

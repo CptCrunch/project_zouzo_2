@@ -10,6 +10,7 @@ public class Gamerules : MonoBehaviour {
     [Header("Game Rules")]
     [Range (0,4)]
     public int playerAmmount = 0;
+    public float playerMaxHealth = 0;
     [Tooltip("Defines the maximal use of an ability")]
     public uint abilityLimit;
     public float itemSpawnrate;
