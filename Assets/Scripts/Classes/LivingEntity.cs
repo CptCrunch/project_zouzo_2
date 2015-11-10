@@ -12,10 +12,11 @@ public class LivingEntity
     private float basicAttackDamage;
 
     public LivingEntity(float maxHealth, string name, float basicAttackDamage) {
-        if (Gamerules._instance.playerMaxHealth == 0)
-        {
-            this.maxHealth = maxHealth;
-        } else { this.maxHealth = Gamerules._instance.playerMaxHealth; }
+        
+        // set maxHealth ( will use maxHealth from Gamerulses )
+        if (Gamerules._instance.playerMaxHealth == 0) { this.maxHealth = maxHealth; } 
+        else { this.maxHealth = Gamerules._instance.playerMaxHealth; }
+
         this.currHealth = maxHealth;
         this.name = name;
         this.basicAttackDamage = basicAttackDamage;
@@ -28,25 +29,20 @@ public class LivingEntity
     #endregion
 
     #region Functions
-    public void Heal(float ammount)
-    {
+
+    // heal Player
+    public void Heal(float ammount) {
         float newHealth = currHealth + ammount;
-        if(newHealth > maxHealth)
-        {
-            currHealth = maxHealth;
-        } else
-        {
-            currHealth = newHealth;
-        }
+
+        if(newHealth > maxHealth) { currHealth = maxHealth; }
+        else { currHealth = newHealth; }
     }
 
-    public void GetDamage(float ammount)
-    {
+    // damage Player
+    public void GetDamage(float ammount) {
         currHealth -= ammount;
-        if(ammount >= maxHealth || currHealth <= 0)
-        {
-            currHealth = 0;
-        }
+
+        if(ammount >= maxHealth || currHealth <= 0) { currHealth = 0; }
     }
     #endregion
 }

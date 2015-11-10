@@ -5,9 +5,12 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
     #region Variables
+
     public float moveSpeed = 6;
+    
     [HideInInspector]
     public Controller2D controller;
+   
     [Tooltip("Define Controller: P1, P2, P3, P4, KB")]
     public string playerAxis;
 
@@ -17,8 +20,11 @@ public class Player : MonoBehaviour
     [Header("Player Vitals:")]
     public float maxHealth;
     public string name;
+    [Tooltip("Only used if its not set in gamerules")]
     public float basicAttackDamage;
     #endregion
+
+    Vector2 input;
 
     #region Jumping
     [Header ("Jumping:")]
@@ -49,6 +55,7 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Condition Variables
+    private bool disabled = false;
     [HideInInspector]
     public bool stunned = false;
     [HideInInspector]
@@ -62,143 +69,123 @@ public class Player : MonoBehaviour
     #endregion
     #endregion
 
-    void Start()
-    {
+    void Start() {
         controller = GetComponent<Controller2D>();
         _animator = GetComponent<Animator>();
 
+        // create playerVitals
         playerVitals = new LivingEntity(maxHealth, name, basicAttackDamage * (Gamerules._instance.damageModifier / 100));
 
+        // calculate gravity
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
 
-        //print("Gravity: " + gravity + "  Jump Velocity: " + maxJumpVelocity);
+        /*print("Gravity: " + gravity + "  Jump Velocity: " + maxJumpVelocity);*/
     }
 
-    void FixedUpdate()
-    {
-        if (!stunned)
-        {
-            Movement();
-        }
+    void FixedUpdate() {
+
+        // imobelised
+        if (stunned || knockUp) { disabled = true; }
+        else { disabled = false; }
+
+        // get movement input ( controler / keyboard )
+        input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
+        _animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw(playerAxis + "_Horizontal")));
+
+        Movement();
+
+        // add gravity
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime, input);
+
+        // stop jumping / falling when colliding top / bottom
+        if (controller.collisions.above || controller.collisions.below) { velocity.y = 0; }
 
         #region Flipping
-        if (Input.GetAxis(playerAxis + "_Horizontal") > 0 && !mirror)
-        {
+        if (Input.GetAxis(playerAxis + "_Horizontal") > 0 && !mirror) {
             Flip();
         }
-        else if (Input.GetAxis(playerAxis + "_Horizontal") < 0 && mirror)
-        {
+        else if (Input.GetAxis(playerAxis + "_Horizontal") < 0 && mirror) {
             Flip();
         }
         #endregion
     }
 
-    void Movement()
-    {
-        Vector2 input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
-        _animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw(playerAxis + "_Horizontal")));
-        int wallDirX = (controller.collisions.left) ? -1 : 1;
+    void Movement() {
+        if (!disabled) {
 
-        float targetVelocityX = input.x * moveSpeed;
-        if (!knockUp)
-        {
+            // horizontal movement
+            float targetVelocityX = input.x * moveSpeed;
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+
+            int wallDirX = (controller.collisions.left) ? -1 : 1;
+            bool wallSliding = false;
             
-        }
-         
-        bool wallSliding = false;
-        if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0 && !knockUp)
-        {
-            wallSliding = true;
+            // sitcked to wall
+            if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0) {
+                wallSliding = true;
 
-            if (velocity.y < -wallSlideSpeedMax)
-            {
-                velocity.y = -wallSlideSpeedMax;
-            }
+                // regulate sliding speed
+                if (velocity.y < -wallSlideSpeedMax) { velocity.y = -wallSlideSpeedMax; }
+                
+                // walljump / leap
+                if (timeToWallUnstick > 0) {
+                    velocityXSmoothing = 0;
+                    velocity.x = 0;
 
-            if (timeToWallUnstick > 0)
-            {
-                velocityXSmoothing = 0;
-                velocity.x = 0;
+                    if (input.x != wallDirX && input.x != 0) {
+                        timeToWallUnstick -= Time.deltaTime; }
 
-                if (input.x != wallDirX && input.x != 0)
-                {
-                    timeToWallUnstick -= Time.deltaTime;
+                    else {
+                        timeToWallUnstick = wallStickTime; }
                 }
-                else
-                {
+
+                else {
                     timeToWallUnstick = wallStickTime;
                 }
             }
-            else
-            {
-                timeToWallUnstick = wallStickTime;
-            }
-        }
-  
-        if (Input.GetButtonDown(playerAxis + "_Jump"))
-        {
-            if (wallSliding)
-            {
-                if (wallDirX == input.x)
-                {
-                    velocity.x = -wallDirX * wallJumpClimb.x;
-                    velocity.y = wallJumpClimb.y;
+
+            // jump
+            if (Input.GetButtonDown(playerAxis + "_Jump")) {
+                if (wallSliding) {
+                    if (wallDirX == input.x) {
+                        velocity.x = -wallDirX * wallJumpClimb.x;
+                        velocity.y = wallJumpClimb.y;
+                    }
+
+                    else if (input.x == 0) {
+                        velocity.x = -wallDirX * wallJumpOff.x;
+                        velocity.y = wallJumpOff.y;
+                    }
+
+                    else {
+                        velocity.x = -wallDirX * wallLeap.x;
+                        velocity.y = wallLeap.y;
+                    }
                 }
-                else if (input.x == 0)
-                {
-                    velocity.x = -wallDirX * wallJumpOff.x;
-                    velocity.y = wallJumpOff.y;
-                }
-                else
-                {
-                    velocity.x = -wallDirX * wallLeap.x;
-                    velocity.y = wallLeap.y;
+
+                if (controller.collisions.below) {
+                    _animator.SetTrigger("Jump");
+                    velocity.y = maxJumpVelocity;
+
                 }
             }
-            if (controller.collisions.below)
-            {
-                _animator.SetTrigger("Jump");
-                velocity.y = maxJumpVelocity;
-               
+
+            if (Input.GetButtonUp(playerAxis + "_Jump")) {
+                if (velocity.y > minJumpVelocity) { velocity.y = minJumpVelocity; }
             }
-        }
-        if (Input.GetButtonUp(playerAxis + "_Jump"))
-        {
-            if (velocity.y > minJumpVelocity)
-            {
-                velocity.y = minJumpVelocity;
-            }
-        }
 
-        if(velocity.y < -0.1)
-        {
-            _animator.SetTrigger("Fall");
-        }
-
-        if(velocity.y == 0)
-        {
-            _animator.SetTrigger("Land");
-        }
-
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime, input);
-
-        if (controller.collisions.above || controller.collisions.below)
-        {
-            velocity.y = 0;
-
+            if (velocity.y < -0.1) { _animator.SetTrigger("Fall"); }
+            if (velocity.y == 0) { _animator.SetTrigger("Land"); }
         }
     }
-
-    void Flip()
-    {
+    
+    void Flip() {
         mirror = !mirror;
         Vector2 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
     }
-
 }
