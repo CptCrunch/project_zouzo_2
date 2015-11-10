@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
     [Header("Wall Jumping & Sliding:")]
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
-    public Vector2 wallLeap;
+    public float wallLeap;
     public float wallSlideSpeedMax = 3;
     public float wallStickTime = .25f;
 
@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
 
     void Start() {
         controller = GetComponent<Controller2D>();
-        _animator = GetComponent<Animator>();
+        /*_animator = GetComponent<Animator>();*/
 
         // create playerVitals
         playerVitals = new LivingEntity(maxHealth, name, basicAttackDamage * (Gamerules._instance.damageModifier / 100));
@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
 
         // get movement input ( controler / keyboard )
         input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
-        _animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw(playerAxis + "_Horizontal")));
+        /*_animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw(playerAxis + "_Horizontal")));*/
 
         Movement();
 
@@ -130,7 +130,7 @@ public class Player : MonoBehaviour
                 // regulate sliding speed
                 if (velocity.y < -wallSlideSpeedMax) { velocity.y = -wallSlideSpeedMax; }
                 
-                // walljump / leap
+                // stic to wall
                 if (timeToWallUnstick > 0) {
                     velocityXSmoothing = 0;
                     velocity.x = 0;
@@ -146,30 +146,42 @@ public class Player : MonoBehaviour
                     timeToWallUnstick = wallStickTime;
                 }
             }
-
+            
             // jump
             if (Input.GetButtonDown(playerAxis + "_Jump")) {
                 if (wallSliding) {
-                    if (wallDirX == input.x) {
+                    
+                    // wall climb
+                    if ((wallDirX < 0 && input.x < 0) || (wallDirX > 0 && input.x > 0))
+                    {
                         velocity.x = -wallDirX * wallJumpClimb.x;
                         velocity.y = wallJumpClimb.y;
                     }
-
+                    
+                    // wall jump
                     else if (input.x == 0) {
                         velocity.x = -wallDirX * wallJumpOff.x;
                         velocity.y = wallJumpOff.y;
                     }
-
+                    
+                    // wall leap
                     else {
-                        velocity.x = -wallDirX * wallLeap.x;
-                        velocity.y = wallLeap.y;
+                        if (Mathf.Abs(input.y) > 0.2) {
+                            velocity.x = -wallDirX * wallLeap / 2;
+                            velocity.y = wallLeap;
+                        }
+                        
+                        else {
+                            velocity.x = -wallDirX * wallLeap;
+                            velocity.y = wallLeap / 4;
+                        }
                     }
                 }
 
+                // jump on floor
                 if (controller.collisions.below) {
-                    _animator.SetTrigger("Jump");
+                    /*_animator.SetTrigger("Jump");*/
                     velocity.y = maxJumpVelocity;
-
                 }
             }
 
@@ -177,8 +189,8 @@ public class Player : MonoBehaviour
                 if (velocity.y > minJumpVelocity) { velocity.y = minJumpVelocity; }
             }
 
-            if (velocity.y < -0.1) { _animator.SetTrigger("Fall"); }
-            if (velocity.y == 0) { _animator.SetTrigger("Land"); }
+            /*if (velocity.y < -0.1) { _animator.SetTrigger("Fall"); }*/
+            /*if (velocity.y == 0) { _animator.SetTrigger("Land"); }*/
         }
     }
     

@@ -28,8 +28,9 @@ GameObject:
   - 33: {fileID: 3383638}
   - 23: {fileID: 2397464}
   - 61: {fileID: 6150000}
-  - 114: {fileID: 11462642}
+  - 95: {fileID: 9510682}
   - 114: {fileID: 11484944}
+  - 114: {fileID: 11462642}
   - 114: {fileID: 11440502}
   m_Layer: 9
   m_Name: Player
@@ -45,7 +46,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191884}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.34943104, y: -1.18637097, z: 0}
+  m_LocalPosition: {x: 4.23999977, y: -.209999993, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 407568}
@@ -97,7 +98,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: c6b119254913fdd48a81bc491ee5fb2e, type: 2}
+  - {fileID: 2100000, guid: 7aca3fec9fb6dff4ba3ce13d74618c0d, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -131,6 +132,23 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+--- !u!95 &9510682
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191884}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!102 &10217820
 TextMesh:
   serializedVersion: 3
@@ -196,7 +214,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 6
   controller: {fileID: 0}
-  playerAxis: 
+  playerAxis: KB
+  maxHealth: 0
+  name: 
+  basicAttackDamage: 0
   maxJumpHeight: 4
   minJumpHeight: 1
   timeToJumpApex: .400000006
