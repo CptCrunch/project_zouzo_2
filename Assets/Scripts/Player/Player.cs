@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
         /*print("Gravity: " + gravity + "  Jump Velocity: " + maxJumpVelocity);*/
     }
 
-    void FixedUpdate() {
+    void Update() {
 
         // imobelised
         if (stunned || knockUp) { disabled = true; }

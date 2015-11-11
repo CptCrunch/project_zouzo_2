@@ -18,21 +18,27 @@ public class SceneItem : Editor {
     }
 
     [MenuItem("Open Scenes/Test Scenes/TestScene_03_Selection")]
-    public static void OpenTestScene_03()
+    public static void OpenTestScene_03_1()
     {
         OpenScene("Test Scenes/TestScene_03_Selection");
     }
 
-    [MenuItem("Open Scenes/Test Scenes/TestScene_04_AfterSelection")]
-    public static void OpenTestScene_04()
+    [MenuItem("Open Scenes/Test Scenes/TestScene_03_AfterSelection")]
+    public static void OpenTestScene_03_2()
     {
-        OpenScene("Test Scenes/TestScene_04_AfterSelection");
+        OpenScene("Test Scenes/TestScene_03_AfterSelection");
     }
 
-    [MenuItem("Open Scenes/Test Scenes/TestScene_05_Animations")]
+    [MenuItem("Open Scenes/Test Scenes/TestScene_04_Animations")]
+    public static void OpenTestScene_04()
+    {
+        OpenScene("Test Scenes/TestScene_04_Animations");
+    }
+
+    [MenuItem("Open Scenes/Test Scenes/TestScene_05_JumpPad")]
     public static void OpenTestScene_05()
     {
-        OpenScene("Test Scenes/TestScene_05_Animations");
+        OpenScene("Test Scenes/TestScene_05_JumpPad");
     }
 
     [MenuItem("Open Scenes/Main Menu")]
