@@ -12,7 +12,6 @@ GameObject:
   - 212: {fileID: 21285792}
   - 114: {fileID: 11480832}
   - 114: {fileID: 11499908}
-  - 114: {fileID: 11404398}
   - 95: {fileID: 9548502}
   m_Layer: 9
   m_Name: Earth
@@ -63,17 +62,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11404398
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 148546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf434228fe102714cb8e91a72ab35a79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11480832
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,20 +93,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b89cbd6079b438746bfa75d43773f370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
   controller: {fileID: 0}
   playerAxis: 
+  moveSpeed: 6
+  maxHealth: 0
+  name: 
+  basicAttackDamage: 0
   maxJumpHeight: 4
   minJumpHeight: 1
   timeToJumpApex: .400000006
   velocity: {x: 0, y: 0, z: 0}
   wallJumpClimb: {x: 8.5, y: 17}
   wallJumpOff: {x: 8.5, y: 7}
-  wallLeap: {x: 8.5, y: 7}
+  wallLeap: 0
   wallSlideSpeedMax: 3
   wallStickTime: .25
-  stunned: 0
-  knockUp: 0
 --- !u!212 &21285792
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -5,8 +5,6 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
     #region Variables
-
-    public float moveSpeed = 6;
     
     [HideInInspector]
     public Controller2D controller;
@@ -18,8 +16,10 @@ public class Player : MonoBehaviour
     private LivingEntity playerVitals;
 
     [Header("Player Vitals:")]
-    public float maxHealth;
     public string name;
+    public float moveSpeed = 6;
+    public float slowedSpeed = 3;
+    public float maxHealth;
     [Tooltip("Only used if its not set in gamerules")]
     public float basicAttackDamage;
     #endregion
@@ -56,10 +56,6 @@ public class Player : MonoBehaviour
 
     #region Condition Variables
     private bool disabled = false;
-    [HideInInspector]
-    public bool stunned = false;
-    [HideInInspector]
-    public bool knockUp = false;
     #endregion
 
     #region Animations 
@@ -74,7 +70,7 @@ public class Player : MonoBehaviour
         /*_animator = GetComponent<Animator>();*/
 
         // create playerVitals
-        playerVitals = new LivingEntity(maxHealth, name, basicAttackDamage * (Gamerules._instance.damageModifier / 100));
+        playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth, basicAttackDamage * (Gamerules._instance.damageModifier / 100));
 
         // calculate gravity
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
@@ -86,8 +82,17 @@ public class Player : MonoBehaviour
 
     void Update() {
 
+        if (Input.GetKeyDown(KeyCode.P)) { StartCoroutine(playerVitals.Stun(3f)); }
+        if (Input.GetKeyDown(KeyCode.O)) { StartCoroutine(playerVitals.SlowOverTime(3f)); }
+        if (Input.GetKeyDown(KeyCode.L)) { playerVitals.Slow(true); }
+        if (Input.GetKeyDown(KeyCode.K)) { playerVitals.Slow(false); }
+        if (Input.GetKeyDown(KeyCode.I)) { StartCoroutine(playerVitals.PlayerKnockUp(10f, 1f)); }
+        if (Input.GetKeyDown(KeyCode.U)) { StartCoroutine(playerVitals.PlayerKnockBack(0f, 20f, 0.2f)); }
+
+        if (Input.GetKeyDown(KeyCode.J)) { Debug.Log(playerVitals.MoveSpeed); }
+
         // imobelised
-        if (stunned || knockUp) { disabled = true; }
+        if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked) { disabled = true; }
         else { disabled = false; }
 
         // get movement input ( controler / keyboard )
@@ -117,7 +122,7 @@ public class Player : MonoBehaviour
         if (!disabled) {
 
             // horizontal movement
-            float targetVelocityX = input.x * moveSpeed;
+            float targetVelocityX = input.x * playerVitals.MoveSpeed;
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
 
             int wallDirX = (controller.collisions.left) ? -1 : 1;

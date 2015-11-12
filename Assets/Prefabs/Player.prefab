@@ -28,9 +28,8 @@ GameObject:
   - 61: {fileID: 6150000}
   - 114: {fileID: 11484944}
   - 114: {fileID: 11462642}
-  - 114: {fileID: 11440502}
-  - 212: {fileID: 21204050}
-  - 95: {fileID: 9559000}
+  - 212: {fileID: 21220066}
+  - 95: {fileID: 9574086}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -45,7 +44,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191884}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.39999998, y: -1.83000004, z: 0}
+  m_LocalPosition: {x: .610000014, y: -1.83000004, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 407568}
@@ -100,7 +99,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: -.0199999996}
   serializedVersion: 2
   m_Size: {x: .300000012, y: .600000024}
---- !u!95 &9559000
+--- !u!95 &9574086
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -138,17 +137,6 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
---- !u!114 &11440502
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 191884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf434228fe102714cb8e91a72ab35a79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11462642
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -180,9 +168,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b89cbd6079b438746bfa75d43773f370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
   controller: {fileID: 0}
-  playerAxis: P1
+  playerAxis: KB
+  moveSpeed: 6
   maxHealth: 0
   name: 
   basicAttackDamage: 0
@@ -190,14 +178,12 @@ MonoBehaviour:
   minJumpHeight: 1
   timeToJumpApex: .400000006
   velocity: {x: 0, y: 0, z: 0}
-  wallJumpClimb: {x: 5, y: 17}
+  wallJumpClimb: {x: 5, y: 20}
   wallJumpOff: {x: 8.5, y: 7}
   wallLeap: 20
   wallSlideSpeedMax: 3
   wallStickTime: .100000001
-  stunned: 0
-  knockUp: 0
---- !u!212 &21204050
+--- !u!212 &21220066
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -221,7 +207,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300006, guid: d1090fce9ea55764c9e66e437783737b, type: 3}
+  m_Sprite: {fileID: 21300006, guid: bcca392178f3658478470a4e49110434, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
