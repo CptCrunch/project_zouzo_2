@@ -26,17 +26,6 @@ public abstract class Attacks {
         if(Gamerules._instance.abilityLimit != 0) { durability = Gamerules._instance.abilityLimit; }
     }
 
-    //Constructor without Heal
-    public Attacks(uint id, string name, float damage, float castTime, float cooldown)
-    {
-        this.id = id;
-        this.name = name;
-        this.damage = damage;
-        this.castTime = castTime;
-        this.cooldown = cooldown;
-        if (Gamerules._instance.abilityLimit != 0) { durability = Gamerules._instance.abilityLimit; }
-    }
-
     #region Get & Set 
     public uint ID { get { return id; } set { this.id = value; } }
     public string Name { get { return name; } set { this.name = value; } }
