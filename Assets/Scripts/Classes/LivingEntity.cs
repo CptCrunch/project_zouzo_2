@@ -125,21 +125,22 @@ public class LivingEntity
 
         knockUped = true;
         /*Debug.Log("KnockUp start");*/
-        instance.velocity.y += _yHeight * instance.maxJumpHeight;
+        instance.velocity.x = 0;
+        instance.velocity.y += _yHeight / _time;
 
         yield return new WaitForSeconds(_time);
         if (currIndex == knockUpIndex) { knockUped = false; /*Debug.Log("KnockUp stop");*/ }
     }
 
-    // knock up Player
-    public IEnumerator PlayerKnockBack(float _yHeight, float _xRange, float _time) {
+    // knock back Player
+    public IEnumerator PlayerKnockBack(float _xDistance, float _yDistance, float _time) {
         knockBackIndex++;
         int currIndex = knockBackIndex;
 
         knockBacked = true;
         /*Debug.Log("KockBack start");*/
-        instance.velocity.y += _yHeight * instance.maxJumpHeight;
-        instance.velocity.x = _xRange;
+        instance.velocity.x = _xDistance / _time;
+        instance.velocity.y += _yDistance / _time;
 
         yield return new WaitForSeconds(_time);
         if (currIndex == knockBackIndex) { knockBacked = false; /*Debug.Log("KockBack stop");*/ }

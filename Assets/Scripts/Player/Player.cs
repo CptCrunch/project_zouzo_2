@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
 
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
-    float gravity;
+    public float gravity;
     float maxJumpVelocity;
     float minJumpVelocity;
     [HideInInspector]
@@ -86,10 +86,8 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.O)) { StartCoroutine(playerVitals.SlowOverTime(3f)); }
         if (Input.GetKeyDown(KeyCode.L)) { playerVitals.Slow(true); }
         if (Input.GetKeyDown(KeyCode.K)) { playerVitals.Slow(false); }
-        if (Input.GetKeyDown(KeyCode.I)) { StartCoroutine(playerVitals.PlayerKnockUp(10f, 1f)); }
-        if (Input.GetKeyDown(KeyCode.U)) { StartCoroutine(playerVitals.PlayerKnockBack(0f, 20f, 0.2f)); }
-
-        if (Input.GetKeyDown(KeyCode.J)) { Debug.Log(playerVitals.MoveSpeed); }
+        if (Input.GetKeyDown(KeyCode.I)) { StartCoroutine(playerVitals.PlayerKnockUp(5f, 0.2f)); }
+        if (Input.GetKeyDown(KeyCode.U)) { StartCoroutine(playerVitals.PlayerKnockBack(5f, 0f, 0.2f)); }
 
         // imobelised
         if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked) { disabled = true; }
