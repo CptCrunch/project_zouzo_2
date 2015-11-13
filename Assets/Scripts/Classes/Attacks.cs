@@ -15,7 +15,7 @@ public abstract class Attacks {
     public Attacks() { }
     
     //Constructor with Heal
-    public Attacks(uint id, string name, float heal, float damage, float castTime, float cooldown)
+    public Attacks(uint id, string name, float heal, float damage, float castTime, float cooldown, GameObject abilityCollider)
     {
         this.id = id;
         this.name = name;
