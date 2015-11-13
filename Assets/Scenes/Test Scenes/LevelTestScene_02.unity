@@ -6587,6 +6587,14 @@ Prefab:
       propertyPath: localWaypoints.Array.data[1].y
       value: -6
       objectReference: {fileID: 0}
+    - target: {fileID: 11492210, guid: 0ab9df1fdf1cccc48b3376838357c843, type: 2}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11492210, guid: 0ab9df1fdf1cccc48b3376838357c843, type: 2}
+      propertyPath: easeAmount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0ab9df1fdf1cccc48b3376838357c843, type: 2}
   m_IsPrefabParent: 0
@@ -11730,6 +11738,14 @@ Prefab:
     - target: {fileID: 142150, guid: 0ab9df1fdf1cccc48b3376838357c843, type: 2}
       propertyPath: m_Name
       value: Platform_Moving (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 11492210, guid: 0ab9df1fdf1cccc48b3376838357c843, type: 2}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11492210, guid: 0ab9df1fdf1cccc48b3376838357c843, type: 2}
+      propertyPath: easeAmount
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0ab9df1fdf1cccc48b3376838357c843, type: 2}
