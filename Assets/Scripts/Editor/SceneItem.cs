@@ -41,6 +41,12 @@ public class SceneItem : Editor {
         OpenScene("Test Scenes/TestScene_05_JumpPad");
     }
 
+    [MenuItem("Open Scenes/Test Scenes/TestScene_06_Editor")]
+    public static void OpenTestScene_06()
+    {
+        OpenScene("Test Scenes/TestScene_06_Editor");
+    }
+
     [MenuItem("Open Scenes/Main Menu")]
     public static void MainMenu()
     {

@@ -4,7 +4,7 @@ using System;
 
 public class Ability : Attacks {
 
-    public Ability() : base()
+    public Ability(uint id, string name, float heal, float damage, float castTime, float cooldown) : base(id, name, heal, damage, castTime, cooldown)
     {
 
     }
