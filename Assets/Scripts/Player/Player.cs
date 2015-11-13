@@ -5,10 +5,11 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
     #region Variables
-    
     [HideInInspector]
     public Controller2D controller;
-   
+    [HideInInspector]
+    public Vector2 input;
+
     [Tooltip("Define Controller: P1, P2, P3, P4, KB")]
     public string playerAxis;
 
@@ -16,7 +17,7 @@ public class Player : MonoBehaviour
     private LivingEntity playerVitals;
 
     [Header("Player Vitals:")]
-    public string name;
+    public string name = "";
     public float moveSpeed = 6;
     public float slowedSpeed = 3;
     public float maxHealth;
@@ -24,10 +25,8 @@ public class Player : MonoBehaviour
     public float basicAttackDamage;
     #endregion
 
-    Vector2 input;
-
     #region Jumping
-    [Header ("Jumping:")]
+    [Header("Jumping:")]
     public float maxJumpHeight = 4;
     public float minJumpHeight = 1;
     [Tooltip("Time it takes to jump (Used to calculate gravity)")]
@@ -65,7 +64,8 @@ public class Player : MonoBehaviour
     #endregion
     #endregion
 
-    void Start() {
+    void Start()
+    {
         controller = GetComponent<Controller2D>();
         /*_animator = GetComponent<Animator>();*/
 
@@ -78,9 +78,12 @@ public class Player : MonoBehaviour
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
 
         /*print("Gravity: " + gravity + "  Jump Velocity: " + maxJumpVelocity);*/
+
+
     }
 
-    void Update() {
+    void Update()
+    {
 
         if (Input.GetKeyDown(KeyCode.P)) { StartCoroutine(playerVitals.Stun(3f)); }
         if (Input.GetKeyDown(KeyCode.O)) { StartCoroutine(playerVitals.SlowOverTime(3f)); }
@@ -107,17 +110,21 @@ public class Player : MonoBehaviour
         if (controller.collisions.above || controller.collisions.below) { velocity.y = 0; }
 
         #region Flipping
-        if (Input.GetAxis(playerAxis + "_Horizontal") > 0 && !mirror) {
+        if (Input.GetAxis(playerAxis + "_Horizontal") > 0 && !mirror)
+        {
             Flip();
         }
-        else if (Input.GetAxis(playerAxis + "_Horizontal") < 0 && mirror) {
+        else if (Input.GetAxis(playerAxis + "_Horizontal") < 0 && mirror)
+        {
             Flip();
         }
         #endregion
     }
 
-    void Movement() {
-        if (!disabled) {
+    void Movement()
+    {
+        if (!disabled)
+        {
 
             // horizontal movement
             float targetVelocityX = input.x * playerVitals.MoveSpeed;
@@ -125,56 +132,69 @@ public class Player : MonoBehaviour
 
             int wallDirX = (controller.collisions.left) ? -1 : 1;
             bool wallSliding = false;
-            
+
             // sitcked to wall
-            if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0) {
+            if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
+            {
                 wallSliding = true;
 
                 // regulate sliding speed
                 if (velocity.y < -wallSlideSpeedMax) { velocity.y = -wallSlideSpeedMax; }
-                
+
                 // stic to wall
-                if (timeToWallUnstick > 0) {
+                if (timeToWallUnstick > 0)
+                {
                     velocityXSmoothing = 0;
                     velocity.x = 0;
 
-                    if (input.x != wallDirX && input.x != 0) {
-                        timeToWallUnstick -= Time.deltaTime; }
+                    if (input.x != wallDirX && input.x != 0)
+                    {
+                        timeToWallUnstick -= Time.deltaTime;
+                    }
 
-                    else {
-                        timeToWallUnstick = wallStickTime; }
+                    else
+                    {
+                        timeToWallUnstick = wallStickTime;
+                    }
                 }
 
-                else {
+                else
+                {
                     timeToWallUnstick = wallStickTime;
                 }
             }
-            
+
             // jump
-            if (Input.GetButtonDown(playerAxis + "_Jump")) {
-                if (wallSliding) {
-                    
+            if (Input.GetButtonDown(playerAxis + "_Jump"))
+            {
+                if (wallSliding)
+                {
+
                     // wall climb
                     if ((wallDirX < 0 && input.x < 0) || (wallDirX > 0 && input.x > 0))
                     {
                         velocity.x = -wallDirX * wallJumpClimb.x;
                         velocity.y = wallJumpClimb.y;
                     }
-                    
+
                     // wall jump
-                    else if (input.x == 0) {
+                    else if (input.x == 0)
+                    {
                         velocity.x = -wallDirX * wallJumpOff.x;
                         velocity.y = wallJumpOff.y;
                     }
-                    
+
                     // wall leap
-                    else {
-                        if (Mathf.Abs(input.y) > 0.2) {
+                    else
+                    {
+                        if (Mathf.Abs(input.y) > 0.2)
+                        {
                             velocity.x = -wallDirX * wallLeap / 2;
                             velocity.y = wallLeap;
                         }
-                        
-                        else {
+
+                        else
+                        {
                             velocity.x = -wallDirX * wallLeap;
                             velocity.y = wallLeap / 4;
                         }
@@ -182,13 +202,15 @@ public class Player : MonoBehaviour
                 }
 
                 // jump on floor
-                if (controller.collisions.below) {
+                if (controller.collisions.below)
+                {
                     /*_animator.SetTrigger("Jump");*/
                     velocity.y = maxJumpVelocity;
                 }
             }
 
-            if (Input.GetButtonUp(playerAxis + "_Jump")) {
+            if (Input.GetButtonUp(playerAxis + "_Jump"))
+            {
                 if (velocity.y > minJumpVelocity) { velocity.y = minJumpVelocity; }
             }
 
@@ -196,8 +218,9 @@ public class Player : MonoBehaviour
             /*if (velocity.y == 0) { _animator.SetTrigger("Land"); }*/
         }
     }
-    
-    void Flip() {
+
+    void Flip()
+    {
         mirror = !mirror;
         Vector2 scale = transform.localScale;
         scale.x *= -1;
