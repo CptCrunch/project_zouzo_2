@@ -15,10 +15,15 @@ public class GridWindow : EditorWindow
     {
         grid.width = createSlider("Width", grid.width);
         grid.height = createSlider("Height", grid.height);
-        EditorGUILayout.BeginVertical();
+        EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Color");
         grid.color = EditorGUILayout.ColorField(grid.color, GUILayout.Width(200));
-        EditorGUILayout.EndVertical();
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("Show Grid");
+        grid.showGrid = EditorGUILayout.Toggle(grid.showGrid, GUILayout.Width(200));
+        EditorGUILayout.EndHorizontal();
     }
 
     private float createSlider(string labelName, float sliderPosition)
