@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         controller = GetComponent<Controller2D>();
-        /*_animator = GetComponent<Animator>();*/
+        _animator = GetComponent<Animator>();
 
         // create playerVitals
         playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth, basicAttackDamage * (Gamerules._instance.damageModifier / 100));
@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
 
         // get movement input ( controler / keyboard )
         input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
-        /*_animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw(playerAxis + "_Horizontal")));*/
+        _animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw(playerAxis + "_Horizontal")));
 
         Movement();
 
@@ -126,6 +126,9 @@ public class Player : MonoBehaviour
         if (!disabled)
         {
 
+            if (velocity.y < 0) { print("Falling");  _animator.SetBool("Fall", true); }
+            if (velocity.y == 0) { _animator.SetTrigger("Land"); _animator.SetBool("Fall", false); }
+
             // horizontal movement
             float targetVelocityX = input.x * playerVitals.MoveSpeed;
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
@@ -133,7 +136,7 @@ public class Player : MonoBehaviour
             int wallDirX = (controller.collisions.left) ? -1 : 1;
             bool wallSliding = false;
 
-            // sitcked to wall
+            // sticked to wall
             if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
             {
                 wallSliding = true;
@@ -141,7 +144,7 @@ public class Player : MonoBehaviour
                 // regulate sliding speed
                 if (velocity.y < -wallSlideSpeedMax) { velocity.y = -wallSlideSpeedMax; }
 
-                // stic to wall
+                // stick to wall
                 if (timeToWallUnstick > 0)
                 {
                     velocityXSmoothing = 0;
@@ -204,7 +207,7 @@ public class Player : MonoBehaviour
                 // jump on floor
                 if (controller.collisions.below)
                 {
-                    /*_animator.SetTrigger("Jump");*/
+                    _animator.SetTrigger("Jump");
                     velocity.y = maxJumpVelocity;
                 }
             }
@@ -214,8 +217,7 @@ public class Player : MonoBehaviour
                 if (velocity.y > minJumpVelocity) { velocity.y = minJumpVelocity; }
             }
 
-            /*if (velocity.y < -0.1) { _animator.SetTrigger("Fall"); }*/
-            /*if (velocity.y == 0) { _animator.SetTrigger("Land"); }*/
+           
         }
     }
 
