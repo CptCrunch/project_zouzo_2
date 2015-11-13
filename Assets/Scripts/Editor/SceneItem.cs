@@ -49,14 +49,22 @@ public class SceneItem : Editor {
         OpenScene("Test Scenes/TestScene_06_Editor");
     }
 
-    [MenuItem("Open Scenes/Test Scenes/TestScene_07_BasicAttack")]
+    [MenuItem("Open Scenes/Test Scenes/TestScene_07_Abilities")]
     public static void OpenTestScene_07()
     {
-        OpenScene("Test Scenes/TestScene_07_BasicAttack");
+        OpenScene("Test Scenes/TestScene_07_Abilities");
+    }
+
+    //levelTestScenes
+
+    [MenuItem("Open Scenes/Level Test Scenes/LevelTestScene_01")]
+    public static void OpenLevelTestScene_01()
+    {
+        OpenScene("Test Scenes/LevelTestScene_01");
     }
 
     [MenuItem("Open Scenes/Level Test Scenes/LevelTestScene_02")]
-    public static void LevelTestScene_02()
+    public static void OpenLevelTestScene_02()
     {
         OpenScene("Test Scenes/LevelTestScene_02");
     }

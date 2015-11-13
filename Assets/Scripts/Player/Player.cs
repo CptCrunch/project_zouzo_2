@@ -96,6 +96,9 @@ public class Player : MonoBehaviour
         if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked) { disabled = true; }
         else { disabled = false; }
 
+        // use ability
+        if (Input.GetKeyDown(KeyCode.Q)) {  }
+
         // get movement input ( controler / keyboard )
         input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
         /*_animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw(playerAxis + "_Horizontal")));*/
