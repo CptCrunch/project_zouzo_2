@@ -44,7 +44,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191884}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .610000014, y: -1.83000004, z: 0}
+  m_LocalPosition: {x: .915927768, y: -1.96924353, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 407568}
@@ -169,14 +169,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
+  input: {x: 0, y: 0}
   playerAxis: KB
+  name: Player 1
   moveSpeed: 6
+  slowedSpeed: 3
   maxHealth: 0
-  name: 
   basicAttackDamage: 0
   maxJumpHeight: 4
   minJumpHeight: 1
   timeToJumpApex: .400000006
+  gravity: 0
   velocity: {x: 0, y: 0, z: 0}
   wallJumpClimb: {x: 5, y: 20}
   wallJumpOff: {x: 8.5, y: 7}
