@@ -8,22 +8,28 @@ public abstract class Attacks {
     private float heal;
     private float damage;
     private float castTime;
+    private float duration;
     private float cooldown;
     private uint durability;
+
+    private GameObject abilityCollider;
 
     //Empty Constructor
     public Attacks() { }
     
     //Constructor with Heal
-    public Attacks(uint id, string name, float heal, float damage, float castTime, float cooldown, GameObject abilityCollider)
+    public Attacks(uint id, string name, float heal, float damage, float castTime, float duration, float cooldown, GameObject abilityCollider)
     {
         this.id = id;
         this.name = name;
         this.heal = heal;
         this.damage = damage;
         this.castTime = castTime;
+        this.castTime = castTime;
         this.cooldown = cooldown;
         if(Gamerules._instance.abilityLimit != 0) { durability = Gamerules._instance.abilityLimit; }
+        this.abilityCollider = abilityCollider;
+
     }
 
     #region Get & Set 
