@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 437374}
   - 212: {fileID: 21226004}
-  - 114: {fileID: 11466230}
   m_Layer: 0
   m_Name: spikes
   m_TagString: Untagged
@@ -29,18 +28,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11466230
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 151818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a89a44a7c3770646bc0e8d27c4d94ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cell_size: .699999988
 --- !u!212 &21226004
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -16,15 +16,15 @@ public class LivingEntity
     private float currHealth;
     private float basicAttackDamage;
 
-    private bool stunned;
-    private int stunIndex;
-    private bool slowed;
-    private bool slowedOverTime;
-    private int slowIndex;
-    private bool knockUped;
-    private int knockUpIndex;
-    private bool knockBacked;
-    private int knockBackIndex;
+    private bool stunned = false;
+    private int stunIndex = 0;
+    private bool slowed = false;
+    private bool slowedOverTime = false;
+    private int slowIndex = 0;
+    private bool knockUped = false;
+    private int knockUpIndex = 0;
+    private bool knockBacked = false;
+    private int knockBackIndex = 0;
 
     public LivingEntity(GameObject playerObject, string name, float moveSpeed, float slowedSpeed, float maxHealth, float basicAttackDamage)
     {

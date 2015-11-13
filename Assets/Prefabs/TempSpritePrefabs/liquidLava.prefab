@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 438418}
   - 212: {fileID: 21273744}
   - 61: {fileID: 6173456}
-  - 114: {fileID: 11470580}
   m_Layer: 0
   m_Name: liquidLava
   m_TagString: Untagged
@@ -43,18 +42,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: .699999988, y: .699999988}
---- !u!114 &11470580
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 107794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a89a44a7c3770646bc0e8d27c4d94ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cell_size: .699999988
 --- !u!212 &21273744
 SpriteRenderer:
   m_ObjectHideFlags: 1

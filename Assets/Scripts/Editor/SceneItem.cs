@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class SceneItem : Editor {
 
+    //TestScenes
+
     [MenuItem("Open Scenes/Test Scenes/TestScene_01_Movement")]
 	public static void OpenTestScene_01()
     {
@@ -52,6 +54,14 @@ public class SceneItem : Editor {
     {
         OpenScene("Test Scenes/TestScene_07_BasicAttack");
     }
+
+    [MenuItem("Open Scenes/Level Test Scenes/LevelTestScene_02")]
+    public static void LevelTestScene_02()
+    {
+        OpenScene("Test Scenes/LevelTestScene_02");
+    }
+
+    //Final
 
     [MenuItem("Open Scenes/Main Menu")]
     public static void MainMenu()
