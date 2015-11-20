@@ -11,14 +11,13 @@ public abstract class Attacks {
     private float duration;
     private float cooldown;
     private uint durability;
-
-    private GameObject abilityCollider;
+    private float range;
 
     //Empty Constructor
     public Attacks() { }
     
     //Constructor with Heal
-    public Attacks(uint id, string name, float heal, float damage, float castTime, float duration, float cooldown, GameObject abilityCollider)
+    public Attacks(uint id, string name, float heal, float damage, float castTime, float duration, float cooldown, float range)
     {
         this.id = id;
         this.name = name;
@@ -27,8 +26,8 @@ public abstract class Attacks {
         this.castTime = castTime;
         this.castTime = castTime;
         this.cooldown = cooldown;
+        this.range = range;
         if(Gamerules._instance.abilityLimit != 0) { durability = Gamerules._instance.abilityLimit; }
-        this.abilityCollider = abilityCollider;
 
     }
 
@@ -40,6 +39,7 @@ public abstract class Attacks {
     public float CastTime { get { return castTime; } set { this.castTime = value; } }
     public float Cooldown { get { return cooldown; } set { this.cooldown = value; } }
     public uint Durability { get { return durability; } }
+    public float Range { get { return range; } }
     #endregion
 
     public abstract void Use();
