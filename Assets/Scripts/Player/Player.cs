@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public float maxHealth;
     [Tooltip("Only used if its not set in gamerules")]
     public float basicAttackDamage;
+    public float basicAttackRange;
     #endregion
 
     #region Jumping
@@ -57,6 +58,9 @@ public class Player : MonoBehaviour
     private bool disabled = false;
     #endregion
 
+    // ability variables
+    private Attacks[] abilityArray = new Attacks[4];
+    
     #region Animations 
     private Animator _animator;
     private bool mirror = false;
@@ -66,40 +70,45 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        // set starter abilities
+        abilityArray[1] = AbilityManager._instance.UseCapricorn();
+
         controller = GetComponent<Controller2D>();
         _animator = GetComponent<Animator>();
 
         // create playerVitals
         playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth, basicAttackDamage * (Gamerules._instance.damageModifier / 100));
-
+        
         // calculate gravity
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
-
+        
         /*print("Gravity: " + gravity + "  Jump Velocity: " + maxJumpVelocity);*/
-
-
     }
 
     void Update()
     {
-
+        #region Testing Conditions
         if (Input.GetKeyDown(KeyCode.P)) { StartCoroutine(playerVitals.Stun(3f)); }
         if (Input.GetKeyDown(KeyCode.O)) { StartCoroutine(playerVitals.SlowOverTime(3f)); }
         if (Input.GetKeyDown(KeyCode.L)) { playerVitals.Slow(true); }
         if (Input.GetKeyDown(KeyCode.K)) { playerVitals.Slow(false); }
         if (Input.GetKeyDown(KeyCode.I)) { StartCoroutine(playerVitals.PlayerKnockUp(5f, 0.2f)); }
         if (Input.GetKeyDown(KeyCode.U)) { StartCoroutine(playerVitals.PlayerKnockBack(5f, 0f, 0.2f)); }
+        #endregion
 
-        // imobelised
+        // Imobelised
         if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked) { disabled = true; }
         else { disabled = false; }
 
         // use ability
-        if (Input.GetKeyDown(KeyCode.Q)) {  }
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            // if player is hit
+				abilityArray[1].Use();
+        }
 
-        // get movement input ( controler / keyboard )
+        // Get movement input ( controler / keyboard )
         input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
         _animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw(playerAxis + "_Horizontal")));
 
@@ -109,7 +118,7 @@ public class Player : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime, input);
 
-        // stop jumping / falling when colliding top / bottom
+        // Stop jumping / falling when colliding top / bottom
         if (controller.collisions.above || controller.collisions.below) { velocity.y = 0; }
 
         #region Flipping
@@ -128,10 +137,6 @@ public class Player : MonoBehaviour
     {
         if (!disabled)
         {
-
-            if (velocity.y < 0) { print("Falling");  _animator.SetBool("Fall", true); }
-            if (velocity.y == 0) { _animator.SetTrigger("Land"); _animator.SetBool("Fall", false); }
-
             // horizontal movement
             float targetVelocityX = input.x * playerVitals.MoveSpeed;
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
@@ -220,7 +225,9 @@ public class Player : MonoBehaviour
                 if (velocity.y > minJumpVelocity) { velocity.y = minJumpVelocity; }
             }
 
-           
+            if (velocity.y < 0 || !controller.collisions.below) { _animator.SetBool("Fall", true); }
+            if (velocity.y == 0 || controller.collisions.below) { _animator.SetTrigger("Land"); _animator.SetBool("Fall", false); }
+            if (controller.collisions.below) { _animator.SetBool("Fall", false); }
         }
     }
 
@@ -230,5 +237,32 @@ public class Player : MonoBehaviour
         Vector2 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+    }
+    
+    void meleeAttack()
+    {
+        RaycastHit objectHit;
+
+        Vector3 fwd = new Vector3(0,0,0);
+
+        if (mirror)
+        {
+            fwd = gameObject.transform.TransformDirection(Vector3.right);
+        }
+        else
+        {
+            fwd = gameObject.transform.TransformDirection(Vector3.left);
+        }
+
+        Debug.DrawRay(gameObject.transform.position, fwd * basicAttackRange, Color.green);
+
+        if (Physics.Raycast(gameObject.transform.position, fwd, out objectHit, basicAttackRange))
+        {
+
+            if (objectHit.transform.tag == "Player")
+            {
+                Debug.Log("Close to enemy");
+            }
+        }
     }
 }
