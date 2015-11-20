@@ -94,14 +94,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
+  input: {x: 0, y: 0}
   playerAxis: 
-  moveSpeed: 6
-  maxHealth: 0
   name: 
+  moveSpeed: 6
+  slowedSpeed: 3
+  maxHealth: 0
   basicAttackDamage: 0
   maxJumpHeight: 4
   minJumpHeight: 1
   timeToJumpApex: .400000006
+  gravity: 0
   velocity: {x: 0, y: 0, z: 0}
   wallJumpClimb: {x: 8.5, y: 17}
   wallJumpOff: {x: 8.5, y: 7}
