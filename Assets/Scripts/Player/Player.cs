@@ -57,6 +57,9 @@ public class Player : MonoBehaviour
     private bool disabled = false;
     #endregion
 
+    // ability variables
+    private Attacks[] abilityArray = new Attacks[4];
+    
     #region Animations 
     private Animator _animator;
     private bool mirror = false;
@@ -66,24 +69,24 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        // set starter abilities
+        abilityArray[1] = AbilityManager._instance.UseCapricorn();
+
         controller = GetComponent<Controller2D>();
         /*_animator = GetComponent<Animator>();*/
 
         // create playerVitals
         playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth, basicAttackDamage * (Gamerules._instance.damageModifier / 100));
-
+        
         // calculate gravity
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
-
+        
         /*print("Gravity: " + gravity + "  Jump Velocity: " + maxJumpVelocity);*/
-
-
     }
 
-    void Update()
-    {
+    void Update() {
 
         if (Input.GetKeyDown(KeyCode.P)) { StartCoroutine(playerVitals.Stun(3f)); }
         if (Input.GetKeyDown(KeyCode.O)) { StartCoroutine(playerVitals.SlowOverTime(3f)); }
@@ -91,27 +94,30 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K)) { playerVitals.Slow(false); }
         if (Input.GetKeyDown(KeyCode.I)) { StartCoroutine(playerVitals.PlayerKnockUp(5f, 0.2f)); }
         if (Input.GetKeyDown(KeyCode.U)) { StartCoroutine(playerVitals.PlayerKnockBack(5f, 0f, 0.2f)); }
-
+        
         // imobelised
         if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked) { disabled = true; }
         else { disabled = false; }
 
         // use ability
-        if (Input.GetKeyDown(KeyCode.Q)) {  }
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            // if player is hit
+				abilityArray[1].Use();
+        }
 
         // get movement input ( controler / keyboard )
         input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
         /*_animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw(playerAxis + "_Horizontal")));*/
 
         Movement();
-
+        
         // add gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime, input);
 
         // stop jumping / falling when colliding top / bottom
         if (controller.collisions.above || controller.collisions.below) { velocity.y = 0; }
-
+        
         #region Flipping
         if (Input.GetAxis(playerAxis + "_Horizontal") > 0 && !mirror)
         {

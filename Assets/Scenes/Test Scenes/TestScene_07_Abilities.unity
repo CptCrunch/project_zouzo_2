@@ -122,7 +122,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 453104, guid: 6906339cacaddc549bcd60c8a96aae10, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11413352, guid: 6906339cacaddc549bcd60c8a96aae10, type: 2}
       propertyPath: width
@@ -200,7 +200,93 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe1ac08a04d2a746b2332e122c292da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capricornPrefab: {fileID: 103598, guid: 26fb50a544da7074f8e7954fe511c9c2, type: 2}
+  abilityCollider:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  abilities:
+  - name: Aries
+    prefab: {fileID: 0}
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+  - name: Taurus
+    prefab: {fileID: 0}
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+  - name: Gemini
+    prefab: {fileID: 0}
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+  - name: Cancer
+    prefab: {fileID: 0}
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+  - name: Leo
+    prefab: {fileID: 0}
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+  - name: Virgo
+    prefab: {fileID: 0}
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+  - name: Libra
+    prefab: {fileID: 0}
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+  - name: Scorpio
+    prefab: {fileID: 0}
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+  - name: Sagittarius
+    prefab: {fileID: 0}
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+  - name: Capricorn
+    prefab: {fileID: 0}
+    damage: 20
+    castTime: 0
+    duration: 0
+    cooldown: 5
+  - name: Aquarius
+    prefab: {fileID: 0}
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+  - name: Aquarius
+    prefab: {fileID: 0}
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
 --- !u!1001 &189650878
 Prefab:
   m_ObjectHideFlags: 0
@@ -515,7 +601,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400148, guid: 260ea4d29efe5ff46a0605e90ddc8e18, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 7.35000801
+      value: 7.69999981
       objectReference: {fileID: 0}
     - target: {fileID: 400148, guid: 260ea4d29efe5ff46a0605e90ddc8e18, type: 2}
       propertyPath: m_LocalPosition.y
@@ -544,6 +630,10 @@ Prefab:
     - target: {fileID: 400148, guid: 260ea4d29efe5ff46a0605e90ddc8e18, type: 2}
       propertyPath: m_RootOrder
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 400148, guid: 260ea4d29efe5ff46a0605e90ddc8e18, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 260ea4d29efe5ff46a0605e90ddc8e18, type: 2}
@@ -671,6 +761,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11484944, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+      propertyPath: abilityColider.Array.data[10]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
   m_IsPrefabParent: 0
@@ -683,7 +777,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 423806, guid: e900e62060dcc5d459b26d2d97e056e3, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -7.349998
+      value: -7.69999981
       objectReference: {fileID: 0}
     - target: {fileID: 423806, guid: e900e62060dcc5d459b26d2d97e056e3, type: 2}
       propertyPath: m_LocalPosition.y
@@ -712,6 +806,10 @@ Prefab:
     - target: {fileID: 423806, guid: e900e62060dcc5d459b26d2d97e056e3, type: 2}
       propertyPath: m_RootOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 423806, guid: e900e62060dcc5d459b26d2d97e056e3, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e900e62060dcc5d459b26d2d97e056e3, type: 2}
