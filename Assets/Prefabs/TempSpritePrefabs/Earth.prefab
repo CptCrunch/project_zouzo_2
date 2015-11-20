@@ -15,7 +15,7 @@ GameObject:
   - 95: {fileID: 9548502}
   m_Layer: 9
   m_Name: Earth
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,8 +27,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148546}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.73532867, y: -.933453083, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: -4.84000015, y: 2.04999995, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -42,9 +42,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: .00338888168}
   serializedVersion: 2
-  m_Size: {x: .5, y: .639999986}
+  m_Size: {x: .5, y: .972154677}
 --- !u!95 &9548502
 Animator:
   serializedVersion: 3
@@ -95,20 +95,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   input: {x: 0, y: 0}
-  playerAxis: 
+  playerAxis: P1
   name: 
-  moveSpeed: 6
+  moveSpeed: 4
   slowedSpeed: 3
   maxHealth: 0
   basicAttackDamage: 0
-  maxJumpHeight: 4
+  maxJumpHeight: 2.5
   minJumpHeight: 1
   timeToJumpApex: .400000006
   gravity: 0
   velocity: {x: 0, y: 0, z: 0}
-  wallJumpClimb: {x: 8.5, y: 17}
+  wallJumpClimb: {x: 3, y: 12.5}
   wallJumpOff: {x: 8.5, y: 7}
-  wallLeap: 0
+  wallLeap: 12.5
   wallSlideSpeedMax: 3
   wallStickTime: .25
 --- !u!212 &21285792
