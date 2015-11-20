@@ -22,8 +22,6 @@ public class Player : MonoBehaviour
     public float moveSpeed = 6;
     public float slowedSpeed = 3;
     public float maxHealth;
-    [Tooltip("Only used if its not set in gamerules")]
-    public float basicAttackDamage;
     #endregion
 
     #region Jumping
@@ -58,6 +56,9 @@ public class Player : MonoBehaviour
     private bool disabled = false;
     #endregion
 
+    // ability variables
+    private Attacks[] abilityArray = new Attacks[4];
+    
     #region Animations 
     private Animator _animator;
     private bool mirror = false;
@@ -67,40 +68,97 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        // set starter abilities
+        abilityArray[0] = AbilityManager._instance.CreateBasic();
+        abilityArray[1] = AbilityManager._instance.CreateCapricorn();
+
         controller = GetComponent<Controller2D>();
         _animator = GetComponent<Animator>();
 
         // create playerVitals
-        playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth, basicAttackDamage * (Gamerules._instance.damageModifier / 100));
-
+        playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth);
+        
         // calculate gravity
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
-
+        
         /*print("Gravity: " + gravity + "  Jump Velocity: " + maxJumpVelocity);*/
-
-
     }
 
     void Update()
     {
-
+        #region Testing Conditions
         if (Input.GetKeyDown(KeyCode.P)) { StartCoroutine(playerVitals.Stun(3f)); }
         if (Input.GetKeyDown(KeyCode.O)) { StartCoroutine(playerVitals.SlowOverTime(3f)); }
         if (Input.GetKeyDown(KeyCode.L)) { playerVitals.Slow(true); }
         if (Input.GetKeyDown(KeyCode.K)) { playerVitals.Slow(false); }
         if (Input.GetKeyDown(KeyCode.I)) { StartCoroutine(playerVitals.PlayerKnockUp(5f, 0.2f)); }
         if (Input.GetKeyDown(KeyCode.U)) { StartCoroutine(playerVitals.PlayerKnockBack(5f, 0f, 0.2f)); }
+        #endregion
 
-        // imobelised
+        // Imobelised
         if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked) { disabled = true; }
         else { disabled = false; }
 
         // use ability
-        if (Input.GetKeyDown(KeyCode.Q)) {  }
 
-        // get movement input ( controler / keyboard )
+        // basic
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (!abilityArray[0].OnCooldown)
+            {
+                if (abilityArray[0].IsMeele)
+                {
+                    Debug.Log(name + " used Basic");
+                    meleeAttack(abilityArray[0]);
+                    OffCooldown(abilityArray[0]);
+                }
+            }
+        }
+
+        // ability 1
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (!abilityArray[1].OnCooldown)
+            {
+                if (abilityArray[1].IsMeele)
+                {
+                    meleeAttack(abilityArray[1]);
+                    OffCooldown(abilityArray[1]);
+                }
+            } 
+        }
+
+        // ability 2
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (!abilityArray[2].OnCooldown)
+            {
+                if (abilityArray[2].IsMeele)
+                {
+                    meleeAttack(abilityArray[2]);
+                    OffCooldown(abilityArray[2]);
+                }
+            }
+        }
+
+        // ability 3
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            if (!abilityArray[3].OnCooldown)
+            {
+                if (abilityArray[3].IsMeele)
+                {
+                    meleeAttack(abilityArray[3]);
+                    OffCooldown(abilityArray[3]);
+                }
+            }
+        }
+
+        //Debug.Log(name + " health: " + playerVitals.CurrHealth);
+
+        // Get movement input ( controler / keyboard )
         input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
         _animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw(playerAxis + "_Horizontal")));
 
@@ -110,7 +168,7 @@ public class Player : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime, input);
 
-        // stop jumping / falling when colliding top / bottom
+        // Stop jumping / falling when colliding top / bottom
         if (controller.collisions.above || controller.collisions.below) { velocity.y = 0; }
 
         #region Flipping
@@ -249,5 +307,32 @@ public class Player : MonoBehaviour
         Vector2 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+    }
+    
+    void meleeAttack(Attacks usedSpell) {
+        RaycastHit objectHit;
+        Vector3 fwd = new Vector3(0,0,0);
+
+        // set atack into right direction
+        if (mirror) { fwd = gameObject.transform.TransformDirection(Vector3.right); }
+        else { fwd = gameObject.transform.TransformDirection(Vector3.left); }
+
+        // send a visual debug ray
+        Debug.DrawRay(gameObject.transform.position, fwd * abilityArray[0].Range, Color.green);
+
+        // create a raycast
+        if (Physics.Raycast(gameObject.transform.position, fwd, out objectHit, usedSpell.Range)) {
+
+            // compares if raycast hits a player
+            if (objectHit.transform.tag == "Player") {
+                Debug.Log(name + " hit: " + objectHit.transform.gameObject.name);
+                usedSpell.Use(objectHit.transform.gameObject);
+            }
+        }
+    }
+
+    IEnumerator OffCooldown(Attacks _spell) {
+        yield return new WaitForSeconds(_spell.Cooldown);
+        _spell.OnCooldown = false;
     }
 }

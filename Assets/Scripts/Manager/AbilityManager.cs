@@ -3,18 +3,30 @@ using System.Collections;
 
 public class AbilityManager : MonoBehaviour {
 
-    private Attacks capricornAbility;
+    public static AbilityManager _instance;
 
-    [Header("Capricorn")]
-    public GameObject capricornPrefab;
+    public Abilities[] abilities = new Abilities[0];
+    void Awake()
+    {
+        if (_instance == null) { _instance = this; }
+    }
 
-	// Use this for initialization
-	void Start () {
-        capricornAbility = new Capricorn( 5f, 0f, 0f, 1f, capricornPrefab);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public Attacks CreateCapricorn() {
+        return new Capricorn(abilities[9].damage, abilities[9].castTime, abilities[9].duration, abilities[9].cooldown, abilities[9].range);
+    }
+
+    public Attacks CreateBasic()
+    {
+        return new Basic(abilities[12].damage, abilities[12].castTime, abilities[12].duration, abilities[12].cooldown, abilities[12].range);
+    }
+}
+
+[System.Serializable]
+public class Abilities {
+    public string name;
+    public float damage;
+    public float castTime;
+    public float duration;
+    public float cooldown;
+    public float range;
 }

@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-public class Capricorn : Attacks
-{
-    public Capricorn(float damage, float castTime, float duration, float cooldown, GameObject capricornPrefab) : base(10, "capricorn", 0, damage, castTime, duration, cooldown, capricornPrefab) { }
+public class Capricorn : Attacks {
 
-    public override void Use() {}
+    public Capricorn(float damage, float castTime, float duration, float cooldown, float range) : base(
+        10, "capricorn", "CC", true, 0, damage, castTime, duration, cooldown, range) { }
+
+    public override void Use(GameObject _target) {
+    }
 }
