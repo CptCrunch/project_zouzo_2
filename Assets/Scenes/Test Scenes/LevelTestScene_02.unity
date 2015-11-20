@@ -13461,7 +13461,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 455532, guid: a4b39bed764cfa6418ea16d03dbeb90c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.72000003
+      value: 2.77999997
       objectReference: {fileID: 0}
     - target: {fileID: 455532, guid: a4b39bed764cfa6418ea16d03dbeb90c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -13485,11 +13485,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 455532, guid: a4b39bed764cfa6418ea16d03dbeb90c, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11499908, guid: a4b39bed764cfa6418ea16d03dbeb90c, type: 2}
       propertyPath: playerAxis
-      value: P1
+      value: KB
       objectReference: {fileID: 0}
     - target: {fileID: 455532, guid: a4b39bed764cfa6418ea16d03dbeb90c, type: 2}
       propertyPath: m_LocalScale.x
