@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public string playerAxis;
 
     #region Player Vitals
+    [HideInInspector]
     public LivingEntity playerVitals;
 
     [Header("Player Vitals:")]
@@ -197,6 +198,8 @@ public class Player : MonoBehaviour
             if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
             {
                 wallSliding = true;
+                _animator.SetBool("WallSlide", true);
+                _animator.SetBool("Fall", false);
 
                 // regulate sliding speed
                 if (velocity.y < -wallSlideSpeedMax) { velocity.y = -wallSlideSpeedMax; }
@@ -223,12 +226,18 @@ public class Player : MonoBehaviour
                     timeToWallUnstick = wallStickTime;
                 }
             }
+            else
+            {
+                _animator.SetBool("WallSlide", false);
+            }
 
             // jump
             if (Input.GetButtonDown(playerAxis + "_Jump"))
             {
                 if (wallSliding)
                 {
+                    _animator.SetBool("WallSlide", true);
+                    _animator.SetBool("Falling", false);
 
                     // wall climb
                     if ((wallDirX < 0 && input.x < 0) || (wallDirX > 0 && input.x > 0))
@@ -259,6 +268,9 @@ public class Player : MonoBehaviour
                             velocity.y = wallLeap / 4;
                         }
                     }
+                } else
+                {
+                    _animator.SetBool("WallSlide", true);
                 }
 
                 // jump on floor
@@ -274,9 +286,18 @@ public class Player : MonoBehaviour
                 if (velocity.y > minJumpVelocity) { velocity.y = minJumpVelocity; }
             }
 
-            if (velocity.y < 0 || !controller.collisions.below) { _animator.SetBool("Fall", true); }
-            if (velocity.y == 0 || controller.collisions.below) { _animator.SetTrigger("Land"); _animator.SetBool("Fall", false); }
-            if (controller.collisions.below) { _animator.SetBool("Fall", false); }
+
+            if (velocity.y < 0.1 || !controller.collisions.below || !controller.collisions.left || !controller.collisions.right)
+            {
+                _animator.SetBool("Fall", true);
+            }
+
+            if (velocity.y == 0 && controller.collisions.below)
+            {
+                _animator.SetBool("Fall", false);
+                _animator.SetTrigger("Land");
+            }
+
         }
     }
 
