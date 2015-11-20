@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 453104}
   - 114: {fileID: 11413352}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: _editor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,12 +39,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4a760c1e33914449e27c51994f3adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 32
-  height: 32
+  width: .320000172
+  height: .159999967
   color: {r: 1, g: 1, b: 1, a: 1}
-  tilePrefab: {fileID: 0}
-  tileSet: {fileID: 0}
+  tilePrefab: {fileID: 494688, guid: e20b99c7856b00a41ab6d72b4e61b3f6, type: 2}
+  tileSet: {fileID: 11400000, guid: 4378c88b183a5da48b9b97cf9b8ee61d, type: 2}
   draggable: 0
+  showGrid: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
