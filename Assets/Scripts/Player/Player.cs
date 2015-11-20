@@ -14,16 +14,13 @@ public class Player : MonoBehaviour
     public string playerAxis;
 
     #region Player Vitals
-    private LivingEntity playerVitals;
+    public LivingEntity playerVitals;
 
     [Header("Player Vitals:")]
     public string name = "";
     public float moveSpeed = 6;
     public float slowedSpeed = 3;
     public float maxHealth;
-    [Tooltip("Only used if its not set in gamerules")]
-    public float basicAttackDamage;
-    public float basicAttackRange;
     #endregion
 
     #region Jumping
@@ -77,7 +74,7 @@ public class Player : MonoBehaviour
         _animator = GetComponent<Animator>();
 
         // create playerVitals
-        playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth, basicAttackDamage * (Gamerules._instance.damageModifier / 100));
+        playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth);
         
         // calculate gravity
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
@@ -103,9 +100,57 @@ public class Player : MonoBehaviour
         else { disabled = false; }
 
         // use ability
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            // if player is hit
-				abilityArray[1].Use();
+
+        // basic
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (!abilityArray[0].OnCooldown)
+            {
+                if (abilityArray[0].IsMeele)
+                {
+                    meleeAttack(abilityArray[0]);
+                    OffCooldown(abilityArray[0]);
+                }
+            }
+        }
+
+        // ability 1
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (abilityArray[1].IsMeele)
+            {
+                if (abilityArray[1].IsMeele)
+                {
+                    meleeAttack(abilityArray[1]);
+                    OffCooldown(abilityArray[1]);
+                }
+            } 
+        }
+
+        // ability 2
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (abilityArray[2].IsMeele)
+            {
+                if (abilityArray[2].IsMeele)
+                {
+                    meleeAttack(abilityArray[2]);
+                    OffCooldown(abilityArray[2]);
+                }
+            }
+        }
+
+        // ability 3
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            if (abilityArray[3].IsMeele)
+            {
+                if (abilityArray[3].IsMeele)
+                {
+                    meleeAttack(abilityArray[3]);
+                    OffCooldown(abilityArray[3]);
+                }
+            }
         }
 
         // Get movement input ( controler / keyboard )
@@ -239,30 +284,31 @@ public class Player : MonoBehaviour
         transform.localScale = scale;
     }
     
-    void meleeAttack()
-    {
-        RaycastHit objectHit;
+    void meleeAttack(Attacks usedSpell) {
 
+        RaycastHit objectHit;
         Vector3 fwd = new Vector3(0,0,0);
 
-        if (mirror)
-        {
-            fwd = gameObject.transform.TransformDirection(Vector3.right);
-        }
-        else
-        {
-            fwd = gameObject.transform.TransformDirection(Vector3.left);
-        }
+        // set atack into right direction
+        if (mirror) { fwd = gameObject.transform.TransformDirection(Vector3.right); }
+        else { fwd = gameObject.transform.TransformDirection(Vector3.left); }
 
-        Debug.DrawRay(gameObject.transform.position, fwd * basicAttackRange, Color.green);
+        // send a visual debug ray
+        Debug.DrawRay(gameObject.transform.position, fwd * abilityArray[0].Range, Color.green);
 
-        if (Physics.Raycast(gameObject.transform.position, fwd, out objectHit, basicAttackRange))
-        {
-
-            if (objectHit.transform.tag == "Player")
-            {
+        // create a raycast
+        if (Physics.Raycast(gameObject.transform.position, fwd, out objectHit, usedSpell.Range)) {
+            
+            // compareif raycast hits a player
+            if (objectHit.transform.tag == "Player") {
                 Debug.Log("Close to enemy");
+                usedSpell.Use(objectHit.transform.gameObject);
             }
         }
+    }
+
+    IEnumerator OffCooldown(Attacks _spell) {
+        yield return new WaitForSeconds(_spell.Cooldown);
+        _spell.OnCooldown = false;
     }
 }
