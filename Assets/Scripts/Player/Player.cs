@@ -68,7 +68,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         // set starter abilities
-        abilityArray[1] = AbilityManager._instance.UseCapricorn();
+        abilityArray[0] = AbilityManager._instance.CreateBasic();
+        abilityArray[1] = AbilityManager._instance.CreateCapricorn();
 
         controller = GetComponent<Controller2D>();
         _animator = GetComponent<Animator>();
@@ -108,6 +109,7 @@ public class Player : MonoBehaviour
             {
                 if (abilityArray[0].IsMeele)
                 {
+                    Debug.Log(name + " used Basic");
                     meleeAttack(abilityArray[0]);
                     OffCooldown(abilityArray[0]);
                 }
@@ -117,7 +119,7 @@ public class Player : MonoBehaviour
         // ability 1
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (abilityArray[1].IsMeele)
+            if (!abilityArray[1].OnCooldown)
             {
                 if (abilityArray[1].IsMeele)
                 {
@@ -130,7 +132,7 @@ public class Player : MonoBehaviour
         // ability 2
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (abilityArray[2].IsMeele)
+            if (!abilityArray[2].OnCooldown)
             {
                 if (abilityArray[2].IsMeele)
                 {
@@ -143,7 +145,7 @@ public class Player : MonoBehaviour
         // ability 3
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            if (abilityArray[3].IsMeele)
+            if (!abilityArray[3].OnCooldown)
             {
                 if (abilityArray[3].IsMeele)
                 {
@@ -152,6 +154,8 @@ public class Player : MonoBehaviour
                 }
             }
         }
+
+        //Debug.Log(name + " health: " + playerVitals.CurrHealth);
 
         // Get movement input ( controler / keyboard )
         input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
@@ -285,7 +289,6 @@ public class Player : MonoBehaviour
     }
     
     void meleeAttack(Attacks usedSpell) {
-
         RaycastHit objectHit;
         Vector3 fwd = new Vector3(0,0,0);
 
@@ -298,10 +301,10 @@ public class Player : MonoBehaviour
 
         // create a raycast
         if (Physics.Raycast(gameObject.transform.position, fwd, out objectHit, usedSpell.Range)) {
-            
-            // compareif raycast hits a player
+
+            // compares if raycast hits a player
             if (objectHit.transform.tag == "Player") {
-                Debug.Log("Close to enemy");
+                Debug.Log(name + " hit: " + objectHit.transform.gameObject.name);
                 usedSpell.Use(objectHit.transform.gameObject);
             }
         }
