@@ -11,7 +11,7 @@ public abstract class Attacks {
     private float castTime;
     private float duration;
     private float cooldown;
-    private bool onCooldown;
+    private bool onCooldown = false;
     private uint durability;
     private float range;
     private bool isMeele;
