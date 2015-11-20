@@ -37,7 +37,7 @@ public class Gamerules : MonoBehaviour {
     // Testing 
     [HideInInspector]
     public List<string> connectedControllers = new List<string>();
-    public TestPlayer[] testPlayers = new TestPlayer[5];
+    public ButtonLayout buttonLayout;
     #endregion
 
     void Awake() {
@@ -82,42 +82,6 @@ public class Gamerules : MonoBehaviour {
         // Change the player axis and name
         obj.GetComponent<Player>().playerAxis = axis;
         obj.name = axis + "_Player";
-
-        // Set prefab clour and Text
-        switch(axis)
-        {
-            case "P1":
-                obj.GetComponent<Renderer>().material.color = testPlayers[0].color;
-                obj.GetComponentInChildren<TextMesh>().text = testPlayers[0].name;
-                break;
-
-            case "P2":
-                obj.GetComponent<Renderer>().material.color = testPlayers[1].color;
-                obj.GetComponentInChildren<TextMesh>().text = testPlayers[1].name;
-                break;
-
-            case "P3":
-                obj.GetComponent<Renderer>().material.color = testPlayers[2].color;
-                obj.GetComponentInChildren<TextMesh>().text = testPlayers[2].name;
-                break;
-
-            case "P4":
-                obj.GetComponent<Renderer>().material.color = testPlayers[3].color;
-                obj.GetComponentInChildren<TextMesh>().text = testPlayers[3].name;
-                break;
-
-            case "KB":
-                obj.GetComponent<Renderer>().material.color = testPlayers[4].color;
-                obj.GetComponentInChildren<TextMesh>().text = testPlayers[4].name;
-                break;
-        }       
-    }
-    
-    [System.Serializable]
-    public class TestPlayer
-    {
-        public string name;
-        public Color color;
     }
 
     [System.Serializable]
@@ -127,5 +91,16 @@ public class Gamerules : MonoBehaviour {
         public int lifeLimit;
         [Range(0,100)]
         public float timeLimit;
+    }
+
+
+    [System.Serializable]
+    public class ButtonLayout
+    {
+        public string jump;
+        public string basicAttack;
+        public string ability_1;
+        public string ability_2;
+        public string ability_3;
     }
 }
