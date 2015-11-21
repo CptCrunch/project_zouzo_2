@@ -88,6 +88,14 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (playerAxis != "KB")
+        {
+            if (Input.GetKeyDown("joystick " + playerAxis.Substring(1, 1) + " button " + "1"))
+            {
+                Debug.Log(playerAxis.Substring(1, 1));
+            }
+        }
+
         #region Testing Conditions
         if (Input.GetKeyDown(KeyCode.P)) { StartCoroutine(playerVitals.Stun(3f)); }
         if (Input.GetKeyDown(KeyCode.O)) { StartCoroutine(playerVitals.SlowOverTime(3f)); }
