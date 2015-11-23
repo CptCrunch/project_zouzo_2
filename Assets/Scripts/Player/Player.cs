@@ -14,16 +14,14 @@ public class Player : MonoBehaviour
     public string playerAxis;
 
     #region Player Vitals
-    private LivingEntity playerVitals;
+    [HideInInspector]
+    public LivingEntity playerVitals;
 
     [Header("Player Vitals:")]
     public string name = "";
     public float moveSpeed = 6;
     public float slowedSpeed = 3;
     public float maxHealth;
-    [Tooltip("Only used if its not set in gamerules")]
-    public float basicAttackDamage;
-    public float basicAttackRange;
     #endregion
 
     #region Jumping
@@ -71,13 +69,14 @@ public class Player : MonoBehaviour
     void Start()
     {
         // set starter abilities
-        abilityArray[1] = AbilityManager._instance.UseCapricorn();
+        abilityArray[0] = AbilityManager._instance.CreateBasic();
+        abilityArray[1] = AbilityManager._instance.CreateCapricorn();
 
         controller = GetComponent<Controller2D>();
         _animator = GetComponent<Animator>();
 
         // create playerVitals
-        playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth, basicAttackDamage * (Gamerules._instance.damageModifier / 100));
+        playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth);
         
         // calculate gravity
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
@@ -89,6 +88,14 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (playerAxis != "KB")
+        {
+            if (Input.GetKeyDown("joystick " + playerAxis.Substring(1, 1) + " button " + "1"))
+            {
+                Debug.Log(playerAxis.Substring(1, 1));
+            }
+        }
+
         #region Testing Conditions
         if (Input.GetKeyDown(KeyCode.P)) { StartCoroutine(playerVitals.Stun(3f)); }
         if (Input.GetKeyDown(KeyCode.O)) { StartCoroutine(playerVitals.SlowOverTime(3f)); }
@@ -103,10 +110,61 @@ public class Player : MonoBehaviour
         else { disabled = false; }
 
         // use ability
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            // if player is hit
-				abilityArray[1].Use();
+
+        // basic
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (!abilityArray[0].OnCooldown)
+            {
+                if (abilityArray[0].IsMeele)
+                {
+                    Debug.Log(name + " used Basic");
+                    meleeAttack(abilityArray[0]);
+                    OffCooldown(abilityArray[0]);
+                }
+            }
         }
+
+        // ability 1
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (!abilityArray[1].OnCooldown)
+            {
+                if (abilityArray[1].IsMeele)
+                {
+                    meleeAttack(abilityArray[1]);
+                    OffCooldown(abilityArray[1]);
+                }
+            } 
+        }
+
+        // ability 2
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (!abilityArray[2].OnCooldown)
+            {
+                if (abilityArray[2].IsMeele)
+                {
+                    meleeAttack(abilityArray[2]);
+                    OffCooldown(abilityArray[2]);
+                }
+            }
+        }
+
+        // ability 3
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            if (!abilityArray[3].OnCooldown)
+            {
+                if (abilityArray[3].IsMeele)
+                {
+                    meleeAttack(abilityArray[3]);
+                    OffCooldown(abilityArray[3]);
+                }
+            }
+        }
+
+        //Debug.Log(name + " health: " + playerVitals.CurrHealth);
 
         // Get movement input ( controler / keyboard )
         input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
@@ -148,6 +206,8 @@ public class Player : MonoBehaviour
             if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
             {
                 wallSliding = true;
+                _animator.SetBool("WallSlide", true);
+                _animator.SetBool("Fall", false);
 
                 // regulate sliding speed
                 if (velocity.y < -wallSlideSpeedMax) { velocity.y = -wallSlideSpeedMax; }
@@ -174,12 +234,18 @@ public class Player : MonoBehaviour
                     timeToWallUnstick = wallStickTime;
                 }
             }
+            else
+            {
+                _animator.SetBool("WallSlide", false);
+            }
 
             // jump
             if (Input.GetButtonDown(playerAxis + "_Jump"))
             {
                 if (wallSliding)
                 {
+                    _animator.SetBool("WallSlide", true);
+                    _animator.SetBool("Falling", false);
 
                     // wall climb
                     if ((wallDirX < 0 && input.x < 0) || (wallDirX > 0 && input.x > 0))
@@ -210,6 +276,9 @@ public class Player : MonoBehaviour
                             velocity.y = wallLeap / 4;
                         }
                     }
+                } else
+                {
+                    _animator.SetBool("WallSlide", true);
                 }
 
                 // jump on floor
@@ -225,9 +294,18 @@ public class Player : MonoBehaviour
                 if (velocity.y > minJumpVelocity) { velocity.y = minJumpVelocity; }
             }
 
-            if (velocity.y < 0 || !controller.collisions.below) { _animator.SetBool("Fall", true); }
-            if (velocity.y == 0 || controller.collisions.below) { _animator.SetTrigger("Land"); _animator.SetBool("Fall", false); }
-            if (controller.collisions.below) { _animator.SetBool("Fall", false); }
+
+            if (velocity.y < 0.1 || !controller.collisions.below || !controller.collisions.left || !controller.collisions.right)
+            {
+                _animator.SetBool("Fall", true);
+            }
+
+            if (velocity.y == 0 && controller.collisions.below)
+            {
+                _animator.SetBool("Fall", false);
+                _animator.SetTrigger("Land");
+            }
+
         }
     }
 
@@ -239,30 +317,30 @@ public class Player : MonoBehaviour
         transform.localScale = scale;
     }
     
-    void meleeAttack()
-    {
+    void meleeAttack(Attacks usedSpell) {
         RaycastHit objectHit;
-
         Vector3 fwd = new Vector3(0,0,0);
 
-        if (mirror)
-        {
-            fwd = gameObject.transform.TransformDirection(Vector3.right);
-        }
-        else
-        {
-            fwd = gameObject.transform.TransformDirection(Vector3.left);
-        }
+        // set atack into right direction
+        if (mirror) { fwd = gameObject.transform.TransformDirection(Vector3.right); }
+        else { fwd = gameObject.transform.TransformDirection(Vector3.left); }
 
-        Debug.DrawRay(gameObject.transform.position, fwd * basicAttackRange, Color.green);
+        // send a visual debug ray
+        Debug.DrawRay(gameObject.transform.position, fwd * abilityArray[0].Range, Color.green);
 
-        if (Physics.Raycast(gameObject.transform.position, fwd, out objectHit, basicAttackRange))
-        {
+        // create a raycast
+        if (Physics.Raycast(gameObject.transform.position, fwd, out objectHit, usedSpell.Range)) {
 
-            if (objectHit.transform.tag == "Player")
-            {
-                Debug.Log("Close to enemy");
+            // compares if raycast hits a player
+            if (objectHit.transform.tag == "Player") {
+                Debug.Log(name + " hit: " + objectHit.transform.gameObject.name);
+                usedSpell.Use(objectHit.transform.gameObject);
             }
         }
+    }
+
+    IEnumerator OffCooldown(Attacks _spell) {
+        yield return new WaitForSeconds(_spell.Cooldown);
+        _spell.OnCooldown = false;
     }
 }

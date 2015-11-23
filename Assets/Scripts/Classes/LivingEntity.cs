@@ -14,7 +14,6 @@ public class LivingEntity
     private float currSpeed;
     private float maxHealth;
     private float currHealth;
-    private float basicAttackDamage;
 
     private bool stunned = false;
     private int stunIndex = 0;
@@ -26,7 +25,7 @@ public class LivingEntity
     private bool knockBacked = false;
     private int knockBackIndex = 0;
 
-    public LivingEntity(GameObject playerObject, string name, float moveSpeed, float slowedSpeed, float maxHealth, float basicAttackDamage)
+    public LivingEntity(GameObject playerObject, string name, float moveSpeed, float slowedSpeed, float maxHealth)
     {
         // set maxHealth ( will use maxHealth from Gamerulses )
         if (Gamerules._instance.playerMaxHealth == 0) { this.maxHealth = maxHealth; } 
@@ -39,14 +38,12 @@ public class LivingEntity
         currSpeed = moveSpeed;
         this.slowedSpeed = slowedSpeed;
         this.currHealth = maxHealth;
-        this.basicAttackDamage = basicAttackDamage;
     }
 
     #region Get & Set
     public float MoveSpeed { get { return currSpeed; } }
     public string Name { get { return name; } }
     public float CurrHealth { get { return currHealth; } }
-    public float BasicAttackDamage { get { return basicAttackDamage; } }
 
     public bool Stunned { get { return stunned; } }
     public bool Slowed {

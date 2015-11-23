@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: d1090fce9ea55764c9e66e437783737b
-timeCreated: 1447413728
-licenseType: Free
+timeCreated: 1447931700
+licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
     21300000: Earth_Sprite_Sheet_0
@@ -154,7 +154,7 @@ TextureImporter:
     - name: Earth_Sprite_Sheet_6
       rect:
         serializedVersion: 2
-        x: 448
+        x: 463
         y: 319
         width: 64
         height: 64
