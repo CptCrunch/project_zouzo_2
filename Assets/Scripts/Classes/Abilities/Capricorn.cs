@@ -8,5 +8,6 @@ public class Capricorn : Attacks {
         10, "capricorn", 0, damage, castTime, duration, cooldown, 2f) { }
 
     public override void Use() {
+
     }
 }

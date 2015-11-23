@@ -766,6 +766,10 @@ Prefab:
       propertyPath: abilityColider.Array.data[10]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6150000, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
   m_IsPrefabParent: 0
