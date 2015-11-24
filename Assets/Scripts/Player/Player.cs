@@ -114,53 +114,36 @@ public class Player : MonoBehaviour
         // basic
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (!abilityArray[0].OnCooldown)
+            if (abilityArray[0].IsMeele)
             {
-                if (abilityArray[0].IsMeele)
-                {
-                    Debug.Log(name + " used Basic");
-                    meleeAttack(abilityArray[0]);
-                    OffCooldown(abilityArray[0]);
-                }
+                meleeAttack(abilityArray[0]);
             }
         }
 
         // ability 1
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (!abilityArray[1].OnCooldown)
+            if (abilityArray[1].IsMeele)
             {
-                if (abilityArray[1].IsMeele)
-                {
-                    meleeAttack(abilityArray[1]);
-                    OffCooldown(abilityArray[1]);
-                }
-            } 
+                meleeAttack(abilityArray[1]);
+            }
         }
 
         // ability 2
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (!abilityArray[2].OnCooldown)
+            if (abilityArray[2].IsMeele)
             {
-                if (abilityArray[2].IsMeele)
-                {
-                    meleeAttack(abilityArray[2]);
-                    OffCooldown(abilityArray[2]);
-                }
+                meleeAttack(abilityArray[2]);
             }
         }
 
         // ability 3
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            if (!abilityArray[3].OnCooldown)
+            if (abilityArray[3].IsMeele)
             {
-                if (abilityArray[3].IsMeele)
-                {
-                    meleeAttack(abilityArray[3]);
-                    OffCooldown(abilityArray[3]);
-                }
+                meleeAttack(abilityArray[3]);
             }
         }
 
@@ -317,24 +300,26 @@ public class Player : MonoBehaviour
         transform.localScale = scale;
     }
     
-    void meleeAttack(Attacks usedSpell) {
-        RaycastHit objectHit;
-        Vector3 fwd = new Vector3(0,0,0);
+    void meleeAttack(Attacks _usedSpell) {
 
-        // set atack into right direction
-        if (mirror) { fwd = gameObject.transform.TransformDirection(Vector3.right); }
-        else { fwd = gameObject.transform.TransformDirection(Vector3.left); }
+        if (!_usedSpell.OnCooldown) {
+            Vector3 fwd = new Vector3(0,0,0);
 
-        // send a visual debug ray
-        Debug.DrawRay(gameObject.transform.position, fwd * abilityArray[0].Range, Color.green);
+            // set atack into right direction
+            if (mirror) { fwd = gameObject.transform.TransformDirection(Vector3.right); }
+            else { fwd = gameObject.transform.TransformDirection(Vector3.left); }
 
-        // create a raycast
-        if (Physics.Raycast(gameObject.transform.position, fwd, out objectHit, usedSpell.Range)) {
+            // send a visual debug ray
+            Debug.DrawRay(gameObject.transform.position, fwd * abilityArray[0].Range, Color.green);
 
+            // create a raycast
+            RaycastHit2D objectHit = Physics2D.Raycast(gameObject.transform.position, fwd, _usedSpell.Range);
             // compares if raycast hits a player
             if (objectHit.transform.tag == "Player") {
                 Debug.Log(name + " hit: " + objectHit.transform.gameObject.name);
-                usedSpell.Use(objectHit.transform.gameObject);
+                _usedSpell.Use(objectHit.transform.gameObject);
+                StartCoroutine(OffCooldown(_usedSpell));
+                Debug.Log(name + " Health: " + objectHit.transform.gameObject.GetComponent<Player>().playerVitals.CurrHealth);
             }
         }
     }
