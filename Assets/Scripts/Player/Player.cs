@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown("joystick " + playerAxis.Substring(1, 1) + " button " + "1"))
             {
-                Debug.Log(playerAxis.Substring(1, 1));
+                
             }
         }
 
@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
                 if (abilityArray[0].IsMeele)
                 {
                     Debug.Log(name + " used Basic");
-                    meleeAttack(abilityArray[0]);
+                    useAbility(abilityArray[0]);
                     OffCooldown(abilityArray[0]);
                 }
             }
@@ -132,7 +132,7 @@ public class Player : MonoBehaviour
             {
                 if (abilityArray[1].IsMeele)
                 {
-                    meleeAttack(abilityArray[1]);
+                    useAbility(abilityArray[1]);
                     OffCooldown(abilityArray[1]);
                 }
             } 
@@ -145,7 +145,7 @@ public class Player : MonoBehaviour
             {
                 if (abilityArray[2].IsMeele)
                 {
-                    meleeAttack(abilityArray[2]);
+                    useAbility(abilityArray[2]);
                     OffCooldown(abilityArray[2]);
                 }
             }
@@ -158,7 +158,7 @@ public class Player : MonoBehaviour
             {
                 if (abilityArray[3].IsMeele)
                 {
-                    meleeAttack(abilityArray[3]);
+                    useAbility(abilityArray[3]);
                     OffCooldown(abilityArray[3]);
                 }
             }
@@ -317,7 +317,7 @@ public class Player : MonoBehaviour
         transform.localScale = scale;
     }
     
-    void meleeAttack(Attacks usedSpell) {
+    void useAbility(Attacks usedSpell) {
         RaycastHit objectHit;
         Vector3 fwd = new Vector3(0,0,0);
 
