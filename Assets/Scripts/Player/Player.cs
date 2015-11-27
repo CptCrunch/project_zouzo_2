@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public float moveSpeed = 6;
     public float slowedSpeed = 3;
     public float maxHealth;
+    private string[] playerControles = new string[5];
     #endregion
 
     #region Jumping
@@ -64,13 +65,61 @@ public class Player : MonoBehaviour
     private bool mirror = false;
     private bool death = false;
     #endregion
+
     #endregion
 
     void Start()
     {
+        if (playerAxis == "KB" || playerAxis == "P1" || playerAxis == "P2" || playerAxis == "P3" || playerAxis == "P4") { }
+        else { Debug.LogError("incorrect playerAxis"); }
+
+        // set controles
+
+        // - keybord
+        if(playerAxis == "KB") {
+            playerControles[0] = "space";       // jump
+            playerControles[1] = "1";           // basic
+            playerControles[2] = "2";           // spell_1
+            playerControles[3] = "3";           // spell_2
+            playerControles[4] = "4";           // spell_3
+        }
+
+        // - joysick
+        if (playerAxis == "P1" || playerAxis == "P2" || playerAxis == "P3" || playerAxis == "P4")
+        {
+            playerControles[0] = "joystick " + playerAxis.Substring(1, 1) + " button 0";        // jump
+            playerControles[1] = "joystick " + playerAxis.Substring(1, 1) + " button 5";        // basic
+            playerControles[2] = "joystick " + playerAxis.Substring(1, 1) + " button 1";        // spell_1
+            playerControles[3] = "joystick " + playerAxis.Substring(1, 1) + " button 2";        // spell_2
+            playerControles[4] = "joystick " + playerAxis.Substring(1, 1) + " button 3";        // spell_3
+        }
+
+        // debug player Controles
+        /*string debugText = name + " Controles:\n";
+
+        for (int i = 0; i < playerControles.Length; i++) {
+            
+            // set debug text
+            switch (i)
+            {
+                case 0: debugText += "  jump: "; break;
+                case 1: debugText += "  basic: "; break;
+                case 2: debugText += "  spell_1: "; break;
+                case 3: debugText += "  spell_2: "; break;
+                case 4: debugText += "  spell_3: "; break;
+            }
+
+            // print debug text and key
+            debugText += playerControles[i] + ",";
+        }
+
+        Debug.Log(debugText);*/
+
         // set starter abilities
         abilityArray[0] = AbilityManager._instance.CreateBasic();
         abilityArray[1] = AbilityManager._instance.CreateCapricorn();
+        abilityArray[2] = AbilityManager._instance.CreateBasic();
+        abilityArray[3] = AbilityManager._instance.CreateBasic();
 
         controller = GetComponent<Controller2D>();
         _animator = GetComponent<Animator>();
@@ -88,14 +137,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (playerAxis != "KB")
-        {
-            if (Input.GetKeyDown("joystick " + playerAxis.Substring(1, 1) + " button " + "1"))
-            {
-                Debug.Log(playerAxis.Substring(1, 1));
-            }
-        }
-
         #region Testing Conditions
         if (Input.GetKeyDown(KeyCode.P)) { StartCoroutine(playerVitals.Stun(3f)); }
         if (Input.GetKeyDown(KeyCode.O)) { StartCoroutine(playerVitals.SlowOverTime(3f)); }
@@ -111,39 +152,43 @@ public class Player : MonoBehaviour
 
         // use ability
 
-        // basic
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        // - basic
+        if (Input.GetKeyDown(playerControles[1]))
         {
             if (abilityArray[0].IsMeele)
             {
                 meleeAttack(abilityArray[0]);
+                /*Debug.Log(name + " used basic");*/
             }
         }
 
-        // ability 1
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        // - ability 1
+        if (Input.GetKeyDown(playerControles[2]))
         {
             if (abilityArray[1].IsMeele)
             {
                 meleeAttack(abilityArray[1]);
+                /*Debug.Log(name + " used spell_1");*/
             }
         }
 
-        // ability 2
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        // - ability 2
+        if (Input.GetKeyDown(playerControles[3]))
         {
             if (abilityArray[2].IsMeele)
             {
                 meleeAttack(abilityArray[2]);
+                /*Debug.Log(name + " used spell_2");*/
             }
         }
 
-        // ability 3
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        // - ability 3
+        if (Input.GetKeyDown(playerControles[4]))
         {
             if (abilityArray[3].IsMeele)
             {
                 meleeAttack(abilityArray[3]);
+                /*Debug.Log(name + " used spell_3");*/
             }
         }
 
@@ -221,9 +266,9 @@ public class Player : MonoBehaviour
             {
                 _animator.SetBool("WallSlide", false);
             }
-
+            
             // jump
-            if (Input.GetButtonDown(playerAxis + "_Jump"))
+            if (Input.GetKeyDown(playerControles[0]))
             {
                 if (wallSliding)
                 {
@@ -272,7 +317,7 @@ public class Player : MonoBehaviour
                 }
             }
 
-            if (Input.GetButtonUp(playerAxis + "_Jump"))
+            if (Input.GetKeyUp(playerControles[0]))
             {
                 if (velocity.y > minJumpVelocity) { velocity.y = minJumpVelocity; }
             }
@@ -314,11 +359,15 @@ public class Player : MonoBehaviour
 
             // create a raycast
             RaycastHit2D objectHit = Physics2D.Raycast(gameObject.transform.position, fwd, _usedSpell.Range);
+            
             // compares if raycast hits a player
             if (objectHit.transform.tag == "Player") {
                 Debug.Log(name + " hit: " + objectHit.transform.gameObject.name);
+
+                // use spell and set it on cooldown
                 _usedSpell.Use(objectHit.transform.gameObject);
                 StartCoroutine(OffCooldown(_usedSpell));
+
                 Debug.Log(name + " Health: " + objectHit.transform.gameObject.GetComponent<Player>().playerVitals.CurrHealth);
             }
         }

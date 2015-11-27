@@ -9,7 +9,7 @@ public class Basic : Attacks {
     public override void Use(GameObject _target) {
         
         // get the vitals of the target
-        LivingEntity Vitals = _target.AddComponent<Player>().playerVitals;
+        LivingEntity Vitals = _target.GetComponent<Player>().playerVitals;
 
         // deal damage
         Vitals.GetDamage(Damage);

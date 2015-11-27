@@ -117,6 +117,8 @@ public class LivingEntity
 
     // knock up Player
     public IEnumerator PlayerKnockUp(float _yHeight, float _time) {
+        Debug.Log(name + " knocked up");
+
         knockUpIndex++;
         int currIndex = knockUpIndex;
 
