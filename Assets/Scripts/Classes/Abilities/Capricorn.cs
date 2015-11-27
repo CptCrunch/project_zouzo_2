@@ -13,7 +13,7 @@ public class Capricorn : Attacks {
         LivingEntity Vitals = _target.GetComponent<Player>().playerVitals;
 
         // kock the target up and deal damage
-        StartCoroutine(Vitals.PlayerKnockUp(2.5f, 0.2f));
+        Vitals.ApplyPlayerKnockUp(2.5f, 0.2f);
         Vitals.GetDamage(Damage);
 
         // set the spell onto cooldown

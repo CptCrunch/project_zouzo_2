@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
-public class LivingEntity
+public class LivingEntity : MonoBehaviour 
 {
     private Player instance;
 
@@ -72,6 +72,12 @@ public class LivingEntity
 
         if(_ammount >= maxHealth || currHealth <= 0) { currHealth = 0; }
     }
+
+    #region Conditions
+    public void ApplyStun(float _time) { StartCoroutine(Stun(_time)); }
+    public void ApplySlowOverTime(float _time) { StartCoroutine(SlowOverTime(_time)); }
+    public void ApplyPlayerKnockUp(float _yHeight, float _time) { StartCoroutine(PlayerKnockUp(_yHeight, _time)); }
+    public void ApplyPlayerKnockBack(float _xDistance, float _yHeight, float _time) { StartCoroutine(PlayerKnockBack(_xDistance, _yHeight, _time)); }
 
     // stun Player
     public IEnumerator Stun(float _time) {
@@ -145,4 +151,6 @@ public class LivingEntity
         if (currIndex == knockBackIndex) { knockBacked = false; /*Debug.Log("KockBack stop");*/ }
     }
     #endregion
+    #endregion
 }
+
