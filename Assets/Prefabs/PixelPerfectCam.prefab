@@ -174,7 +174,7 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 159542}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!92 &9299282
 Behaviour:
   m_ObjectHideFlags: 1
@@ -193,8 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12025c473a87c7f46919a28bbe803dcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenVerticalPixels: 512
-  preferUncropped: 1
+  screenVerticalPixels: 780
+  preferUncropped: 0
 --- !u!124 &12482888
 Behaviour:
   m_ObjectHideFlags: 1
