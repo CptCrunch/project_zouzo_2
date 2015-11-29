@@ -5,7 +5,7 @@ public abstract class Attacks {
 
     private uint id;
     private string name;
-    private string kind;
+    private string type;
     private float heal;
     private float damage;
     private float castTime;
@@ -20,11 +20,11 @@ public abstract class Attacks {
     public Attacks() { }
     
     //Constructor with Heal
-    public Attacks(uint id, string name, string kind, bool isMeele, float heal, float damage, float castTime, float duration, float cooldown, float range)
+    public Attacks(uint id, string name, string type, bool isMeele, float heal, float damage, float castTime, float duration, float cooldown, float range)
     {
         this.id = id;
         this.name = name;
-        this.kind = kind;
+        this.type = type;
         this.isMeele = isMeele;
         this.heal = heal;
         this.damage = damage;
@@ -39,7 +39,7 @@ public abstract class Attacks {
     #region Get & Set 
     public uint ID { get { return id; } }
     public string Name { get { return name; } }
-    public string Kind { get { return kind; } }
+    public string Type { get { return type; } }
     public bool IsMeele { get { return isMeele; } }
     public float Heal { get { return heal; } set { this.heal = value; } }
     public float Damage { get { return damage; } set { this.damage = value; } }
