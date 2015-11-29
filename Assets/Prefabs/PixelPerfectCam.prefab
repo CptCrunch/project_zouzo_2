@@ -29,7 +29,6 @@ GameObject:
   - 20: {fileID: 2078156}
   - 124: {fileID: 12482888}
   - 92: {fileID: 9299282}
-  - 81: {fileID: 8117736}
   m_Layer: 0
   m_Name: PixelPerfectCam
   m_TagString: Untagged
@@ -111,7 +110,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: .5
+  orthographic size: .550000012
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -168,13 +167,6 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!81 &8117736
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 159542}
-  m_Enabled: 0
 --- !u!92 &9299282
 Behaviour:
   m_ObjectHideFlags: 1
@@ -193,8 +185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12025c473a87c7f46919a28bbe803dcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenVerticalPixels: 780
-  preferUncropped: 0
+  screenVerticalPixels: 512
+  preferUncropped: 1
 --- !u!124 &12482888
 Behaviour:
   m_ObjectHideFlags: 1
