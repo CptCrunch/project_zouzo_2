@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using System.Threading;
 
 [System.Serializable]
 public class LivingEntity : MonoBehaviour 
@@ -74,13 +75,50 @@ public class LivingEntity : MonoBehaviour
     }
 
     #region Conditions
-    public void ApplyStun(float _time) { StartCoroutine(Stun(_time)); }
-    public void ApplySlowOverTime(float _time) { StartCoroutine(SlowOverTime(_time)); }
-    public void ApplyPlayerKnockUp(float _yHeight, float _time) { StartCoroutine(PlayerKnockUp(_yHeight, _time)); }
-    public void ApplyPlayerKnockBack(float _xDistance, float _yHeight, float _time) { StartCoroutine(PlayerKnockBack(_xDistance, _yHeight, _time)); }
+    public void ApplyPlayerKnockUp(float _yHeight, int _time)
+    {
+        Thread KnockUpThread = new Thread(() => PlayerKnockUp(_yHeight, _time));
+
+        try
+        {
+            KnockUpThread.Start();
+        }
+        catch (ThreadStateException)
+        {
+            Debug.LogError("Error with PlayerKnockUp Thread");
+        }
+    }
+
+    public void ApplyStun(int _time)
+    {
+        Thread StunThread = new Thread(() => Stun(_time));
+
+        try
+        {
+            StunThread.Start();
+        }
+        catch (ThreadStateException)
+        {
+            Debug.LogError("Error with StunThread Thread");
+        }
+    }
+
+    public void ApplySlowOverTime(int _time)
+    {
+        Thread SlowOverTimeThread = new Thread(() => SlowOverTime(_time));
+
+        try
+        {
+            SlowOverTimeThread.Start();
+        }
+        catch (ThreadStateException)
+        {
+            Debug.LogError("Error with SlowOverTimeThread Thread");
+        }
+    }
 
     // stun Player
-    public IEnumerator Stun(float _time) {
+    public void Stun(int _time) {
         stunIndex++;
         int currIndex = stunIndex;
 
@@ -88,7 +126,7 @@ public class LivingEntity : MonoBehaviour
         /*Debug.Log("Stun start");*/
         instance.velocity.x = 0;
 
-        yield return new WaitForSeconds(_time);
+        Thread.Sleep(_time);
         if (currIndex == stunIndex) { stunned = false; /*Debug.Log("Stun stop");*/ }
     }
 
@@ -99,13 +137,11 @@ public class LivingEntity : MonoBehaviour
             slowed = false;
             /*Debug.Log("Slow stop");*/
             if (!Slowed) { currSpeed = moveSpeed; }
-        }
-             
-            
+        }       
     }
 
     // slow Plyer over Time
-    public IEnumerator SlowOverTime(float _time) {
+    public void SlowOverTime(int _time) {
         slowIndex++;
         int currIndex = slowIndex;
         
@@ -113,7 +149,7 @@ public class LivingEntity : MonoBehaviour
         /*Debug.Log("SlowOverTime start");*/
         currSpeed = slowedSpeed;
 
-        yield return new WaitForSeconds(_time);
+        Thread.Sleep(_time);
         if (currIndex == slowIndex) {
             slowedOverTime = false;
             /*Debug.Log("SlowOverTime stop");*/
@@ -122,19 +158,19 @@ public class LivingEntity : MonoBehaviour
     }
 
     // knock up Player
-    public IEnumerator PlayerKnockUp(float _yHeight, float _time) {
+    public void PlayerKnockUp(float _yHeight, int _time) {
         Debug.Log(name + " knocked up");
 
         knockUpIndex++;
         int currIndex = knockUpIndex;
 
         knockUped = true;
-        /*Debug.Log("KnockUp start");*/
+        Debug.Log("KnockUp start");
         instance.velocity.x = 0;
         instance.velocity.y += _yHeight / _time;
 
-        yield return new WaitForSeconds(_time);
-        if (currIndex == knockUpIndex) { knockUped = false; /*Debug.Log("KnockUp stop");*/ }
+        Thread.Sleep(_time);
+        if (currIndex == knockUpIndex) { knockUped = false; Debug.Log("KnockUp stop"); }
     }
 
     // knock back Player
