@@ -138,11 +138,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         #region Testing Conditions
-        if (Input.GetKeyDown(KeyCode.P)) { StartCoroutine(playerVitals.Stun(3f)); }
-        if (Input.GetKeyDown(KeyCode.O)) { StartCoroutine(playerVitals.SlowOverTime(3f)); }
+        if (Input.GetKeyDown(KeyCode.P)) { playerVitals.Stun(300); }
+        if (Input.GetKeyDown(KeyCode.O)) { playerVitals.SlowOverTime(300); }
         if (Input.GetKeyDown(KeyCode.L)) { playerVitals.Slow(true); }
         if (Input.GetKeyDown(KeyCode.K)) { playerVitals.Slow(false); }
-        if (Input.GetKeyDown(KeyCode.I)) { StartCoroutine(playerVitals.PlayerKnockUp(5f, 0.2f)); }
+        if (Input.GetKeyDown(KeyCode.I)) { playerVitals.ApplyPlayerKnockUp(5f, 200); }
         if (Input.GetKeyDown(KeyCode.U)) { StartCoroutine(playerVitals.PlayerKnockBack(5f, 0f, 0.2f)); }
         #endregion
 

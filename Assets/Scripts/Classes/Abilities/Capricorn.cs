@@ -13,7 +13,14 @@ public class Capricorn : Attacks {
         LivingEntity Vitals = _target.GetComponent<Player>().playerVitals;
 
         // kock the target up and deal damage
-        Vitals.ApplyPlayerKnockUp(2.5f, 0.2f);
+        try {
+            Vitals.ApplyPlayerKnockUp(10f, Convert.ToInt32(Util.ConvertSecondsToMilliseconds(2)));
+        }
+        catch (OverflowException)
+        {
+            Debug.LogError("Is Outside range of Int32 tyoe.");
+        }
+
         Vitals.GetDamage(Damage);
 
         // set the spell onto cooldown
