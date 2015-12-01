@@ -4,7 +4,7 @@ using System.Collections;
 public class Basic : Attacks {
 
     public Basic(float damage, float castTime, float duration, float cooldown, float range) : base(
-        0, "basic", "meele", true, 0, damage, castTime, duration, cooldown, range) { }
+        0, "basic", "meele", true, false, 0, damage, castTime, duration, cooldown, range) { }
 
     public override void Use(GameObject _target) {
         
