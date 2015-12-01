@@ -142,8 +142,8 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.O)) { playerVitals.SlowOverTime(300); }
         if (Input.GetKeyDown(KeyCode.L)) { playerVitals.Slow(true); }
         if (Input.GetKeyDown(KeyCode.K)) { playerVitals.Slow(false); }
-        if (Input.GetKeyDown(KeyCode.I)) { playerVitals.ApplyPlayerKnockUp(5f, 200); }
-        if (Input.GetKeyDown(KeyCode.U)) { StartCoroutine(playerVitals.PlayerKnockBack(5f, 0f, 0.2f)); }
+        if (Input.GetKeyDown(KeyCode.I)) { playerVitals.PlayerKnockUp(5f, 300); }
+        if (Input.GetKeyDown(KeyCode.U)) { playerVitals.PlayerKnockBack(5f, 0f, 300); }
         #endregion
 
         // Imobelised
