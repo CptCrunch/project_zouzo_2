@@ -15,17 +15,19 @@ public abstract class Attacks {
     private uint durability;
     private float range;
     private bool isMeele;
+    private bool isAOE;
 
     //Empty Constructor
     public Attacks() { }
     
     //Constructor with Heal
-    public Attacks(uint id, string name, string type, bool isMeele, float heal, float damage, float castTime, float duration, float cooldown, float range)
+    public Attacks(uint id, string name, string type, bool isMeele, bool isAOE, float heal, float damage, float castTime, float duration, float cooldown, float range)
     {
         this.id = id;
         this.name = name;
         this.type = type;
         this.isMeele = isMeele;
+        this.isAOE = isAOE;
         this.heal = heal;
         this.damage = damage;
         this.castTime = castTime;
@@ -41,6 +43,7 @@ public abstract class Attacks {
     public string Name { get { return name; } }
     public string Type { get { return type; } }
     public bool IsMeele { get { return isMeele; } }
+    public bool IsAOE { get { return isAOE; } }
     public float Heal { get { return heal; } set { this.heal = value; } }
     public float Damage { get { return damage; } set { this.damage = value; } }
     public float CastTime { get { return castTime; } set { this.castTime = value; } }
