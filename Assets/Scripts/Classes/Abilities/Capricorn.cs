@@ -14,7 +14,7 @@ public class Capricorn : Attacks {
 
         // kock the target up and deal damage
         try {
-            Vitals.ApplyPlayerKnockUp(10f, Convert.ToInt32(Util.ConvertSecondsToMilliseconds(2)));
+            Vitals.ApplyPlayerKnockUp(10f, 300);
         }
         catch (OverflowException)
         {
