@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour
@@ -12,6 +13,8 @@ public class Player : MonoBehaviour
 
     [Tooltip("Define Controller: P1, P2, P3, P4, KB")]
     public string playerAxis;
+
+    private Vector2[] debugRayHitpointArray = new Vector2[1];
 
     #region Player Vitals
     [HideInInspector]
@@ -355,14 +358,17 @@ public class Player : MonoBehaviour
             else { fwd = gameObject.transform.TransformDirection(Vector3.left); }
 
             // send a visual debug ray
-            Debug.DrawRay(gameObject.transform.position, fwd * abilityArray[0].Range, Color.green);
+            Debug.DrawRay(gameObject.transform.position + new Vector3((gameObject.GetComponent<BoxCollider2D>().size.x + 0.01f) * fwd.x, 0), fwd * abilityArray[0].Range, Color.green);
 
             // create a raycast
-            RaycastHit2D objectHit = Physics2D.Raycast(gameObject.transform.position, fwd, _usedSpell.Range);
+            RaycastHit2D objectHit = Physics2D.Raycast(gameObject.transform.position + new Vector3((gameObject.GetComponent<BoxCollider2D>().size.x + 0.01f) * fwd.x, 0), fwd, _usedSpell.Range);
             
             // compares if raycast hits a player
             if (objectHit.transform.tag == "Player") {
                 Debug.Log(name + " hit: " + objectHit.transform.gameObject.name);
+
+                // add objectHitpoint to debugRayHitpoint to show the hitten point in editor
+                debugRayHitpointArray[0] = objectHit.transform.position;
 
                 // use spell and set it on cooldown
                 _usedSpell.Use(objectHit.transform.gameObject);
@@ -376,5 +382,15 @@ public class Player : MonoBehaviour
     IEnumerator OffCooldown(Attacks _spell) {
         yield return new WaitForSeconds(_spell.Cooldown);
         _spell.OnCooldown = false;
+    }
+
+    void OnDrawGizmos()
+    {
+        foreach (Vector2 raycastHitpoint in debugRayHitpointArray)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(raycastHitpoint - new Vector2(0.2f, 0), raycastHitpoint + new Vector2(0.2f, 0));
+            Gizmos.DrawLine(raycastHitpoint - new Vector2(0, 0.2f), raycastHitpoint + new Vector2(0, 0.2f));
+        }
     }
 }
