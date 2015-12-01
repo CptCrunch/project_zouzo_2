@@ -5,7 +5,7 @@ using System.Collections;
 using System.Threading;
 
 [System.Serializable]
-public class LivingEntity : MonoBehaviour 
+public class LivingEntity 
 {
     private Player instance;
 
@@ -89,6 +89,20 @@ public class LivingEntity : MonoBehaviour
         }
     }
 
+    public void ApplyPlayerKnockBack(float _yDistance, float _xDistance, int _time)
+    {
+        Thread KnockBackThread = new Thread(() => PlayerKnockBack(_xDistance, _yDistance ,_time));
+
+        try
+        {
+            KnockBackThread.Start();
+        }
+        catch (ThreadStateException)
+        {
+            Debug.LogError("Error with KnockBackThread Thread");
+        }
+    }
+
     public void ApplyStun(int _time)
     {
         Thread StunThread = new Thread(() => Stun(_time));
@@ -167,23 +181,23 @@ public class LivingEntity : MonoBehaviour
         knockUped = true;
         Debug.Log("KnockUp start");
         instance.velocity.x = 0;
-        instance.velocity.y += _yHeight / _time;
+        instance.velocity.y += _yHeight / (float)Util.ConvertMillisecondsToSeconds(_time);
 
         Thread.Sleep(_time);
         if (currIndex == knockUpIndex) { knockUped = false; Debug.Log("KnockUp stop"); }
     }
 
     // knock back Player
-    public IEnumerator PlayerKnockBack(float _xDistance, float _yDistance, float _time) {
+    public void PlayerKnockBack(float _xDistance, float _yDistance, int _time) {
         knockBackIndex++;
         int currIndex = knockBackIndex;
 
         knockBacked = true;
         /*Debug.Log("KockBack start");*/
-        instance.velocity.x = _xDistance / _time;
-        instance.velocity.y += _yDistance / _time;
+        instance.velocity.x = _xDistance / (float)Util.ConvertMillisecondsToSeconds(_time);
+        instance.velocity.y += _yDistance / (float)Util.ConvertMillisecondsToSeconds(_time);
 
-        yield return new WaitForSeconds(_time);
+        Thread.Sleep(_time);
         if (currIndex == knockBackIndex) { knockBacked = false; /*Debug.Log("KockBack stop");*/ }
     }
     #endregion
