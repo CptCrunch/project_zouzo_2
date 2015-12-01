@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     [Tooltip("Define Controller: P1, P2, P3, P4, KB")]
     public string playerAxis;
 
-    private Vector2[] debugRayHitpointArray = new Vector2[1];
+    private Vector2[] debugRayHitpointArray = new Vector2[4];
 
     #region Player Vitals
     [HideInInspector]
@@ -358,23 +358,34 @@ public class Player : MonoBehaviour
             else { fwd = gameObject.transform.TransformDirection(Vector3.left); }
 
             // send a visual debug ray
-            Debug.DrawRay(gameObject.transform.position + new Vector3((gameObject.GetComponent<BoxCollider2D>().size.x + 0.01f) * fwd.x, 0), fwd * abilityArray[0].Range, Color.green);
+            Debug.DrawRay(gameObject.transform.position, fwd * abilityArray[0].Range, Color.green);
+
+            // reset the debugRayHitpointArray
+            for (int i = 0; debugRayHitpointArray.Length > i; i++) {
+                debugRayHitpointArray[i] = new Vector2(0, 0);
+            }
 
             // create a raycast
-            RaycastHit2D objectHit = Physics2D.Raycast(gameObject.transform.position + new Vector3((gameObject.GetComponent<BoxCollider2D>().size.x + 0.01f) * fwd.x, 0), fwd, _usedSpell.Range);
-            
-            // compares if raycast hits a player
-            if (objectHit.transform.tag == "Player") {
-                Debug.Log(name + " hit: " + objectHit.transform.gameObject.name);
+            /*RaycastHit2D objectHit = Physics2D.RaycastAll(gameObject.transform.position, fwd, _usedSpell.Range);*/
+            int loopindex = 0;
+            foreach (RaycastHit2D objectHit in Physics2D.RaycastAll(gameObject.transform.position, fwd, _usedSpell.Range)) {
 
                 // add objectHitpoint to debugRayHitpoint to show the hitten point in editor
-                debugRayHitpointArray[0] = objectHit.transform.position;
+                debugRayHitpointArray[loopindex] = objectHit.transform.position;
 
-                // use spell and set it on cooldown
-                _usedSpell.Use(objectHit.transform.gameObject);
-                StartCoroutine(OffCooldown(_usedSpell));
+                // compares if raycast hits a player
+                if (objectHit.transform.tag == "Player" && loopindex > 0) {
+                    if (loopindex > 2 && _usedSpell.IsAOE) {
+                        Debug.Log(name + " hit: " + objectHit.transform.gameObject.name);
 
-                Debug.Log(name + " Health: " + objectHit.transform.gameObject.GetComponent<Player>().playerVitals.CurrHealth);
+                        // use spell and set it on cooldown
+                        _usedSpell.Use(objectHit.transform.gameObject);
+                        StartCoroutine(OffCooldown(_usedSpell));
+
+                        Debug.Log(name + " Health: " + objectHit.transform.gameObject.GetComponent<Player>().playerVitals.CurrHealth);
+                    }
+                }
+                loopindex++;
             }
         }
     }
@@ -384,13 +395,48 @@ public class Player : MonoBehaviour
         _spell.OnCooldown = false;
     }
 
-    void OnDrawGizmos()
-    {
-        foreach (Vector2 raycastHitpoint in debugRayHitpointArray)
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(raycastHitpoint - new Vector2(0.2f, 0), raycastHitpoint + new Vector2(0.2f, 0));
-            Gizmos.DrawLine(raycastHitpoint - new Vector2(0, 0.2f), raycastHitpoint + new Vector2(0, 0.2f));
+    private int hitpointDebugLoopindex;
+
+    void OnDrawGizmos() {
+
+        // reset loopindex
+        hitpointDebugLoopindex = 0;
+
+        // visualize hitpoints
+        foreach (Vector2 raycastHitpoint in debugRayHitpointArray) {
+
+            // only draw hitpoint if it hit a player
+            if (raycastHitpoint != new Vector2(0, 0)) {
+                
+                // set hitpoint color
+                switch (hitpointDebugLoopindex) {
+                    case 0:
+                        Gizmos.color = Color.white;
+                        break;
+
+                    case 1:
+                        Gizmos.color = Color.yellow;
+                        break;
+
+                    case 2:
+                        Gizmos.color = Color.red;
+                        break;
+
+                    case 3:
+                        Gizmos.color = Color.black;
+                        break;
+                }
+
+                // draw hitpoint
+                Gizmos.DrawLine(raycastHitpoint - new Vector2(0.2f, 0), raycastHitpoint + new Vector2(0.2f, 0));
+                Gizmos.DrawLine(raycastHitpoint - new Vector2(0, 0.2f), raycastHitpoint + new Vector2(0, 0.2f));
+
+                Gizmos.DrawLine(raycastHitpoint + new Vector2(0, 0.1f), raycastHitpoint + new Vector2(0.1f, 0));
+                Gizmos.DrawLine(raycastHitpoint + new Vector2(0.1f, 0), raycastHitpoint + new Vector2(0, -0.1f));
+                Gizmos.DrawLine(raycastHitpoint + new Vector2(0, -0.1f), raycastHitpoint + new Vector2(-0.1f, 0));
+                Gizmos.DrawLine(raycastHitpoint + new Vector2(-0.1f, 0), raycastHitpoint + new Vector2(0, 0.1f));
+            }
+            hitpointDebugLoopindex++;
         }
     }
 }
