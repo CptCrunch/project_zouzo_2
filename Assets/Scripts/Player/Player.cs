@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
 
     // ability variables
     private Attacks[] abilityArray = new Attacks[4];
-    
+
     #region Animations 
     private Animator _animator;
     private bool mirror = false;
@@ -79,7 +79,8 @@ public class Player : MonoBehaviour
         // set controles
 
         // - keybord
-        if(playerAxis == "KB") {
+        if (playerAxis == "KB")
+        {
             playerControles[0] = "space";       // jump
             playerControles[1] = "1";           // basic
             playerControles[2] = "2";           // spell_1
@@ -129,24 +130,24 @@ public class Player : MonoBehaviour
 
         // create playerVitals
         playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth);
-        
+
         // calculate gravity
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
-        
+
         /*print("Gravity: " + gravity + "  Jump Velocity: " + maxJumpVelocity);*/
     }
 
     void Update()
     {
         #region Testing Conditions
-        if (Input.GetKeyDown(KeyCode.P)) { playerVitals.Stun(300); }
-        if (Input.GetKeyDown(KeyCode.O)) { playerVitals.SlowOverTime(300); }
-        if (Input.GetKeyDown(KeyCode.L)) { playerVitals.Slow(true); }
-        if (Input.GetKeyDown(KeyCode.K)) { playerVitals.Slow(false); }
-        if (Input.GetKeyDown(KeyCode.I)) { playerVitals.PlayerKnockUp(5f, 300); }
-        if (Input.GetKeyDown(KeyCode.U)) { playerVitals.PlayerKnockBack(5f, 0f, 300); }
+        if (Input.GetKeyDown(KeyCode.P)) { playerVitals.ApplyStun(300); }
+        if (Input.GetKeyDown(KeyCode.O)) { playerVitals.ApplySlowOverTime(300); }
+        if (Input.GetKeyDown(KeyCode.L)) { playerVitals.ApplySlow(true); }
+        if (Input.GetKeyDown(KeyCode.K)) { playerVitals.ApplySlow(false); }
+        if (Input.GetKeyDown(KeyCode.I)) { playerVitals.ApplyPlayerKnockUp(5f, 300); }
+        if (Input.GetKeyDown(KeyCode.U)) { playerVitals.ApplyPlayerKnockBack(5f, 0f, 300); }
         #endregion
 
         // Imobelised
@@ -269,7 +270,7 @@ public class Player : MonoBehaviour
             {
                 _animator.SetBool("WallSlide", false);
             }
-            
+
             // jump
             if (Input.GetKeyDown(playerControles[0]))
             {
@@ -307,7 +308,8 @@ public class Player : MonoBehaviour
                             velocity.y = wallLeap / 4;
                         }
                     }
-                } else
+                }
+                else
                 {
                     _animator.SetBool("WallSlide", true);
                 }
@@ -347,11 +349,13 @@ public class Player : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
     }
-    
-    void meleeAttack(Attacks _usedSpell) {
 
-        if (!_usedSpell.OnCooldown) {
-            Vector3 fwd = new Vector3(0,0,0);
+    void meleeAttack(Attacks _usedSpell)
+    {
+
+        if (!_usedSpell.OnCooldown)
+        {
+            Vector3 fwd = new Vector3(0, 0, 0);
 
             // set atack into right direction
             if (mirror) { fwd = gameObject.transform.TransformDirection(Vector3.right); }
@@ -361,21 +365,39 @@ public class Player : MonoBehaviour
             Debug.DrawRay(gameObject.transform.position, fwd * abilityArray[0].Range, Color.green);
 
             // reset the debugRayHitpointArray
-            for (int i = 0; debugRayHitpointArray.Length > i; i++) {
+            for (int i = 0; debugRayHitpointArray.Length > i; i++)
+            {
                 debugRayHitpointArray[i] = new Vector2(0, 0);
             }
 
             // create a raycast
             /*RaycastHit2D objectHit = Physics2D.RaycastAll(gameObject.transform.position, fwd, _usedSpell.Range);*/
             int loopindex = 0;
-            foreach (RaycastHit2D objectHit in Physics2D.RaycastAll(gameObject.transform.position, fwd, _usedSpell.Range)) {
+            foreach (RaycastHit2D objectHit in Physics2D.RaycastAll(gameObject.transform.position, fwd, _usedSpell.Range))
+            {
 
                 // add objectHitpoint to debugRayHitpoint to show the hitten point in editor
                 debugRayHitpointArray[loopindex] = objectHit.transform.position;
 
                 // compares if raycast hits a player
-                if (objectHit.transform.tag == "Player" && loopindex > 0) {
-                    if (loopindex > 2 && _usedSpell.IsAOE) {
+                if (objectHit.transform.tag == "Player" && loopindex > 0)
+                {
+                    if (loopindex > 1)
+                    {
+                        if (_usedSpell.IsAOE)
+                        {
+                            Debug.Log(name + " hit: " + objectHit.transform.gameObject.name);
+
+                            // use spell and set it on cooldown
+                            _usedSpell.Use(objectHit.transform.gameObject);
+                            StartCoroutine(OffCooldown(_usedSpell));
+
+                            Debug.Log(name + " Health: " + objectHit.transform.gameObject.GetComponent<Player>().playerVitals.CurrHealth);
+                        }
+                    }
+
+                    else
+                    {
                         Debug.Log(name + " hit: " + objectHit.transform.gameObject.name);
 
                         // use spell and set it on cooldown
@@ -390,26 +412,31 @@ public class Player : MonoBehaviour
         }
     }
 
-    IEnumerator OffCooldown(Attacks _spell) {
+    IEnumerator OffCooldown(Attacks _spell)
+    {
         yield return new WaitForSeconds(_spell.Cooldown);
         _spell.OnCooldown = false;
     }
 
     private int hitpointDebugLoopindex;
 
-    void OnDrawGizmos() {
+    void OnDrawGizmos()
+    {
 
         // reset loopindex
         hitpointDebugLoopindex = 0;
 
         // visualize hitpoints
-        foreach (Vector2 raycastHitpoint in debugRayHitpointArray) {
+        foreach (Vector2 raycastHitpoint in debugRayHitpointArray)
+        {
 
             // only draw hitpoint if it hit a player
-            if (raycastHitpoint != new Vector2(0, 0)) {
-                
+            if (raycastHitpoint != new Vector2(0, 0))
+            {
+
                 // set hitpoint color
-                switch (hitpointDebugLoopindex) {
+                switch (hitpointDebugLoopindex)
+                {
                     case 0:
                         Gizmos.color = Color.white;
                         break;

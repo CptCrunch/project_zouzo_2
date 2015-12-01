@@ -4,8 +4,15 @@ using System;
 
 public class Capricorn : Attacks {
 
-    public Capricorn(float damage, float castTime, float duration, float cooldown, float range) : base(
-        10, "capricorn", "CC", true, false, 0, damage, castTime, duration, cooldown, range) { }
+    private int time;
+    private float height;
+
+    public Capricorn(float damage, float castTime, float duration, float cooldown, float range, float height, int time) : base(
+        10, "capricorn", "CC", true, false, 0, damage, castTime, duration, cooldown, range)
+    {
+        this.time = time;
+        this.height = height;
+    }
 
     public override void Use(GameObject _target) {
         
@@ -14,7 +21,7 @@ public class Capricorn : Attacks {
 
         // kock the target up and deal damage
         try {
-            Vitals.ApplyPlayerKnockUp(10f, 300);
+            Vitals.ApplyPlayerKnockUp(height, time);
         }
         catch (OverflowException)
         {

@@ -131,8 +131,19 @@ public class LivingEntity
         }
     }
 
+    public void ApplySlow(bool _toggle)
+    {
+        if (_toggle) { currSpeed = slowedSpeed; slowed = true; /*Debug.Log("Slow start");*/ }
+        else
+        {
+            slowed = false;
+            /*Debug.Log("Slow stop");*/
+            if (!Slowed) { currSpeed = moveSpeed; }
+        }
+    }
+
     // stun Player
-    public void Stun(int _time) {
+    private void Stun(int _time) {
         stunIndex++;
         int currIndex = stunIndex;
 
@@ -144,18 +155,8 @@ public class LivingEntity
         if (currIndex == stunIndex) { stunned = false; /*Debug.Log("Stun stop");*/ }
     }
 
-    // slow Plyer
-    public void Slow(bool _toggle) {
-        if (_toggle) { currSpeed = slowedSpeed; slowed = true; /*Debug.Log("Slow start");*/ }
-        else {
-            slowed = false;
-            /*Debug.Log("Slow stop");*/
-            if (!Slowed) { currSpeed = moveSpeed; }
-        }       
-    }
-
     // slow Plyer over Time
-    public void SlowOverTime(int _time) {
+    private void SlowOverTime(int _time) {
         slowIndex++;
         int currIndex = slowIndex;
         
@@ -172,23 +173,23 @@ public class LivingEntity
     }
 
     // knock up Player
-    public void PlayerKnockUp(float _yHeight, int _time) {
+    private void PlayerKnockUp(float _yHeight, int _time) {
         Debug.Log(name + " knocked up");
 
         knockUpIndex++;
         int currIndex = knockUpIndex;
 
         knockUped = true;
-        Debug.Log("KnockUp start");
+        //Debug.Log("KnockUp start");
         instance.velocity.x = 0;
         instance.velocity.y += _yHeight / (float)Util.ConvertMillisecondsToSeconds(_time);
 
         Thread.Sleep(_time);
-        if (currIndex == knockUpIndex) { knockUped = false; Debug.Log("KnockUp stop"); }
+        if (currIndex == knockUpIndex) { knockUped = false; /*Debug.Log("KnockUp stop");*/ }
     }
 
     // knock back Player
-    public void PlayerKnockBack(float _xDistance, float _yDistance, int _time) {
+    private void PlayerKnockBack(float _xDistance, float _yDistance, int _time) {
         knockBackIndex++;
         int currIndex = knockBackIndex;
 
