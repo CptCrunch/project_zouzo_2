@@ -12,7 +12,7 @@ public class AbilityManager : MonoBehaviour {
     }
 
     public Attacks CreateCapricorn() {
-        return new Capricorn(abilities[9].damage, abilities[9].castTime, abilities[9].duration, abilities[9].cooldown, abilities[9].range);
+        return new Capricorn(abilities[9].damage, abilities[9].castTime, abilities[9].duration, abilities[9].cooldown, abilities[9].range, abilities[9].knockUpHeght, abilities[9].time);
     }
 
     public Attacks CreateBasic()
@@ -22,11 +22,17 @@ public class AbilityManager : MonoBehaviour {
 }
 
 [System.Serializable]
-public class Abilities {
+public struct Abilities {
     public string name;
     public float damage;
     public float castTime;
     public float duration;
     public float cooldown;
     public float range;
+
+    [Header("Class specific variables")]
+    public float knockUpHeght;
+    public float knockBackDistance;
+    [Tooltip("time in milliseconds (1:1000)")]
+    public int time;
 }
