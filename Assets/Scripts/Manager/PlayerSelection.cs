@@ -12,8 +12,9 @@ public class PlayerSelection : MonoBehaviour {
     private bool p1, p2, p3, p4, kb;
     public int levelToLoad;
 
-    // Player Limitation and Text
-    public Text[] playerText = new Text[4];
+    // Player Limitation and Text/
+    public CharacterSplashArts splashart;
+
     public bool limitPlayerAmmount;
     [Range(1,4)]
     public int playerLimit;
@@ -43,8 +44,8 @@ public class PlayerSelection : MonoBehaviour {
 
         // visualize connected controlsers
         for(int i = 0; i < controller.Count; i++) {
-            playerText[i].color = Color.green;
-            playerText[i].text = controller[i] + " Connected";
+            splashart.playerText[i].color = Color.green;
+            splashart.playerText[i].text = controller[i] + " Connected";
         }
 
         Gamerules._instance.playerAmmount = controller.Count;
@@ -244,7 +245,16 @@ public class PlayerSelection : MonoBehaviour {
 
     void ResetText(int index) {
         Debug.Log(index);
-        playerText[index].color = Color.black;
-        playerText[index].text = "Player " + (index + 1);
+        splashart.playerText[index].color = Color.black;
+        splashart.playerText[index].text = "Player " + (index + 1);
     }
+}
+
+[System.Serializable]
+public class CharacterSplashArts
+{
+    public Text[] playerText = new Text[4];
+    public Sprite[] playerSplashart = new Sprite[4];
+    public Sprite[] playerSplashartGrayscale = new Sprite[4];
+    public Image[] splashartHolder = new Image[4];
 }

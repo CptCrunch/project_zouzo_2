@@ -207,78 +207,117 @@ MonoBehaviour:
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Taurus
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Gemini
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Cancer
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Leo
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Virgo
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Libra
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Scorpio
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Sagittarius
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Capricorn
     damage: 20
     castTime: 0
     duration: 0
     cooldown: 5
     range: 4
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Aquarius
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Aquarius
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Basic
     damage: 10
     castTime: 0
     duration: 0
     cooldown: .200000003
     range: 2
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
 --- !u!1001 &189650878
 Prefab:
   m_ObjectHideFlags: 0
@@ -856,7 +895,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 159542, guid: b3d938f58e985734fb0d4a50e6ef1b9b, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b3d938f58e985734fb0d4a50e6ef1b9b, type: 2}
@@ -1057,7 +1096,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 9125ce904de4bd641a773e3da1c440cf, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0

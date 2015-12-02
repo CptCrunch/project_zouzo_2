@@ -84,78 +84,117 @@ MonoBehaviour:
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Taurus
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Gemini
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Cancer
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Leo
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Virgo
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Libra
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Scorpio
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Sagittarius
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Capricorn
     damage: 20
     castTime: 0
     duration: 0
     cooldown: 5
     range: 4
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Aquarius
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Aquarius
     damage: 0
     castTime: 0
     duration: 0
     cooldown: 0
     range: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
   - name: Basic
     damage: 10
     castTime: 0
     duration: 0
     cooldown: .200000003
     range: 2
+    knockUpHeght: 0
+    knockBackDistance: 0
+    time: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
