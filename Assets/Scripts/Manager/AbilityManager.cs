@@ -12,12 +12,12 @@ public class AbilityManager : MonoBehaviour {
     }
 
     public Attacks CreateCapricorn() {
-        return new Capricorn(abilities[9].damage, abilities[9].castTime, abilities[9].duration, abilities[9].cooldown, abilities[9].range, abilities[9].knockUpHeght, abilities[9].time);
+        return new Capricorn(abilities[9].damage, abilities[9].castTime, abilities[9].delay, abilities[9].duration, abilities[9].cooldown, abilities[9].range, abilities[9].knockUpHeght, abilities[9].time);
     }
 
     public Attacks CreateBasic()
     {
-        return new Basic(abilities[12].damage, abilities[12].castTime, abilities[12].duration, abilities[12].cooldown, abilities[12].range);
+        return new Basic(abilities[12].damage, abilities[12].castTime, abilities[12].delay, abilities[12].duration, abilities[12].cooldown, abilities[12].range);
     }
 }
 
@@ -26,6 +26,7 @@ public struct Abilities {
     public string name;
     public float damage;
     public float castTime;
+    public float delay;
     public float duration;
     public float cooldown;
     public float range;

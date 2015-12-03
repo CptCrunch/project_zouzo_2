@@ -182,6 +182,22 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11435204, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
+      propertyPath: abilities.Array.data[9].time
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 11435204, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
+      propertyPath: abilities.Array.data[9].knockBackDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11435204, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
+      propertyPath: abilities.Array.data[9].knockUpHeght
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11435204, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
+      propertyPath: abilities.Array.data[9].castTime
+      value: .100000001
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
   m_IsPrefabParent: 0
@@ -204,6 +220,7 @@ MonoBehaviour:
   - name: Aries
     damage: 0
     castTime: 0
+    delay: 0
     duration: 0
     cooldown: 0
     range: 0
@@ -213,6 +230,7 @@ MonoBehaviour:
   - name: Taurus
     damage: 0
     castTime: 0
+    delay: 0
     duration: 0
     cooldown: 0
     range: 0
@@ -222,6 +240,7 @@ MonoBehaviour:
   - name: Gemini
     damage: 0
     castTime: 0
+    delay: 0
     duration: 0
     cooldown: 0
     range: 0
@@ -231,6 +250,7 @@ MonoBehaviour:
   - name: Cancer
     damage: 0
     castTime: 0
+    delay: 0
     duration: 0
     cooldown: 0
     range: 0
@@ -240,6 +260,7 @@ MonoBehaviour:
   - name: Leo
     damage: 0
     castTime: 0
+    delay: 0
     duration: 0
     cooldown: 0
     range: 0
@@ -249,6 +270,7 @@ MonoBehaviour:
   - name: Virgo
     damage: 0
     castTime: 0
+    delay: 0
     duration: 0
     cooldown: 0
     range: 0
@@ -258,6 +280,7 @@ MonoBehaviour:
   - name: Libra
     damage: 0
     castTime: 0
+    delay: 0
     duration: 0
     cooldown: 0
     range: 0
@@ -267,6 +290,7 @@ MonoBehaviour:
   - name: Scorpio
     damage: 0
     castTime: 0
+    delay: 0
     duration: 0
     cooldown: 0
     range: 0
@@ -276,6 +300,7 @@ MonoBehaviour:
   - name: Sagittarius
     damage: 0
     castTime: 0
+    delay: 0
     duration: 0
     cooldown: 0
     range: 0
@@ -285,6 +310,7 @@ MonoBehaviour:
   - name: Capricorn
     damage: 20
     castTime: 0
+    delay: 0
     duration: 0
     cooldown: 5
     range: 4
@@ -294,6 +320,7 @@ MonoBehaviour:
   - name: Aquarius
     damage: 0
     castTime: 0
+    delay: 0
     duration: 0
     cooldown: 0
     range: 0
@@ -303,6 +330,7 @@ MonoBehaviour:
   - name: Aquarius
     damage: 0
     castTime: 0
+    delay: 0
     duration: 0
     cooldown: 0
     range: 0
@@ -312,6 +340,7 @@ MonoBehaviour:
   - name: Basic
     damage: 10
     castTime: 0
+    delay: 0
     duration: 0
     cooldown: .200000003
     range: 2
@@ -359,6 +388,68 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 620bd2cd7136dc24b89d81174f60c7be, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &391123881
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 405256, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2.12299991
+      objectReference: {fileID: 0}
+    - target: {fileID: 405256, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1.96924353
+      objectReference: {fileID: 0}
+    - target: {fileID: 405256, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 405256, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 405256, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 405256, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 405256, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 405256, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+      propertyPath: m_Name
+      value: Player2(P1) (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 11484944, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+      propertyPath: playerAxis
+      value: P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 11484944, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 11484944, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+      propertyPath: name
+      value: Player 3 (P2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &695431188
 Prefab:
@@ -1115,4 +1206,4 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4

@@ -7,8 +7,8 @@ public class Capricorn : Attacks {
     private int time;
     private float height;
 
-    public Capricorn(float damage, float castTime, float duration, float cooldown, float range, float height, int time) : base(
-        10, "capricorn", "CC", true, false, 0, damage, castTime, duration, cooldown, range)
+    public Capricorn(float damage, float castTime, float delay, float duration, float cooldown, float range, float height, int time) : base(
+        10, "capricorn", "CC", true, false, 0, damage, castTime, delay, duration, cooldown, range)
     {
         this.time = time;
         this.height = height;
