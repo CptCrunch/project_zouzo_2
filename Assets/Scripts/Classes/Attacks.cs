@@ -9,9 +9,10 @@ public abstract class Attacks {
     private float heal;
     private float damage;
     private float castTime;
-    private float delay;
+    private float toTravelTime;
+    private float traveltTime;
+    private bool shallTravel = true;
     private float duration;
-    private float currDuration = 0;
     private float cooldown;
     private bool onCooldown = false;
     private uint durability;
@@ -34,7 +35,7 @@ public abstract class Attacks {
         this.heal = heal;
         this.damage = damage;
         this.castTime = castTime;
-        this.delay = delay;
+        this.toTravelTime = delay;
         this.castTime = castTime;
         this.cooldown = cooldown;
         this.range = range;
@@ -47,17 +48,16 @@ public abstract class Attacks {
     public string Name { get { return name; } }
     public string Type { get { return type; } }
     public bool IsMeele { get { return isMeele; } }
-    public bool IsAOE { get { return isAOE; } }
     public float Heal { get { return heal; } set { this.heal = value; } }
     public float Damage { get { return damage; } set { this.damage = value; } }
-    public float CastTime { get { return castTime; } set { this.castTime = value; } }
-    public float Delay { get { return delay;  } }
+    public float CastTime { get { return castTime; } }
+    public float ToTravelTime { get { return toTravelTime;  } }
+    public bool ShallTravel { get { return shallTravel; } set { shallTravel = value; } }
     public float Cooldown { get { return cooldown; } set { this.cooldown = value; } }
     public bool OnCooldown { get { return onCooldown; } set { onCooldown = value; } }
     public uint Durability { get { return durability; } }
     public float Range { get { return range; } }
     public int PlayersHit { get { return playersHit; } set { playersHit = value; } }
-    public float CurrDuration { get { return currDuration; } set { currDuration = value; } }
     #endregion
 
     public abstract void Use(GameObject _target);
@@ -77,16 +77,20 @@ public abstract class Attacks {
 
     public void ResetPlayersHit() { playersHit = 0; }
 
-    public bool AbilityTime()
+    public float TravelDistance()
     {
-        if (currDuration > delay)
+        // if 'toTravelTime' is 0 it's instand and shall automaticly return max range
+        if (toTravelTime == 0) { traveltTime = toTravelTime; }
+
+        traveltTime += Time.deltaTime;
+
+        if (traveltTime >= toTravelTime)
         {
-            currDuration = 0;
-            return false;
+            traveltTime = 0;
+            shallTravel = false;
+            return range;
         }
 
-        currDuration += Time.deltaTime;
-
-        return true;
+        return range / toTravelTime * traveltTime;
     }
 }
