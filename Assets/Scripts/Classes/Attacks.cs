@@ -11,12 +11,14 @@ public abstract class Attacks {
     private float castTime;
     private float delay;
     private float duration;
+    private float currDuration = 0;
     private float cooldown;
     private bool onCooldown = false;
     private uint durability;
     private float range;
     private bool isMeele;
     private bool isAOE;
+    private int playersHit;
 
     //Empty Constructor
     public Attacks() { }
@@ -54,7 +56,37 @@ public abstract class Attacks {
     public bool OnCooldown { get { return onCooldown; } set { onCooldown = value; } }
     public uint Durability { get { return durability; } }
     public float Range { get { return range; } }
+    public int PlayersHit { get { return playersHit; } set { playersHit = value; } }
+    public float CurrDuration { get { return currDuration; } set { currDuration = value; } }
     #endregion
 
     public abstract void Use(GameObject _target);
+
+    public bool IsCastable()
+    {
+        playersHit++;
+        if (!isAOE)
+        {
+            if (playersHit > 1)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void ResetPlayersHit() { playersHit = 0; }
+
+    public bool AbilityTime()
+    {
+        if (currDuration > delay)
+        {
+            currDuration = 0;
+            return false;
+        }
+
+        currDuration += Time.deltaTime;
+
+        return true;
+    }
 }
