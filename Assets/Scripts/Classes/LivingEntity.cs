@@ -174,7 +174,7 @@ public class LivingEntity
 
     // knock up Player
     private void PlayerKnockUp(float _yHeight, int _time) {
-        Debug.Log(name + " knocked up");
+        /*Debug.Log(name + " knocked up");*/
 
         knockUpIndex++;
         int currIndex = knockUpIndex;
