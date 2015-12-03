@@ -155,47 +155,48 @@ public class Player : MonoBehaviour
         else { disabled = false; }
 
         // use ability
-
-        // - basic
-        if (Input.GetKeyDown(playerControles[1]))
+        if (!disabled)
         {
-            if (abilityArray[0].IsMeele)
+            // - basic
+            if (Input.GetKeyDown(playerControles[1]))
             {
-                meleeAttack(abilityArray[0]);
-                /*Debug.Log(name + " used basic");*/
+                if (abilityArray[0].IsMeele)
+                {
+                    StartCoroutine(meleeAttack(abilityArray[0]));
+                    /*Debug.Log(name + " used basic");*/
+                }
+            }
+
+            // - ability 1
+            if (Input.GetKeyDown(playerControles[2]))
+            {
+                if (abilityArray[1].IsMeele)
+                {
+                    StartCoroutine(meleeAttack(abilityArray[1]));
+                    /*Debug.Log(name + " used spell_1");*/
+                }
+            }
+
+            // - ability 2
+            if (Input.GetKeyDown(playerControles[3]))
+            {
+                if (abilityArray[2].IsMeele)
+                {
+                    StartCoroutine(meleeAttack(abilityArray[2]));
+                    /*Debug.Log(name + " used spell_2");*/
+                }
+            }
+
+            // - ability 3
+            if (Input.GetKeyDown(playerControles[4]))
+            {
+                if (abilityArray[3].IsMeele)
+                {
+                    StartCoroutine(meleeAttack(abilityArray[3]));
+                    /*Debug.Log(name + " used spell_3");*/
+                }
             }
         }
-
-        // - ability 1
-        if (Input.GetKeyDown(playerControles[2]))
-        {
-            if (abilityArray[1].IsMeele)
-            {
-                meleeAttack(abilityArray[1]);
-                /*Debug.Log(name + " used spell_1");*/
-            }
-        }
-
-        // - ability 2
-        if (Input.GetKeyDown(playerControles[3]))
-        {
-            if (abilityArray[2].IsMeele)
-            {
-                meleeAttack(abilityArray[2]);
-                /*Debug.Log(name + " used spell_2");*/
-            }
-        }
-
-        // - ability 3
-        if (Input.GetKeyDown(playerControles[4]))
-        {
-            if (abilityArray[3].IsMeele)
-            {
-                meleeAttack(abilityArray[3]);
-                /*Debug.Log(name + " used spell_3");*/
-            }
-        }
-
         //Debug.Log(name + " health: " + playerVitals.CurrHealth);
 
         // Get movement input ( controler / keyboard )
@@ -350,7 +351,7 @@ public class Player : MonoBehaviour
         transform.localScale = scale;
     }
 
-    void meleeAttack(Attacks _usedSpell)
+    IEnumerator meleeAttack(Attacks _usedSpell)
     {
 
         if (!_usedSpell.OnCooldown)
@@ -360,6 +361,10 @@ public class Player : MonoBehaviour
             // set atack into right direction
             if (mirror) { fwd = gameObject.transform.TransformDirection(Vector3.right); }
             else { fwd = gameObject.transform.TransformDirection(Vector3.left); }
+
+            Debug.DrawRay(gameObject.transform.position, fwd, Color.white);
+
+            yield return new WaitForSeconds(_usedSpell.CastTime);
 
             // send a visual debug ray
             Debug.DrawRay(gameObject.transform.position, fwd * abilityArray[0].Range, Color.green);
