@@ -3,8 +3,10 @@ using System.Collections;
 
 public class Basic : Attacks {
 
-    public Basic(float damage, float castTime, float duration, float delay, float cooldown, float range) : base(
-        0, "basic", "meele", true, false, 0, damage, castTime, delay, duration, cooldown, range) { }
+    private static int instanceCount = 0;
+
+    public Basic(float damage, float castTime, float delay, float duration, float cooldown, float range) : base(
+        0, "basic", "meele", true, false, 0, damage, castTime, delay, duration, cooldown, range) { instanceCount++; }
 
     public override void Use(GameObject _target) {
         
@@ -17,4 +19,6 @@ public class Basic : Attacks {
         // set spell onto cooldown
         OnCooldown = true;
     }
+
+    public int InstanceCount { get { return instanceCount; } }
 }

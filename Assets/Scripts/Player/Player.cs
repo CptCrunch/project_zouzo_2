@@ -60,8 +60,16 @@ public class Player : MonoBehaviour
     private bool disabled = false;
     #endregion
 
-    // ability variables
+    #region Ability Variables
     private Attacks[] abilityArray = new Attacks[4];
+    private bool useMeeleAttack;
+    private bool isAttacking;
+
+    private GameObject[] registeredEnemies = new GameObject[4];
+    Vector3 spellDirection = new Vector3(0, 90, 0);
+    private Attacks castedSpell;
+    private int abilityLoopindex = 0;
+    #endregion
 
     #region Animations 
     private Animator _animator;
@@ -155,7 +163,7 @@ public class Player : MonoBehaviour
         else { disabled = false; }
 
         // use ability
-        if (!disabled)
+        if (!disabled && !isAttacking)
         {
             // - basic
             if (Input.GetKeyDown(playerControles[1]))
@@ -222,6 +230,107 @@ public class Player : MonoBehaviour
             Flip();
         }
         #endregion
+
+        // disable and enable spellcasting if a spell is active
+        if (useMeeleAttack)
+        {
+            isAttacking = true;
+        }
+
+        else if (isAttacking)
+        {
+            isAttacking = false;
+        }
+
+        // use meele abilities
+        // to do:
+        // # need to reset hitted palyers
+        if (useMeeleAttack)
+        {
+            // only continue if spell is still active (spell needs time to get to full range)
+            if (castedSpell.AbilityTime())
+            {
+                // calculate spell lenght
+                Vector3 spellLenght;
+
+                if (castedSpell.Delay == 0)
+                {
+                    spellLenght = spellDirection * castedSpell.Range;
+                }
+
+                else
+                {
+                    spellLenght = spellDirection * castedSpell.Range / castedSpell.Delay * castedSpell.CurrDuration;
+                }
+
+                // create a Debug ray
+                Debug.DrawRay(gameObject.transform.position, spellLenght, Color.green);
+
+                // create a raycast
+                foreach (RaycastHit2D objectHit in Physics2D.RaycastAll(gameObject.transform.position, spellLenght, Mathf.Abs(spellLenght.x)))
+                {
+                    // check if hitted object is a Player
+                    if (objectHit.transform.tag == "Player")
+                    {
+                        // only continue if spell didn't hit the spell caster
+                        if (objectHit.transform.gameObject != gameObject)
+                        {
+                            // get every already registered enemy seperat
+                            bool isEnemyRegistered = false;
+                            int firstFreeEntry = 0;
+                            int entryIndex = 0;
+
+                            foreach (GameObject enemy in registeredEnemies)
+                            {
+                                // only compare filled index
+                                if (enemy != null)
+                                {
+                                    // find out if enemy is already hited
+                                    if (enemy == objectHit.transform.gameObject)
+                                    {
+                                        isEnemyRegistered = true;
+                                    }
+                                }
+
+                                // get free entry
+                                else
+                                {
+                                    firstFreeEntry = entryIndex;
+                                }
+                                entryIndex++;
+                            }
+
+                            // only continue if enemy isn't registered previorsly (one anemy shall only be hitted once)
+                            if (!isEnemyRegistered)
+                            {
+                                // register enemy
+                                registeredEnemies[firstFreeEntry] = objectHit.transform.gameObject;
+
+                                // checks if the spell already hit its max of players
+                                if (castedSpell.IsCastable())
+                                {
+                                    // use spell and set it on cooldown
+                                    castedSpell.Use(objectHit.transform.gameObject);
+                                    StartCoroutine(OffCooldown(castedSpell));
+                                    break;
+                                }
+                            }
+                        }
+
+                        abilityLoopindex++;
+                    }
+                }
+            }
+
+            // stop attack
+            else
+            {
+                useMeeleAttack = false;
+                registeredEnemies = new GameObject[4];
+                castedSpell.ResetPlayersHit();
+                castedSpell = null;
+            }
+        }
     }
 
     void Movement()
@@ -353,16 +462,26 @@ public class Player : MonoBehaviour
 
     IEnumerator meleeAttack(Attacks _usedSpell)
     {
-
         if (!_usedSpell.OnCooldown)
+        {
+            castedSpell = _usedSpell;
+            if (mirror) { spellDirection = gameObject.transform.TransformDirection(Vector3.right); }
+            else { spellDirection = gameObject.transform.TransformDirection(Vector3.left); }
+            useMeeleAttack = true;
+            yield return new WaitForSeconds(0);
+        }
+
+        else
+        {
+            Debug.Log("spell is on cooldown");
+        }
+        /*if (!_usedSpell.OnCooldown)
         {
             Vector3 fwd = new Vector3(0, 0, 0);
 
             // set atack into right direction
             if (mirror) { fwd = gameObject.transform.TransformDirection(Vector3.right); }
             else { fwd = gameObject.transform.TransformDirection(Vector3.left); }
-
-            Debug.DrawRay(gameObject.transform.position, fwd, Color.white);
 
             yield return new WaitForSeconds(_usedSpell.CastTime);
 
@@ -374,34 +493,22 @@ public class Player : MonoBehaviour
             {
                 debugRayHitpointArray[i] = new Vector2(0, 0);
             }
+            */
+        // create a raycast
+        /*RaycastHit2D objectHit = Physics2D.RaycastAll(gameObject.transform.position, fwd, _usedSpell.Range);*/
+        /*int loopindex = 0;
+        foreach (RaycastHit2D objectHit in Physics2D.RaycastAll(gameObject.transform.position, fwd, _usedSpell.Range))
+        {
 
-            // create a raycast
-            /*RaycastHit2D objectHit = Physics2D.RaycastAll(gameObject.transform.position, fwd, _usedSpell.Range);*/
-            int loopindex = 0;
-            foreach (RaycastHit2D objectHit in Physics2D.RaycastAll(gameObject.transform.position, fwd, _usedSpell.Range))
+            // add objectHitpoint to debugRayHitpoint to show the hitten point in editor
+            debugRayHitpointArray[loopindex] = objectHit.transform.position;
+
+            // compares if raycast hits a player
+            if (objectHit.transform.tag == "Player" && loopindex > 0)
             {
-
-                // add objectHitpoint to debugRayHitpoint to show the hitten point in editor
-                debugRayHitpointArray[loopindex] = objectHit.transform.position;
-
-                // compares if raycast hits a player
-                if (objectHit.transform.tag == "Player" && loopindex > 0)
+                if (loopindex > 1)
                 {
-                    if (loopindex > 1)
-                    {
-                        if (_usedSpell.IsAOE)
-                        {
-                            Debug.Log(name + " hit: " + objectHit.transform.gameObject.name);
-
-                            // use spell and set it on cooldown
-                            _usedSpell.Use(objectHit.transform.gameObject);
-                            StartCoroutine(OffCooldown(_usedSpell));
-
-                            Debug.Log(name + " Health: " + objectHit.transform.gameObject.GetComponent<Player>().playerVitals.CurrHealth);
-                        }
-                    }
-
-                    else
+                    if (_usedSpell.IsAOE)
                     {
                         Debug.Log(name + " hit: " + objectHit.transform.gameObject.name);
 
@@ -412,9 +519,21 @@ public class Player : MonoBehaviour
                         Debug.Log(name + " Health: " + objectHit.transform.gameObject.GetComponent<Player>().playerVitals.CurrHealth);
                     }
                 }
-                loopindex++;
+
+                else
+                {
+                    Debug.Log(name + " hit: " + objectHit.transform.gameObject.name);
+
+                    // use spell and set it on cooldown
+                    _usedSpell.Use(objectHit.transform.gameObject);
+                    StartCoroutine(OffCooldown(_usedSpell));
+
+                    Debug.Log(name + " Health: " + objectHit.transform.gameObject.GetComponent<Player>().playerVitals.CurrHealth);
+                }
             }
+            loopindex++;
         }
+    }*/
     }
 
     IEnumerator OffCooldown(Attacks _spell)
@@ -425,20 +544,17 @@ public class Player : MonoBehaviour
 
     private int hitpointDebugLoopindex;
 
-    void OnDrawGizmos()
+    /*void OnDrawGizmos()
     {
-
         // reset loopindex
         hitpointDebugLoopindex = 0;
 
         // visualize hitpoints
         foreach (Vector2 raycastHitpoint in debugRayHitpointArray)
         {
-
             // only draw hitpoint if it hit a player
             if (raycastHitpoint != new Vector2(0, 0))
             {
-
                 // set hitpoint color
                 switch (hitpointDebugLoopindex)
                 {
@@ -470,5 +586,5 @@ public class Player : MonoBehaviour
             }
             hitpointDebugLoopindex++;
         }
-    }
+    }*/
 }
