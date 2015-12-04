@@ -19,11 +19,22 @@ public class PlayerSelection : MonoBehaviour {
     [Range(1,4)]
     public int playerLimit;
     private int playerCount;
+    public int splashCounter;
     #endregion
 
     void Awake()
     {
         if (_instance == null) { _instance = this; }
+    }
+
+    void Start()
+    {
+        splashCounter =  splashart.playerSplashart.Length;
+
+        //for (int i = 0; i < splashart.splashartHolder.Length; i++)
+        //{
+        //    splashart.splashartHolder[i].sprite = splashart.playerSplashartGrayscale[i];
+        //}
     }
 
     void Update()
@@ -59,6 +70,7 @@ public class PlayerSelection : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Joystick1Button0) && !p1) {
             if (!limitPlayerAmmount) {
                 controller.Add("P1");
+                //splashart.splashartHolder[i].sprite = splashart.playerSplashart[i];
                 p1 = true;
             }
 
@@ -88,7 +100,95 @@ public class PlayerSelection : MonoBehaviour {
                 p1 = false;
             }
         }
+
+        if (p1)
+        {
+            if (Input.GetKeyDown(KeyCode.Joystick1Button4))
+            {
+                int counter = 0;
+                foreach (string i in controller)
+                {
+                    print(counter);
+                    if (i == "P1")
+                    {
+                        SplashArtChange(counter, true);
+                    }
+                }
+
+                splashCounter--;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Joystick1Button5))
+            {
+                int counter = 0;
+                foreach (string i in controller)
+                {
+                    print(counter);
+                    if (i == "P1")
+                    {
+                        SplashArtChange(counter, false);
+                    }
+                }
+                splashCounter++;
+            }
+        }
     }
+
+    private void SplashArtChange(int index, bool upOrDown)
+    {
+        if (upOrDown)
+        {
+            switch (splashCounter)
+            {
+                case 0:
+                    splashart.splashartHolder[index].sprite = splashart.playerSplashart[0];
+                    splashCounter = splashart.playerSplashart.Length;
+                    break;
+
+                case 1:
+                    splashart.splashartHolder[index].sprite = splashart.playerSplashart[3];
+                    break;
+
+                case 2:
+                    splashart.splashartHolder[index].sprite = splashart.playerSplashart[2];
+                    break;
+
+                case 3:
+                    splashart.splashartHolder[index].sprite = splashart.playerSplashart[1];
+                    break;
+
+                case 4:
+                    splashart.splashartHolder[index].sprite = splashart.playerSplashart[0];
+                    break;
+            }
+        } else
+        {
+            switch (splashCounter)
+            {
+                case 0:
+                    splashart.splashartHolder[index].sprite = splashart.playerSplashart[0];
+                    break;
+
+                case 1:
+                    splashart.splashartHolder[index].sprite = splashart.playerSplashart[3];
+                    break;
+
+                case 2:
+                    splashart.splashartHolder[index].sprite = splashart.playerSplashart[2];
+                    break;
+
+                case 3:
+                    splashart.splashartHolder[index].sprite = splashart.playerSplashart[1];
+                    break;
+
+                case 4:
+                    splashart.splashartHolder[index].sprite = splashart.playerSplashart[0];
+                    splashCounter = 0;
+                    break;
+            }
+        }
+    }
+
 
     //Input Joystick 2
     void Joystick_2() {
