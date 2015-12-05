@@ -9,7 +9,9 @@ public abstract class Attacks {
     private float heal;
     private float damage;
     private float castTime;
-    private float delay;
+    private float toTravelTime;
+    private float traveltTime;
+    private bool shallTravel = true;
     private float duration;
     private float cooldown;
     private bool onCooldown = false;
@@ -17,6 +19,7 @@ public abstract class Attacks {
     private float range;
     private bool isMeele;
     private bool isAOE;
+    private int playersHit;
 
     //Empty Constructor
     public Attacks() { }
@@ -32,7 +35,7 @@ public abstract class Attacks {
         this.heal = heal;
         this.damage = damage;
         this.castTime = castTime;
-        this.delay = delay;
+        this.toTravelTime = delay;
         this.castTime = castTime;
         this.cooldown = cooldown;
         this.range = range;
@@ -45,16 +48,49 @@ public abstract class Attacks {
     public string Name { get { return name; } }
     public string Type { get { return type; } }
     public bool IsMeele { get { return isMeele; } }
-    public bool IsAOE { get { return isAOE; } }
     public float Heal { get { return heal; } set { this.heal = value; } }
     public float Damage { get { return damage; } set { this.damage = value; } }
-    public float CastTime { get { return castTime; } set { this.castTime = value; } }
-    public float Delay { get { return delay;  } }
+    public float CastTime { get { return castTime; } }
+    public float ToTravelTime { get { return toTravelTime;  } }
+    public bool ShallTravel { get { return shallTravel; } set { shallTravel = value; } }
     public float Cooldown { get { return cooldown; } set { this.cooldown = value; } }
     public bool OnCooldown { get { return onCooldown; } set { onCooldown = value; } }
     public uint Durability { get { return durability; } }
     public float Range { get { return range; } }
+    public int PlayersHit { get { return playersHit; } set { playersHit = value; } }
     #endregion
 
     public abstract void Use(GameObject _target);
+
+    public bool IsCastable()
+    {
+        playersHit++;
+        if (!isAOE)
+        {
+            if (playersHit > 1)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void ResetPlayersHit() { playersHit = 0; }
+
+    public float TravelDistance()
+    {
+        // if 'toTravelTime' is 0 it's instand and shall automaticly return max range
+        if (toTravelTime == 0) { traveltTime = toTravelTime; }
+
+        traveltTime += Time.deltaTime;
+
+        if (traveltTime >= toTravelTime)
+        {
+            traveltTime = 0;
+            shallTravel = false;
+            return range;
+        }
+
+        return range / toTravelTime * traveltTime;
+    }
 }

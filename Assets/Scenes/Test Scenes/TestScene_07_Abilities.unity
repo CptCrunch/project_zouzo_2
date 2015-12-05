@@ -198,155 +198,17 @@ Prefab:
       propertyPath: abilities.Array.data[9].castTime
       value: .100000001
       objectReference: {fileID: 0}
+    - target: {fileID: 11435204, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
+      propertyPath: abilities.Array.data[12].delay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11435204, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
+      propertyPath: abilities.Array.data[9].delay
+      value: .5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &100247792 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 122012, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-  m_PrefabInternal: {fileID: 100247791}
---- !u!114 &100247793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 100247792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe1ac08a04d2a746b2332e122c292da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilities:
-  - name: Aries
-    damage: 0
-    castTime: 0
-    delay: 0
-    duration: 0
-    cooldown: 0
-    range: 0
-    knockUpHeght: 0
-    knockBackDistance: 0
-    time: 0
-  - name: Taurus
-    damage: 0
-    castTime: 0
-    delay: 0
-    duration: 0
-    cooldown: 0
-    range: 0
-    knockUpHeght: 0
-    knockBackDistance: 0
-    time: 0
-  - name: Gemini
-    damage: 0
-    castTime: 0
-    delay: 0
-    duration: 0
-    cooldown: 0
-    range: 0
-    knockUpHeght: 0
-    knockBackDistance: 0
-    time: 0
-  - name: Cancer
-    damage: 0
-    castTime: 0
-    delay: 0
-    duration: 0
-    cooldown: 0
-    range: 0
-    knockUpHeght: 0
-    knockBackDistance: 0
-    time: 0
-  - name: Leo
-    damage: 0
-    castTime: 0
-    delay: 0
-    duration: 0
-    cooldown: 0
-    range: 0
-    knockUpHeght: 0
-    knockBackDistance: 0
-    time: 0
-  - name: Virgo
-    damage: 0
-    castTime: 0
-    delay: 0
-    duration: 0
-    cooldown: 0
-    range: 0
-    knockUpHeght: 0
-    knockBackDistance: 0
-    time: 0
-  - name: Libra
-    damage: 0
-    castTime: 0
-    delay: 0
-    duration: 0
-    cooldown: 0
-    range: 0
-    knockUpHeght: 0
-    knockBackDistance: 0
-    time: 0
-  - name: Scorpio
-    damage: 0
-    castTime: 0
-    delay: 0
-    duration: 0
-    cooldown: 0
-    range: 0
-    knockUpHeght: 0
-    knockBackDistance: 0
-    time: 0
-  - name: Sagittarius
-    damage: 0
-    castTime: 0
-    delay: 0
-    duration: 0
-    cooldown: 0
-    range: 0
-    knockUpHeght: 0
-    knockBackDistance: 0
-    time: 0
-  - name: Capricorn
-    damage: 20
-    castTime: 0
-    delay: 0
-    duration: 0
-    cooldown: 5
-    range: 4
-    knockUpHeght: 0
-    knockBackDistance: 0
-    time: 0
-  - name: Aquarius
-    damage: 0
-    castTime: 0
-    delay: 0
-    duration: 0
-    cooldown: 0
-    range: 0
-    knockUpHeght: 0
-    knockBackDistance: 0
-    time: 0
-  - name: Aquarius
-    damage: 0
-    castTime: 0
-    delay: 0
-    duration: 0
-    cooldown: 0
-    range: 0
-    knockUpHeght: 0
-    knockBackDistance: 0
-    time: 0
-  - name: Basic
-    damage: 10
-    castTime: 0
-    delay: 0
-    duration: 0
-    cooldown: .200000003
-    range: 2
-    knockUpHeght: 0
-    knockBackDistance: 0
-    time: 0
 --- !u!1001 &189650878
 Prefab:
   m_ObjectHideFlags: 0
@@ -430,7 +292,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
       propertyPath: m_Name
-      value: Player2(P1) (1)
+      value: Player3(P2)
       objectReference: {fileID: 0}
     - target: {fileID: 11484944, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
       propertyPath: playerAxis

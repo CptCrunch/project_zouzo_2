@@ -60,13 +60,21 @@ public class Player : MonoBehaviour
     private bool disabled = false;
     #endregion
 
-    // ability variables
+    #region Ability Variables
     private Attacks[] abilityArray = new Attacks[4];
+    private bool isAttacking;
+
+    private GameObject[] registeredEnemies = new GameObject[4];
+    Vector3 spellDirection = new Vector3(0, 90, 0);
+    private Attacks castedSpell;
+    private int abilityLoopindex = 0;
+    #endregion
 
     #region Animations 
     private Animator _animator;
     private bool mirror = false;
     private bool death = false;
+    private bool flipEnable = true;
     #endregion
 
     #endregion
@@ -155,45 +163,27 @@ public class Player : MonoBehaviour
         else { disabled = false; }
 
         // use ability
-        if (!disabled)
+        if (!disabled && !isAttacking)
         {
-            // - basic
-            if (Input.GetKeyDown(playerControles[1]))
-            {
-                if (abilityArray[0].IsMeele)
-                {
-                    StartCoroutine(meleeAttack(abilityArray[0]));
-                    /*Debug.Log(name + " used basic");*/
-                }
-            }
+            // get input
+            int spellused = -1;
+            if (Input.GetKeyDown(playerControles[1])) { spellused = 0; } // basic
+            if (Input.GetKeyDown(playerControles[2])) { spellused = 1; } // spell_1
+            if (Input.GetKeyDown(playerControles[3])) { spellused = 2; } // spell_2
+            if (Input.GetKeyDown(playerControles[4])) { spellused = 3; } // spell_3
 
-            // - ability 1
-            if (Input.GetKeyDown(playerControles[2]))
+            // use spell if casted
+            if (spellused > -1)
             {
-                if (abilityArray[1].IsMeele)
+                // cast spell only if it's not on cooldown
+                if (!abilityArray[spellused].OnCooldown)
                 {
-                    StartCoroutine(meleeAttack(abilityArray[1]));
-                    /*Debug.Log(name + " used spell_1");*/
-                }
-            }
-
-            // - ability 2
-            if (Input.GetKeyDown(playerControles[3]))
-            {
-                if (abilityArray[2].IsMeele)
-                {
-                    StartCoroutine(meleeAttack(abilityArray[2]));
-                    /*Debug.Log(name + " used spell_2");*/
-                }
-            }
-
-            // - ability 3
-            if (Input.GetKeyDown(playerControles[4]))
-            {
-                if (abilityArray[3].IsMeele)
-                {
-                    StartCoroutine(meleeAttack(abilityArray[3]));
-                    /*Debug.Log(name + " used spell_3");*/
+                    // use meele funktion if it is a meele attack
+                    if (abilityArray[spellused].IsMeele)
+                    {
+                        // set casted spell (also triggerst meele funktion)
+                        castedSpell = abilityArray[spellused];
+                    }
                 }
             }
         }
@@ -213,15 +203,42 @@ public class Player : MonoBehaviour
         if (controller.collisions.above || controller.collisions.below) { velocity.y = 0; }
 
         #region Flipping
-        if (Input.GetAxis(playerAxis + "_Horizontal") > 0 && !mirror)
+        if (flipEnable)
         {
-            Flip();
-        }
-        else if (Input.GetAxis(playerAxis + "_Horizontal") < 0 && mirror)
-        {
-            Flip();
+            if (Input.GetAxis(playerAxis + "_Horizontal") > 0 && !mirror)
+            {
+                Flip();
+            }
+            else if (Input.GetAxis(playerAxis + "_Horizontal") < 0 && mirror)
+            {
+                Flip();
+            }
         }
         #endregion
+
+        
+        // use meele abilities
+        if (castedSpell != null)
+        {
+            // disable and enable spellcasting if a spell is active
+            isAttacking = true;
+
+            // disable flipping while attacking
+            flipEnable = false;
+
+            // get the spellDirection
+            if (mirror) { spellDirection = gameObject.transform.TransformDirection(Vector3.right); }
+            else { spellDirection = gameObject.transform.TransformDirection(Vector3.left); }
+
+            // use the meele attack funktion
+            UseMeleeAttack();
+        }
+
+        else
+        {
+            if (isAttacking) { isAttacking = false; }
+            if (!flipEnable) { flipEnable = true; }
+        }
     }
 
     void Movement()
@@ -351,69 +368,79 @@ public class Player : MonoBehaviour
         transform.localScale = scale;
     }
 
-    IEnumerator meleeAttack(Attacks _usedSpell)
+    void UseMeleeAttack()
     {
-
-        if (!_usedSpell.OnCooldown)
+        // only continue if spell is still active (spell needs time to get to full range)
+        if (castedSpell.ShallTravel)
         {
-            Vector3 fwd = new Vector3(0, 0, 0);
-
-            // set atack into right direction
-            if (mirror) { fwd = gameObject.transform.TransformDirection(Vector3.right); }
-            else { fwd = gameObject.transform.TransformDirection(Vector3.left); }
-
-            Debug.DrawRay(gameObject.transform.position, fwd, Color.white);
-
-            yield return new WaitForSeconds(_usedSpell.CastTime);
-
-            // send a visual debug ray
-            Debug.DrawRay(gameObject.transform.position, fwd * abilityArray[0].Range, Color.green);
-
-            // reset the debugRayHitpointArray
-            for (int i = 0; debugRayHitpointArray.Length > i; i++)
-            {
-                debugRayHitpointArray[i] = new Vector2(0, 0);
-            }
+            // get travel distance
+            float travelDistance = castedSpell.TravelDistance();
+            // create a Debug ray
+            Debug.DrawRay(gameObject.transform.position, spellDirection * travelDistance, Color.green);
 
             // create a raycast
-            /*RaycastHit2D objectHit = Physics2D.RaycastAll(gameObject.transform.position, fwd, _usedSpell.Range);*/
-            int loopindex = 0;
-            foreach (RaycastHit2D objectHit in Physics2D.RaycastAll(gameObject.transform.position, fwd, _usedSpell.Range))
+            foreach (RaycastHit2D objectHit in Physics2D.RaycastAll(gameObject.transform.position, spellDirection, travelDistance))
             {
-
-                // add objectHitpoint to debugRayHitpoint to show the hitten point in editor
-                debugRayHitpointArray[loopindex] = objectHit.transform.position;
-
-                // compares if raycast hits a player
-                if (objectHit.transform.tag == "Player" && loopindex > 0)
+                // check if hitted object is a Player
+                if (objectHit.transform.tag == "Player")
                 {
-                    if (loopindex > 1)
+                    // only continue if spell didn't hit the spell caster
+                    if (objectHit.transform.gameObject != gameObject)
                     {
-                        if (_usedSpell.IsAOE)
+                        // get every already registered enemy seperat
+                        bool isEnemyRegistered = false;
+                        int firstFreeEntry = 0;
+                        int entryIndex = 0;
+
+                        foreach (GameObject enemy in registeredEnemies)
                         {
-                            Debug.Log(name + " hit: " + objectHit.transform.gameObject.name);
+                            // only compare filled index
+                            if (enemy != null)
+                            {
+                                // find out if enemy is already hited
+                                if (enemy == objectHit.transform.gameObject)
+                                {
+                                    isEnemyRegistered = true;
+                                }
+                            }
 
-                            // use spell and set it on cooldown
-                            _usedSpell.Use(objectHit.transform.gameObject);
-                            StartCoroutine(OffCooldown(_usedSpell));
+                            // get free entry
+                            else
+                            {
+                                firstFreeEntry = entryIndex;
+                            }
+                            entryIndex++;
+                        }
 
-                            Debug.Log(name + " Health: " + objectHit.transform.gameObject.GetComponent<Player>().playerVitals.CurrHealth);
+                        // only continue if enemy isn't registered previorsly (one anemy shall only be hitted once)
+                        if (!isEnemyRegistered)
+                        {
+                            // register enemy
+                            registeredEnemies[firstFreeEntry] = objectHit.transform.gameObject;
+
+                            // checks if the spell already hit its max of players
+                            if (castedSpell.IsCastable())
+                            {
+                                // use spell and set it on cooldown
+                                castedSpell.Use(objectHit.transform.gameObject);
+                                StartCoroutine(OffCooldown(castedSpell));
+                                break;
+                            }
                         }
                     }
 
-                    else
-                    {
-                        Debug.Log(name + " hit: " + objectHit.transform.gameObject.name);
-
-                        // use spell and set it on cooldown
-                        _usedSpell.Use(objectHit.transform.gameObject);
-                        StartCoroutine(OffCooldown(_usedSpell));
-
-                        Debug.Log(name + " Health: " + objectHit.transform.gameObject.GetComponent<Player>().playerVitals.CurrHealth);
-                    }
+                    abilityLoopindex++;
                 }
-                loopindex++;
             }
+        }
+
+        // stop attack
+        else
+        {
+            registeredEnemies = new GameObject[4];
+            castedSpell.ResetPlayersHit();
+            castedSpell.ShallTravel = true;
+            castedSpell = null;
         }
     }
 
@@ -421,54 +448,5 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(_spell.Cooldown);
         _spell.OnCooldown = false;
-    }
-
-    private int hitpointDebugLoopindex;
-
-    void OnDrawGizmos()
-    {
-
-        // reset loopindex
-        hitpointDebugLoopindex = 0;
-
-        // visualize hitpoints
-        foreach (Vector2 raycastHitpoint in debugRayHitpointArray)
-        {
-
-            // only draw hitpoint if it hit a player
-            if (raycastHitpoint != new Vector2(0, 0))
-            {
-
-                // set hitpoint color
-                switch (hitpointDebugLoopindex)
-                {
-                    case 0:
-                        Gizmos.color = Color.white;
-                        break;
-
-                    case 1:
-                        Gizmos.color = Color.yellow;
-                        break;
-
-                    case 2:
-                        Gizmos.color = Color.red;
-                        break;
-
-                    case 3:
-                        Gizmos.color = Color.black;
-                        break;
-                }
-
-                // draw hitpoint
-                Gizmos.DrawLine(raycastHitpoint - new Vector2(0.2f, 0), raycastHitpoint + new Vector2(0.2f, 0));
-                Gizmos.DrawLine(raycastHitpoint - new Vector2(0, 0.2f), raycastHitpoint + new Vector2(0, 0.2f));
-
-                Gizmos.DrawLine(raycastHitpoint + new Vector2(0, 0.1f), raycastHitpoint + new Vector2(0.1f, 0));
-                Gizmos.DrawLine(raycastHitpoint + new Vector2(0.1f, 0), raycastHitpoint + new Vector2(0, -0.1f));
-                Gizmos.DrawLine(raycastHitpoint + new Vector2(0, -0.1f), raycastHitpoint + new Vector2(-0.1f, 0));
-                Gizmos.DrawLine(raycastHitpoint + new Vector2(-0.1f, 0), raycastHitpoint + new Vector2(0, 0.1f));
-            }
-            hitpointDebugLoopindex++;
-        }
     }
 }
