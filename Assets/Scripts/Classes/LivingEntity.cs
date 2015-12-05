@@ -26,6 +26,12 @@ public class LivingEntity
     private bool knockBacked = false;
     private int knockBackIndex = 0;
 
+    Thread KnockUpThread;
+    Thread KnockBackThread;
+    Thread StunThread;
+    Thread SlowOverTimeThread;
+
+
     public LivingEntity(GameObject playerObject, string name, float moveSpeed, float slowedSpeed, float maxHealth)
     {
         // set maxHealth ( will use maxHealth from Gamerulses )
@@ -77,7 +83,7 @@ public class LivingEntity
     #region Conditions
     public void ApplyPlayerKnockUp(float _yHeight, int _time)
     {
-        Thread KnockUpThread = new Thread(() => PlayerKnockUp(_yHeight, _time));
+        KnockUpThread = new Thread(() => PlayerKnockUp(_yHeight, _time));
 
         try
         {
@@ -91,7 +97,7 @@ public class LivingEntity
 
     public void ApplyPlayerKnockBack(float _yDistance, float _xDistance, int _time)
     {
-        Thread KnockBackThread = new Thread(() => PlayerKnockBack(_xDistance, _yDistance ,_time));
+        KnockBackThread = new Thread(() => PlayerKnockBack(_xDistance, _yDistance ,_time));
 
         try
         {
@@ -105,7 +111,7 @@ public class LivingEntity
 
     public void ApplyStun(int _time)
     {
-        Thread StunThread = new Thread(() => Stun(_time));
+        StunThread = new Thread(() => Stun(_time));
 
         try
         {
@@ -119,7 +125,7 @@ public class LivingEntity
 
     public void ApplySlowOverTime(int _time)
     {
-        Thread SlowOverTimeThread = new Thread(() => SlowOverTime(_time));
+        SlowOverTimeThread = new Thread(() => SlowOverTime(_time));
 
         try
         {
