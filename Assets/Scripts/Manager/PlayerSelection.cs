@@ -19,11 +19,27 @@ public class PlayerSelection : MonoBehaviour {
     [Range(1,4)]
     public int playerLimit;
     private int playerCount;
+
+    public int splashCounter_pic1, splashCounter_pic2, splashCounter_pic3, splashCounter_pic4, splashCounter_pic5;
     #endregion
 
     void Awake()
     {
         if (_instance == null) { _instance = this; }
+    }
+
+    void Start()
+    {
+        splashCounter_pic1 = splashart.playerSplashart.Length;
+        splashCounter_pic2 = splashart.playerSplashart.Length;
+        splashCounter_pic3 = splashart.playerSplashart.Length;
+        splashCounter_pic4 = splashart.playerSplashart.Length;
+        splashCounter_pic5 = splashart.playerSplashart.Length;
+
+        //for (int i = 0; i < splashart.splashartHolder.Length; i++)
+        //{
+        //    splashart.splashartHolder[i].sprite = splashart.playerSplashartGrayscale[i];
+        //}
     }
 
     void Update()
@@ -35,7 +51,7 @@ public class PlayerSelection : MonoBehaviour {
         Keyboard();
 
         // load level on confirm
-        if (Input.GetKeyDown(KeyCode.Joystick1Button7) || Input.GetKeyDown(KeyCode.Joystick2Button7) || Input.GetKeyDown(KeyCode.Joystick3Button7) || Input.GetKeyDown(KeyCode.Joystick4Button7) || Input.GetKeyDown(KeyCode.A)) {
+        if (Input.GetKeyDown(KeyCode.Joystick1Button7) || Input.GetKeyDown(KeyCode.Joystick2Button7) || Input.GetKeyDown(KeyCode.Joystick3Button7) || Input.GetKeyDown(KeyCode.Joystick4Button7) || Input.GetKeyDown(KeyCode.L)) {
             if (p1 || p2 || p3 || p4 || kb) {
                 Gamerules._instance.connectedControllers = controller;
                 Application.LoadLevel(levelToLoad);
@@ -59,6 +75,7 @@ public class PlayerSelection : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Joystick1Button0) && !p1) {
             if (!limitPlayerAmmount) {
                 controller.Add("P1");
+                //splashart.splashartHolder[i].sprite = splashart.playerSplashart[i];
                 p1 = true;
             }
 
@@ -87,6 +104,47 @@ public class PlayerSelection : MonoBehaviour {
                 
                 p1 = false;
             }
+        }
+
+        int counter = 0;
+
+        if (p1)
+        {
+            if (Input.GetKeyDown(KeyCode.Joystick1Button4))
+            {
+                counter = 0;
+                foreach (string i in controller)
+                {
+                    if (i == "P1")
+                    {
+                        splashCounter_pic1--;
+                        if (splashCounter_pic1 == 0) { splashCounter_pic1 = splashart.playerSplashart.Length; }
+
+                        SplashArtChange(counter, splashCounter_pic1);
+                    }
+                }
+
+                 
+            }
+
+            if (Input.GetKeyDown(KeyCode.Joystick1Button5))
+            {
+                counter = 0;
+                foreach (string i in controller)
+                {
+                    if (i == "P1")
+                    {
+                        splashCounter_pic1++;
+                        if (splashCounter_pic1 >= splashart.playerSplashart.Length + 1) { splashCounter_pic1 = 1; }
+
+                        SplashArtChange(counter, splashCounter_pic1);
+                    }
+                }
+               
+            }
+        } else
+        {
+            splashart.splashartHolder[counter].sprite = null;
         }
     }
 
@@ -240,6 +298,48 @@ public class PlayerSelection : MonoBehaviour {
                 kb = false;
             }
         }
+
+        int counter = 0;
+
+        if (kb)
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                counter = 0;
+                foreach (string i in controller)
+                {
+                    if (i == "KB")
+                    {
+                        splashCounter_pic5--;
+                        if (splashCounter_pic5 == 0) { splashCounter_pic5 = splashart.playerSplashart.Length; }
+
+                        SplashArtChange(counter, splashCounter_pic5);
+                    }
+                }
+
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                counter = 0;
+                foreach (string i in controller)
+                {
+                    if (i == "KB")
+                    {
+                        splashCounter_pic5++;
+                        if (splashCounter_pic5 >= splashart.playerSplashart.Length + 1) { splashCounter_pic5 = 1; }
+
+                        SplashArtChange(counter, splashCounter_pic5);
+                    }
+                }
+
+            }
+        }
+        else
+        {
+           splashart.splashartHolder[counter].sprite = null;
+        }
     }
     #endregion
 
@@ -247,6 +347,28 @@ public class PlayerSelection : MonoBehaviour {
         Debug.Log(index);
         splashart.playerText[index].color = Color.black;
         splashart.playerText[index].text = "Player " + (index + 1);
+    }
+
+    private void SplashArtChange(int index, int splashCounterChange)
+    {
+        switch (splashCounterChange)
+        {
+            case 1:
+                splashart.splashartHolder[index].sprite = splashart.playerSplashart[splashCounterChange - 1];
+                break;
+
+            case 2:
+                splashart.splashartHolder[index].sprite = splashart.playerSplashart[splashCounterChange - 1];
+                break;
+
+            case 3:
+                splashart.splashartHolder[index].sprite = splashart.playerSplashart[splashCounterChange - 1];
+                break;
+
+            case 4:
+                splashart.splashartHolder[index].sprite = splashart.playerSplashart[splashCounterChange - 1];
+                break;
+        }
     }
 }
 
