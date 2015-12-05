@@ -70,8 +70,6 @@ public class Controller2D : RaycastController
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
 
-            Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
-
             if (hit)
             {
 
@@ -127,8 +125,6 @@ public class Controller2D : RaycastController
             Vector2 rayOrigin = (directionY == -1) ? raycastOrigins.bottomLeft : raycastOrigins.topLeft;
             rayOrigin += Vector2.right * (verticalRaySpacing * i + velocity.x);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
-
-            Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
 
             if (hit)
             {

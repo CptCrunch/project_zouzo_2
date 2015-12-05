@@ -13,34 +13,34 @@ public abstract class Attacks {
     private float traveltTime;
     private bool shallTravel = true;
     private float duration;
-    private float cooldown;
-    private bool onCooldown = false;
+    private float maxCooldown;
+    private float currCooldown = 0;
+    private bool isDisabled = false;
     private uint durability;
     private float range;
     private bool isMeele;
-    private bool isAOE;
+    private int maxTargets;
     private int playersHit;
 
     //Empty Constructor
     public Attacks() { }
     
     //Constructor with Heal
-    public Attacks(uint id, string name, string type, bool isMeele, bool isAOE, float heal, float damage, float castTime, float delay, float duration, float cooldown, float range)
+    public Attacks(uint id, string name, string type, bool isMeele, int maxTargets, float heal, float damage, float castTime, float delay, float duration, float cooldown, float range)
     {
         this.id = id;
         this.name = name;
         this.type = type;
         this.isMeele = isMeele;
-        this.isAOE = isAOE;
+        this.maxTargets = maxTargets;
         this.heal = heal;
         this.damage = damage;
         this.castTime = castTime;
         this.toTravelTime = delay;
         this.castTime = castTime;
-        this.cooldown = cooldown;
+        this.maxCooldown = cooldown;
         this.range = range;
         if(Gamerules._instance.abilityLimit != 0) { durability = Gamerules._instance.abilityLimit; }
-
     }
 
     #region Get & Set 
@@ -53,25 +53,21 @@ public abstract class Attacks {
     public float CastTime { get { return castTime; } }
     public float ToTravelTime { get { return toTravelTime;  } }
     public bool ShallTravel { get { return shallTravel; } set { shallTravel = value; } }
-    public float Cooldown { get { return cooldown; } set { this.cooldown = value; } }
-    public bool OnCooldown { get { return onCooldown; } set { onCooldown = value; } }
+    public float MaxCooldown { get { return maxCooldown; } }
+    public float CurrCooldown { get { return currCooldown; } set { this.currCooldown = value; } }
+    public bool IsDisabled { get { return isDisabled; } set { isDisabled = value; } }
     public uint Durability { get { return durability; } }
     public float Range { get { return range; } }
     public int PlayersHit { get { return playersHit; } set { playersHit = value; } }
     #endregion
 
-    public abstract void Use(GameObject _target);
+    public abstract void Use(GameObject _target, GameObject _caster);
 
-    public bool IsCastable()
+    public bool MaxTargetsReached()
     {
         playersHit++;
-        if (!isAOE)
-        {
-            if (playersHit > 1)
-            {
-                return false;
-            }
-        }
+        if (maxTargets == 0) { return true; }
+        if (playersHit > maxTargets) { return false; }
         return true;
     }
 
@@ -92,5 +88,17 @@ public abstract class Attacks {
         }
 
         return range / toTravelTime * traveltTime;
+    }
+
+    public virtual void UpdateCooldowns()
+    {
+        currCooldown -= Time.deltaTime;
+        if (currCooldown <= 0) { currCooldown = 0; IsDisabled = false; }
+    }
+
+    public virtual void SetCooldowne()
+    {
+        currCooldown = maxCooldown;
+        isDisabled = true;
     }
 }
