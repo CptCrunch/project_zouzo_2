@@ -130,7 +130,7 @@ public class Player : MonoBehaviour
         // set starter abilities
         abilityArray[0] = AbilityManager._instance.CreateBasic();
         abilityArray[1] = AbilityManager._instance.CreateCapricorn();
-        abilityArray[2] = AbilityManager._instance.CreateBasic();
+        abilityArray[2] = AbilityManager._instance.CreateLeo();
         abilityArray[3] = AbilityManager._instance.CreateBasic();
 
         controller = GetComponent<Controller2D>();
@@ -162,6 +162,12 @@ public class Player : MonoBehaviour
         if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked) { disabled = true; }
         else { disabled = false; }
 
+        // update Cooldowns
+        foreach (Attacks _spell in abilityArray)
+        {
+            if (_spell.CurrCooldown > 0) { _spell.UpdateCooldowns(); }
+        }
+
         // use ability
         if (!disabled && !isAttacking)
         {
@@ -176,15 +182,38 @@ public class Player : MonoBehaviour
             if (spellused > -1)
             {
                 // cast spell only if it's not on cooldown
-                if (!abilityArray[spellused].OnCooldown)
+                if (!abilityArray[spellused].IsDisabled)
                 {
                     // use meele funktion if it is a meele attack
                     if (abilityArray[spellused].IsMeele)
                     {
                         // set casted spell (also triggerst meele funktion)
                         castedSpell = abilityArray[spellused];
+                        castedSpell.SetCooldowne();
                     }
                 }
+                
+                if (abilityArray[spellused].Name == "Capricorn" && !controller.collisions.below)
+                {
+                    Capricorn capricornSpell = (Capricorn) abilityArray[spellused];
+
+                    foreach (GameObject targetObject in GameObject.FindGameObjectsWithTag("Player"))
+                    {
+                        if (targetObject.GetComponent<Player>().playerVitals.KnockUped)
+                        {
+                            if (Mathf.Abs(Vector2.Distance(transform.position, targetObject.transform.position)) <= capricornSpell.MaxKockBackDistance)
+                            {
+                                abilityArray[spellused].Use;
+                                castedSpell.SetCooldowne();
+                            }
+                        }
+                    }
+                }
+            }
+
+            else
+            {
+                Debug.Log(abilityArray[spellused].Name + " on cooldown for " + abilityArray[spellused].CurrCooldown + "/" + abilityArray[spellused].MaxCooldown);
             }
         }
         //Debug.Log(name + " health: " + playerVitals.CurrHealth);
@@ -375,6 +404,7 @@ public class Player : MonoBehaviour
         {
             // get travel distance
             float travelDistance = castedSpell.TravelDistance();
+
             // create a Debug ray
             Debug.DrawRay(gameObject.transform.position, spellDirection * travelDistance, Color.green);
 
@@ -419,11 +449,10 @@ public class Player : MonoBehaviour
                             registeredEnemies[firstFreeEntry] = objectHit.transform.gameObject;
 
                             // checks if the spell already hit its max of players
-                            if (castedSpell.IsCastable())
+                            if (castedSpell.MaxTargetsReached())
                             {
-                                // use spell and set it on cooldown
-                                castedSpell.Use(objectHit.transform.gameObject);
-                                StartCoroutine(OffCooldown(castedSpell));
+                                // use spell
+                                castedSpell.Use(objectHit.transform.gameObject, gameObject);
                                 break;
                             }
                         }
@@ -442,11 +471,5 @@ public class Player : MonoBehaviour
             castedSpell.ShallTravel = true;
             castedSpell = null;
         }
-    }
-
-    IEnumerator OffCooldown(Attacks _spell)
-    {
-        yield return new WaitForSeconds(_spell.Cooldown);
-        _spell.OnCooldown = false;
     }
 }
