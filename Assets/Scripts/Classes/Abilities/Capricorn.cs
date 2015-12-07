@@ -22,6 +22,7 @@ public class Capricorn : Attacks {
         // get the vitals of the target
         LivingEntity Vitals = _target.GetComponent<Player>().playerVitals;
 
+        // if player is on floor, use capricorn 1
         if (_caster.GetComponent<Controller2D>().collisions.below)
         {
             // kock the target up and deal damage
@@ -37,12 +38,15 @@ public class Capricorn : Attacks {
             Vitals.GetDamage(Damage);
         }
 
+        // if player is in air, use capricorn 2
         else
         {
             float dirX = _caster.transform.position.x - _target.transform.position.x;
             float dirY = _target.transform.position.y - _caster.transform.position.y;
-            Vector2 direction = new Vector2(dirX, dirY);
-            _target.GetComponent<Player>().playerVitals.ApplyPlayerKnockBack(direction.x, direction.y, 20);
+
+            float distaceMultiplicator = 1 / (dirX + dirY);
+
+            _target.GetComponent<Player>().playerVitals.ApplyPlayerKnockBack(dirX * distaceMultiplicator, dirY * distaceMultiplicator, 20);
         }
     }
 }
