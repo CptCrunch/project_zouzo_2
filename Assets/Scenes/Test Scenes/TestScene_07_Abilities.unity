@@ -534,7 +534,35 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11488288, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
       propertyPath: name
-      value: Player 1 (KB)
+      value: Player1 (KB)
+      objectReference: {fileID: 0}
+    - target: {fileID: 11488288, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
+      propertyPath: playerAxis
+      value: KB
+      objectReference: {fileID: 0}
+    - target: {fileID: 11488288, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
+      propertyPath: maxHealth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11488288, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
+      propertyPath: timeToJumpApex
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 11488288, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
+      propertyPath: wallJumpClimb.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11488288, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
+      propertyPath: wallJumpClimb.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11488288, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
+      propertyPath: wallJumpOff.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11488288, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
+      propertyPath: wallJumpOff.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
