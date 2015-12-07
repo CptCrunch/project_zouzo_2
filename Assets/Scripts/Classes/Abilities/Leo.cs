@@ -15,7 +15,7 @@ public class Leo : Attacks {
         this.currCharge = this.maxCharge;
     }
 
-    public override void Use(GameObject _target, GameObject _caster, bool _inAir)
+    public override void Use(GameObject _target, GameObject _caster)
     {
         // get the vitals of the target
         LivingEntity Vitals = _target.GetComponent<Player>().playerVitals;
