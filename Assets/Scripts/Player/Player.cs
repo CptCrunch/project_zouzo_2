@@ -168,6 +168,32 @@ public class Player : MonoBehaviour
             if (_spell.CurrCooldown > 0) { _spell.UpdateCooldowns(); }
         }
 
+        // find out if capricorn_2 can be used
+        float minDistance = AbilityManager._instance.abilities[9].maxKockBackDistance;
+        GameObject neartestObject = null;
+
+        // get all player objects
+        foreach (GameObject targetObject in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            // get kocked up players
+            if (targetObject.GetComponent<Player>().playerVitals.KnockUped)
+            {
+                // get the distance to the player
+                float distance = Mathf.Abs(Vector2.Distance(transform.position, targetObject.transform.position));
+
+                // compair if plyer is in range
+                if (distance <= AbilityManager._instance.abilities[9].knockBackDistance)
+                {
+                    // get nearest player
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        neartestObject = targetObject;
+                    }
+                }
+            }
+        }
+
         // use ability
         if (!disabled && !isAttacking)
         {
@@ -179,41 +205,35 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(playerControles[4])) { spellused = 3; } // spell_3
 
             // use spell if casted
-            if (spellused > -1)
+            if (spellused > -1 && spellused > abilityArray.Length)
             {
                 // cast spell only if it's not on cooldown
                 if (!abilityArray[spellused].IsDisabled)
                 {
+                    // use Capricorn_2 spell
+                    if (abilityArray[spellused].Name == "Capricorn" && !controller.collisions.below)
+                    {
+                        if (neartestObject != null)
+                        {
+                            // use spell
+                            abilityArray[spellused].Use(neartestObject, gameObject);
+                            castedSpell.SetCooldowne();
+                        }
+                    }
+
                     // use meele funktion if it is a meele attack
-                    if (abilityArray[spellused].IsMeele)
+                    else if (abilityArray[spellused].IsMeele)
                     {
                         // set casted spell (also triggerst meele funktion)
                         castedSpell = abilityArray[spellused];
                         castedSpell.SetCooldowne();
                     }
                 }
-                
-                if (abilityArray[spellused].Name == "Capricorn" && !controller.collisions.below)
+
+                else
                 {
-                    Capricorn capricornSpell = (Capricorn) abilityArray[spellused];
-
-                    foreach (GameObject targetObject in GameObject.FindGameObjectsWithTag("Player"))
-                    {
-                        if (targetObject.GetComponent<Player>().playerVitals.KnockUped)
-                        {
-                            if (Mathf.Abs(Vector2.Distance(transform.position, targetObject.transform.position)) <= capricornSpell.MaxKockBackDistance)
-                            {
-                                abilityArray[spellused].Use;
-                                castedSpell.SetCooldowne();
-                            }
-                        }
-                    }
+                    Debug.Log(abilityArray[spellused].Name + " on cooldown for " + abilityArray[spellused].CurrCooldown + "/" + abilityArray[spellused].MaxCooldown);
                 }
-            }
-
-            else
-            {
-                Debug.Log(abilityArray[spellused].Name + " on cooldown for " + abilityArray[spellused].CurrCooldown + "/" + abilityArray[spellused].MaxCooldown);
             }
         }
         //Debug.Log(name + " health: " + playerVitals.CurrHealth);

@@ -8,7 +8,7 @@ public class Basic : Attacks {
     public Basic(float damage, float castTime, float delay, float duration, float cooldown, float range, int targets) : base(
         0, "basic", "meele", true, targets, 0, damage, castTime, delay, duration, cooldown, range) { instanceCount++; }
 
-    public override void Use(GameObject _target, GameObject _caster, bool _inAir)
+    public override void Use(GameObject _target, GameObject _caster)
     {
         // get the vitals of the target
         LivingEntity Vitals = _target.GetComponent<Player>().playerVitals;
