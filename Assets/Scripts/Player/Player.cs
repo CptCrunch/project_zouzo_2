@@ -203,7 +203,7 @@ public class Player : MonoBehaviour
                         {
                             if (Mathf.Abs(Vector2.Distance(transform.position, targetObject.transform.position)) <= capricornSpell.MaxKockBackDistance)
                             {
-                                abilityArray[spellused].Use;
+                                //abilityArray[spellused].Use;
                                 castedSpell.SetCooldowne();
                             }
                         }
@@ -213,7 +213,7 @@ public class Player : MonoBehaviour
 
             else
             {
-                Debug.Log(abilityArray[spellused].Name + " on cooldown for " + abilityArray[spellused].CurrCooldown + "/" + abilityArray[spellused].MaxCooldown);
+                //Debug.Log(abilityArray[spellused].Name + " on cooldown for " + abilityArray[spellused].CurrCooldown + "/" + abilityArray[spellused].MaxCooldown);
             }
         }
         //Debug.Log(name + " health: " + playerVitals.CurrHealth);
@@ -260,6 +260,8 @@ public class Player : MonoBehaviour
             else { spellDirection = gameObject.transform.TransformDirection(Vector3.left); }
 
             // use the meele attack funktion
+            _animator.SetInteger("AttackRan", Random.Range(1, 3));
+            _animator.SetTrigger("Attack");
             UseMeleeAttack();
         }
 
@@ -285,6 +287,7 @@ public class Player : MonoBehaviour
             if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
             {
                 wallSliding = true;
+                flipEnable = false;
                 _animator.SetBool("WallSlide", true);
                 _animator.SetBool("Fall", false);
 
@@ -316,6 +319,7 @@ public class Player : MonoBehaviour
             else
             {
                 _animator.SetBool("WallSlide", false);
+                flipEnable = true;
             }
 
             // jump
@@ -452,7 +456,7 @@ public class Player : MonoBehaviour
                             if (castedSpell.MaxTargetsReached())
                             {
                                 // use spell
-                                castedSpell.Use(objectHit.transform.gameObject, gameObject);
+                                castedSpell.Use(objectHit.transform.gameObject, gameObject, false);
                                 break;
                             }
                         }
@@ -460,7 +464,10 @@ public class Player : MonoBehaviour
 
                     abilityLoopindex++;
                 }
+
             }
+            print("Print");
+            _animator.SetInteger("AttackRan", 0);
         }
 
         // stop attack

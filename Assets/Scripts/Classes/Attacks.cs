@@ -61,7 +61,7 @@ public abstract class Attacks {
     public int PlayersHit { get { return playersHit; } set { playersHit = value; } }
     #endregion
 
-    public abstract void Use(GameObject _target, GameObject _caster);
+    public abstract void Use(GameObject _target, GameObject _caster, bool _inAir);
 
     public bool MaxTargetsReached()
     {

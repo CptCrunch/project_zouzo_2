@@ -17,7 +17,7 @@ public class Capricorn : Attacks {
 
     public float MaxKockBackDistance { get { return maxKnockBackDistance; } }
 
-    public override void Use(GameObject _target, GameObject _caster) {
+    public override void Use(GameObject _target, GameObject _caster, bool _inAir) {
         
         // get the vitals of the target
         LivingEntity Vitals = _target.GetComponent<Player>().playerVitals;
