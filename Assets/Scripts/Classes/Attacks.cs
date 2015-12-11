@@ -6,7 +6,6 @@ public abstract class Attacks {
     private uint id;
     private string name;
     private string type;
-    private float heal;
     private float damage;
     private float castTime;
     private float toTravelTime;
@@ -18,22 +17,20 @@ public abstract class Attacks {
     private bool isDisabled = false;
     private uint durability;
     private float range;
-    private bool isMeele;
     private int maxTargets;
     private int playersHit;
+    private bool isAbilityCasted = false;
 
     //Empty Constructor
     public Attacks() { }
     
     //Constructor with Heal
-    public Attacks(uint id, string name, string type, bool isMeele, int maxTargets, float heal, float damage, float castTime, float delay, float duration, float cooldown, float range)
+    public Attacks(uint id, string name, string type, int maxTargets, float damage, float castTime, float delay, float duration, float cooldown, float range)
     {
         this.id = id;
         this.name = name;
         this.type = type;
-        this.isMeele = isMeele;
         this.maxTargets = maxTargets;
-        this.heal = heal;
         this.damage = damage;
         this.castTime = castTime;
         this.toTravelTime = delay;
@@ -47,8 +44,6 @@ public abstract class Attacks {
     public uint ID { get { return id; } }
     public string Name { get { return name; } }
     public string Type { get { return type; } }
-    public bool IsMeele { get { return isMeele; } }
-    public float Heal { get { return heal; } set { this.heal = value; } }
     public float Damage { get { return damage; } set { this.damage = value; } }
     public float CastTime { get { return castTime; } }
     public float ToTravelTime { get { return toTravelTime;  } }
@@ -59,10 +54,19 @@ public abstract class Attacks {
     public uint Durability { get { return durability; } }
     public float Range { get { return range; } }
     public int PlayersHit { get { return playersHit; } set { playersHit = value; } }
+    public bool IsAbilityCasted { get { return isAbilityCasted; } set { value = isAbilityCasted; } }
     #endregion
 
-    public abstract void Use(GameObject _target, GameObject _caster, bool _inAir);
+    /// <summary> Casts spell and checks if spell can be casted </summary>
+    public abstract void Cast(GameObject _caster);
 
+    /// <summary> Used at button releace </summary>
+    public abstract void AfterCast();
+
+    /// <summary> uses spell (deals damage, aplys conditions) </summary>
+    public abstract void Use(GameObject _target, GameObject _caster);
+
+    /// <summary> checks if spell hits his maximum targets </summary>
     public bool MaxTargetsReached()
     {
         playersHit++;

@@ -6,28 +6,52 @@ public class AbilityManager : MonoBehaviour {
     public static AbilityManager _instance;
 
     public Abilities[] abilities = new Abilities[0];
+    public Abilities[] spells = new Abilities[13];
+
     void Awake()
     {
         if (_instance == null) { _instance = this; }
-    }
 
-    public Attacks CreateLeo()
-    {
-        return new Leo(abilities[4].damage, abilities[4].castTime, abilities[4].travelTime, abilities[4].duration, abilities[4].cooldown, abilities[4].range, abilities[4].targets, abilities[4].charges);
-    }
-
-    public Attacks CreateCapricorn() {
-        return new Capricorn(abilities[9].damage, abilities[9].castTime, abilities[9].travelTime, abilities[9].duration, abilities[9].cooldown, abilities[9].range, abilities[9].targets, abilities[9].knockUpHeght, abilities[9].time);
+        for (int i = 0; i < abilities.Length; i++)
+        {
+            switch (abilities[i].name)
+            {
+                case "Basic": spells[0] = abilities[i]; break;
+                case "Aries": spells[1] = abilities[i]; break;
+                case "Taurus": spells[2] = abilities[i]; break;
+                case "Gemini": spells[3] = abilities[i]; break;
+                case "Cancer": spells[4] = abilities[i]; break;
+                case "Leo": spells[5] = abilities[i]; break;
+                case "Virgo": spells[6] = abilities[i]; break;
+                case "Libra": spells[7] = abilities[i]; break;
+                case "Scorpio": spells[8] = abilities[i]; break;
+                case "Sagittarius": spells[9] = abilities[i]; break;
+                case "Capricorn": spells[10] = abilities[i]; break;
+                case "Aquarius": spells[11] = abilities[i]; break;
+                case "Pisces": spells[12] = abilities[i]; break;
+            }
+        }
     }
 
     public Attacks CreateBasic()
     {
-        return new Basic(abilities[12].damage, abilities[12].castTime, abilities[12].travelTime, abilities[12].duration, abilities[12].cooldown, abilities[12].range, abilities[12].targets);
+        return new Basic(spells[0].damage, spells[0].castTime, spells[0].travelTime, spells[0].duration, spells[0].cooldown, spells[0].range, spells[0].targets);
+    }
+
+    public Attacks CreateLeo()
+    {
+        return new Leo(spells[5].damage, spells[5].castTime, spells[5].travelTime, spells[5].duration, spells[5].cooldown, spells[5].range, spells[5].targets, spells[5].charges);
+    }
+
+    public Attacks CreateCapricorn()
+    {
+        return new Capricorn(spells[10].damage, spells[10].castTime, spells[10].travelTime, spells[10].duration, spells[10].cooldown, spells[10].range, spells[10].targets, spells[10].knockUpHeght, spells[10].time);
     }
 }
 
 [System.Serializable]
-public struct Abilities {
+public struct Abilities
+{
     public string name;
     public float damage;
     [Tooltip("[time in seconds]")]
@@ -42,12 +66,16 @@ public struct Abilities {
     public int targets;
 
     [Header("Class specific variables")]
-    [Tooltip("nessesary for: capricorn")]
+    [Tooltip("nessesary for: capricorn(1)")]
     public float knockUpHeght;
-    [Tooltip("nessesary for: capricorn")]
+    [Tooltip("nessesary for: capricorn(2)")]
     public float knockBackDistance;
-    [Tooltip("nessesary for: capricorn \n[time in milliseconds (1:1000)]")]
+    [Tooltip("nessesary for: capricorn(2)")]
+    public float maxKnockBackDistance;
+    [Tooltip("nessesary for: capricorn(1) \n[time in milliseconds (1:1000)]")]
     public int time;
     [Tooltip("nessesary for: leo")]
     public int charges;
+    [Tooltip("nessesary for: saggitarius")]
+    public GameObject bullet;
 }

@@ -25,6 +25,7 @@ public class LivingEntity
     private int knockUpIndex = 0;
     private bool knockBacked = false;
     private int knockBackIndex = 0;
+    private bool dashing = false;
 
     Thread KnockUpThread;
     Thread KnockBackThread;
@@ -206,6 +207,18 @@ public class LivingEntity
 
         Thread.Sleep(_time);
         if (currIndex == knockBackIndex) { knockBacked = false; /*Debug.Log("KockBack stop");*/ }
+    }
+
+    // dash
+    private void PlayerDash(float _xDistance, int _time)
+    {
+        dashing = true;
+        /*Debug.Log("Dash start");*/
+        instance.velocity.x = _xDistance / (float)Util.ConvertMillisecondsToSeconds(_time);
+
+        Thread.Sleep(_time);
+        dashing = false;
+        /*Debug.Log("Dash stop");*/
     }
     #endregion
     #endregion
