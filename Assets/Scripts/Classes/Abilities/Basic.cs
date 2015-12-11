@@ -16,6 +16,9 @@ public class Basic : Attacks {
 
         if (!IsDisabled)
         {
+            _caster.GetComponent<Animator>().SetInteger("AttackRan", UnityEngine.Random.Range(1, 4));
+            _caster.GetComponent<Animator>().SetTrigger("Attack");
+
             playerScript.castedSpell = this;
             SetCooldowne();
         }

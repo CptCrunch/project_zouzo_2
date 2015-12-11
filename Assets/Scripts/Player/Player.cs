@@ -225,9 +225,7 @@ public class Player : MonoBehaviour
             if (mirror) { spellDirection = gameObject.transform.TransformDirection(Vector3.right); }
             else { spellDirection = gameObject.transform.TransformDirection(Vector3.left); }
 
-            // use the meele attack funktion
-            _animator.SetInteger("AttackRan", Random.Range(1, 3));
-            _animator.SetTrigger("Attack");
+            // use the meele attack funktion 
             UseMeleeAttack();
         }
 
@@ -423,7 +421,7 @@ public class Player : MonoBehaviour
                             if (castedSpell.MaxTargetsReached())
                             {
                                 // use spell
-                                castedSpell.Use(objectHit.transform.gameObject, gameObject, false);
+                                castedSpell.Use(objectHit.transform.gameObject, gameObject);
                                 break;
                             }
                         }
@@ -433,8 +431,6 @@ public class Player : MonoBehaviour
                 }
 
             }
-            print("Print");
-            _animator.SetInteger("AttackRan", 0);
         }
 
         // stop attack
