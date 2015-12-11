@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 
-public class Basic : Attacks {
+public class Saggitarius : Attacks {
 
     private static int instanceCount = 0;
 
-    public Basic(float damage, float castTime, float delay, float duration, float cooldown, float range, int targets) : base(
-        0, "basic", "meele", targets, damage, castTime, delay, duration, cooldown, range) { instanceCount++; }
+    public Saggitarius(float damage, float castTime, float delay, float duration, float cooldown, float range, int targets) : base(
+        9, "saggitarius", "skillshot", targets, damage, castTime, delay, duration, cooldown, range)
+    {
+        instanceCount++;
+    }
 
     public override void Cast(GameObject _caster)
     {
@@ -16,11 +18,7 @@ public class Basic : Attacks {
 
         if (!IsDisabled)
         {
-            playerScript.castedSpell = this;
-            SetCooldowne();
         }
-
-        IsAbilityCasted = true;
     }
 
     public override void AfterCast()
@@ -36,6 +34,4 @@ public class Basic : Attacks {
         // deal damage
         Vitals.GetDamage(Damage);
     }
-
-    public int InstanceCount { get { return instanceCount; } }
 }

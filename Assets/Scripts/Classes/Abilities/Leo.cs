@@ -8,11 +8,28 @@ public class Leo : Attacks {
     private int currCharge;
 
     public Leo(float damage, float castTime, float delay, float duration, float cooldown, float range, int targets, int maxCharge) : base(
-        5, "leo", "meele", true, targets, 0, damage, castTime, delay, duration, cooldown, range)
+        5, "leo", "meele", targets, damage, castTime, delay, duration, cooldown, range)
     {
         instanceCount++;
         this.maxCharge = maxCharge;
         this.currCharge = this.maxCharge;
+    }
+
+    public override void Cast(GameObject _caster)
+    {
+        // get playerScript from caster
+        Player playerScript = _caster.GetComponent<Player>();
+
+        if (!IsDisabled)
+        {
+            playerScript.castedSpell = this;
+            SetCooldowne();
+        }
+    }
+
+    public override void AfterCast()
+    {
+        IsAbilityCasted = false;
     }
 
     public override void Use(GameObject _target, GameObject _caster)
