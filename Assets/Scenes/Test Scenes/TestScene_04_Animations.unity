@@ -278,6 +278,26 @@ Prefab:
       propertyPath: playerMaxHealth
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11435204, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
+      propertyPath: abilities.Array.data[12].castTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11435204, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
+      propertyPath: abilities.Array.data[12].travelTime
+      value: .300000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 11435204, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
+      propertyPath: abilities.Array.data[12].range
+      value: .699999988
+      objectReference: {fileID: 0}
+    - target: {fileID: 11435204, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
+      propertyPath: abilities.Array.data[12].cooldown
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11435204, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
+      propertyPath: abilities.Array.data[12].targets
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
   m_IsPrefabParent: 0
@@ -297,6 +317,189 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities: []
+  spells:
+  - name: 
+    damage: 0
+    castTime: 0
+    travelTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    maxKnockBackDistance: 0
+    time: 0
+    charges: 0
+    bullet: {fileID: 0}
+  - name: 
+    damage: 0
+    castTime: 0
+    travelTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    maxKnockBackDistance: 0
+    time: 0
+    charges: 0
+    bullet: {fileID: 0}
+  - name: 
+    damage: 0
+    castTime: 0
+    travelTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    maxKnockBackDistance: 0
+    time: 0
+    charges: 0
+    bullet: {fileID: 0}
+  - name: 
+    damage: 0
+    castTime: 0
+    travelTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    maxKnockBackDistance: 0
+    time: 0
+    charges: 0
+    bullet: {fileID: 0}
+  - name: 
+    damage: 0
+    castTime: 0
+    travelTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    maxKnockBackDistance: 0
+    time: 0
+    charges: 0
+    bullet: {fileID: 0}
+  - name: 
+    damage: 0
+    castTime: 0
+    travelTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    maxKnockBackDistance: 0
+    time: 0
+    charges: 0
+    bullet: {fileID: 0}
+  - name: 
+    damage: 0
+    castTime: 0
+    travelTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    maxKnockBackDistance: 0
+    time: 0
+    charges: 0
+    bullet: {fileID: 0}
+  - name: 
+    damage: 0
+    castTime: 0
+    travelTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    maxKnockBackDistance: 0
+    time: 0
+    charges: 0
+    bullet: {fileID: 0}
+  - name: 
+    damage: 0
+    castTime: 0
+    travelTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    maxKnockBackDistance: 0
+    time: 0
+    charges: 0
+    bullet: {fileID: 0}
+  - name: 
+    damage: 0
+    castTime: 0
+    travelTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    maxKnockBackDistance: 0
+    time: 0
+    charges: 0
+    bullet: {fileID: 0}
+  - name: 
+    damage: 0
+    castTime: 0
+    travelTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    maxKnockBackDistance: 0
+    time: 0
+    charges: 0
+    bullet: {fileID: 0}
+  - name: 
+    damage: 0
+    castTime: 0
+    travelTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    maxKnockBackDistance: 0
+    time: 0
+    charges: 0
+    bullet: {fileID: 0}
+  - name: 
+    damage: 0
+    castTime: 0
+    travelTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    knockUpHeght: 0
+    knockBackDistance: 0
+    maxKnockBackDistance: 0
+    time: 0
+    charges: 0
+    bullet: {fileID: 0}
 --- !u!1001 &404573008
 Prefab:
   m_ObjectHideFlags: 0
