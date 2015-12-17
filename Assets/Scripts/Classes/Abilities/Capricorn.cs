@@ -6,17 +6,18 @@ public class Capricorn : Attacks {
 
     private int time;
     private float height;
-    private float maxKnockBackDistance;
+    private float knockBackDistance;
     private bool usedInAir = false;
 
-    public Capricorn(float damage, float castTime, float travleTime, float duration, float cooldown, float range, int targets, float height, int time) : base(
-        10, "capricorn", "CC", targets, damage, castTime, travleTime, duration, cooldown, range)
+    public Capricorn(float damage, float castTime, float travleTime, float duration, float cooldown, float range, int targets, uint spellDir, float height, int time, float knockBackDistance) : base(
+        10, "capricorn", "CC", targets, damage, castTime, travleTime, duration, cooldown, range, spellDir)
     {
         this.time = time;
         this.height = height;
+        this.knockBackDistance = knockBackDistance;
     }
 
-    public float MaxKnockBackDistance { get { return maxKnockBackDistance; } }
+    public float KnockBackDistance { get { return knockBackDistance; } }
     public bool UsedInAir { get { return usedInAir; } }
 
     public override void Cast(GameObject _caster)
@@ -28,16 +29,36 @@ public class Capricorn : Attacks {
         {
             if (!IsDisabled)
             {
-                playerScript.castedSpell = this;
+                // wait castTime
+
+                // set animation
+
+                // cast spell
+                playerScript.castedMeeleSpell = this;
+
+                // set spell on cooldown
+                SetCooldown();
             }
+
+            // debug that spell is on cooldown
+            else { Debug.Log("capricorn is on cooldown for: " + CurrCooldown); }
         }
 
-        else
+        else if(!usedInAir)
         {
-            if (playerScript.CanCapricorn2BeUsed() != null)
+            if (playerScript.GetCapricorn2Targets() != null)
             {
-                UseCapricorn2(_caster, playerScript.CanCapricorn2BeUsed());
+                // set animation
+
+                // use spell
+                UseCapricorn2(_caster, playerScript.GetCapricorn2Targets());
+
+                // reset cooldown
+                SetCooldown();
             }
+
+            // debug that spell is on cooldown
+            else { Debug.Log("capricorn is on cooldown for: " + CurrCooldown); }
         }
     }
 
@@ -61,6 +82,7 @@ public class Capricorn : Attacks {
             Debug.LogError("Is Outside range of Int32 tyoe.");
         }
 
+        // deal damage
         Vitals.GetDamage(Damage);
     }
 
@@ -69,15 +91,24 @@ public class Capricorn : Attacks {
         // get the vitals of the target
         LivingEntity Vitals = _target.GetComponent<Player>().playerVitals;
 
+        // get distance between caster and target
         float dirX = _caster.transform.position.x - _target.transform.position.x;
         float dirY = _target.transform.position.y - _caster.transform.position.y;
+        float distaceMultiplicator = 1 / (dirX + dirY) * knockBackDistance;
 
-        float distaceMultiplicator = 1 / (dirX + dirY);
-
+        // kock target away form caster
         _target.GetComponent<Player>().playerVitals.ApplyPlayerKnockBack(dirX * distaceMultiplicator, dirY * distaceMultiplicator, 20);
 
+        // deal damage
         Vitals.GetDamage(Damage);
 
+        // disable Capricorn2
         usedInAir = true;
+    }
+
+    public override void UpdateCooldowns()
+    {
+        CurrCooldown -= Time.deltaTime;
+        if (CurrCooldown <= 0) { CurrCooldown = 0; IsDisabled = false; usedInAir = false; }
     }
 }

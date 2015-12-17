@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 484028}
   - 212: {fileID: 21215236}
   - 61: {fileID: 6128956}
+  - 114: {fileID: 11420146}
   m_Layer: 0
   m_Name: saggitariusBullet
   m_TagString: Untagged
@@ -42,6 +43,18 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: .660000026, y: .419999987}
+--- !u!114 &11420146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7686162cb063b54a9f29c891d07268a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPosition: {x: 0, y: 0}
 --- !u!212 &21215236
 SpriteRenderer:
   m_ObjectHideFlags: 1

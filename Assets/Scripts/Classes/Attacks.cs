@@ -20,12 +20,13 @@ public abstract class Attacks {
     private int maxTargets;
     private int playersHit;
     private bool isAbilityCasted = false;
+    private uint spellDir;
 
     //Empty Constructor
     public Attacks() { }
     
     //Constructor with Heal
-    public Attacks(uint id, string name, string type, int maxTargets, float damage, float castTime, float delay, float duration, float cooldown, float range)
+    public Attacks(uint id, string name, string type, int maxTargets, float damage, float castTime, float delay, float duration, float cooldown, float range, uint spellDir)
     {
         this.id = id;
         this.name = name;
@@ -37,6 +38,7 @@ public abstract class Attacks {
         this.castTime = castTime;
         this.maxCooldown = cooldown;
         this.range = range;
+        this.spellDir = spellDir;
         if(Gamerules._instance.abilityLimit != 0) { durability = Gamerules._instance.abilityLimit; }
     }
 
@@ -55,6 +57,7 @@ public abstract class Attacks {
     public float Range { get { return range; } }
     public int PlayersHit { get { return playersHit; } set { playersHit = value; } }
     public bool IsAbilityCasted { get { return isAbilityCasted; } set { value = isAbilityCasted; } }
+    public uint SpellDir { get { return spellDir; } }
     #endregion
 
     /// <summary> Casts spell and checks if spell can be casted </summary>
@@ -63,7 +66,7 @@ public abstract class Attacks {
     /// <summary> Used at button releace </summary>
     public abstract void AfterCast();
 
-    /// <summary> uses spell (deals damage, aplys conditions) </summary>
+    /// <summary> uses spell (deals damage, applys conditions) </summary>
     public abstract void Use(GameObject _target, GameObject _caster);
 
     /// <summary> checks if spell hits his maximum targets </summary>
@@ -100,7 +103,7 @@ public abstract class Attacks {
         if (currCooldown <= 0) { currCooldown = 0; IsDisabled = false; }
     }
 
-    public virtual void SetCooldowne()
+    public virtual void SetCooldown()
     {
         currCooldown = maxCooldown;
         isDisabled = true;

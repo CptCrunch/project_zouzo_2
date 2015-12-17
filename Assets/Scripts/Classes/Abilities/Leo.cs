@@ -7,8 +7,8 @@ public class Leo : Attacks {
     private int maxCharge;
     private int currCharge;
 
-    public Leo(float damage, float castTime, float delay, float duration, float cooldown, float range, int targets, int maxCharge) : base(
-        5, "leo", "meele", targets, damage, castTime, delay, duration, cooldown, range)
+    public Leo(float damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir, int maxCharge) : base(
+        5, "leo", "meele", targets, damage, castTime, delay, duration, cooldown, range, spellDir)
     {
         instanceCount++;
         this.maxCharge = maxCharge;
@@ -22,9 +22,19 @@ public class Leo : Attacks {
 
         if (!IsDisabled)
         {
-            playerScript.castedSpell = this;
-            SetCooldowne();
+            // wait castTime
+
+            // set animation
+
+            // cast spell
+            playerScript.castedMeeleSpell = this;
+
+            // set spell on cooldown
+            SetCooldown();
         }
+
+        // debug that spell is on cooldown
+        else { Debug.Log("leo is on cooldown for: " + CurrCooldown); }
     }
 
     public override void AfterCast()
@@ -43,19 +53,26 @@ public class Leo : Attacks {
 
     public override void UpdateCooldowns()
     {
+        // reduce current cooldown
         CurrCooldown -= Time.deltaTime;
 
+        // check if cooldown is over 
         if (CurrCooldown <= 0)
         {
+            // add one charge
             currCharge++;
+
+            // enable spell
             IsDisabled = false;
 
+            // if charges are max stacked set cooldown to 0
             if (currCharge >= maxCharge) { CurrCooldown = 0; }
+            // else add max cooldown to restart charg stacking
             else { CurrCooldown += MaxCooldown; }
         }
     }
 
-    public override void SetCooldowne()
+    public override void SetCooldown()
     {
         // set cooldown
         CurrCooldown = MaxCooldown;

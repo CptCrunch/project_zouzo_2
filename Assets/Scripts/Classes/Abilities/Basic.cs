@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Threading;
 
 public class Basic : Attacks {
 
     private static int instanceCount = 0;
 
-    public Basic(float damage, float castTime, float delay, float duration, float cooldown, float range, int targets) : base(
-        0, "basic", "meele", targets, damage, castTime, delay, duration, cooldown, range) { instanceCount++; }
+    public Basic(float damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir) : base(
+        0, "basic", "meele", targets, damage, castTime, delay, duration, cooldown, range, spellDir) { instanceCount++; }
 
     public override void Cast(GameObject _caster)
     {
@@ -16,12 +17,21 @@ public class Basic : Attacks {
 
         if (!IsDisabled)
         {
+            // wait castTime
+
+            // set animation
             _caster.GetComponent<Animator>().SetInteger("AttackRan", UnityEngine.Random.Range(1, 4));
             _caster.GetComponent<Animator>().SetTrigger("Attack");
 
-            playerScript.castedSpell = this;
-            SetCooldowne();
+            // cast spell
+            playerScript.castedMeeleSpell = this;
+
+            // set spell on cooldown
+            SetCooldown();
         }
+
+        // debug that spell is on cooldown
+        else { Debug.Log("basic is on cooldown for: " + CurrCooldown); }
 
         IsAbilityCasted = true;
     }
