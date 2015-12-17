@@ -55,6 +55,12 @@ public class SceneItem : Editor {
         OpenScene("Test Scenes/TestScene_07_Abilities");
     }
 
+    [MenuItem("Open Scenes/Test Scenes/TestScene_08_AnimationAndGraphics")]
+    public static void OpenTestScene_08()
+    {
+        OpenScene("Test Scenes/TestScene_08_AnimationAndGraphics");
+    }
+
     //levelTestScenes
 
     [MenuItem("Open Scenes/Level Test Scenes/LevelTestScene_01")]
@@ -67,6 +73,20 @@ public class SceneItem : Editor {
     public static void OpenLevelTestScene_02()
     {
         OpenScene("Test Scenes/LevelTestScene_02");
+    }
+
+    //Prototyp
+
+    [MenuItem("Open Scenes/Prototyp/Prototyp_Selection")]
+    public static void Open_Prototyp_Selection()
+    {
+        OpenScene("Prototype_Selection");
+    }
+
+    [MenuItem("Open Scenes/Prototyp/Prototyp_Game")]
+    public static void Open_Prototyp_Game()
+    {
+        OpenScene("Prototype_Game");
     }
 
     //Final
