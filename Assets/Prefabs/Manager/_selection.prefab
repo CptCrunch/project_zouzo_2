@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: []
-  levelToLoad: 1
+  levelToLoad: 5
   splashart:
     playerText:
     - {fileID: 0}

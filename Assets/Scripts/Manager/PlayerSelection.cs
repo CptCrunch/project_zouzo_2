@@ -22,6 +22,7 @@ public class PlayerSelection : MonoBehaviour {
 
     private int splashCounter_pic1, splashCounter_pic2, splashCounter_pic3, splashCounter_pic4, splashCounter_pic5;
     private bool sp_p1, sp_p2, sp_p3, sp_p4, sp_kb;
+    public string[] chosenPics = new string[4];
     #endregion
 
     void Awake()
@@ -52,15 +53,18 @@ public class PlayerSelection : MonoBehaviour {
         Keyboard();
 
         // load level on confirm
-        if (Input.GetKeyDown(KeyCode.Joystick1Button7) || Input.GetKeyDown(KeyCode.Joystick2Button7) || Input.GetKeyDown(KeyCode.Joystick3Button7) || Input.GetKeyDown(KeyCode.Joystick4Button7) || Input.GetKeyDown(KeyCode.L)) {
-            if (sp_p1 || sp_p2 || sp_p3 || sp_p4 || sp_kb) {
+        if (Input.GetKeyDown(KeyCode.Joystick1Button7) || Input.GetKeyDown(KeyCode.Joystick2Button7) || Input.GetKeyDown(KeyCode.Joystick3Button7) || Input.GetKeyDown(KeyCode.Joystick4Button7) || Input.GetKeyDown(KeyCode.L))
+        {
+            if (sp_p1 || sp_p2 || sp_p3 || sp_p4 || sp_kb)
+            {
                 Gamerules._instance.connectedControllers = controller;
+                Gamerules._instance.chosenCharacters = chosenPics;
                 Application.LoadLevel(levelToLoad);
             }
         }
 
         // visualize connected controlsers
-        for(int i = 0; i < controller.Count; i++) {
+        for (int i = 0; i < controller.Count; i++) {
             splashart.playerText[i].color = Color.green;
             splashart.playerText[i].text = controller[i] + " Connected";
         }
@@ -73,7 +77,7 @@ public class PlayerSelection : MonoBehaviour {
     void Joystick_1() {
 
         // connect joystic 1
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && !p1) {
+        if (Input.GetKeyDown(KeyCode.Joystick1Button7) && !p1) {
             if (!limitPlayerAmmount) {
                 controller.Add("P1");
                 p1 = true;
@@ -111,7 +115,7 @@ public class PlayerSelection : MonoBehaviour {
         {
             if (i == "P1" && p1)
             {
-                if (Input.GetKeyDown(KeyCode.Joystick1Button4))
+                if (Input.GetKeyDown(KeyCode.Joystick1Button4) && !sp_p1)
                 {
 
                     splashCounter_pic1--;
@@ -120,12 +124,18 @@ public class PlayerSelection : MonoBehaviour {
                     SplashArtChange(counter, splashCounter_pic1);
                 }
 
-                if (Input.GetKeyDown(KeyCode.Joystick1Button5))
+                if (Input.GetKeyDown(KeyCode.Joystick1Button5) && !sp_p1)
                 {
                     splashCounter_pic1++;
                     if (splashCounter_pic1 >= splashart.playerSplashart.Length + 1) { splashCounter_pic1 = 1; }
 
                     SplashArtChange(counter, splashCounter_pic1);
+                }
+
+                if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+                {
+                    ChooseSplashArt(counter, splashCounter_pic1);
+                    sp_p1 = true;
                 }
             }
             counter++;
@@ -348,7 +358,6 @@ public class PlayerSelection : MonoBehaviour {
 
     //Input Keyboard
     void Keyboard() {
-
         // connect keyboard
         if (Input.GetKeyDown(KeyCode.LeftControl) && !kb) {
             if (!limitPlayerAmmount) {
@@ -373,6 +382,7 @@ public class PlayerSelection : MonoBehaviour {
                 controller.Remove("KB");
                 
                 kb = false;
+                sp_kb = false;
             }
             
             else {
@@ -380,6 +390,7 @@ public class PlayerSelection : MonoBehaviour {
                 controller.Remove("KB");
                 
                 kb = false;
+                sp_kb = false;
             }
         }
 
@@ -388,7 +399,7 @@ public class PlayerSelection : MonoBehaviour {
         {
             if (i == "KB" && kb)
             {
-                if (Input.GetKeyDown(KeyCode.A))
+                if (Input.GetKeyDown(KeyCode.A) && !sp_kb)
                 {
 
                     splashCounter_pic5--;
@@ -397,12 +408,18 @@ public class PlayerSelection : MonoBehaviour {
                     SplashArtChange(counter, splashCounter_pic5);
                 }
 
-                if (Input.GetKeyDown(KeyCode.D))
+                if (Input.GetKeyDown(KeyCode.D) && !sp_kb)
                 {
                     splashCounter_pic5++;
                     if (splashCounter_pic5 >= splashart.playerSplashart.Length + 1) { splashCounter_pic5 = 1; }
 
                     SplashArtChange(counter, splashCounter_pic5);
+                }
+
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    ChooseSplashArt(counter, splashCounter_pic5);
+                    sp_kb = true;
                 }
             }
             counter++;
@@ -439,6 +456,27 @@ public class PlayerSelection : MonoBehaviour {
 
             case 4:
                 splashart.splashartHolder[index].overrideSprite = splashart.playerSplashart[splashCounterChange - 1];
+                break;
+        }
+    }
+    private void ChooseSplashArt(int index, int splashCounter)
+    {
+        switch (splashCounter)
+        {
+            case 1:
+                chosenPics[index] = "Earth";
+                break;
+
+            case 2:
+                chosenPics[index] = "Saturn";
+                break;
+
+            case 3:
+                chosenPics[index] = "Jupiter";
+                break;
+
+            case 4:
+                chosenPics[index] = "Sun";
                 break;
         }
     }
