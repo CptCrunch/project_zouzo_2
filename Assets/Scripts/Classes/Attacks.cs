@@ -100,7 +100,7 @@ public abstract class Attacks {
     public virtual void UpdateCooldowns()
     {
         currCooldown -= Time.deltaTime;
-        if (currCooldown <= 0) { currCooldown = 0; IsDisabled = false; }
+        if (currCooldown <= 0) { currCooldown = 0; IsDisabled = false; Debug.Log(IsDisabled); }
     }
 
     public virtual void SetCooldown()

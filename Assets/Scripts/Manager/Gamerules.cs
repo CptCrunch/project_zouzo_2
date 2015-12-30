@@ -49,7 +49,7 @@ public class Gamerules : MonoBehaviour {
     }
     
     // Create All Player when the level loads
-    void OnLevelWasLoaded() {
+    /*void OnLevelWasLoaded() {
 
         int character = 0;
         int counter = 0;
@@ -115,7 +115,7 @@ public class Gamerules : MonoBehaviour {
             }
         }
         
-    }
+    }*/
 
     private void ChangeAxis(string axis, GameObject obj) {
 

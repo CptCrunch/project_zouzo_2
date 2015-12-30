@@ -158,7 +158,7 @@ public class Player : MonoBehaviour
         // update Cooldowns
         foreach (Attacks _spell in abilityArray)
         {
-            if (_spell.CurrCooldown > 0) { _spell.UpdateCooldowns(); }
+            _spell.UpdateCooldowns();
         }
 
         // use ability
