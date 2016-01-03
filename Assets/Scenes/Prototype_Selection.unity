@@ -208,6 +208,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11486172, guid: 6e027b729732d76438e90c7dd826d8f7, type: 2}
+      propertyPath: controller.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 491742, guid: 6e027b729732d76438e90c7dd826d8f7, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0

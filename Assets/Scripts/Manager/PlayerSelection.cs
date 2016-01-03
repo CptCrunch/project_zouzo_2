@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +21,10 @@ public class PlayerSelection : MonoBehaviour
     public Sprite[] characterSplashartBW = new Sprite[4];
     public Image[] characterHolder = new Image[4];
 
-    public CharacterPicture[] characterPicture = new CharacterPicture[4];
+    private CharacterPicture[] characterPicture = new CharacterPicture[4];
+
+    // TODO public -> private
+    public Sprite[] chosenPics = new Sprite[4];
     #endregion
 
     void Start()
@@ -35,6 +39,7 @@ public class PlayerSelection : MonoBehaviour
     void Update()
     {
         Keyboard();
+        Gamepad_1();
     }
 
     void Keyboard()
@@ -47,6 +52,7 @@ public class PlayerSelection : MonoBehaviour
                 characterPicture[0].pressed = false;
                 characterPicture[0].pressedTwice = true;
                 characterPicture[0].ChoseSprite();
+                chosenPics[0] = characterPicture[0].GetChosenImage;
             }
             else
             {
@@ -82,107 +88,45 @@ public class PlayerSelection : MonoBehaviour
     void Gamepad_1()
     {
         //Activate Keyboard
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && characterPicture[0].pressedTwice != true)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0) && characterPicture[1].pressedTwice != true)
         {
-            if (characterPicture[0].pressed)
+            if (characterPicture[1].pressed)
             {
-                characterPicture[0].pressed = false;
-                characterPicture[0].pressedTwice = true;
-                characterPicture[0].ChoseSprite();
+                characterPicture[1].pressed = false;
+                characterPicture[1].pressedTwice = true;
+                characterPicture[1].ChoseSprite();
             }
             else
             {
-                characterPicture[0].ChangePicture(characterSplashart[0]);
-                characterPicture[0].pressed = true;
+                characterPicture[1].ChangePicture(characterSplashart[1]);
+                characterPicture[1].pressed = true;
+
+                controller[1] = "P1";
             }
         }
 
         //Deactivate/Disconnect Keyboard
         if (Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
-            characterPicture[0].ResetPicture(characterSplashartBW[0]);
+            characterPicture[1].ResetPicture(characterSplashartBW[1]);
+
+            controller[1] = null;
         }
 
         //Cycle thru the splasharts
-        if (Input.GetKeyDown(KeyCode.Joystick1Button6) && characterPicture[0].pressed)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button4) && characterPicture[1].pressed)
         {
-            characterPicture[0].CountUpDown(-1);
-            characterPicture[0].ChangePicture(characterSplashart[characterPicture[0].GetCount]);
+            characterPicture[1].CountUpDown(-1);
+            characterPicture[1].ChangePicture(characterSplashart[characterPicture[1].GetCount]);
         }
 
-        if (Input.GetKeyDown(KeyCode.Joystick1Button7) && characterPicture[0].pressed)
+        if (Input.GetKeyDown(KeyCode.Joystick1Button5) && characterPicture[1].pressed)
         {
-            characterPicture[0].CountUpDown(1);
-            characterPicture[0].ChangePicture(characterSplashart[characterPicture[0].GetCount]);
+            characterPicture[1].CountUpDown(1);
+            characterPicture[1].ChangePicture(characterSplashart[characterPicture[1].GetCount]);
         }
     }
+
 }
 
 
-public class CharacterPicture
-{
-    private Sprite currImage;
-    private Sprite chosenImage;
-    private Image imageHolder;
-    private int index;
-
-    public bool pressed;
-    public bool pressedTwice;
-    private int count;
-
-    public CharacterPicture(Sprite currImage, Image imageHolder, int index)
-    {
-        this.currImage = currImage;
-        this.imageHolder = imageHolder;
-        this.index = index;
-
-        imageHolder.sprite = currImage;
-    }
-
-    /// <summary>
-    /// Change the current image and set the image holder to the current image
-    /// </summary>
-    public void ChangePicture(Sprite imageToChange)
-    {
-        currImage = imageToChange;
-        imageHolder.overrideSprite = currImage;
-    }
-
-    /// <summary>
-    /// Count up or down, based on the parameter
-    /// </summary>
-    /// <param name="i">If the Parameter is 1 it goes up, if its -1 it goes down</param>
-    public void CountUpDown(int i)
-    {
-        if (i == -1) count--;
-        if (i == 1) count++;
-        if (count > 3) count = 0;
-        if (count < 0) count = 3;
-    }
-
-    /// <summary>
-    /// Finalize the image, cant be changed afterwards (ingame)
-    /// </summary>
-    public void ChoseSprite()
-    {
-        chosenImage = currImage;
-        imageHolder.overrideSprite = chosenImage;
-    }
-
-    /// <summary>
-    /// Reset the whole image with all it variables
-    /// </summary>
-    /// <param name="standartImage">Sprite where it resets to</param>
-    public void ResetPicture(Sprite standartImage)
-    {
-        currImage = standartImage;
-        imageHolder.overrideSprite = currImage;
-        pressed = false;
-        pressedTwice = false;
-        count = 0;
-    }
-
-    public Sprite GetCurrImage { get { return currImage; } }
-    public Image GetImageHolder { get { return imageHolder; } }
-    public int GetCount { get { return count; } set { value = count; } }
-}

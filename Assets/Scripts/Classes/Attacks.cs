@@ -63,7 +63,7 @@ public abstract class Attacks {
     /// <summary> Casts spell and checks if spell can be casted </summary>
     public abstract void Cast(GameObject _caster);
 
-    /// <summary> Used at button releace </summary>
+    /// <summary> Used at button release </summary>
     public abstract void AfterCast();
 
     /// <summary> uses spell (deals damage, applys conditions) </summary>
