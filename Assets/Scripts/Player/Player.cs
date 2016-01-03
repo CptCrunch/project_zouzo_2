@@ -462,7 +462,8 @@ public class Player : MonoBehaviour
                             if (castedMeeleSpell.MaxTargetsReached())
                             {
                                 // use spell
-                                castedMeeleSpell.Use(objectHit.transform.gameObject, gameObject);
+                                // TODO: DO THIS
+                                //castedSpell.Use(objectHit.transform.gameObject, gameObject);
                                 break;
                             }
                         }
