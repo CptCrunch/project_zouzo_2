@@ -39,31 +39,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb26b35122e8cc040b6ed01b182e11cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: []
-  levelToLoad: 5
-  splashart:
-    playerText:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    playerSplashart:
-    - {fileID: 21300000, guid: 196c8f874048d824b8f0870274b87338, type: 3}
-    - {fileID: 21300000, guid: fc0d5d94a0401fd4e95abe78ea029175, type: 3}
-    - {fileID: 21300000, guid: 78524b9fee45be147ae0e981849e9c5b, type: 3}
-    - {fileID: 21300000, guid: afcfb29a17d1be34c95c357f0803b104, type: 3}
-    playerSplashartGrayscale:
-    - {fileID: 21300000, guid: 972d2fc5e6a7c03478d3c73501fd52f0, type: 3}
-    - {fileID: 21300000, guid: 8b86ebd1ba21b084fab6c9cd4b8cf455, type: 3}
-    - {fileID: 21300000, guid: d5684c21b94235d4b99b08beed176a5b, type: 3}
-    - {fileID: 21300000, guid: 9e1e48da1d5197742a2ed3ca8fb4a4a5, type: 3}
-    splashartHolder:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  limitPlayerAmmount: 0
+  controller:
+  - 
+  - 
+  - 
+  - 
+  levelToLoad: 0
   playerLimit: 1
+  characterSplashart:
+  - {fileID: 21300000, guid: 196c8f874048d824b8f0870274b87338, type: 3}
+  - {fileID: 21300000, guid: 78524b9fee45be147ae0e981849e9c5b, type: 3}
+  - {fileID: 21300000, guid: fc0d5d94a0401fd4e95abe78ea029175, type: 3}
+  - {fileID: 21300000, guid: afcfb29a17d1be34c95c357f0803b104, type: 3}
+  characterSplashartBW:
+  - {fileID: 21300000, guid: 972d2fc5e6a7c03478d3c73501fd52f0, type: 3}
+  - {fileID: 21300000, guid: d5684c21b94235d4b99b08beed176a5b, type: 3}
+  - {fileID: 21300000, guid: 8b86ebd1ba21b084fab6c9cd4b8cf455, type: 3}
+  - {fileID: 21300000, guid: 9e1e48da1d5197742a2ed3ca8fb4a4a5, type: 3}
+  characterHolder:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  ReadyScreen: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

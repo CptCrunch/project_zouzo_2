@@ -368,7 +368,7 @@ public class Player : MonoBehaviour
 
                 else
                 {
-                    _animator.SetBool("WallSlide", true);
+                    _animator.SetBool("WallSlide", false);
                 }
 
                 // jump on floor

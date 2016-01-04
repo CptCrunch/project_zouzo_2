@@ -31,6 +31,14 @@ public class CharacterPicture
     {
         currImage = imageToChange;
         imageHolder.overrideSprite = currImage;
+
+        switch (count)
+        {
+            case 0: tag = "Earth"; break;
+            case 1: tag = "Jupiter"; break;
+            case 2: tag = "Saturn"; break;
+            case 3: tag = "Sun"; break;
+        }
     }
 
     /// <summary>
@@ -52,13 +60,7 @@ public class CharacterPicture
     {
         chosenImage = currImage;
         imageHolder.overrideSprite = chosenImage;
-        switch(count)
-        {
-            case 0: tag = "Earth"; break;
-            case 1: tag = "Jupiter"; break;
-            case 2: tag = "Saturn"; break;
-            case 3: tag = "Sun"; break;
-        }
+        
     }
 
     /// <summary>

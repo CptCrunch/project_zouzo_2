@@ -228,16 +228,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11413352, guid: 6906339cacaddc549bcd60c8a96aae10, type: 2}
       propertyPath: width
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11413352, guid: 6906339cacaddc549bcd60c8a96aae10, type: 2}
       propertyPath: height
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11413352, guid: 6906339cacaddc549bcd60c8a96aae10, type: 2}
       propertyPath: tilePrefab
       value: 
-      objectReference: {fileID: 498138, guid: 0edc8151a6dd5e248b0818dd59841ca6, type: 2}
+      objectReference: {fileID: 496608, guid: 4acbede7c219e474e860a06cb7ac28ce, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6906339cacaddc549bcd60c8a96aae10, type: 2}
   m_IsPrefabParent: 0

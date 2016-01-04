@@ -34,11 +34,12 @@ public class Gamerules : MonoBehaviour {
     [Tooltip("Spawnpoints must have this given tag")]
     public string spawnTag;
 
-    // Testing 
     [HideInInspector]
-    public List<string> connectedControllers = new List<string>();
+    public Dictionary<string, bool> chosenPics = new Dictionary<string, bool>();
     [HideInInspector]
-    public string[] chosenCharacters = new string[4];
+    public Dictionary<string, string> controllerToPlayer = new Dictionary<string, string>();
+    [HideInInspector]
+    public GameObject[] spawnedPlayer = new GameObject[4];
     #endregion
 
     void Awake() {
@@ -49,73 +50,72 @@ public class Gamerules : MonoBehaviour {
     }
     
     // Create All Player when the level loads
-    /*void OnLevelWasLoaded() {
-
-        int character = 0;
-        int counter = 0;
-
-        //Get all objecticts with the given tag
+    void OnLevelWasLoaded() {
         playerSpawn = GameObject.FindGameObjectsWithTag(spawnTag);
 
-        // instantiate Player-Prefabs for each listed Player on a Spawnpoint
-        if (playerAmmount > 0)
+        foreach(var item in chosenPics)
         {
-            foreach (string z in chosenCharacters)
+            if(item.Key == "Earth" && item.Value == true)
             {
-                if (z == "Earth")
-                {
-                    character = counter;
-                    print(character);
-                }
-                else if (z == "Jupiter")
-                {
-                    character = counter;
-                    print(character);
-                }
-                else if (z == "Saturn")
-                {
-                    character = counter;
-                    print(character);
-                }
-                else if (z == "Sun")
-                {
-                    character = counter;
-                    print(character);
-                }
+                spawnedPlayer[0] = Instantiate(playerPrefab[0], playerSpawn[Random.Range(0, playerSpawn.Length)].transform.position, Quaternion.identity) as GameObject;
+            }
 
-                GameObject go = Instantiate(playerPrefab[character], playerSpawn[Random.Range(0, playerSpawn.Length)].transform.position, Quaternion.identity) as GameObject;
+            if (item.Key == "Saturn" && item.Value == true)
+            {
+                spawnedPlayer[1] = Instantiate(playerPrefab[1], playerSpawn[Random.Range(0, playerSpawn.Length)].transform.position, Quaternion.identity) as GameObject;
+            }
 
-                // set the axis of the Prefab
-                if (PlayerSelection._instance.controller[counter] == "KB")
-                {
-                    ChangeAxis("KB", go);
-                }
+            if (item.Key == "Jupiter" && item.Value == true)
+            {
+                spawnedPlayer[2] = Instantiate(playerPrefab[2], playerSpawn[Random.Range(0, playerSpawn.Length)].transform.position, Quaternion.identity) as GameObject;
+            }
 
-                if (PlayerSelection._instance.controller[counter] == "P1")
-                {
-                    ChangeAxis("P1", go);
-                }
-
-                if (PlayerSelection._instance.controller[counter] == "P2")
-                {
-                    ChangeAxis("P2", go);
-                }
-
-                if (PlayerSelection._instance.controller[counter] == "P3")
-                {
-                    ChangeAxis("P3", go);
-                }
-
-                if (PlayerSelection._instance.controller[counter] == "P4")
-                {
-                    ChangeAxis("P4", go);
-                }
-
-                counter++;
+            if (item.Key == "Sun" && item.Value == true)
+            {
+                spawnedPlayer[3] = Instantiate(playerPrefab[3], playerSpawn[Random.Range(0, playerSpawn.Length)].transform.position, Quaternion.identity) as GameObject;
             }
         }
-        
-    }*/
+
+        foreach(var i in controllerToPlayer)
+        {
+            switch(i.Key)
+            {
+                case "Earth":
+                    AdjustAxis(i.Value, 0);
+                    break;
+                case "Jupiter":
+                    AdjustAxis(i.Value, 1);
+                    break;
+                case "Saturn":
+                    AdjustAxis(i.Value, 2);
+                    break;
+                case "Sun":
+                    AdjustAxis(i.Value, 3);
+                    break;
+            }
+
+
+        }
+    }
+
+    private void AdjustAxis(string value, int index)
+    {
+        switch (value)
+        {
+            case "KB":
+                ChangeAxis("KB", spawnedPlayer[index]);
+                break;
+            case "P1":
+                ChangeAxis("P1", spawnedPlayer[index]);
+                break;
+            case "P2":
+                ChangeAxis("P2", spawnedPlayer[index]);
+                break;
+            case "P3":
+                ChangeAxis("P3", spawnedPlayer[index]);
+                break;
+        }
+    }
 
     private void ChangeAxis(string axis, GameObject obj) {
 
@@ -131,16 +131,5 @@ public class Gamerules : MonoBehaviour {
         public int lifeLimit;
         [Range(0,100)]
         public float timeLimit;
-    }
-
-
-    [System.Serializable]
-    public class ButtonLayout
-    {
-        public string jump;
-        public string basicAttack;
-        public string ability_1;
-        public string ability_2;
-        public string ability_3;
     }
 }
