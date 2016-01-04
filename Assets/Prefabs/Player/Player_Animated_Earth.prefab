@@ -100,14 +100,14 @@ MonoBehaviour:
   moveSpeed: 6
   slowedSpeed: 3
   maxHealth: 100
-  maxJumpHeight: 4
+  maxJumpHeight: 3.5
   minJumpHeight: 1
-  timeToJumpApex: .5
+  timeToJumpApex: .400000006
   gravity: 0
   velocity: {x: 0, y: 0, z: 0}
   wallJumpClimb: {x: 8.5, y: 17}
   wallJumpOff: {x: 8.5, y: 7}
-  wallLeap: 0
+  wallLeap: 15
   wallSlideSpeedMax: 3
   wallStickTime: .25
 --- !u!212 &21200258
@@ -152,6 +152,18 @@ Prefab:
       value: 
       objectReference: {fileID: 21300018, guid: 3b62faa2f2d1f96478b26120f0f5752e,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: timeToJumpApex
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxJumpHeight
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: wallLeap
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 183932}

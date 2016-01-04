@@ -266,7 +266,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11486172, guid: 6e027b729732d76438e90c7dd826d8f7, type: 2}
       propertyPath: playerLimit
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e027b729732d76438e90c7dd826d8f7, type: 2}
