@@ -5,8 +5,7 @@ using System.Collections.Generic;
 
 public class SceneItem : Editor {
 
-    //TestScenes
-
+    #region TestScenes
     [MenuItem("Open Scenes/Test Scenes/TestScene_01_Movement")]
 	public static void OpenTestScene_01()
     {
@@ -60,9 +59,9 @@ public class SceneItem : Editor {
     {
         OpenScene("Test Scenes/TestScene_08_AnimationAndGraphics");
     }
+    #endregion
 
-    //levelTestScenes
-
+    #region LevelTestScenes
     [MenuItem("Open Scenes/Level Test Scenes/LevelTestScene_01")]
     public static void OpenLevelTestScene_01()
     {
@@ -74,28 +73,29 @@ public class SceneItem : Editor {
     {
         OpenScene("Test Scenes/LevelTestScene_02");
     }
+    #endregion
 
-    //Prototyp
-
+    #region Prototyp
     [MenuItem("Open Scenes/Prototyp/Prototyp_Selection")]
     public static void Open_Prototyp_Selection()
     {
-        OpenScene("Prototype_Selection");
+        OpenScene("Prototyp/Prototype_Selection");
     }
 
-    [MenuItem("Open Scenes/Prototyp/Prototyp_Game")]
+    [MenuItem("Open Scenes/Prototyp/Prototyp_Stage_01")]
     public static void Open_Prototyp_Game()
     {
-        OpenScene("Prototype_Game");
+        OpenScene("Prototyp/Prototype_Stage01");
     }
+    #endregion
 
-    //Final
-
+    #region Main Game
     [MenuItem("Open Scenes/Main Menu")]
     public static void MainMenu()
     {
         OpenScene("MainMenu");
     }
+    #endregion
 
     static void OpenScene(string name)
     {
