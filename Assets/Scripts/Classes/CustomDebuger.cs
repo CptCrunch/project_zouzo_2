@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Internal;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace UnityEngine
@@ -15,7 +16,7 @@ namespace UnityEngine
         {
             if (active)
             {
-                string output = "Type: " + array.GetType() + "\n" + "Length: " + array.Length + "\n\n Values:\n";
+                string output = "Type: " + array.GetType() + "\n Length: " + array.Length + "\n\n Values:\n";
                 int count = 0;
 
                 foreach (object item in array)
@@ -31,7 +32,7 @@ namespace UnityEngine
         {
             if (active)
             {
-                string output = "Type: " + arrayList.GetType() + "\n" + "Count: " + arrayList.Count + "\n\n Values:\n";
+                string output = "Type: " + arrayList.GetType() + "\n" + "Count: " + arrayList.Count + "\n\n" + "Values: " + "\n";
                 int count = 0;
 
                 foreach (object item in arrayList)
@@ -41,6 +42,51 @@ namespace UnityEngine
                 }
 
                 Debug.Log(output);
+            }
+        }
+        public static void LogList(object list)
+        {
+            if (active)
+            {
+                var result = ((IEnumerable)list).Cast<object>().ToList();
+
+                string output = "Type: " + result.GetType() + "\n" + "Count: " + result.Count + "\n\n" + "Values: " + "\n";
+                int count = 0;
+
+                foreach (object item in result)
+                {
+                    output += "Location: " + count + " -> " + item.ToString() + "\n";
+                    count++;
+                }
+
+                Debug.Log(output);
+            }
+        }
+        public static void LogDictionary(object dictionary)
+        {
+            if (active)
+            {
+                if (typeof(IDictionary).IsAssignableFrom(dictionary.GetType()))
+                {
+                    IDictionary idict = (IDictionary)dictionary;
+                    Dictionary<string, string> newDict = new Dictionary<string, string>();
+
+                    foreach (object key in idict.Keys)
+                    {
+                        newDict.Add(key.ToString(), idict[key].ToString());
+                    }
+
+                    int count = 0;
+                    string output = "Type: " + newDict.GetType() + "\n" + "Count: " + newDict.Count + "\n\n" + "Values: " + "\n";
+
+                    foreach (KeyValuePair<string, string> entry in newDict)
+                    {
+                        output += "Location: " + count + " -> " + "Key: " + entry.Key + ", Value: " + entry.Value + "\n";
+                        count++;
+                    }
+
+                    Debug.Log(output);
+                } 
             }
         }
         #endregion
