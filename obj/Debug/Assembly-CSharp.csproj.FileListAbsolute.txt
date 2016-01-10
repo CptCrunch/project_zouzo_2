@@ -20,3 +20,4 @@ D:\Schule\Unity\projekt_ZouZo\Temp\bin\Debug\UnityEngine.UI.xml
 D:\Schule\Unity\projekt_ZouZo\Temp\bin\Debug\UnityEngine.Networking.xml
 D:\Schule\Unity\projekt_ZouZo\obj\Debug\Assembly-CSharp.dll
 D:\Schule\Unity\projekt_ZouZo\obj\Debug\Assembly-CSharp.pdb
+D:\Schule\Unity\projekt_ZouZo\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
