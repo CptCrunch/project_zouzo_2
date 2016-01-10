@@ -8,14 +8,13 @@ public class PlayerSelection : MonoBehaviour
 {
     #region Variables
     public static PlayerSelection _instance;
-
-    public string[] controller = new string[4];
+    [Tooltip("Level Index to load after everyone pressed twice")]
     public int levelToLoad;
 
     [Tooltip("Limit the player ammount")]
     [Range(1, 4)]
     public int playerLimit;
-    private int playerCount;
+    public int playerCount;
 
     #region Player Splashart
     public Sprite[] characterSplashart = new Sprite[4];
@@ -23,13 +22,15 @@ public class PlayerSelection : MonoBehaviour
     public Image[] characterHolder = new Image[4];
     private Sprite[] characterSplashartBackup = new Sprite[4];
 
+    private string[] controller = new string[4];
     private CharacterPicture[] characterPicture = new CharacterPicture[4];
     private Dictionary<string, bool> chosenPics = new Dictionary<string, bool>();
     private Dictionary<string, string> controllerToPlayer = new Dictionary<string, string>();
     #endregion
 
     #region UI
-    public GameObject ReadyScreen = null; 
+    // TODO Make a UI-Manager
+    public GameObject ReadyScreen = null;
     #endregion
 
     #endregion
@@ -38,20 +39,23 @@ public class PlayerSelection : MonoBehaviour
     {
         characterSplashart.CopyTo(characterSplashartBackup, 0);
 
+        //Set All Dictionary Entries 
         chosenPics.Add("Earth", false); chosenPics.Add("Jupiter", false); chosenPics.Add("Saturn", false); chosenPics.Add("Sun", false);
         controllerToPlayer.Add("Earth", ""); controllerToPlayer.Add("Jupiter", ""); controllerToPlayer.Add("Saturn", ""); controllerToPlayer.Add("Sun", "");
 
+        //Set All Splasharts to the default sprite
         for (int i = 0; i < 4; i++)
         {
             characterPicture[i] = new CharacterPicture(characterSplashartBW[i], characterHolder[i], i);
         }
-
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Keyboard();
         Gamepad_1();
+        Gamepad_2();
+        Gamepad_3();
 
         //If all player have pressed twice 
         if(playerCount == playerLimit)
@@ -74,13 +78,13 @@ public class PlayerSelection : MonoBehaviour
         //Activate Keyboard
         if (Input.GetKeyDown(KeyCode.C) && characterPicture[0].pressedTwice != true && playerCount < playerLimit)
         {
-            if (characterPicture[0].pressed && CheckChosenPic(characterPicture[0].Tag) != true)
+            if (characterPicture[0].pressed && SearchForKeyInDictionary(characterPicture[0].Tag) != true)
             {
                 characterPicture[0].pressed = false;
                 characterPicture[0].pressedTwice = true;
                 characterPicture[0].ChoseSprite();
 
-                SetChosenPic(characterPicture[0].Tag, "KB", true, true);
+                SetAllPlayerRelatedVariables(characterPicture[0].Tag, "KB", true, true);
 
                 //Player Count/Limit
                 playerCount++;
@@ -97,7 +101,7 @@ public class PlayerSelection : MonoBehaviour
         //Deactivate/Disconnect Keyboard
         if(Input.GetKeyDown(KeyCode.X) && playerCount > 0)
         {
-            SetChosenPic(characterPicture[0].Tag, "KB", false, false);
+            SetAllPlayerRelatedVariables(characterPicture[0].Tag, "KB", false, false);
 
             characterPicture[0].ResetPicture(characterSplashartBW[0]);
 
@@ -126,13 +130,13 @@ public class PlayerSelection : MonoBehaviour
         //Activate Gamepad_1
         if (Input.GetKeyDown(KeyCode.Joystick1Button0) && characterPicture[1].pressedTwice != true && playerCount < playerLimit)
         {
-            if (characterPicture[1].pressed && CheckChosenPic(characterPicture[1].Tag) != true)
+            if (characterPicture[1].pressed && SearchForKeyInDictionary(characterPicture[1].Tag) != true)
             {
                 characterPicture[1].pressed = false;
                 characterPicture[1].pressedTwice = true;
                 characterPicture[1].ChoseSprite();
 
-                SetChosenPic(characterPicture[1].Tag, "P1", true, true);
+                SetAllPlayerRelatedVariables(characterPicture[1].Tag, "P1", true, true);
 
                 //Player Count/Limit
                 playerCount++;
@@ -149,7 +153,7 @@ public class PlayerSelection : MonoBehaviour
         //Deactivate/Disconnect Gamepad_1
         if (Input.GetKeyDown(KeyCode.Joystick1Button1) && playerCount > 0)
         {
-            SetChosenPic(characterPicture[1].Tag, "P1", false, false);
+            SetAllPlayerRelatedVariables(characterPicture[1].Tag, "P1", false, false);
 
             characterPicture[1].ResetPicture(characterSplashartBW[1]);
 
@@ -173,12 +177,118 @@ public class PlayerSelection : MonoBehaviour
         }
     }
 
+    void Gamepad_2()
+    {
+        //Activate Gamepad_1
+        if (Input.GetKeyDown(KeyCode.Joystick2Button0) && characterPicture[2].pressedTwice != true && playerCount < playerLimit)
+        {
+            if (characterPicture[2].pressed && SearchForKeyInDictionary(characterPicture[2].Tag) != true)
+            {
+                characterPicture[2].pressed = false;
+                characterPicture[2].pressedTwice = true;
+                characterPicture[2].ChoseSprite();
+
+                SetAllPlayerRelatedVariables(characterPicture[2].Tag, "P2", true, true);
+
+                //Player Count/Limit
+                playerCount++;
+            }
+            else
+            {
+                characterPicture[2].ChangePicture(characterSplashart[2]);
+                characterPicture[2].pressed = true;
+
+                controller[2] = "P2";
+            }
+        }
+
+        //Deactivate/Disconnect Gamepad_1
+        if (Input.GetKeyDown(KeyCode.Joystick2Button1) && playerCount > 0)
+        {
+            SetAllPlayerRelatedVariables(characterPicture[2].Tag, "P2", false, false);
+
+            characterPicture[2].ResetPicture(characterSplashartBW[2]);
+
+            controller[2] = null;
+
+            //Player Count/Limit
+            playerCount--;
+        }
+
+        //Cycle thru the splasharts
+        if (Input.GetKeyDown(KeyCode.Joystick2Button4) && characterPicture[2].pressed)
+        {
+            characterPicture[2].CountUpDown(-1);
+            characterPicture[2].ChangePicture(characterSplashart[characterPicture[2].GetCount]);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Joystick2Button5) && characterPicture[2].pressed)
+        {
+            characterPicture[2].CountUpDown(1);
+            characterPicture[2].ChangePicture(characterSplashart[characterPicture[2].GetCount]);
+        }
+    }
+
+    void Gamepad_3()
+    {
+        //Activate Gamepad_1
+        if (Input.GetKeyDown(KeyCode.Joystick3Button0) && characterPicture[3].pressedTwice != true && playerCount < playerLimit)
+        {
+            if (characterPicture[3].pressed && SearchForKeyInDictionary(characterPicture[3].Tag) != true)
+            {
+                characterPicture[3].pressed = false;
+                characterPicture[3].pressedTwice = true;
+                characterPicture[3].ChoseSprite();
+
+                SetAllPlayerRelatedVariables(characterPicture[3].Tag, "P3", true, true);
+
+                //Player Count/Limit
+                playerCount++;
+            }
+            else
+            {
+                characterPicture[3].ChangePicture(characterSplashart[3]);
+                characterPicture[3].pressed = true;
+
+                controller[3] = "P3";
+            }
+        }
+
+        //Deactivate/Disconnect Gamepad_1
+        if (Input.GetKeyDown(KeyCode.Joystick3Button1) && playerCount > 0)
+        {
+            SetAllPlayerRelatedVariables(characterPicture[3].Tag, "P3", false, false);
+
+            characterPicture[3].ResetPicture(characterSplashartBW[3]);
+
+            controller[3] = null;
+
+            //Player Count/Limit
+            playerCount--;
+        }
+
+        //Cycle thru the splasharts
+        if (Input.GetKeyDown(KeyCode.Joystick3Button4) && characterPicture[3].pressed)
+        {
+            characterPicture[3].CountUpDown(-1);
+            characterPicture[3].ChangePicture(characterSplashart[characterPicture[3].GetCount]);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Joystick3Button5) && characterPicture[3].pressed)
+        {
+            characterPicture[3].CountUpDown(1);
+            characterPicture[3].ChangePicture(characterSplashart[characterPicture[3].GetCount]);
+        }
+    }
+
     /// <summary>
-    /// Search for the Dictonary Entry and set the bool variable
+    /// Set the dictionaries based on the given tag and controller and change the splashart to grayscale
     /// </summary>
-    /// <param name="tag">Search Parameter</param>
-    /// <param name="value">Bool Value</param>
-    private void SetChosenPic(string tag, string controller,bool value, bool bw)
+    /// <param name="tag">Earth, Jupiter, Saturn or Sun</param>
+    /// <param name="controller">KB, P1, P2 or P3</param>
+    /// <param name="value">Set the chosenPic Dicitonary entry to the given parameter</param>
+    /// <param name="bw">Turn it into grayscale or not</param>
+    private void SetAllPlayerRelatedVariables(string tag, string controller, bool value, bool bw)
     {
         switch (tag)
         {
@@ -186,39 +296,41 @@ public class PlayerSelection : MonoBehaviour
                 chosenPics["Earth"] = value;
                 controllerToPlayer["Earth"] = controller;
                 if (bw) { characterSplashart[0] = characterSplashartBW[0]; } else { characterSplashart[0] = characterSplashartBackup[0]; }
-                //print("Earth: " + chosenPics["Earth"]);
                 break;
             case "Jupiter":
                 chosenPics["Jupiter"] = value;
                 controllerToPlayer["Jupiter"] = controller;
                 if (bw) { characterSplashart[1] = characterSplashartBW[1]; } else { characterSplashart[1] = characterSplashartBackup[1]; }
-                //print("Jupiter: " + chosenPics["Jupiter"]);
                 break;
             case "Saturn":
                 chosenPics["Saturn"] = value;
                 controllerToPlayer["Saturn"] = controller;
                 if (bw) { characterSplashart[2] = characterSplashartBW[2]; } else { characterSplashart[2] = characterSplashartBackup[2]; }
-                //print("Saturn: " + chosenPics["Saturn"]);
                 break;
             case "Sun":
                 chosenPics["Sun"] = value;
                 controllerToPlayer["Sun"] = controller;
                 if (bw) { characterSplashart[3] = characterSplashartBW[3]; } else { characterSplashart[3] = characterSplashartBackup[3]; }
-                //print("Sun: " + chosenPics["Sun"]);
                 break;
         }
     }
 
-    private bool CheckChosenPic(string tag)
+    /// <summary>
+    /// Search for a key in chosenPics
+    /// </summary>
+    /// <param name="search">The key to search for</param>
+    /// <returns>Return true if given parameter is found in the dictionary</returns>
+    private bool SearchForKeyInDictionary(string search)
     {
-        foreach(var item in chosenPics)
+        foreach (var item in chosenPics)
         {
-            if(item.Key == tag)
+            if (item.Key == search)
             {
-                if(item.Value == true)
+                if (item.Value == true)
                 {
                     return true;
-                } else
+                }
+                else
                 {
                     return false;
                 }

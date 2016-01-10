@@ -64,6 +64,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  LogingToConsole: 0
 --- !u!114 &11435204
 MonoBehaviour:
   m_ObjectHideFlags: 1

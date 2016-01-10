@@ -41,12 +41,15 @@ public class Gamerules : MonoBehaviour {
     [HideInInspector]
     public GameObject[] spawnedPlayer = new GameObject[4];
 
-    ArrayList asd = new ArrayList() { "asd", "asda", "asda" };
+    [Header("Debug")]
+    public bool LogingToConsole = false;
     #endregion
 
     void Awake() {
         // Dont destroy this object on loading a new level
         DontDestroyOnLoad(gameObject);
+
+        CustomDebuger.Active = LogingToConsole;
 
         if (_instance == null) { _instance = this; }
     }

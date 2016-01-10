@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Internal;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace CustomDebuger
+namespace UnityEngine
 {
     public sealed class CustomDebuger
     {

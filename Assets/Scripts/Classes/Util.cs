@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
 public static class Util{
@@ -8,6 +9,30 @@ public static class Util{
     {
         float a = easeAmount + 1;
         return Mathf.Pow(x, a) / (Mathf.Pow(x, a) + Mathf.Pow(1 - x, a));
+    }
+
+    /// <summary></summary>
+    /// <returns> returns a array with the GameObject added </returns>
+    public static GameObject[] IsGameObjectIncluded(GameObject[] entrys, GameObject newEntry)
+    {
+        GameObject[] newArray = entrys;
+
+        bool registered = false;
+        int emptyIndex = entrys.Length;
+
+        for (int i = 0; i < newArray.Length; i++)
+        {
+
+            if (newArray[i] == null) { emptyIndex = i; }
+            else if (newArray[i] == newEntry) { registered = true; }
+        }
+
+        if (!registered)
+        {
+            newArray[emptyIndex] = newEntry;
+        }
+
+        return newArray;
     }
 
     #region To days
@@ -120,30 +145,7 @@ public static class Util{
     }
     #endregion
 
-    /// <summary></summary>
-    /// <returns> returns a array with the GameObject added </returns>
-    public static GameObject[] IsGameObjectIncluded(GameObject[] entrys, GameObject newEntry)
-    {
-        GameObject[] newArray = entrys;
-
-        bool registered = false;
-        int emptyIndex = entrys.Length;
-
-        for (int i = 0; i < newArray.Length; i++)
-        {
-
-            if (newArray[i] == null) { emptyIndex = i; }
-            else if (newArray[i] == newEntry) { registered = true; }
-        }
-
-        if (!registered)
-        {
-            newArray[emptyIndex] = newEntry;
-        }
-
-        return newArray;
-    }
-
+    #region AimDirection
     /// <summary> returns te direction which the vector is aiming at </summary>
     /// <param name="_direction"></param>
     /// <returns> right, left, noAim </returns>
@@ -205,4 +207,5 @@ public static class Util{
 
         return direction;
     }
+    #endregion
 }
