@@ -40,6 +40,8 @@ public class Gamerules : MonoBehaviour {
     public Dictionary<string, string> controllerToPlayer = new Dictionary<string, string>();
     [HideInInspector]
     public GameObject[] spawnedPlayer = new GameObject[4];
+
+    ArrayList asd = new ArrayList() { "asd", "asda", "asda" };
     #endregion
 
     void Awake() {
@@ -48,7 +50,7 @@ public class Gamerules : MonoBehaviour {
 
         if (_instance == null) { _instance = this; }
     }
-    
+
     // Create All Player when the level loads
     void OnLevelWasLoaded() {
         playerSpawn = GameObject.FindGameObjectsWithTag(spawnTag);
