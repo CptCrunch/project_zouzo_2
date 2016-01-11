@@ -275,6 +275,7 @@ public class Player : MonoBehaviour
             if (isAttacking) { isAttacking = false; }
             if (!flipEnable) { flipEnable = true; }
         }
+
     }
 
     void Movement()

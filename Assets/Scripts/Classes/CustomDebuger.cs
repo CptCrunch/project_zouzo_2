@@ -91,16 +91,28 @@ namespace UnityEngine
         }
         public static void LogGameObject(GameObject gameObject, bool advanced)
         {
-            string output = "Type: " + gameObject.GetType() + "\n\n";
-
-            if (active)
+            if (active && gameObject != null)
             {
-                output += "Transform: " + "x:" + gameObject.transform.position.x + " y: " + gameObject.transform.position.y + " z: " + gameObject.transform.position.z + "\n";
-                output += "Rotation: " + "x:" + gameObject.transform.rotation.x + " y: " + gameObject.transform.rotation.y + " z: " + gameObject.transform.rotation.z + "\n";
-                output += "Scale: " + "x:" + gameObject.transform.localScale.x + " y: " + gameObject.transform.localScale.y + " z: " + gameObject.transform.localScale.z + "\n";
+                int count = 0;
+                string output = "Type: " + gameObject.GetType() + "\n" + "Tag: " + gameObject.tag + "\n\n";
+                output += "Transform: \t" + "<color=brown>x:</color>" + gameObject.transform.position.x + " <color=green>y:</color> " + gameObject.transform.position.y + " <color=teal>z:</color> " + gameObject.transform.position.z + "\n";
+                output += "Rotation: \t\t" + "<color=brown>x:</color>" + gameObject.transform.rotation.x + " <color=green>y:</color> " + gameObject.transform.rotation.y + " <color=teal>z:</color> " + gameObject.transform.rotation.z + "\n";
+                output += "Scale: \t\t" + "<color=brown>x:</color>" + gameObject.transform.localScale.x + " <color=green>y:</color> " + gameObject.transform.localScale.y + " <color=teal>z:</color> " + gameObject.transform.localScale.z + "\n\n";
+
+                if(advanced)
+                {
+                    output += "Components: \n";
+
+                    foreach(Component comp in gameObject.GetComponents(typeof(Component)))
+                    {
+                        output += count + " -> " + comp.GetType() + "\t \n";
+                        count++;
+                    }
+                }
+
+                Debug.Log(output);
             }
 
-            Debug.Log(output);
         }
         #endregion
 

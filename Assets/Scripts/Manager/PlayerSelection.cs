@@ -64,7 +64,7 @@ public class PlayerSelection : MonoBehaviour
             ReadyScreen.SetActive(true);
 
             //Start or Backspace is pressed go to next scene and copy dictionary to gamerules
-            if(Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Joystick1Button7) || Input.GetKeyDown(KeyCode.Joystick2Button7) || Input.GetKeyDown(KeyCode.Joystick3Button7))
+            if(Input.GetKeyDown(KeyCode.V) || Input.GetKeyDown(KeyCode.Joystick1Button7) || Input.GetKeyDown(KeyCode.Joystick2Button7) || Input.GetKeyDown(KeyCode.Joystick3Button7))
             {
                 try { Gamerules._instance.chosenPics = chosenPics; } catch(Exception) { print("Failed to copy chosenPics Dictionary"); }
                 try { Gamerules._instance.controllerToPlayer = controllerToPlayer; } catch (Exception) { print("Failed to copy controllerToPlayer Dictionary"); }
