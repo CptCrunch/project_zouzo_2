@@ -89,6 +89,19 @@ namespace UnityEngine
                 } 
             }
         }
+        public static void LogGameObject(GameObject gameObject, bool advanced)
+        {
+            string output = "Type: " + gameObject.GetType() + "\n\n";
+
+            if (active)
+            {
+                output += "Transform: " + "x:" + gameObject.transform.position.x + " y: " + gameObject.transform.position.y + " z: " + gameObject.transform.position.z + "\n";
+                output += "Rotation: " + "x:" + gameObject.transform.rotation.x + " y: " + gameObject.transform.rotation.y + " z: " + gameObject.transform.rotation.z + "\n";
+                output += "Scale: " + "x:" + gameObject.transform.localScale.x + " y: " + gameObject.transform.localScale.y + " z: " + gameObject.transform.localScale.z + "\n";
+            }
+
+            Debug.Log(output);
+        }
         #endregion
 
         #region Log, Error, Warning

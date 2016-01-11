@@ -43,6 +43,8 @@ public class Gamerules : MonoBehaviour {
 
     [Header("Debug")]
     public bool LogingToConsole = false;
+
+    public GameObject obj;
     #endregion
 
     void Awake() {
