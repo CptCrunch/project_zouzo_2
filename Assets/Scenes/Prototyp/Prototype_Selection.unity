@@ -202,6 +202,10 @@ Prefab:
       propertyPath: LogingToConsole
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
+      propertyPath: obj
+      value: 
+      objectReference: {fileID: 165844, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
   m_IsPrefabParent: 0
