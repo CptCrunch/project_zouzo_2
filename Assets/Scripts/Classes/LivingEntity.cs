@@ -76,6 +76,9 @@ public class LivingEntity
 
     // damage Player
     public void GetDamage(float _ammount) {
+
+        Debug.Log(name + " got " + _ammount + " damage");
+
         currHealth -= _ammount;
 
         if(_ammount >= maxHealth || currHealth <= 0) { currHealth = 0; }

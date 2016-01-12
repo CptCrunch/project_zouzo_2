@@ -59,16 +59,19 @@ public class Leo : Attacks {
         // check if cooldown is over 
         if (CurrCooldown <= 0)
         {
-            // add one charge
-            currCharge++;
-
             // enable spell
             IsDisabled = false;
 
             // if charges are max stacked set cooldown to 0
             if (currCharge >= maxCharge) { CurrCooldown = 0; }
             // else add max cooldown to restart charg stacking
-            else { CurrCooldown += MaxCooldown; }
+            else
+            {
+                CurrCooldown += MaxCooldown;
+                
+                // add one charge
+                currCharge++;
+            }
         }
     }
 

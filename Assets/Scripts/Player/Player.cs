@@ -175,7 +175,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyUp(playerControles[3])) { abilityArray[2].AfterCast(); } // spell_2
         if (Input.GetKeyUp(playerControles[4])) { abilityArray[3].AfterCast(); } // spell_3
 
-        //Debug.Log(name + " health: " + playerVitals.CurrHealth);
+        /*Debug.Log(name + " health: " + playerVitals.CurrHealth);*/
 
         // Get movement input ( controler / keyboard )
         input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
@@ -466,7 +466,7 @@ public class Player : MonoBehaviour
 
                                 // use spell
                                 // TODO: DO THIS
-                                //castedSpell.Use(objectHit.transform.gameObject, gameObject);
+                                castedMeeleSpell.Use(objectHit.transform.gameObject, gameObject);
                                 break;
                             }
                         }
