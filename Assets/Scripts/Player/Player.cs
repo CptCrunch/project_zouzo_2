@@ -465,7 +465,6 @@ public class Player : MonoBehaviour
                                 castedMeeleSpell.PlayersHit++;
 
                                 // use spell
-                                // TODO: DO THIS
                                 castedMeeleSpell.Use(objectHit.transform.gameObject, gameObject);
                                 break;
                             }
@@ -550,6 +549,9 @@ public class Player : MonoBehaviour
 
             // pass over bullet speed
             bulletInstance.GetComponent<SpellBullet>().usedSpell = _spell;
+
+            // pass over caster
+            bulletInstance.GetComponent<SpellBullet>().caster = gameObject;
 
             // destroy bullet, if still existing, after secounds 
             try { Destroy(bulletInstance, 4); }

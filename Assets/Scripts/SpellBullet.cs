@@ -3,9 +3,11 @@ using System.Collections;
 
 public class SpellBullet : MonoBehaviour {
 
-    public Attacks usedSpell;
-    public Vector2 spellDir;
-    public Vector2 startPosition;
+    [HideInInspector] public Attacks usedSpell;
+    [HideInInspector] public Vector2 spellDir;
+    [HideInInspector] public Vector2 startPosition;
+    [HideInInspector] public GameObject caster;
+
     private GameObject[] targetsHit = new GameObject[3];
 
 	void Start ()
@@ -40,7 +42,6 @@ public class SpellBullet : MonoBehaviour {
         // create a raycast
         foreach (RaycastHit2D other in Physics2D.RaycastAll(transform.position, spellDir, GetComponent<BoxCollider2D>().bounds.size.x / 2 + 0.2f))
         {
-            Debug.Log("i kum da eini");
             // get hited gameObject
             GameObject objectHit = other.transform.gameObject;
             
@@ -48,13 +49,13 @@ public class SpellBullet : MonoBehaviour {
             if (objectHit.tag == "Player")
             {
                 // check if player is a enemy
-                if (objectHit != gameObject)
+                if (objectHit != caster)
                 {
                     // check if enemy is registerd
-                    if (targetsHit != Util.IsGameObjectIncluded(targetsHit, objectHit))
+                    if (!Util.IsGameObjectIncluded(targetsHit, objectHit))
                     {
                         // register enemy
-                        targetsHit = Util.IsGameObjectIncluded(targetsHit, objectHit);
+                        Util.IncludeGameObject(targetsHit, objectHit);
 
                         // checks if the spell already hit its max of players
                         if (!usedSpell.MaxTargetsReached())
@@ -76,11 +77,15 @@ public class SpellBullet : MonoBehaviour {
             }
 
             // check if hitedobject is a Obstacle
-            if (objectHit.tag == "Obstacle")
+            if (objectHit.tag == "Ground")
             {
-                Debug.Log("hit Obstacle");
-                // remove spell bullet script
-                Destroy(this);
+                CustomDebuger.Log("hit Obstacle");
+                // check if ability is the saggitarus spell
+                if (usedSpell.ID == 9)
+                {
+                    // remove spell bullet script
+                    Destroy(this);
+                }
             }
         }
     }
