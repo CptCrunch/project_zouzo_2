@@ -71,7 +71,6 @@ public struct Abilities
     [Tooltip("the amount of directions the spell can be aimed (2, 4, 8)")]
     [Range(2,8)]
     public uint directions;
-
     [Header("Meeles")]
     [Tooltip("the time that the spell needs to reach max range (0 is instand) [time in seconds]")]
     public float travelTime;

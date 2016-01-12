@@ -22,7 +22,7 @@ public class Basic : Attacks {
             // set animation
             _caster.GetComponent<Animator>().SetInteger("AttackRan", UnityEngine.Random.Range(1, 4));
             _caster.GetComponent<Animator>().SetTrigger("Attack");
-            Debug.Log("Should Play");
+            /*Debug.Log("should play attack animation");*/
 
             // cast spell
             playerScript.castedMeeleSpell = this;

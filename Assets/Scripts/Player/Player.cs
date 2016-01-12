@@ -459,8 +459,11 @@ public class Player : MonoBehaviour
                             registeredEnemies[firstFreeEntry] = objectHit.transform.gameObject;
 
                             // checks if the spell already hit its max of players
-                            if (castedMeeleSpell.MaxTargetsReached())
+                            if (!castedMeeleSpell.MaxTargetsReached())
                             {
+                                // add player hit
+                                castedMeeleSpell.PlayersHit++;
+
                                 // use spell
                                 // TODO: DO THIS
                                 //castedSpell.Use(objectHit.transform.gameObject, gameObject);
