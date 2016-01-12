@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+
+using UnityEngine;
 using UnityEditor;
 using System.Collections;
 using System.IO;
@@ -295,3 +297,4 @@ public class GridEditor : Editor
 
     }
 }
+#endif
