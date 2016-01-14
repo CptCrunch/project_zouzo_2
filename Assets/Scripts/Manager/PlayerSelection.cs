@@ -27,6 +27,8 @@ public class PlayerSelection : MonoBehaviour
     private CharacterPicture[] characterPicture = new CharacterPicture[4];
     #endregion
 
+    private int[] gamepadSwep = new int[4];
+
     #region UI
     // TODO Make a UI-Manager
     public GameObject ReadyScreen = null;
@@ -51,25 +53,34 @@ public class PlayerSelection : MonoBehaviour
 
     void Update()
     {
+        for (int i = 1; i <= gamepadSwep.Length; i++)
+        {
+            if (Input.GetAxis("P" + i + "_Horizontal") > 0.3f && gamepadSwep[i - 1] == 0) { gamepadSwep[i - 1] = 1; }
+            if (Input.GetAxis("P" + i + "_Horizontal") < -0.3f && gamepadSwep[i - 1] == 0) { gamepadSwep[i - 1] = -1; }
+            if (Input.GetAxis("P" + i + "_Horizontal") <= 0.3f && Input.GetAxis("P" + i + "_Horizontal") >= -0.3f && gamepadSwep[i - 1] != 0) { gamepadSwep[i - 1] = 0; }
+        }
+
         // connect player
-        if (Input.GetKeyDown(KeyCode.C)) { ConnectPlayer("KB"); }
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)) { ConnectPlayer("KB"); }
         if (Input.GetKeyDown(KeyCode.Joystick1Button7)) { ConnectPlayer("P1"); }
         if (Input.GetKeyDown(KeyCode.Joystick2Button7)) { ConnectPlayer("P2"); }
         if (Input.GetKeyDown(KeyCode.Joystick3Button7)) { ConnectPlayer("P3"); }
         if (Input.GetKeyDown(KeyCode.Joystick4Button7)) { ConnectPlayer("P4"); }
 
         // disconnect player
-        if (Input.GetKeyDown(KeyCode.X)) { DisConnectPlayer("KB"); }
-        if (Input.GetKeyDown(KeyCode.Joystick1Button2)) { DisConnectPlayer("P1"); }
-        if (Input.GetKeyDown(KeyCode.Joystick2Button2)) { DisConnectPlayer("P2"); }
-        if (Input.GetKeyDown(KeyCode.Joystick3Button2)) { DisConnectPlayer("P3"); }
-        if (Input.GetKeyDown(KeyCode.Joystick4Button2)) { DisConnectPlayer("P4"); }
+        if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Escape)) { DisConnectPlayer("KB"); }
+        if (Input.GetKeyDown(KeyCode.Joystick1Button6)) { DisConnectPlayer("P1"); }
+        if (Input.GetKeyDown(KeyCode.Joystick2Button6)) { DisConnectPlayer("P2"); }
+        if (Input.GetKeyDown(KeyCode.Joystick3Button6)) { DisConnectPlayer("P3"); }
+        if (Input.GetKeyDown(KeyCode.Joystick4Button6)) { DisConnectPlayer("P4"); }
 
         // switch char
         foreach(CharacterPicture character in characterPicture)
         {
+            // check if entry isn't empty
             if (character != null)
             {
+                // check if char is already locked
                 if (!character.IsLocked)
                 {
                     if (character.Axis == "KB")
@@ -80,62 +91,64 @@ public class PlayerSelection : MonoBehaviour
 
                     if (character.Axis == "P1")
                     {
-                        if (Input.GetKeyDown(KeyCode.Joystick1Button5)) { SwitchCharacter(character, "right"); }
-                        if (Input.GetKeyDown(KeyCode.Joystick1Button4)) { SwitchCharacter(character, "left"); }
+                        if (Input.GetKeyDown(KeyCode.Joystick1Button5) || gamepadSwep[0] == 1) { SwitchCharacter(character, "right"); gamepadSwep[0] = 2; }
+                        if (Input.GetKeyDown(KeyCode.Joystick1Button4) || gamepadSwep[0] == -1) { SwitchCharacter(character, "left"); gamepadSwep[0] = -2; }
                     }
 
                     if (character.Axis == "P2")
                     {
-                        if (Input.GetKeyDown(KeyCode.Joystick2Button5)) { SwitchCharacter(character, "right"); }
-                        if (Input.GetKeyDown(KeyCode.Joystick2Button4)) { SwitchCharacter(character, "left"); }
+                        if (Input.GetKeyDown(KeyCode.Joystick2Button5) || gamepadSwep[1] == 1) { SwitchCharacter(character, "right"); gamepadSwep[1] = 2; }
+                        if (Input.GetKeyDown(KeyCode.Joystick2Button4) || gamepadSwep[1] == -1) { SwitchCharacter(character, "left"); gamepadSwep[1] = -2; }
                     }
 
                     if (character.Axis == "P3")
                     {
-                        if (Input.GetKeyDown(KeyCode.Joystick3Button5)) { SwitchCharacter(character, "right"); }
-                        if (Input.GetKeyDown(KeyCode.Joystick3Button4)) { SwitchCharacter(character, "left"); }
+                        if (Input.GetKeyDown(KeyCode.Joystick3Button5) || gamepadSwep[2] == 1) { SwitchCharacter(character, "right"); gamepadSwep[2] = 2; }
+                        if (Input.GetKeyDown(KeyCode.Joystick3Button4) || gamepadSwep[2] == -1) { SwitchCharacter(character, "left"); gamepadSwep[2] = -2; }
                     }
 
                     if (character.Axis == "P4")
                     {
-                        if (Input.GetKeyDown(KeyCode.Joystick4Button5)) { SwitchCharacter(character, "right"); }
-                        if (Input.GetKeyDown(KeyCode.Joystick4Button4)) { SwitchCharacter(character, "left"); }
+                        if (Input.GetKeyDown(KeyCode.Joystick4Button5) || gamepadSwep[3] == 1) { SwitchCharacter(character, "right"); gamepadSwep[3] = 2; }
+                        if (Input.GetKeyDown(KeyCode.Joystick4Button4) || gamepadSwep[3] == -1) { SwitchCharacter(character, "left"); gamepadSwep[3] = -2; }
                     }
                 }
             }
         }
 
-        // log in char
+        // lock in char
         foreach (CharacterPicture character in characterPicture)
         {
+            // check if entry isn't empty
             if (character != null)
             {
+                // check if char is already locked
                 if (!character.IsLocked)
                 {
-                    if (character.Axis == "KB")
-                    {
-                        if (Input.GetKeyDown(KeyCode.V)) { LockCharacter(character); }
-                    }
+                    if (character.Axis == "KB" && Input.GetKeyDown(KeyCode.V)) { LockCharacter(character); }
+                    if (character.Axis == "P1" && Input.GetKeyDown(KeyCode.Joystick1Button0)) { LockCharacter(character); }
+                    if (character.Axis == "P2" && Input.GetKeyDown(KeyCode.Joystick2Button0)) { LockCharacter(character); }
+                    if (character.Axis == "P3" && Input.GetKeyDown(KeyCode.Joystick3Button0)) { LockCharacter(character); }
+                    if (character.Axis == "P4" && Input.GetKeyDown(KeyCode.Joystick4Button0)) { LockCharacter(character); }
+                }
 
-                    if (character.Axis == "P1")
-                    {
-                        if (Input.GetKeyDown(KeyCode.Joystick1Button0)) { LockCharacter(character); }
-                    }
+            }
+        }
 
-                    if (character.Axis == "P2")
-                    {
-                        if (Input.GetKeyDown(KeyCode.Joystick2Button0)) { LockCharacter(character); }
-                    }
-
-                    if (character.Axis == "P3")
-                    {
-                        if (Input.GetKeyDown(KeyCode.Joystick3Button0)) { LockCharacter(character); }
-                    }
-
-                    if (character.Axis == "P4")
-                    {
-                        if (Input.GetKeyDown(KeyCode.Joystick4Button0)) { LockCharacter(character); }
-                    }
+        // delock char
+        foreach (CharacterPicture character in characterPicture)
+        {
+            // check if entry isn't empty
+            if (character != null)
+            {
+                // check if char is already locked
+                if (character.IsLocked)
+                {
+                    if (character.Axis == "KB" && Input.GetKeyDown(KeyCode.Y)) { DelockCharacter(character); }
+                    if (character.Axis == "P1" && Input.GetKeyDown(KeyCode.Joystick1Button1)) { DelockCharacter(character); }
+                    if (character.Axis == "P2" && Input.GetKeyDown(KeyCode.Joystick2Button1)) { DelockCharacter(character); }
+                    if (character.Axis == "P3" && Input.GetKeyDown(KeyCode.Joystick3Button1)) { DelockCharacter(character); }
+                    if (character.Axis == "P4" && Input.GetKeyDown(KeyCode.Joystick4Button1)) { DelockCharacter(character); }
                 }
 
             }
@@ -160,11 +173,14 @@ public class PlayerSelection : MonoBehaviour
         // continue if player isn't connected yet
         if (!connected)
         {
+            // get free entry
             for (int i = 0; i < characterPicture.Length; i++)
             {
                 if (characterPicture[i] == null)
                 {
+                    // create new player
                     characterPicture[i] = new CharacterPicture(axis, i, 0);
+                    // show chars
                     characterHolder[i].overrideSprite = scrollSplasharts[i];
                     break;
                 }
@@ -174,13 +190,20 @@ public class PlayerSelection : MonoBehaviour
 
     private void DisConnectPlayer(string axis)
     {
+        // get all palyer
         for(int i = 0; i < characterPicture.Length; i++)
         {
+            // check if entry is empty
             if(characterPicture[i] != null)
             {
+                // get player with right axis
                 if(characterPicture[i].Axis == axis)
                 {
+                    // delock char
+                    if (characterPicture[i].IsLocked) { DelockCharacter(characterPicture[i]); }
+                    // set disconnected pcture
                     characterHolder[characterPicture[i].Index].overrideSprite = notConnectedImg[characterPicture[i].Index];
+                    // delite palyer
                     characterPicture[i] = null;
                 }
             }
@@ -206,6 +229,7 @@ public class PlayerSelection : MonoBehaviour
 
     private void LockCharacter(CharacterPicture character)
     {
+        // check if the character is already locked in 
         bool isCharLocked = false;
         foreach (CharacterPicture picture in characterPicture)
         {
@@ -220,10 +244,14 @@ public class PlayerSelection : MonoBehaviour
 
         if (!isCharLocked)
         {
+            // replace the splash arts to the blocked one in scrollSplasharts
             scrollSplasharts[character.PictureNumber] = characterSplashartBlocked[character.PictureNumber];
+            // replace the players splashart to the locked in one
             characterHolder[character.Index].overrideSprite = characterSplashartLocked[character.PictureNumber];
+            // set the isLocked variable of the instance to true
             character.IsLocked = true;
 
+            // reload all splasharts from all not locked in palyers
             foreach (CharacterPicture picture in characterPicture)
             {
                 if (picture != null)
@@ -232,6 +260,26 @@ public class PlayerSelection : MonoBehaviour
                     {
                         characterHolder[picture.Index].overrideSprite = scrollSplasharts[picture.PictureNumber];
                     }
+                }
+            }
+        }
+    }
+
+    private void DelockCharacter(CharacterPicture character)
+    {
+        // replace the splash arts to the not blocked one in scrollSplasharts
+        scrollSplasharts[character.PictureNumber] = characterSplashart[character.PictureNumber];
+        // set the isLocked variable of the instance to false
+        character.IsLocked = false;
+
+        // reload all splasharts from all not locked in palyers
+        foreach (CharacterPicture picture in characterPicture)
+        {
+            if (picture != null)
+            {
+                if (!picture.IsLocked)
+                {
+                    characterHolder[picture.Index].overrideSprite = scrollSplasharts[picture.PictureNumber];
                 }
             }
         }
