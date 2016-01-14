@@ -11,28 +11,56 @@ public static class Util{
         return Mathf.Pow(x, a) / (Mathf.Pow(x, a) + Mathf.Pow(1 - x, a));
     }
 
-    /// <summary></summary>
+    /// <summary>Retrun a Array with the GameObject Included</summary>
     /// <returns> returns a array with the GameObject added </returns>
-    public static GameObject[] IsGameObjectIncluded(GameObject[] entrys, GameObject newEntry)
+    public static GameObject[] IncludeGameObjectOld(GameObject[] _entrys, GameObject _newEntry)
     {
-        GameObject[] newArray = entrys;
+        GameObject[] newArray = _entrys;
 
         bool registered = false;
-        int emptyIndex = entrys.Length;
+        int emptyIndex = _entrys.Length;
 
+        // check each entry
         for (int i = 0; i < newArray.Length; i++)
         {
-
+            // check if entry is null
             if (newArray[i] == null) { emptyIndex = i; }
-            else if (newArray[i] == newEntry) { registered = true; }
+            // if not check if GameObject is registered
+            else if (newArray[i] == _newEntry) { registered = true; }
         }
 
-        if (!registered)
-        {
-            newArray[emptyIndex] = newEntry;
-        }
+        // add entry if not registered
+        if (!registered) { newArray[emptyIndex] = _newEntry; }
 
         return newArray;
+    }
+
+    public static bool IsGameObjectIncluded(GameObject[] _entrys, GameObject _newEntry)
+    {
+        // check each entry
+        for (int i = 0; i < _entrys.Length; i++)
+        {
+            // check if entry is null
+            if (_entrys[i] != null)
+            { 
+                // check if GameObject is registered
+                if (_entrys[i] == _newEntry) { return true; }
+            }
+        }
+        return false;
+    }
+
+    public static void IncludeGameObject(GameObject[] _entrys, GameObject _newEntry)
+    {
+        // check each entry
+        for (int i = 0; i < _entrys.Length; i++)
+        {
+            // check if entry is null
+            if (_entrys[i] == null)
+            {
+                _entrys[i] = _newEntry;
+            }
+        }
     }
 
     #region To days
