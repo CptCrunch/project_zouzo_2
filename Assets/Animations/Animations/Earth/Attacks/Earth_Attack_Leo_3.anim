@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Earth_Attack_1
+  m_Name: Earth_Attack_Leo_3
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -18,13 +18,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300218, guid: 3b62faa2f2d1f96478b26120f0f5752e, type: 3}
+      value: {fileID: 21300364, guid: 3b62faa2f2d1f96478b26120f0f5752e, type: 3}
     - time: .100000001
-      value: {fileID: 21300220, guid: 3b62faa2f2d1f96478b26120f0f5752e, type: 3}
+      value: {fileID: 21300366, guid: 3b62faa2f2d1f96478b26120f0f5752e, type: 3}
     - time: .200000003
-      value: {fileID: 21300222, guid: 3b62faa2f2d1f96478b26120f0f5752e, type: 3}
+      value: {fileID: 21300368, guid: 3b62faa2f2d1f96478b26120f0f5752e, type: 3}
     - time: .300000012
-      value: {fileID: 21300224, guid: 3b62faa2f2d1f96478b26120f0f5752e, type: 3}
+      value: {fileID: 21300370, guid: 3b62faa2f2d1f96478b26120f0f5752e, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -43,10 +43,10 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300218, guid: 3b62faa2f2d1f96478b26120f0f5752e, type: 3}
-    - {fileID: 21300220, guid: 3b62faa2f2d1f96478b26120f0f5752e, type: 3}
-    - {fileID: 21300222, guid: 3b62faa2f2d1f96478b26120f0f5752e, type: 3}
-    - {fileID: 21300224, guid: 3b62faa2f2d1f96478b26120f0f5752e, type: 3}
+    - {fileID: 21300364, guid: 3b62faa2f2d1f96478b26120f0f5752e, type: 3}
+    - {fileID: 21300366, guid: 3b62faa2f2d1f96478b26120f0f5752e, type: 3}
+    - {fileID: 21300368, guid: 3b62faa2f2d1f96478b26120f0f5752e, type: 3}
+    - {fileID: 21300370, guid: 3b62faa2f2d1f96478b26120f0f5752e, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0

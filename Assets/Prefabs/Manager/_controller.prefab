@@ -64,7 +64,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  LogingToConsole: 0
+  LogingToConsole: 1
 --- !u!114 &11435204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,20 +138,20 @@ MonoBehaviour:
     knockBackDistance: 0
     charges: 0
   - name: Leo
-    damage: 0
+    damage: 5
     castTime: 0
     duration: 0
-    cooldown: 0
-    range: 0
-    targets: 0
-    directions: 0
-    travelTime: 0
+    cooldown: 2
+    range: 2
+    targets: 1
+    directions: 2
+    travelTime: .200000003
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
     knockUpTime: 0
     knockBackDistance: 0
-    charges: 0
+    charges: 3
   - name: Virgo
     damage: 0
     castTime: 0
@@ -198,16 +198,16 @@ MonoBehaviour:
     knockBackDistance: 0
     charges: 0
   - name: Sagittarius
-    damage: 0
+    damage: 500
     castTime: 0
     duration: 0
-    cooldown: 0
+    cooldown: 4
     range: 0
     targets: 0
-    directions: 0
+    directions: 8
     travelTime: 0
-    bullet: {fileID: 0}
-    bulletSpeed: 0
+    bullet: {fileID: 193644, guid: 7aa2708f04cb29c4597fe0c1a923b347, type: 2}
+    bulletSpeed: 2
     knockUpHeght: 0
     knockUpTime: 0
     knockBackDistance: 0
@@ -219,13 +219,13 @@ MonoBehaviour:
     cooldown: 5
     range: 4
     targets: 0
-    directions: 0
-    travelTime: 0
+    directions: 2
+    travelTime: .400000006
     bullet: {fileID: 0}
     bulletSpeed: 0
-    knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockUpHeght: 100
+    knockUpTime: 200
+    knockBackDistance: 100
     charges: 0
   - name: Aquarius
     damage: 0
