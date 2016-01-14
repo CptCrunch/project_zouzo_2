@@ -130,10 +130,10 @@ public class Player : MonoBehaviour
         Debug.Log(debugText);*/
 
         // set starter abilities
-        abilityArray[0] = AbilityManager._instance.CreateBasic();
-        abilityArray[1] = AbilityManager._instance.CreateCapricorn();
-        abilityArray[2] = AbilityManager._instance.CreateLeo();
-        abilityArray[3] = AbilityManager._instance.CreateSaggitarius();
+        abilityArray[0] = AbilityManager._instance.CreateBasic();           // basic
+        abilityArray[1] = AbilityManager._instance.CreateCapricorn();       // spell_1
+        abilityArray[2] = AbilityManager._instance.CreateLeo();             // spell_2
+        abilityArray[3] = AbilityManager._instance.CreateSaggitarius();     // spell_3
 
         controller = GetComponent<Controller2D>();
         _animator = GetComponent<Animator>();
@@ -175,7 +175,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyUp(playerControles[3])) { abilityArray[2].AfterCast(); } // spell_2
         if (Input.GetKeyUp(playerControles[4])) { abilityArray[3].AfterCast(); } // spell_3
 
-        //Debug.Log(name + " health: " + playerVitals.CurrHealth);
+        /*Debug.Log(name + " health: " + playerVitals.CurrHealth);*/
 
         // Get movement input ( controler / keyboard )
         input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
@@ -460,11 +460,13 @@ public class Player : MonoBehaviour
                             registeredEnemies[firstFreeEntry] = objectHit.transform.gameObject;
 
                             // checks if the spell already hit its max of players
-                            if (castedMeeleSpell.MaxTargetsReached())
+                            if (!castedMeeleSpell.MaxTargetsReached())
                             {
+                                // add player hit
+                                castedMeeleSpell.PlayersHit++;
+
                                 // use spell
-                                // TODO: DO THIS
-                                //castedSpell.Use(objectHit.transform.gameObject, gameObject);
+                                castedMeeleSpell.Use(objectHit.transform.gameObject, gameObject);
                                 break;
                             }
                         }
@@ -548,6 +550,9 @@ public class Player : MonoBehaviour
 
             // pass over bullet speed
             bulletInstance.GetComponent<SpellBullet>().usedSpell = _spell;
+
+            // pass over caster
+            bulletInstance.GetComponent<SpellBullet>().caster = gameObject;
 
             // destroy bullet, if still existing, after secounds 
             try { Destroy(bulletInstance, 4); }

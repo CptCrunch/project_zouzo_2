@@ -40,7 +40,7 @@ public class AbilityManager : MonoBehaviour {
 
     public Attacks CreateLeo()
     {
-        return new Leo(spells[5].damage, spells[5].castTime, spells[5].travelTime, spells[5].duration, spells[5].cooldown, spells[5].range, spells[5].targets, spells[5].directions, spells[5].charges);
+        return new Leo(spells[5].damage, spells[5].castTime, spells[5].travelTime, spells[5].duration, spells[5].cooldown, spells[5].range, spells[5].targets, spells[5].directions, spells[5].charges, spells[5].chargeCooldown);
     }
 
     public Attacks CreateSaggitarius()
@@ -71,7 +71,6 @@ public struct Abilities
     [Tooltip("the amount of directions the spell can be aimed (2, 4, 8)")]
     [Range(2,8)]
     public uint directions;
-
     [Header("Meeles")]
     [Tooltip("the time that the spell needs to reach max range (0 is instand) [time in seconds]")]
     public float travelTime;
@@ -90,4 +89,6 @@ public struct Abilities
     public float knockBackDistance;
     [Tooltip("nessesary for: leo")]
     public int charges;
+    [Tooltip("nessesary for: leo")]
+    public float chargeCooldown;
 }

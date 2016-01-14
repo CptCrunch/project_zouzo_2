@@ -76,6 +76,9 @@ public class LivingEntity
 
     // damage Player
     public void GetDamage(float _ammount) {
+
+        Debug.Log(name + " got " + _ammount + " damage");
+
         currHealth -= _ammount;
 
         if(_ammount >= maxHealth || currHealth <= 0) { currHealth = 0; }
@@ -187,9 +190,9 @@ public class LivingEntity
         int currIndex = knockUpIndex;
 
         knockUped = true;
-        //Debug.Log("KnockUp start");
+        /*Debug.Log("KnockUp start");*/
         instance.velocity.x = 0;
-        instance.velocity.y += _yHeight / (float)Util.ConvertMillisecondsToSeconds(_time);
+        instance.velocity.y += _yHeight / 30 / (float)Util.ConvertMillisecondsToSeconds(_time);
 
         Thread.Sleep(_time);
         if (currIndex == knockUpIndex) { knockUped = false; /*Debug.Log("KnockUp stop");*/ }

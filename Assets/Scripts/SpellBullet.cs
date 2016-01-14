@@ -3,9 +3,11 @@ using System.Collections;
 
 public class SpellBullet : MonoBehaviour {
 
-    public Attacks usedSpell;
-    public Vector2 spellDir;
-    public Vector2 startPosition;
+    [HideInInspector] public Attacks usedSpell;
+    [HideInInspector] public Vector2 spellDir;
+    [HideInInspector] public Vector2 startPosition;
+    [HideInInspector] public GameObject caster;
+
     private GameObject[] targetsHit = new GameObject[3];
 
 	void Start ()
@@ -28,31 +30,61 @@ public class SpellBullet : MonoBehaviour {
             if (usedSpell.Range > 0) { transform.Translate(spellDir * usedSpell.ToTravelTime / usedSpell.Range * Time.deltaTime); }
             else { transform.Translate(spellDir * usedSpell.ToTravelTime * Time.deltaTime); }
         }
+
+        TargetCollision();
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void TargetCollision()
     {
-        // check if hited object is a player
-        if (other.gameObject.tag == "Player")
+        // draw a DebugRay
+        Debug.DrawRay(transform.position, spellDir * (GetComponent<BoxCollider2D>().bounds.size.x / 2 + 0.2f), Color.blue);
+        
+        // create a raycast
+        foreach (RaycastHit2D other in Physics2D.RaycastAll(transform.position, spellDir, GetComponent<BoxCollider2D>().bounds.size.x / 2 + 0.2f))
         {
-            // check if player is a enemy
-            if (other.gameObject != gameObject)
+            // get hited gameObject
+            GameObject objectHit = other.transform.gameObject;
+            
+            // check if hited object is a player
+            if (objectHit.tag == "Player")
             {
-                // check if enemy is registerd
-                if (targetsHit != Util.IsGameObjectIncluded(targetsHit, other.gameObject))
+                // check if player is a enemy
+                if (objectHit != caster)
                 {
-                    // register enemy
-                    targetsHit = Util.IsGameObjectIncluded(targetsHit, other.gameObject);
-
-                    // checks if the spell already hit its max of players
-                    if (usedSpell.MaxTargetsReached())
+                    // check if enemy is registerd
+                    if (!Util.IsGameObjectIncluded(targetsHit, objectHit))
                     {
-                        // get player script
-                        Player playerScript = other.gameObject.GetComponent<Player>();
+                        // register enemy
+                        Util.IncludeGameObject(targetsHit, objectHit);
 
-                        // deal damage
-                        playerScript.playerVitals.GetDamage(usedSpell.Damage);
+                        // checks if the spell already hit its max of players
+                        if (!usedSpell.MaxTargetsReached())
+                        {
+                            // add player hit
+                            usedSpell.PlayersHit++;
+
+                            // get player script
+                            Player playerScript = objectHit.GetComponent<Player>();
+
+                            // deal damage
+                            playerScript.playerVitals.GetDamage(usedSpell.Damage);
+
+                            // after max enemys reached
+                            if (usedSpell.MaxTargetsReached()) { }
+                        }
                     }
+                }
+            }
+
+            // check if hitedobject is a Obstacle
+            if (objectHit.tag == "Ground")
+            {
+                CustomDebuger.Log("hit Obstacle");
+                // check if ability is the saggitarus spell
+                if (usedSpell.ID == 9)
+                {
+                    // remove spell bullet script
+                    Destroy(this);
                 }
             }
         }
