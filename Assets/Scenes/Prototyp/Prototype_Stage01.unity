@@ -887,7 +887,7 @@ Prefab:
         type: 3}
     - target: {fileID: 11488288, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
       propertyPath: playerAxis
-      value: KB
+      value: P1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
@@ -1938,6 +1938,10 @@ Prefab:
     - target: {fileID: 498222, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428654, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
+      propertyPath: playerAxis
+      value: KB
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0e538311351f00449b0d45190e7246e3, type: 2}

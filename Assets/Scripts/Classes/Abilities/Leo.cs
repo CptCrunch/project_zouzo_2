@@ -10,6 +10,9 @@ public class Leo : Attacks {
     private float currChargeCooldown;
     private bool castDisable = false;
 
+    private int attackAnim = 0;
+    private float animReset = 0.0f;
+
     public Leo(float damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir, int maxCharge, float maxChargeCooldown) : base(
         5, "leo", "meele", targets, damage, castTime, delay, duration, cooldown, range, spellDir)
     {
@@ -30,8 +33,10 @@ public class Leo : Attacks {
             // wait castTime
 
             // set animation
-            _caster.GetComponent<Animator>().SetInteger("LeoAttack", currCharge);
+            attackAnim++;
+            _caster.GetComponent<Animator>().SetInteger("LeoAttack", attackAnim);
             _caster.GetComponent<Animator>().SetTrigger("LeoTrigger");
+            animReset = 1.0f;
             
             // cast spell
             playerScript.castedMeeleSpell = this;
@@ -63,6 +68,14 @@ public class Leo : Attacks {
         // reduce current cooldown
         CurrCooldown -= Time.deltaTime;
         currChargeCooldown -= Time.deltaTime;
+        animReset -= Time.deltaTime;
+
+        //Animation Reset
+        if(animReset <= 0)
+        {
+            animReset = 0;
+            attackAnim = 0;
+        }
 
         // enable casting if cooldown is over
         if (currChargeCooldown <= 0)
