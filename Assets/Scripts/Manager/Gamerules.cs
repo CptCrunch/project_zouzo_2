@@ -45,8 +45,6 @@ public class Gamerules : MonoBehaviour {
     public bool LogingToConsole = false;
     #endregion
 
-    void Update() { CustomDebuger.LogGameObject(spawnedPlayer[0], true); }
-
     void Awake() {
         // Dont destroy this object on loading a new level
         DontDestroyOnLoad(gameObject);

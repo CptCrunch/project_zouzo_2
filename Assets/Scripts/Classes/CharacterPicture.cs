@@ -6,22 +6,29 @@ public class CharacterPicture
 {
     private string tag;
 
+    private string axis;
+    private int index;
+    private int pictureNumber;
+    private bool isLocked = false;
+
     private Sprite currImage;
     private Sprite chosenImage;
     private Image imageHolder;
-    private int index;
 
     public bool pressed;
     public bool pressedTwice;
     private int count;
 
-    public CharacterPicture(Sprite currImage, Image imageHolder, int index)
+    public CharacterPicture(string axis, int index, int pictureNumber/*Sprite currImage, Image imageHolder, int index*/)
     {
-        this.currImage = currImage;
+        this.axis = axis;
+        this.index = index;
+        this.pictureNumber = pictureNumber;
+        /*this.currImage = currImage;
         this.imageHolder = imageHolder;
         this.index = index;
 
-        imageHolder.sprite = currImage;
+        imageHolder.sprite = currImage;*/
     }
 
     /// <summary>
@@ -75,6 +82,19 @@ public class CharacterPicture
         pressedTwice = false;
         count = 0;
         tag = null;
+    }
+
+    public string Axis { get { return axis; } }
+    public int Index { get { return index; } }
+    public int PictureNumber
+    {
+        get { return pictureNumber; }
+        set { pictureNumber = value; }
+    }
+    public bool IsLocked
+    {
+        get { return isLocked; }
+        set { isLocked = value; }
     }
 
     public string Tag { get { return tag; } }

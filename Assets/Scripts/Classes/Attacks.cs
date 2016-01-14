@@ -72,10 +72,9 @@ public abstract class Attacks {
     /// <summary> checks if spell hits his maximum targets </summary>
     public bool MaxTargetsReached()
     {
-        playersHit++;
-        if (maxTargets == 0) { return true; }
-        if (playersHit > maxTargets) { return false; }
-        return true;
+        if (maxTargets == 0) { return false; }
+        if (playersHit > maxTargets) { return true; }
+        return false;
     }
 
     public void ResetPlayersHit() { playersHit = 0; }
