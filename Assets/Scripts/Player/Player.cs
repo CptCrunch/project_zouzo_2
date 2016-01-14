@@ -130,10 +130,10 @@ public class Player : MonoBehaviour
         Debug.Log(debugText);*/
 
         // set starter abilities
-        abilityArray[0] = AbilityManager._instance.CreateBasic();
-        abilityArray[1] = AbilityManager._instance.CreateCapricorn();
-        abilityArray[2] = AbilityManager._instance.CreateLeo();
-        abilityArray[3] = AbilityManager._instance.CreateSaggitarius();
+        abilityArray[0] = AbilityManager._instance.CreateBasic();           // basic
+        abilityArray[1] = AbilityManager._instance.CreateCapricorn();       // spell_1
+        abilityArray[2] = AbilityManager._instance.CreateLeo();             // spell_2
+        abilityArray[3] = AbilityManager._instance.CreateSaggitarius();     // spell_3
 
         controller = GetComponent<Controller2D>();
         _animator = GetComponent<Animator>();
