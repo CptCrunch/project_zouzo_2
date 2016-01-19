@@ -35,11 +35,6 @@ public class UIManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if(Util.LeftJoystickUp("P1"))
-        {
-            CustomDebuger.Log("True");
-        }
-
         if (preStartMenu.GetBool("preMain_active") == true)
         {
             if(Input.anyKey)
