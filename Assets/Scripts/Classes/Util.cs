@@ -63,6 +63,21 @@ public static class Util{
         }
     }
 
+    #region Test Joysick Axis
+    public static bool LeftJoystickUp(string axis) 
+    {
+        if(Input.GetAxisRaw(axis + "_Verical") < 0)
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+
+    }
+
+    #endregion
+
     #region To days
     public static double ConvertMillisecondsToDays(double milliseconds)
     {
