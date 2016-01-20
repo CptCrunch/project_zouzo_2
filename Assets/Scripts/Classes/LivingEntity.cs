@@ -27,11 +27,11 @@ public class LivingEntity
     private int knockBackIndex = 0;
     private bool dashing = false;
 
-    Thread KnockUpThread;
-    Thread KnockBackThread;
     Thread StunThread;
     Thread SlowOverTimeThread;
-
+    Thread KnockUpThread;
+    Thread KnockBackThread;
+    Thread DashThread;
 
     public LivingEntity(GameObject playerObject, string name, float moveSpeed, float slowedSpeed, float maxHealth)
     {
@@ -77,53 +77,29 @@ public class LivingEntity
     // damage Player
     public void GetDamage(float _ammount) {
 
-        Debug.Log(name + " got " + _ammount + " damage");
-
+        Debug.Log("<b>" + name + "</b> got <color=red>" + _ammount + " damage</color>");
         currHealth -= _ammount;
-
-        if(_ammount >= maxHealth || currHealth <= 0) { currHealth = 0; }
+        if (_ammount >= maxHealth || currHealth <= 0) { currHealth = 0; }
     }
 
     #region Conditions
-    public void ApplyPlayerKnockUp(float _yHeight, int _time)
-    {
-        KnockUpThread = new Thread(() => PlayerKnockUp(_yHeight, _time));
-
-        try
-        {
-            KnockUpThread.Start();
-        }
-        catch (ThreadStateException)
-        {
-            Debug.LogError("Error with PlayerKnockUp Thread");
-        }
-    }
-
-    public void ApplyPlayerKnockBack(float _yDistance, float _xDistance, int _time)
-    {
-        KnockBackThread = new Thread(() => PlayerKnockBack(_xDistance, _yDistance ,_time));
-
-        try
-        {
-            KnockBackThread.Start();
-        }
-        catch (ThreadStateException)
-        {
-            Debug.LogError("Error with KnockBackThread Thread");
-        }
-    }
-
+    #region apply condition
     public void ApplyStun(int _time)
     {
         StunThread = new Thread(() => Stun(_time));
 
-        try
+        try { StunThread.Start(); }
+        catch (ThreadStateException) { Debug.LogError("Error with StunThread Thread"); }
+    }
+
+    public void ApplySlow(bool _toggle)
+    {
+        if (_toggle) { currSpeed = slowedSpeed; slowed = true; /*Debug.Log("<b>" + name + "s</b> Slow start");*/ }
+        else
         {
-            StunThread.Start();
-        }
-        catch (ThreadStateException)
-        {
-            Debug.LogError("Error with StunThread Thread");
+            slowed = false;
+            /*Debug.Log("<b>" + name + "</b>s Slow stop");*/
+            if (!Slowed) { currSpeed = moveSpeed; }
         }
     }
 
@@ -131,98 +107,152 @@ public class LivingEntity
     {
         SlowOverTimeThread = new Thread(() => SlowOverTime(_time));
 
-        try
-        {
-            SlowOverTimeThread.Start();
-        }
-        catch (ThreadStateException)
-        {
-            Debug.LogError("Error with SlowOverTimeThread Thread");
-        }
+        try { SlowOverTimeThread.Start(); }
+        catch (ThreadStateException) { Debug.LogError("Error with SlowOverTimeThread Thread"); }
     }
 
-    public void ApplySlow(bool _toggle)
+    public void ApplyPlayerKnockUp(float _height)
     {
-        if (_toggle) { currSpeed = slowedSpeed; slowed = true; /*Debug.Log("Slow start");*/ }
-        else
-        {
-            slowed = false;
-            /*Debug.Log("Slow stop");*/
-            if (!Slowed) { currSpeed = moveSpeed; }
-        }
+        KnockUpThread = new Thread(() => PlayerKnockUp(_height));
+
+        try { KnockUpThread.Start(); }
+        catch (ThreadStateException) { Debug.LogError("Error with PlayerKnockUp Thread"); }
     }
 
-    // stun Player
+    public void ApplyPlayerKnockBack(float _xDistance, float _yDistance)
+    {
+        KnockBackThread = new Thread(() => PlayerKnockBack(_xDistance, _yDistance));
+
+        try { KnockBackThread.Start(); }
+        catch (ThreadStateException) { Debug.LogError("Error with KnockBackThread Thread"); }
+    }
+
+    public void ApplyDash(float _xDistance, int _time)
+    {
+        DashThread = new Thread(() => Dash(_xDistance, _time));
+
+        try { StunThread.Start(); }
+        catch (ThreadStateException) { Debug.LogError("Error with StunThread Thread"); }
+    }
+    #endregion
+
+    #region Thread Conditions
     private void Stun(int _time) {
+        // add stunIndex
         stunIndex++;
         int currIndex = stunIndex;
 
+        // set player stunned
         stunned = true;
-        /*Debug.Log("Stun start");*/
+        /*Debug.Log("<b>" + name + "</b>s Stun start");*/
+
+        // set movemntspeed to 0
         instance.velocity.x = 0;
 
+        // wait till player isn't stunned
         Thread.Sleep(_time);
-        if (currIndex == stunIndex) { stunned = false; /*Debug.Log("Stun stop");*/ }
+
+        // check if stun should end or if there is a newer stun
+        if (currIndex == stunIndex) { stunned = false; /*Debug.Log("<b>" + name + "</b>s Stun stop");*/ }
     }
 
-    // slow Plyer over Time
     private void SlowOverTime(int _time) {
+        // add  slowIndex
         slowIndex++;
         int currIndex = slowIndex;
         
+        // set player slowed
         slowedOverTime = true;
-        /*Debug.Log("SlowOverTime start");*/
+        /*Debug.Log("<b>" + name + "</b>s SlowOverTime start");*/
+
+        // set speed
         currSpeed = slowedSpeed;
 
+        // wait till player isn't slowed
         Thread.Sleep(_time);
+
+        // check if slow should end or if there is a newer slow
         if (currIndex == slowIndex) {
+            
+            // set player to not slowed
             slowedOverTime = false;
-            /*Debug.Log("SlowOverTime stop");*/
+            /*Debug.Log("<b>" + name + "</b>s SlowOverTime stop");*/
+
+            // set speed to noemal speed
             if (!Slowed) { currSpeed = moveSpeed; }
         }
     }
 
-    // knock up Player
-    private void PlayerKnockUp(float _yHeight, int _time) {
-        /*Debug.Log(name + " knocked up");*/
-
+    private void PlayerKnockUp(float _height) {
+        // add knockUpIndex
         knockUpIndex++;
         int currIndex = knockUpIndex;
 
-        knockUped = true;
-        /*Debug.Log("KnockUp start");*/
-        instance.velocity.x = 0;
-        instance.velocity.y += _yHeight / 30 / (float)Util.ConvertMillisecondsToSeconds(_time);
+        // get in air time
+        float inAirTime = Mathf.Sqrt(_height / 2 / -instance.gravity);
 
-        Thread.Sleep(_time);
-        if (currIndex == knockUpIndex) { knockUped = false; /*Debug.Log("KnockUp stop");*/ }
+        // get in strength
+        float knockUpStrenght = 2 * -instance.gravity + inAirTime;
+
+        // set player knockUped
+        knockUped = true;
+        Debug.Log("<b>" + name + "</b> is <color=magenta>KnockUped</color> for <color=magenta>" + inAirTime + "</color> sec");
+
+        // add velocity
+        instance.velocity.x = 0;
+        instance.velocity.y = knockUpStrenght * inAirTime;
+
+        // wait till player isn't knockUped
+        Thread.Sleep(Convert.ToInt32(Util.ConvertSecondsToMilliseconds(Convert.ToDouble(inAirTime))));
+
+        // check if knockUp should end or if there is a newer nockUp
+        if (currIndex == knockUpIndex) { knockUped = false; Debug.Log("<b>" + name + "</b>s <color=magenta>KnockUp</color> stop"); }
     }
 
-    // knock back Player
-    private void PlayerKnockBack(float _xDistance, float _yDistance, int _time) {
+    private void PlayerKnockBack(float _xDistance, float _yDistance)
+    {
+        // add knockBackIndex
         knockBackIndex++;
         int currIndex = knockBackIndex;
 
+        // get in air time
+        float inAirTime = Mathf.Sqrt((Mathf.Abs(_xDistance) + Mathf.Abs(_yDistance)) / 2 / -instance.gravity);
+
+        // get in strength
+        float knockUpStrenght = 2 * -instance.gravity + inAirTime;
+
+        // set player knockedBack
         knockBacked = true;
-        /*Debug.Log("KockBack start");*/
-        instance.velocity.x = _xDistance / (float)Util.ConvertMillisecondsToSeconds(_time);
-        instance.velocity.y += _yDistance / (float)Util.ConvertMillisecondsToSeconds(_time);
 
-        Thread.Sleep(_time);
-        if (currIndex == knockBackIndex) { knockBacked = false; /*Debug.Log("KockBack stop");*/ }
+        // add velocity
+        Debug.Log("x: " + _xDistance + "\ny: " + _yDistance);
+        instance.velocity.x = _xDistance / inAirTime;
+        instance.velocity.y = knockUpStrenght * inAirTime;
+
+        // wait till player isn't knockBacked
+        Thread.Sleep(Convert.ToInt32(Util.ConvertSecondsToMilliseconds(Convert.ToDouble(inAirTime))));
+
+        // check if knockBack should end or if there is a newer knockBack
+        if (currIndex == knockBackIndex) { knockBacked = false; Debug.Log("<b>" + name + "</b>s <color=magenta>KockBack</color> stop"); }
     }
-
-    // dash
-    private void PlayerDash(float _xDistance, int _time)
+    
+    private void Dash(float _xDistance, int _time)
     {
+        // set player to dashing
         dashing = true;
-        /*Debug.Log("Dash start");*/
+        /*Debug.Log("<b>" + name + "</b>s Dash start");*/
+
+        //add velocity
         instance.velocity.x = _xDistance / (float)Util.ConvertMillisecondsToSeconds(_time);
 
+        // wait till dash is finished
         Thread.Sleep(_time);
+
+        // stop dashing
         dashing = false;
-        /*Debug.Log("Dash stop");*/
+        /*Debug.Log("<b>" + name + "</b>s Dash stop");*/
     }
+    #endregion
     #endregion
     #endregion
 }

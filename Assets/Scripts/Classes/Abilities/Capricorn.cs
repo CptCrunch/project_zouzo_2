@@ -4,20 +4,21 @@ using System;
 
 public class Capricorn : Attacks {
 
-    private int time;
     private float height;
-    private float knockBackDistance;
+    private float knockBackRange;
     private bool usedInAir = false;
+    private float knockBackStrenght;
 
-    public Capricorn(float damage, float castTime, float travleTime, float duration, float cooldown, float range, int targets, uint spellDir, float height, int time, float knockBackDistance) : base(
+    public Capricorn(float damage, float castTime, float travleTime, float duration, float cooldown, float range, int targets, uint spellDir, float height, float knockBackRange, float knockBackStrenght) : base(
         10, "capricorn", "CC", targets, damage, castTime, travleTime, duration, cooldown, range, spellDir)
     {
-        this.time = time;
         this.height = height;
-        this.knockBackDistance = knockBackDistance;
+        this.knockBackRange = knockBackRange;
+        this.knockBackStrenght = knockBackStrenght;
     }
 
-    public float KnockBackDistance { get { return knockBackDistance; } }
+    public float KnockBackDistance { get { return knockBackRange; } }
+    public float KnockBackStrenght { get { return knockBackStrenght; } }
     public bool UsedInAir { get { return usedInAir; } }
 
     public override void Cast(GameObject _caster)
@@ -41,27 +42,31 @@ public class Capricorn : Attacks {
             }
 
             // debug that spell is on cooldown
-            else { Debug.Log("capricorn is on cooldown for: " + CurrCooldown); }
+            else { Debug.Log("<b><color=white>capricorn</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec"); }
         }
 
-        else if(!usedInAir)
+        else
         {
-            if (playerScript.GetCapricorn2Targets() != null)
+            if (!usedInAir)
             {
-                // set animation
+                if (playerScript.GetCapricorn2Targets() != null)
+                {
+                    // set animation
 
-                // use spell
-                UseCapricorn2(_caster, playerScript.GetCapricorn2Targets());
+                    // use spell
+                    UseCapricorn2(_caster, playerScript.GetCapricorn2Targets());
 
-                // reset cooldown
-                SetCooldown();
+                    // reset cooldown
+                    SetCooldown();
+                }
+
+                // debug that spell is on cooldown
+                else { Debug.Log("no target in range for <b><color=white>Capricorn 2</color></b>"); }
             }
-
-            // debug that spell is on cooldown
-            else { Debug.Log("capricorn is on cooldown for: " + CurrCooldown); }
+            else { Debug.Log("<b><color=white>capricorn</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec"); }
         }
     }
-
+    
     public override void AfterCast()
     {
         IsAbilityCasted = false;
@@ -75,7 +80,7 @@ public class Capricorn : Attacks {
         // knock the target up and deal damage
         try
         {
-            Vitals.ApplyPlayerKnockUp(height, time);
+            Vitals.ApplyPlayerKnockUp(height);
         }
         catch (OverflowException)
         {
@@ -88,16 +93,20 @@ public class Capricorn : Attacks {
 
     public void UseCapricorn2(GameObject _caster, GameObject _target)
     {
+        Debug.Log("<b>" + _caster.GetComponent<Player>().playerVitals.Name + "</b> used <b><color=white>Capricorn2</color></b>");
+
         // get the vitals of the target
         LivingEntity Vitals = _target.GetComponent<Player>().playerVitals;
 
         // get distance between caster and target
-        float dirX = _caster.transform.position.x - _target.transform.position.x;
+        float dirX = _target.transform.position.x - _caster.transform.position.x;
         float dirY = _target.transform.position.y - _caster.transform.position.y;
-        float distaceMultiplicator = 1 / (dirX + dirY) * knockBackDistance;
 
+        // get mutiplicator
+        float multi = 1 / Mathf.Sqrt(dirX * dirX + dirY * dirY);
+        
         // kock target away form caster
-        _target.GetComponent<Player>().playerVitals.ApplyPlayerKnockBack(dirX * distaceMultiplicator, dirY * distaceMultiplicator, 20);
+        _target.GetComponent<Player>().playerVitals.ApplyPlayerKnockBack(dirX * multi * knockBackStrenght, dirY * multi * knockBackStrenght);
 
         // deal damage
         Vitals.GetDamage(Damage);

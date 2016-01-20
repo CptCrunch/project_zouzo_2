@@ -50,7 +50,7 @@ public class AbilityManager : MonoBehaviour {
 
     public Attacks CreateCapricorn()
     {
-        return new Capricorn(spells[10].damage, spells[10].castTime, spells[10].travelTime, spells[10].duration, spells[10].cooldown, spells[10].range, spells[10].targets, spells[10].directions, spells[10].knockUpHeght, spells[10].knockUpTime, spells[10].knockBackDistance);
+        return new Capricorn(spells[10].damage, spells[10].castTime, spells[10].travelTime, spells[10].duration, spells[10].cooldown, spells[10].range, spells[10].targets, spells[10].directions, spells[10].knockUpHeght, spells[10].knockBackRange, spells[10].knockBackStrenght);
     }
 }
 
@@ -83,10 +83,10 @@ public struct Abilities
     [Header("Class specific variables")]
     [Tooltip("nessesary for: capricorn(1)")]
     public float knockUpHeght;
-    [Tooltip("nessesary for: capricorn(1) \n[time in milliseconds (1:1000)]")]
-    public int knockUpTime;
+    [Tooltip("nessesary for: capricorn(2)")]
+    public float knockBackRange;
     [Tooltip("nessesary for: capricorn(2)\nthe distance the enemy gets kocked back")]
-    public float knockBackDistance;
+    public float knockBackStrenght;
     [Tooltip("nessesary for: leo")]
     public int charges;
     [Tooltip("nessesary for: leo")]
