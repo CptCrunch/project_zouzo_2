@@ -49,7 +49,7 @@ public class Gamerules : MonoBehaviour {
         // Dont destroy this object on loading a new level
         DontDestroyOnLoad(gameObject);
 
-        CustomDebuger.Active = LogingToConsole;
+        CustomDebug.Active = LogingToConsole;
 
         if (_instance == null) { _instance = this; }
     }

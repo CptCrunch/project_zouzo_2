@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace UnityEngine
 {
-    public sealed class CustomDebuger
+    public sealed class CustomDebug
     {
         private static bool active;
 

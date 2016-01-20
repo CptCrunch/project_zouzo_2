@@ -564,7 +564,9 @@ public class Player : MonoBehaviour
 
     public GameObject GetCapricorn2Targets()
     {
-        float range = AbilityManager._instance.abilities[10].knockBackDistance;
+        float range = AbilityManager._instance.spells[10].knockBackRange;
+        GameObject nearestPlayer = null;
+        float distanceToPlayer = range;
 
         // get all player objects
         foreach (GameObject targetObject in GameObject.FindGameObjectsWithTag("Player"))
@@ -575,19 +577,14 @@ public class Player : MonoBehaviour
                 // get the distance to the knock uped player
                 float distance = Mathf.Abs(Vector2.Distance(transform.position, targetObject.transform.position));
 
-                // compair if plyer is in range
-                if (distance <= AbilityManager._instance.abilities[10].knockBackDistance)
+                // compair if player is in range & get nearest player
+                if (distanceToPlayer >= distance)
                 {
-                    // get nearest player
-                    if (distance < range)
-                    {
-                        range = distance;
-                        return targetObject;
-                    }
+                    nearestPlayer = targetObject;
+                    distanceToPlayer = distance;
                 }
             }
         }
-
-        return null;
+        return nearestPlayer;
     }
 }
