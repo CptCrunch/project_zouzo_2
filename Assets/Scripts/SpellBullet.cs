@@ -79,7 +79,7 @@ public class SpellBullet : MonoBehaviour {
             // check if hitedobject is a Obstacle
             if (objectHit.tag == "Ground")
             {
-                CustomDebuger.Log("hit Obstacle");
+                //CustomDebuger.Log("hit Obstacle");
                 // check if ability is the saggitarus spell
                 if (usedSpell.ID == 9)
                 {
