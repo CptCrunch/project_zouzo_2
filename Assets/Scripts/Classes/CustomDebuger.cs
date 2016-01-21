@@ -9,9 +9,26 @@ namespace UnityEngine
     public sealed class CustomDebuger
     {
         private static bool active;
+        private static Dictionary<string, bool> tags = new Dictionary<string, bool>() {
+            {"Main", false },
+            {"Player", false},
+            {"Damage", false},
+            {"Spells", false},
+            {"UI", false}
+        };
 
         #region Extras
         public static bool Active { get { return active; } set { active = value; } }
+        public static void EnableTag(string tag, bool value) {
+            foreach (KeyValuePair<string, bool> item in tags)
+            {
+                if (item.Key == tag)
+                {
+                    tags[tag] = value;
+                    break;
+                }
+            }
+        }
         public static void LogArray(object[] array)
         {
             if (active)
@@ -117,35 +134,53 @@ namespace UnityEngine
         #endregion
 
         #region Log, Error, Warning
-        public static void Log(object message)
+        public static void Log(object message, string tag)
         {
             if (active)
-                Debug.Log(message.ToString());
+            {
+                foreach(KeyValuePair<string, bool> item in tags)
+                {
+                    if(item.Key == tag)
+                    {
+                        if(item.Value == true)
+                        {
+                            Debug.Log(message.ToString());
+                        }
+                    }
+                }
+            }
         }
-        public static void Log(object message, Object context)
+        public static void LogError(object message, string tag)
         {
             if (active)
-                Debug.Log(message.ToString(), context);
+            {
+                foreach (KeyValuePair<string, bool> item in tags)
+                {
+                    if (item.Key == tag)
+                    {
+                        if (item.Value == true)
+                        {
+                            Debug.LogError(message.ToString());
+                        }
+                    }
+                }
+            }
         }
-        public static void LogError(object message)
+        public static void LogWarning(object message, string tag)
         {
             if (active)
-                Debug.LogError(message.ToString());
-        }
-        public static void LogError(object message, Object context)
-        {
-            if (active)
-                Debug.LogError(message.ToString(), context);
-        }
-        public static void LogWarning(object message)
-        {
-            if (active)
-                Debug.LogWarning(message.ToString());
-        }
-        public static void LogWarning(object message, Object context)
-        {
-            if (active)
-                Debug.LogWarning(message.ToString(), context);
+            {
+                foreach (KeyValuePair<string, bool> item in tags)
+                {
+                    if (item.Key == tag)
+                    {
+                        if (item.Value == true)
+                        {
+                            Debug.LogWarning(message.ToString());
+                        }
+                    }
+                }
+            }
         }
         #endregion
 
