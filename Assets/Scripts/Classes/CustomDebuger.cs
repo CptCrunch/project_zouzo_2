@@ -14,6 +14,7 @@ namespace UnityEngine
             {"Player", false},
             {"Damage", false},
             {"Spells", false},
+            {"Testing", false},
             {"UI", false}
         };
 
