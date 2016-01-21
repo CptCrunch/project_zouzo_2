@@ -6,6 +6,11 @@ public class UIManager : MonoBehaviour {
 
     private static UIManager instance;
 
+    public GameObject[] btnList_mainMenu = new GameObject[3];
+    private int currentBtn_menu = 0;
+
+    private int[] joystickY = new int[4];
+
     public Animator preStartMenu;
     public Animator mainMenu;
     public Animator optionsMenu;
@@ -35,6 +40,30 @@ public class UIManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        for (int i = 1; i <= joystickY.Length; i++)
+        {
+            if (Input.GetAxis("P" + i + "_Vertical") > 0.3f && joystickY[i - 1] == 0) { joystickY[i - 1] = 1; }
+            if (Input.GetAxis("P" + i + "_Vertical") < -0.3f && joystickY[i - 1] == 0) { joystickY[i - 1] = -1; }
+            if (Input.GetAxis("P" + i + "_Vertical") <= 0.3f && Input.GetAxis("P" + i + "_Vertical") >= -0.3f && joystickY[i - 1] != 0) { joystickY[i - 1] = 0; }
+        }
+
+        if (cg_main.interactable == true)
+        {
+            if (Input.GetKeyDown(KeyCode.DownArrow) || joystickY[0] == -1 || joystickY[1] == -1 || joystickY[2] == -1 || joystickY[3] == -1)
+            {
+                currentBtn_menu++;
+                if (currentBtn_menu > btnList_mainMenu.Length - 1) { currentBtn_menu = 0; }
+                Debug.Log(currentBtn_menu);
+            }
+
+            if (Input.GetKeyDown(KeyCode.UpArrow) || joystickY[0] == 1 || joystickY[1] == 1 || joystickY[2] == 1 || joystickY[3] == 1)
+            {
+                currentBtn_menu--;
+                if (currentBtn_menu < 0) { currentBtn_menu = btnList_mainMenu.Length - 1; }
+                Debug.Log(currentBtn_menu);
+            }
+        }
+      
         if (preStartMenu.GetBool("preMain_active") == true)
         {
             if(Input.anyKey)
@@ -50,8 +79,13 @@ public class UIManager : MonoBehaviour {
                 // enable buttons in mainmenu
                 cg_main.interactable = true;
             }
-        }        
-   }
+        }
+
+        if (joystickY[0] == -1) { joystickY[0] = -2; }
+        if (joystickY[1] == -1) { joystickY[1] = -2; }
+        if (joystickY[2] == -1) { joystickY[2] = -2; }
+        if (joystickY[3] == -1) { joystickY[3] = -2; }
+    }
 
     // optionsButton controller
     public void pressOptionBtn()
