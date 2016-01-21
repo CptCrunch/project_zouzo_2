@@ -61,6 +61,7 @@ public class Gamerules : MonoBehaviour {
         CustomDebuger.EnableTag("Damage", Tags.Damage);
         CustomDebuger.EnableTag("Spells", Tags.Spells);
         CustomDebuger.EnableTag("UI", Tags.UI);
+        CustomDebuger.EnableTag("Testing", Tags.Testing);
     }
 
     // Create All Player when the level loads
@@ -155,5 +156,6 @@ public class Gamerules : MonoBehaviour {
         public bool Damage;
         public bool Spells;
         public bool UI;
+        public bool Testing;
     }
 }

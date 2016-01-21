@@ -66,16 +66,47 @@ public static class Util{
     #region Test Joysick Axis
     public static bool LeftJoystickUp(string axis) 
     {
-        if(Input.GetAxisRaw(axis + "_Verical") < 0)
+        if(Input.GetAxisRaw(axis + "_Vertical") > 0)
         {
             return true;
         } else
         {
             return false;
         }
-
     }
-
+    public static bool LeftJoystickDown(string axis)
+    {
+        if (Input.GetAxisRaw(axis + "_Vertical") < 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public static bool LeftJoystickRight(string axis)
+    {
+        if (Input.GetAxisRaw(axis + "_Horizontal") > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public static bool LeftJoystickLeft(string axis)
+    {
+        if (Input.GetAxisRaw(axis + "_Horizontal") < 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     #endregion
 
     #region To days
