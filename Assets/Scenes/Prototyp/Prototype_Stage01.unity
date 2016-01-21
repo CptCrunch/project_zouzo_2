@@ -6628,6 +6628,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 11489008, guid: b3d938f58e985734fb0d4a50e6ef1b9b, type: 2}
+      propertyPath: preferUncropped
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2080376, guid: b3d938f58e985734fb0d4a50e6ef1b9b, type: 2}
+      propertyPath: orthographic size
+      value: .600000024
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b3d938f58e985734fb0d4a50e6ef1b9b, type: 2}
   m_IsPrefabParent: 0
