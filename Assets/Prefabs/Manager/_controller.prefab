@@ -42,7 +42,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAmmount: 0
   playerMaxHealth: 0
-  abilityLimit: 0
+  abilityLimit: 3
   itemSpawnrate: 0
   timeDeathSpawn: 0
   damageModifier: 100
@@ -64,7 +64,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  LogingToConsole: 1
+  LogToConsole: 1
+  Tags:
+    Main: 1
+    Player: 1
+    Damage: 1
+    Spells: 1
+    UI: 1
+    Testing: 1
 --- !u!114 &11435204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -89,9 +96,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: Taurus
     damage: 0
     castTime: 0
@@ -104,9 +112,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: Gemini
     damage: 0
     castTime: 0
@@ -119,9 +128,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: Cancer
     damage: 0
     castTime: 0
@@ -134,9 +144,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: Leo
     damage: 5
     castTime: 0
@@ -149,9 +160,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 3
+    chargeCooldown: .5
   - name: Virgo
     damage: 0
     castTime: 0
@@ -164,9 +176,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: Libra
     damage: 0
     castTime: 0
@@ -179,9 +192,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: Scorpio
     damage: 0
     castTime: 0
@@ -194,9 +208,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: Sagittarius
     damage: 500
     castTime: 0
@@ -209,9 +224,10 @@ MonoBehaviour:
     bullet: {fileID: 193644, guid: 7aa2708f04cb29c4597fe0c1a923b347, type: 2}
     bulletSpeed: 2
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: Capricorn
     damage: 20
     castTime: 0
@@ -223,10 +239,11 @@ MonoBehaviour:
     travelTime: .400000006
     bullet: {fileID: 0}
     bulletSpeed: 0
-    knockUpHeght: 100
-    knockUpTime: 200
-    knockBackDistance: 100
+    knockUpHeght: 3
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: Aquarius
     damage: 0
     castTime: 0
@@ -239,9 +256,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: Aquarius
     damage: 0
     castTime: 0
@@ -254,9 +272,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: Basic
     damage: 10
     castTime: 0
@@ -269,9 +288,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   spells:
   - name: 
     damage: 0
@@ -285,9 +305,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: 
     damage: 0
     castTime: 0
@@ -300,9 +321,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: 
     damage: 0
     castTime: 0
@@ -315,9 +337,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: 
     damage: 0
     castTime: 0
@@ -330,9 +353,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: 
     damage: 0
     castTime: 0
@@ -345,9 +369,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: 
     damage: 0
     castTime: 0
@@ -360,9 +385,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: 
     damage: 0
     castTime: 0
@@ -375,9 +401,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: 
     damage: 0
     castTime: 0
@@ -390,9 +417,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: 
     damage: 0
     castTime: 0
@@ -405,9 +433,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: 
     damage: 0
     castTime: 0
@@ -420,9 +449,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: 
     damage: 0
     castTime: 0
@@ -435,9 +465,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: 
     damage: 0
     castTime: 0
@@ -450,9 +481,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
   - name: 
     damage: 0
     castTime: 0
@@ -465,9 +497,10 @@ MonoBehaviour:
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
-    knockUpTime: 0
-    knockBackDistance: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
     charges: 0
+    chargeCooldown: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

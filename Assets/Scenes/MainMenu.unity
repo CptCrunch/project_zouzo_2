@@ -820,7 +820,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1835896139}
+      - m_Target: {fileID: 0}
         m_MethodName: pressOptionBtn
         m_Mode: 1
         m_Arguments:
@@ -1008,8 +1008,8 @@ MonoBehaviour:
   cg_main: {fileID: 474219428}
   cg_options: {fileID: 1490131527}
   btn_options: {fileID: 1481711914}
-  btn_fight: {fileID: 0}
-  btn_quit: {fileID: 0}
+  btn_fight: {fileID: 894098832}
+  btn_quit: {fileID: 674427633}
 --- !u!1 &1967394577
 GameObject:
   m_ObjectHideFlags: 0
