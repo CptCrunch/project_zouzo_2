@@ -1001,10 +1001,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d23d47d82b6aac45b3897ca70727761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btnList_mainMenu:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   preStartMenu: {fileID: 913192185}
   mainMenu: {fileID: 474219429}
   optionsMenu: {fileID: 1490131526}
