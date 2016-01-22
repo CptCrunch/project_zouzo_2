@@ -151,8 +151,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-       if(Util.LeftJoystickRight(playerAxis) == true ) { CustomDebuger.Log("UP", "Testing"); }
-
         // Imobelised
         if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked) { disabled = true; }
         else { disabled = false; }

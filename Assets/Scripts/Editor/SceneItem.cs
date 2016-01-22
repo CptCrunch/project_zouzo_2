@@ -95,6 +95,12 @@ public class SceneItem : Editor {
     {
         OpenScene("MainMenu");
     }
+
+    [MenuItem("Open Scenes/Scene Selection Menu")]
+    public static void SceneSelection()
+    {
+        OpenScene("SceneSelection");
+    }
     #endregion
 
     static void OpenScene(string name)

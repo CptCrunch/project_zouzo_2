@@ -24,8 +24,6 @@ public class MainUIManager : MonoBehaviour {
     // instance getter
     public static MainUIManager Instance { get { return instance; } }
 
-    
-
 	// Use this for initialization
 	void Start () {
         cg_main.interactable = false;

@@ -9,9 +9,28 @@ namespace UnityEngine
     public sealed class CustomDebug
     {
         private static bool active;
+        private static Dictionary<string, bool> tags = new Dictionary<string, bool>() {
+            {"Main", false },
+            {"Player", false},
+            {"Damage", false},
+            {"Spells", false},
+            {"Testing", false},
+            {"UI", false}
+        };
 
         #region Extras
         public static bool Active { get { return active; } set { active = value; } }
+        public static void EnableTag(string tag, bool value)
+        {
+            foreach (KeyValuePair<string, bool> item in tags)
+            {
+                if (item.Key == tag)
+                {
+                    tags[tag] = value;
+                    break;
+                }
+            }
+        }
         public static void LogArray(object[] array)
         {
             if (active)
@@ -86,54 +105,84 @@ namespace UnityEngine
                     }
 
                     Debug.Log(output);
-                } 
+                }
             }
         }
         public static void LogGameObject(GameObject gameObject, bool advanced)
         {
-            string output = "Type: " + gameObject.GetType() + "\n\n";
-
-            if (active)
+            if (active && gameObject != null)
             {
-                output += "Transform: " + "x:" + gameObject.transform.position.x + " y: " + gameObject.transform.position.y + " z: " + gameObject.transform.position.z + "\n";
-                output += "Rotation: " + "x:" + gameObject.transform.rotation.x + " y: " + gameObject.transform.rotation.y + " z: " + gameObject.transform.rotation.z + "\n";
-                output += "Scale: " + "x:" + gameObject.transform.localScale.x + " y: " + gameObject.transform.localScale.y + " z: " + gameObject.transform.localScale.z + "\n";
+                int count = 0;
+                string output = "Type: " + gameObject.GetType() + "\n" + "Tag: " + gameObject.tag + "\n\n";
+                output += "Transform: \t" + "<color=brown>x:</color>" + gameObject.transform.position.x + " <color=green>y:</color> " + gameObject.transform.position.y + " <color=teal>z:</color> " + gameObject.transform.position.z + "\n";
+                output += "Rotation: \t\t" + "<color=brown>x:</color>" + gameObject.transform.rotation.x + " <color=green>y:</color> " + gameObject.transform.rotation.y + " <color=teal>z:</color> " + gameObject.transform.rotation.z + "\n";
+                output += "Scale: \t\t" + "<color=brown>x:</color>" + gameObject.transform.localScale.x + " <color=green>y:</color> " + gameObject.transform.localScale.y + " <color=teal>z:</color> " + gameObject.transform.localScale.z + "\n\n";
+
+                if (advanced)
+                {
+                    output += "Components: \n";
+
+                    foreach (Component comp in gameObject.GetComponents(typeof(Component)))
+                    {
+                        output += count + " -> " + comp.GetType() + "\t \n";
+                        count++;
+                    }
+                }
+
+                Debug.Log(output);
             }
 
-            Debug.Log(output);
         }
         #endregion
 
         #region Log, Error, Warning
-        public static void Log(object message)
+        public static void Log(object message, string tag)
         {
             if (active)
-                Debug.Log(message.ToString());
+            {
+                foreach (KeyValuePair<string, bool> item in tags)
+                {
+                    if (item.Key == tag)
+                    {
+                        if (item.Value == true)
+                        {
+                            Debug.Log(message.ToString());
+                        }
+                    }
+                }
+            }
         }
-        public static void Log(object message, Object context)
+        public static void LogError(object message, string tag)
         {
             if (active)
-                Debug.Log(message.ToString(), context);
+            {
+                foreach (KeyValuePair<string, bool> item in tags)
+                {
+                    if (item.Key == tag)
+                    {
+                        if (item.Value == true)
+                        {
+                            Debug.LogError(message.ToString());
+                        }
+                    }
+                }
+            }
         }
-        public static void LogError(object message)
+        public static void LogWarning(object message, string tag)
         {
             if (active)
-                Debug.LogError(message.ToString());
-        }
-        public static void LogError(object message, Object context)
-        {
-            if (active)
-                Debug.LogError(message.ToString(), context);
-        }
-        public static void LogWarning(object message)
-        {
-            if (active)
-                Debug.LogWarning(message.ToString());
-        }
-        public static void LogWarning(object message, Object context)
-        {
-            if (active)
-                Debug.LogWarning(message.ToString(), context);
+            {
+                foreach (KeyValuePair<string, bool> item in tags)
+                {
+                    if (item.Key == tag)
+                    {
+                        if (item.Value == true)
+                        {
+                            Debug.LogWarning(message.ToString());
+                        }
+                    }
+                }
+            }
         }
         #endregion
 
