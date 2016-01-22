@@ -1010,6 +1010,14 @@ MonoBehaviour:
   btn_options: {fileID: 1481711914}
   btn_fight: {fileID: 894098832}
   btn_quit: {fileID: 674427633}
+  Tags:
+    Active: 0
+    Main: 0
+    Player: 0
+    Damage: 0
+    Spells: 0
+    UI: 0
+    Testing: 0
 --- !u!1 &1967394577
 GameObject:
   m_ObjectHideFlags: 0
