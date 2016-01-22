@@ -54,7 +54,14 @@ public class Gamerules : MonoBehaviour {
 
     void Start()
     {
-        Tags.SetAllValues(true);
+        Tags.ResetValues();
+        CustomDebug.Active = Tags.Active;
+        CustomDebug.EnableTag("Main", Tags.Main);
+        CustomDebug.EnableTag("Player", Tags.Player);
+        CustomDebug.EnableTag("Damage", Tags.Damage);
+        CustomDebug.EnableTag("Spells", Tags.Spells);
+        CustomDebug.EnableTag("UI", Tags.UI);
+        CustomDebug.EnableTag("Testing", Tags.Testing);
     }
 
     // Create All Player when the level loads
