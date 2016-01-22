@@ -42,7 +42,6 @@ public class Gamerules : MonoBehaviour {
     public GameObject[] spawnedPlayer = new GameObject[4];
 
     [Header("Debug")]
-    public bool LogToConsole;
     public DebugValues Tags;
     #endregion
 
@@ -55,13 +54,7 @@ public class Gamerules : MonoBehaviour {
 
     void Start()
     {
-        CustomDebuger.Active = LogToConsole;
-        CustomDebuger.EnableTag("Main", Tags.Main);
-        CustomDebuger.EnableTag("Player", Tags.Player);
-        CustomDebuger.EnableTag("Damage", Tags.Damage);
-        CustomDebuger.EnableTag("Spells", Tags.Spells);
-        CustomDebuger.EnableTag("UI", Tags.UI);
-        CustomDebuger.EnableTag("Testing", Tags.Testing);
+        Tags.SetAllValues(true);
     }
 
     // Create All Player when the level loads
@@ -146,16 +139,5 @@ public class Gamerules : MonoBehaviour {
         public int lifeLimit;
         [Range(0,100)]
         public float timeLimit;
-    }
-
-    [System.Serializable]
-    public struct DebugValues
-    {
-        public bool Main;
-        public bool Player;
-        public bool Damage;
-        public bool Spells;
-        public bool UI;
-        public bool Testing;
     }
 }

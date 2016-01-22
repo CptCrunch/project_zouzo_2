@@ -46,7 +46,7 @@ public class Leo : Attacks {
         }
 
         // debug that spell is on cooldown
-        else { CustomDebug.Log("leo is on cooldown for: " + CurrCooldown); }
+        else { CustomDebug.Log("leo is on cooldown for: " + CurrCooldown, "Spells"); }
     }
 
     public override void AfterCast()
@@ -114,7 +114,7 @@ public class Leo : Attacks {
         
         // sub charge
         currCharge--;
-        CustomDebug.Log("currCharges: " + currCharge);
+        CustomDebug.Log("currCharges: " + currCharge, "Spells");
 
         // disable spell if no charges are left
         if (currCharge <= 0) { IsDisabled = true; }
