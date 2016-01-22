@@ -64,8 +64,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  LogToConsole: 1
   Tags:
+    Active: 1
     Main: 1
     Player: 1
     Damage: 1

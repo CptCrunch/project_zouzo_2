@@ -17,6 +17,8 @@ public class MainUIManager : MonoBehaviour {
     public GameObject btn_fight;
     public GameObject btn_quit;
 
+    [Header("Debug")]
+    public DebugValues Tags;
 
     // set singleton variable to this instance
     void Awake() { instance = this; }
@@ -26,6 +28,15 @@ public class MainUIManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        Tags.ResetValues();
+        CustomDebug.Active = Tags.Active;
+        CustomDebug.EnableTag("Main", Tags.Main);
+        CustomDebug.EnableTag("Player", Tags.Player);
+        CustomDebug.EnableTag("Damage", Tags.Damage);
+        CustomDebug.EnableTag("Spells", Tags.Spells);
+        CustomDebug.EnableTag("UI", Tags.UI);
+        CustomDebug.EnableTag("Testing", Tags.Testing);
+
         cg_main.interactable = false;
         cg_options.interactable = false;
     }

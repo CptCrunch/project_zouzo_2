@@ -34,4 +34,15 @@ public class DebugValues
         CustomDebug.EnableTag("UI", value);
         CustomDebug.EnableTag("Testing", value);
     }
+
+    public void ResetValues()
+    {
+        CustomDebug.Active = false;
+        CustomDebug.EnableTag("Main", false);
+        CustomDebug.EnableTag("Player", false);
+        CustomDebug.EnableTag("Damage", false);
+        CustomDebug.EnableTag("Spells", false);
+        CustomDebug.EnableTag("UI", false);
+        CustomDebug.EnableTag("Testing", false);
+    }
 }
