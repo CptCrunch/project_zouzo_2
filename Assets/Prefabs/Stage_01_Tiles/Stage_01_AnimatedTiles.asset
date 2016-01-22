@@ -2,13 +2,19 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 149c1fd3f6decae4cb6adbe6d74327ac, type: 3}
-  m_Name: TileSet
+  m_Name: Stage_01_AnimatedTiles
   m_EditorClassIdentifier: 
-  prefabs: []
+  prefabs:
+  - {fileID: 489556, guid: 0fe06aa274caecc44a2f2f932e4ca941, type: 2}
+  - {fileID: 495170, guid: 44ccc0d3bccedb6469c2efd91a5fd542, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

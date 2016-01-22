@@ -2,9 +2,9 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class UIManager : MonoBehaviour {
+public class MainUIManager : MonoBehaviour {
 
-    private static UIManager instance;
+    private static MainUIManager instance;
 
     public Animator preStartMenu;
     public Animator mainMenu;
@@ -20,9 +20,9 @@ public class UIManager : MonoBehaviour {
 
     // set singleton variable to this instance
     void Awake() { instance = this; }
-
+        
     // instance getter
-    public static UIManager Instance { get { return instance; } }
+    public static MainUIManager Instance { get { return instance; } }
 
     
 
