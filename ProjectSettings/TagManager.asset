@@ -9,6 +9,7 @@ TagManager:
   - Player Spawn
   - Ground
   - Player
+  - Orb
   layers:
   - Default
   - TransparentFX
