@@ -820,7 +820,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1835896139}
         m_MethodName: pressOptionBtn
         m_Mode: 1
         m_Arguments:
@@ -998,25 +998,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 1835896134}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d23d47d82b6aac45b3897ca70727761, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a8a9f36e2ef0c24e8a9894e9589932e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  btnList_mainMenu:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  mainMenu_currentBtn: 0
   preStartMenu: {fileID: 913192185}
   mainMenu: {fileID: 474219429}
   optionsMenu: {fileID: 1490131526}
   cg_preMain: {fileID: 913192186}
   cg_main: {fileID: 474219428}
   cg_options: {fileID: 1490131527}
-  btn_options: {fileID: 1481711914}
-  btn_fight: {fileID: 894098832}
+  btn_options: {fileID: 894098832}
+  btn_fight: {fileID: 1481711914}
   btn_quit: {fileID: 674427633}
   Tags:
-    Active: 0
+    Active: 1
     Main: 0
     Player: 0
     Damage: 0
     Spells: 0
-    UI: 0
+    UI: 1
     Testing: 0
 --- !u!1 &1967394577
 GameObject:

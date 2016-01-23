@@ -21,6 +21,9 @@ public class MainUIManager : MonoBehaviour {
     public GameObject btn_options;
     public GameObject btn_fight;
     public GameObject btn_quit;
+    public Animator anim_options;
+    public Animator anim_fight;
+    public Animator anim_quit;
 
     [Header("Debug")]
     public DebugValues Tags;
@@ -51,6 +54,7 @@ public class MainUIManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        // controller stuffs
         for (int i = 1; i <= joystickY.Length; i++)
         {
             if (Input.GetAxis("P" + i + "_Vertical") > 0.3f && joystickY[i - 1] == 0) { joystickY[i - 1] = 1; }
@@ -58,6 +62,7 @@ public class MainUIManager : MonoBehaviour {
             if (Input.GetAxis("P" + i + "_Vertical") <= 0.3f && Input.GetAxis("P" + i + "_Vertical") >= -0.3f && joystickY[i - 1] != 0) { joystickY[i - 1] = 0; }
         }
 
+        // buttonSelector
         if (cg_main.interactable == true)
         {
             if (Input.GetKeyDown(KeyCode.DownArrow) || joystickY[0] == -1 || joystickY[1] == -1 || joystickY[2] == -1 || joystickY[3] == -1)
@@ -76,6 +81,7 @@ public class MainUIManager : MonoBehaviour {
 
         }
 
+        // preMain control
         if (preStartMenu.GetBool("preMain_active") == true)
         {
             if(Input.anyKey)
@@ -93,6 +99,7 @@ public class MainUIManager : MonoBehaviour {
             }
         } 
         
+        // button functions
         if (mainMenu.GetBool("main_active") == true)
         {
             if (mainMenu_currentBtn == 0)
@@ -125,7 +132,8 @@ public class MainUIManager : MonoBehaviour {
         if (joystickY[1] == -1) { joystickY[1] = -2; }
         if (joystickY[2] == -1) { joystickY[2] = -2; }
         if (joystickY[3] == -1) { joystickY[3] = -2; }
-    }
+
+    } // update end
 
     // optionsButton controller
     public void pressOptionBtn()
