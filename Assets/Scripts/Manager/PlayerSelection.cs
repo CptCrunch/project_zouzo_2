@@ -38,7 +38,7 @@ public class PlayerSelection : MonoBehaviour
 
     void Start()
     {
-        CustomDebuger.Log(Test.Instance.TestInt);
+        //CustomDebuger.Log(Test.Instance.TestInt);
 
         // set notConnected images
         for (int i = 0; i < characterHolder.Length; i++)
