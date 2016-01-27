@@ -40,6 +40,7 @@ public class SceneWindow : EditorWindow {
         if (GUILayout.Button("Create Scene"))
         {
             EditorApplication.NewScene();
+            DestroyImmediate(Camera.main.gameObject);
             foreach(GameObject i in prefabs)
             {
                 if (i != null)
