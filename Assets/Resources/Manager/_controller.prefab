@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 456444}
   - 114: {fileID: 11411430}
   - 114: {fileID: 11435204}
+  - 114: {fileID: 11407454}
   m_Layer: 0
   m_Name: _controller
   m_TagString: Untagged
@@ -29,6 +30,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11407454
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 122012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19686ab8d31ff824ab326e447c27f273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orbTag: Orb
+  orbPrefab: {fileID: 0}
+  spawnPointsCheck:
+  - prefab: {fileID: 0}
+    index: 0
+    active: 0
+  - prefab: {fileID: 0}
+    index: 0
+    active: 0
+  - prefab: {fileID: 0}
+    index: 0
+    active: 0
+  - prefab: {fileID: 0}
+    index: 0
+    active: 0
 --- !u!114 &11411430
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -40,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 976bae19c6eb6c94f987156ea5f2e99e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Running: 0
   playerAmmount: 0
   playerMaxHealth: 0
   abilityLimit: 3
