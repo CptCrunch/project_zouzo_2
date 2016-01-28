@@ -102,26 +102,46 @@ public class MainUIManager : MonoBehaviour {
         // button functions
         if (mainMenu.GetBool("main_active") == true)
         {
+            // if fight button is selected
             if (mainMenu_currentBtn == 0)
             {
+                anim_fight.SetBool("fight_selected", true);
+                anim_options.SetBool("options_selected", false);
+                anim_quit.SetBool("quit_selected", false);
+
+                // if fight button is pressed
                 if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick2Button0) || Input.GetKeyDown(KeyCode.Joystick3Button0) || Input.GetKeyDown(KeyCode.Joystick4Button0))
                 {
                     CustomDebug.Log("fight pressed", "UI");
+                    Application.LoadLevel("Prototype_Selection");
                 }
             }
+            // if option button is selected
             else if (mainMenu_currentBtn == 1)
             {
+                anim_options.SetBool("options_selected", true);
+                anim_fight.SetBool("fight_selected", false);
+                anim_quit.SetBool("quit_selected", false);
+
+                // if options button is pressed
                 if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick2Button0) || Input.GetKeyDown(KeyCode.Joystick3Button0) || Input.GetKeyDown(KeyCode.Joystick4Button0))
                 {
                     CustomDebug.Log("options pressed", "UI");
                 }
 
             }
+            // if quit button is selected
             else if (mainMenu_currentBtn == 2)
             {
+                anim_quit.SetBool("quit_selected", true);
+                anim_fight.SetBool("fight_selected", false);
+                anim_options.SetBool("options_selected", false);
+
+                // if quit button is pressed
                 if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick2Button0) || Input.GetKeyDown(KeyCode.Joystick3Button0) || Input.GetKeyDown(KeyCode.Joystick4Button0))
                 {
                     CustomDebug.Log("quit pressed", "UI");
+                    Application.Quit();
                 }
 
             }

@@ -6,7 +6,8 @@ public class Gamerules : MonoBehaviour {
 
     public static Gamerules _instance;
 
-    private bool Running;
+    [HideInInspector]
+    public bool Running;
 
     #region Gamerules Variable
     [Header("Game Rules")]
@@ -43,12 +44,6 @@ public class Gamerules : MonoBehaviour {
     [HideInInspector]
     public GameObject[] spawnedPlayer = new GameObject[4];
 
-    //Orb Spawn
-    [Header("Orb Spawn")]
-    public string orbTag = "Orb";
-    public GameObject[] spawnPoints = new GameObject[4];
-    public GameObject orbPrefab;
-
     [Header("Debug")]
     public DebugValues Tags;
     #endregion
@@ -72,7 +67,6 @@ public class Gamerules : MonoBehaviour {
         CustomDebug.EnableTag("Testing", Tags.Testing);
 
         playerSpawn = GameObject.FindGameObjectsWithTag(spawnTag);
-        spawnPoints = GameObject.FindGameObjectsWithTag(orbTag);
 
         while (Running)
         {
