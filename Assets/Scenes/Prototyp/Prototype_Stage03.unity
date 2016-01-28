@@ -939,14 +939,6 @@ Prefab:
       propertyPath: moveSpeed
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 473802, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 473802, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
   m_IsPrefabParent: 0
@@ -1995,7 +1987,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 498222, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11428654, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
       propertyPath: playerAxis
@@ -2004,14 +1996,6 @@ Prefab:
     - target: {fileID: 11428654, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
       propertyPath: moveSpeed
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 498222, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 498222, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
@@ -4364,11 +4348,11 @@ Prefab:
       objectReference: {fileID: 430966, guid: 4b01f4add6101ea4baec7f0bf7080285, type: 2}
     - target: {fileID: 453104, guid: 6906339cacaddc549bcd60c8a96aae10, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 453104, guid: 6906339cacaddc549bcd60c8a96aae10, type: 2}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6906339cacaddc549bcd60c8a96aae10, type: 2}
@@ -4953,9 +4937,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -4970,8 +4952,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 637772348}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.00999999978, y: .00999999978, z: 0}
-  m_LocalScale: {x: 4.16921043, y: 3.6980474, z: 1.16341734}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 5.93462324, y: 5.22812033, z: 1.41300547}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -6780,19 +6762,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11489008, guid: b3d938f58e985734fb0d4a50e6ef1b9b, type: 2}
       propertyPath: preferUncropped
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2080376, guid: b3d938f58e985734fb0d4a50e6ef1b9b, type: 2}
-      propertyPath: orthographic size
-      value: .574999988
-      objectReference: {fileID: 0}
-    - target: {fileID: 2080376, guid: b3d938f58e985734fb0d4a50e6ef1b9b, type: 2}
-      propertyPath: orthographic
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2075202, guid: b3d938f58e985734fb0d4a50e6ef1b9b, type: 2}
+    - target: {fileID: 2080376, guid: b3d938f58e985734fb0d4a50e6ef1b9b, type: 2}
       propertyPath: orthographic size
-      value: 10
+      value: .600000024
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b3d938f58e985734fb0d4a50e6ef1b9b, type: 2}
