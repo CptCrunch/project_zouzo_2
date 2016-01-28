@@ -53,8 +53,10 @@ public class GridEditor : Editor
         //base.OnInspectorGUI();
         if (GUILayout.Button("Open Grid Window"))
         {
-            GridWindow window = (GridWindow)EditorWindow.GetWindow(typeof(GridWindow));
+            GridWindow window = (GridWindow)EditorWindow.GetWindow(typeof(GridWindow), true, "Grid Options");
             window.init();
+            window.maxSize = new Vector2(400, 80f);
+            window.minSize = new Vector2(400f, 80f);
         }
 
         // Tile Prefab
