@@ -10,12 +10,14 @@ namespace UnityEngine
     {
         private static bool active;
         private static Dictionary<string, bool> tags = new Dictionary<string, bool>() {
-            {"Main", false },
+            {"Main", false},
+            {"Testing", false},
             {"Player", false},
             {"Damage", false},
             {"Spells", false},
-            {"Testing", false},
-            {"UI", false}
+            {"UI", false},
+            {"Animation", false},
+            {"Condition", false}
         };
 
         #region Extras

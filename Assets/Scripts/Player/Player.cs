@@ -81,6 +81,8 @@ public class Player : MonoBehaviour
 
     #endregion
 
+    public bool Mirror { get { return mirror; } }
+
     void Start()
     {
         if (playerAxis == "KB" || playerAxis == "P1" || playerAxis == "P2" || playerAxis == "P3" || playerAxis == "P4") { }
@@ -130,10 +132,10 @@ public class Player : MonoBehaviour
         Debug.Log(debugText);*/
 
         // set starter abilities
-        abilityArray[0] = AbilityManager._instance.CreateBasic();           // basic
-        abilityArray[1] = AbilityManager._instance.CreateCapricorn();       // spell_1
-        abilityArray[2] = AbilityManager._instance.CreateLeo();             // spell_2
-        abilityArray[3] = AbilityManager._instance.CreateSaggitarius();     // spell_3
+        abilityArray[0] = AbilityManager.Instance.CreateBasic();           // basic
+        abilityArray[1] = AbilityManager.Instance.CreateCapricorn();       // spell_1
+        abilityArray[2] = AbilityManager.Instance.CreateLeo();             // spell_2
+        abilityArray[3] = AbilityManager.Instance.CreateSaggitarius();     // spell_3
 
         controller = GetComponent<Controller2D>();
         _animator = GetComponent<Animator>();
@@ -155,10 +157,13 @@ public class Player : MonoBehaviour
         if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked) { disabled = true; }
         else { disabled = false; }
 
-        // update Cooldowns
+        // update Cooldowns / timeBetweenCasts
         foreach (Attacks _spell in abilityArray)
         {
+            // update cooldown
             _spell.UpdateCooldowns();
+            // update timeBetweenCasts
+            if (_spell.IsCasted) { _spell.TimeBeteewnCasts += Time.deltaTime; }
         }
 
         // use ability
@@ -204,7 +209,7 @@ public class Player : MonoBehaviour
         }
         #endregion
 
-        
+        #region use meele abilities
         // use meele abilities
         if (castedMeeleSpell != null)
         {
@@ -215,58 +220,9 @@ public class Player : MonoBehaviour
             flipEnable = false;
 
             // check in how many directions the bullet can be shot
-            switch (castedMeeleSpell.SpellDir)
-            {
-                case 2:
-                    // get the aim direction
-                    switch (Util.Aim2Direction(new Vector2(Input.GetAxis(playerAxis + "_Vertical"), Input.GetAxis(playerAxis + "_Horizontal"))))
-                    {
-                        case "right": spellDirection = new Vector2(1, 0); break;
-                        case "left": spellDirection = new Vector2(-1, 0); break;
-                        case "noAim":
-                            if (mirror) { spellDirection = new Vector2(1, 0); }
-                            else { spellDirection = new Vector2(-1, 0); }
-                            break;
-                    }
-                    break;
+            spellDirection = Util.GetAimDirection(castedMeeleSpell, this);
 
-                case 4:
-                    // get the aim direction
-                    switch (Util.Aim4Direction(new Vector2(Input.GetAxis(playerAxis + "_Vertical"), Input.GetAxis(playerAxis + "_Horizontal"))))
-                    {
-                        case "up": spellDirection = new Vector2(0, 1); break;
-                        case "right": spellDirection = new Vector2(1, 0); break;
-                        case "down": spellDirection = new Vector2(0, -1); break;
-                        case "left": spellDirection = new Vector2(-1, 0); break;
-                        case "noAim":
-                            if (mirror) { spellDirection = new Vector2(1, 0); }
-                            else { spellDirection = new Vector2(-1, 0); }
-                            break;
-                    }
-                    break;
-
-                case 8:
-                    // get the aim direction
-                    switch (Util.Aim8Direction(new Vector2(Input.GetAxis(playerAxis + "_Vertical"), Input.GetAxis(playerAxis + "_Horizontal"))))
-                    {
-                        case "up": spellDirection = new Vector2(0, 1); break;
-                        case "upRight": spellDirection = new Vector2(0.5f, 0.5f); break;
-                        case "right": spellDirection = new Vector2(1, 0); break;
-                        case "downRight": spellDirection = new Vector2(0.5f, -0.5f); break;
-                        case "down": spellDirection = new Vector2(0, -1); break;
-                        case "downLeft": spellDirection = new Vector2(-0.5f, -0.5f); break;
-                        case "left": spellDirection = new Vector2(-1, 0); break;
-                        case "upLeft": spellDirection = new Vector2(-1, 0.5f); break;
-                        case "noAim":
-                            if (mirror) { spellDirection = new Vector2(1, 0); }
-                            else { spellDirection = new Vector2(-1, 0); }
-                            break;
-                    }
-                    break;
-
-            }
-
-            // use the meele attack funktion 
+            // cast spell
             UseMeleeAttack();
         }
 
@@ -275,11 +231,12 @@ public class Player : MonoBehaviour
             if (isAttacking) { isAttacking = false; }
             if (!flipEnable) { flipEnable = true; }
         }
-
+        #endregion
     }
 
     void Movement()
     {
+        // checkif player can move
         if (!disabled)
         {
             // horizontal movement
@@ -462,6 +419,8 @@ public class Player : MonoBehaviour
                             // checks if the spell already hit its max of players
                             if (!castedMeeleSpell.MaxTargetsReached())
                             {
+                                CustomDebug.Log("<b><color=white>" + castedMeeleSpell.Name + "</color></b> hit <b>" + objectHit.transform.gameObject.GetComponent<Player>().playerVitals.Name + "</b>", "Spells");
+
                                 // add player hit
                                 castedMeeleSpell.PlayersHit++;
 
@@ -495,58 +454,9 @@ public class Player : MonoBehaviour
         {
             // instantiate bullet
             GameObject bulletInstance = Instantiate(_bullet, transform.position, transform.rotation) as GameObject;
-            
+
             // check in how many directions the bullet can be shot
-            switch (_spell.SpellDir)
-            {
-                case 2:
-                    // get the aim direction
-                    switch (Util.Aim2Direction(new Vector2(Input.GetAxis(playerAxis + "_Vertical"), Input.GetAxis(playerAxis + "_Horizontal"))))
-                    {
-                        case "right": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(1, 0); break;
-                        case "left": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(-1, 0); break;
-                        case "noAim":
-                            if (mirror) { bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(1, 0); }
-                            else { bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(-1, 0); }
-                            break;
-                    }
-                break;
-
-                case 4:
-                    // get the aim direction
-                    switch (Util.Aim4Direction(new Vector2(Input.GetAxis(playerAxis + "_Vertical"), Input.GetAxis(playerAxis + "_Horizontal"))))
-                    {
-                        case "up": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(0, 1); break;
-                        case "right": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(1, 0); break;
-                        case "down": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(0, -1); break;
-                        case "left": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(-1, 0); break;
-                        case "noAim":
-                            if (mirror) { bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(1, 0); }
-                            else { bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(-1, 0); }
-                            break;
-                    }
-                    break;
-
-                case 8:
-                    // get the aim direction
-                    switch (Util.Aim8Direction(new Vector2(Input.GetAxis(playerAxis + "_Vertical"), Input.GetAxis(playerAxis + "_Horizontal"))))
-                    {
-                        case "up": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(0, 1); break;
-                        case "upRight": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(0.5f, 0.5f); break;
-                        case "right": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(1, 0); break;
-                        case "downRight": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(0.5f, -0.5f); break;
-                        case "down": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(0, -1); break;
-                        case "downLeft": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(-0.5f, -0.5f); break;
-                        case "left": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(-1, 0); break;
-                        case "upLeft": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(-1, 0.5f); break;
-                        case "noAim":
-                            if (mirror) { bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(1, 0); }
-                            else { bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(-1, 0); }
-                            break;
-                    }
-                    break;
-            }
-
+            bulletInstance.GetComponent<SpellBullet>().spellDir = Util.GetAimDirection(_spell, this);
 
             // pass over bullet speed
             bulletInstance.GetComponent<SpellBullet>().usedSpell = _spell;
@@ -565,7 +475,7 @@ public class Player : MonoBehaviour
 
     public GameObject GetCapricorn2Targets()
     {
-        float range = AbilityManager._instance.spells[10].knockBackRange;
+        float range = AbilityManager.Instance.spells[10].knockBackRange;
         GameObject nearestPlayer = null;
         float distanceToPlayer = range;
 

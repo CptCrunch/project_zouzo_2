@@ -64,14 +64,22 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  orbTag: Orb
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  orbPrefab: {fileID: 0}
   Tags:
     Active: 1
-    Main: 1
-    Player: 1
-    Damage: 1
-    Spells: 1
-    UI: 1
-    Testing: 1
+    Main: 0
+    Player: 0
+    Damage: 0
+    Spells: 0
+    UI: 0
+    Testing: 0
+    Condition: 1
 --- !u!114 &11435204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -100,6 +108,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: Taurus
     damage: 0
     castTime: 0
@@ -116,6 +128,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: Gemini
     damage: 0
     castTime: 0
@@ -132,6 +148,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: Cancer
     damage: 0
     castTime: 0
@@ -148,22 +168,30 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: Leo
     damage: 5
     castTime: 0
     duration: 0
     cooldown: 2
     range: 2
-    targets: 1
+    targets: 0
     directions: 2
-    travelTime: .200000003
+    travelTime: 0.2
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
     knockBackRange: 0
     knockBackStrenght: 0
     charges: 3
-    chargeCooldown: .5
+    chargeCooldown: 0.5
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: Virgo
     damage: 0
     castTime: 0
@@ -180,6 +208,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: Libra
     damage: 0
     castTime: 0
@@ -196,6 +228,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: Scorpio
     damage: 0
     castTime: 0
@@ -212,38 +248,50 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
-  - name: Sagittarius
-    damage: 500
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: Saggitarius
+    damage: 20
     castTime: 0
     duration: 0
-    cooldown: 4
-    range: 0
+    cooldown: 2
+    range: 6
     targets: 0
     directions: 8
     travelTime: 0
     bullet: {fileID: 193644, guid: 7aa2708f04cb29c4597fe0c1a923b347, type: 2}
-    bulletSpeed: 2
+    bulletSpeed: 20
     knockUpHeght: 0
     knockBackRange: 0
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 2
+    minRange: 2
+    stickArrowPerCent: 0.5
+    castSlow: 0
   - name: Capricorn
     damage: 20
     castTime: 0
     duration: 0
-    cooldown: 5
+    cooldown: 1
     range: 4
-    targets: 0
+    targets: 1
     directions: 2
-    travelTime: .400000006
+    travelTime: 0.5
     bullet: {fileID: 0}
     bulletSpeed: 0
-    knockUpHeght: 3
-    knockBackRange: 0
-    knockBackStrenght: 0
+    knockUpHeght: 4
+    knockBackRange: 4
+    knockBackStrenght: 3
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: Aquarius
     damage: 0
     castTime: 0
@@ -260,6 +308,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: Aquarius
     damage: 0
     castTime: 0
@@ -276,15 +328,19 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: Basic
     damage: 10
     castTime: 0
     duration: 0
-    cooldown: .5
-    range: 2
+    cooldown: 0.5
+    range: 0.9
     targets: 1
     directions: 2
-    travelTime: .300000012
+    travelTime: 0.2
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
@@ -292,6 +348,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   spells:
   - name: 
     damage: 0
@@ -309,6 +369,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: 
     damage: 0
     castTime: 0
@@ -325,6 +389,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: 
     damage: 0
     castTime: 0
@@ -341,6 +409,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: 
     damage: 0
     castTime: 0
@@ -357,6 +429,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: 
     damage: 0
     castTime: 0
@@ -373,6 +449,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: 
     damage: 0
     castTime: 0
@@ -389,6 +469,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: 
     damage: 0
     castTime: 0
@@ -405,6 +489,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: 
     damage: 0
     castTime: 0
@@ -421,6 +509,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: 
     damage: 0
     castTime: 0
@@ -437,6 +529,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: 
     damage: 0
     castTime: 0
@@ -453,6 +549,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: 
     damage: 0
     castTime: 0
@@ -469,6 +569,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: 
     damage: 0
     castTime: 0
@@ -485,6 +589,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
   - name: 
     damage: 0
     castTime: 0
@@ -501,6 +609,10 @@ MonoBehaviour:
     knockBackStrenght: 0
     charges: 0
     chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

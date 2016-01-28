@@ -3,14 +3,15 @@ using System.Collections;
 
 public class AbilityManager : MonoBehaviour {
 
-    public static AbilityManager _instance;
+    public static AbilityManager Instance;
 
-    public Abilities[] abilities = new Abilities[0];
-    public Abilities[] spells = new Abilities[13];
+    public Abilities[] abilities = new Abilities[0]; // array with all abilitie stats
+    [HideInInspector]
+    public Abilities[] spells = new Abilities[13]; // sorted array with all abilitie stats
 
     void Awake()
     {
-        if (_instance == null) { _instance = this; }
+        if (Instance == null) { Instance = this; }
 
         for (int i = 0; i < abilities.Length; i++)
         {
@@ -45,7 +46,7 @@ public class AbilityManager : MonoBehaviour {
 
     public Attacks CreateSaggitarius()
     {
-        return new Saggitarius(spells[9].damage, spells[9].castTime, spells[9].bulletSpeed, spells[9].duration, spells[9].cooldown, spells[9].range, spells[9].targets, spells[9].directions, spells[9].bullet);
+        return new Saggitarius(spells[9].damage, spells[9].castTime, spells[9].bulletSpeed, spells[9].duration, spells[9].cooldown, spells[9].range, spells[9].targets, spells[9].directions, spells[9].bullet, spells[9].timeToGetMaxRange, spells[9].minRange, spells[9].stickArrowPerCent, spells[9].castSlow);
     }
 
     public Attacks CreateCapricorn()
@@ -53,6 +54,7 @@ public class AbilityManager : MonoBehaviour {
         return new Capricorn(spells[10].damage, spells[10].castTime, spells[10].travelTime, spells[10].duration, spells[10].cooldown, spells[10].range, spells[10].targets, spells[10].directions, spells[10].knockUpHeght, spells[10].knockBackRange, spells[10].knockBackStrenght);
     }
 }
+
 
 [System.Serializable]
 public struct Abilities
@@ -91,4 +93,12 @@ public struct Abilities
     public int charges;
     [Tooltip("nessesary for: leo")]
     public float chargeCooldown;
+    [Tooltip("nessesary for: saggitarius")]
+    public float timeToGetMaxRange;
+    [Tooltip("nessesary for: saggitarius")]
+    public float minRange;
+    [Tooltip("nessesary for: saggitarius\n[0-1]")]
+    public float stickArrowPerCent;
+    [Tooltip("nessesary for: saggitarius")]
+    public float castSlow;
 }

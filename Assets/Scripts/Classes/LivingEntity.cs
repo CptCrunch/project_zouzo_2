@@ -13,6 +13,7 @@ public class LivingEntity
     private float moveSpeed;
     private float slowedSpeed;
     private float currSpeed;
+    private float launchSpeed;
     private float maxHealth;
     private float currHealth;
 
@@ -21,6 +22,7 @@ public class LivingEntity
     private bool slowed = false;
     private bool slowedOverTime = false;
     private int slowIndex = 0;
+    private bool launching = false;
     private bool knockUped = false;
     private int knockUpIndex = 0;
     private bool knockBacked = false;
@@ -46,6 +48,7 @@ public class LivingEntity
         currSpeed = moveSpeed;
         this.slowedSpeed = slowedSpeed;
         this.currHealth = maxHealth;
+        launchSpeed = moveSpeed;
     }
 
     #region Get & Set
@@ -77,7 +80,7 @@ public class LivingEntity
     // damage Player
     public void GetDamage(float _ammount) {
 
-        Debug.Log("<b>" + name + "</b> got <color=red>" + _ammount + " damage</color>");
+        CustomDebug.Log("<b>" + name + "</b> got <color=red>" + _ammount + " damage</color>","Damage");
         currHealth -= _ammount;
         if (_ammount >= maxHealth || currHealth <= 0) { currHealth = 0; }
     }
@@ -94,12 +97,23 @@ public class LivingEntity
 
     public void ApplySlow(bool _toggle)
     {
-        if (_toggle) { currSpeed = slowedSpeed; slowed = true; /*Debug.Log("<b>" + name + "s</b> Slow start");*/ }
+        if (_toggle)
+        {
+            if (currSpeed > slowedSpeed)
+            {
+                currSpeed = slowedSpeed;
+                slowed = true;
+                CustomDebug.Log("<b>" + name + "</b>s <color=magenta>Slow</color> start", "Condition");
+            }
+        }
+
         else
         {
             slowed = false;
-            /*Debug.Log("<b>" + name + "</b>s Slow stop");*/
-            if (!Slowed) { currSpeed = moveSpeed; }
+            CustomDebug.Log("<b>" + name + "</b>s <color=magenta>Slow</color> stop", "Condition");
+
+            if (!slowedOverTime) { currSpeed = moveSpeed; }
+            if (launching) { currSpeed = launchSpeed; }
         }
     }
 
@@ -109,6 +123,30 @@ public class LivingEntity
 
         try { SlowOverTimeThread.Start(); }
         catch (ThreadStateException) { Debug.LogError("Error with SlowOverTimeThread Thread"); }
+    }
+
+    public void ApplyLaunch(bool _toggel, float _speed)
+    {
+        if (_toggel)
+        {
+            launching = true;
+            CustomDebug.Log("<b>" + name + "</b>s <color=magenta>Launch</color> start", "Condition");
+
+            if (_speed < launchSpeed) { launchSpeed = _speed; }
+
+            if (_speed < currSpeed) { currSpeed = _speed; }
+        }
+
+        else
+        {
+            launching = false;
+            CustomDebug.Log("<b>" + name + "</b>s <color=magenta>Launch</color> stop", "Condition");
+
+            launchSpeed = moveSpeed;
+
+            if (slowed || slowedOverTime) { currSpeed = slowedSpeed; }
+            else { currSpeed = moveSpeed; }
+        }
     }
 
     public void ApplyPlayerKnockUp(float _height)
@@ -144,7 +182,7 @@ public class LivingEntity
 
         // set player stunned
         stunned = true;
-        /*Debug.Log("<b>" + name + "</b>s Stun start");*/
+        CustomDebug.Log("<b>" + name + "</b>s <color=magenta>Stun</color> start", "Codition");
 
         // set movemntspeed to 0
         instance.velocity.x = 0;
@@ -153,7 +191,7 @@ public class LivingEntity
         Thread.Sleep(_time);
 
         // check if stun should end or if there is a newer stun
-        if (currIndex == stunIndex) { stunned = false; /*Debug.Log("<b>" + name + "</b>s Stun stop");*/ }
+        if (currIndex == stunIndex) { stunned = false; CustomDebug.Log("<b>" + name + "</b>s <color=magenta>Stuny/color> stop", "Condition"); }
     }
 
     private void SlowOverTime(int _time) {
@@ -163,7 +201,7 @@ public class LivingEntity
         
         // set player slowed
         slowedOverTime = true;
-        /*Debug.Log("<b>" + name + "</b>s SlowOverTime start");*/
+        CustomDebug.Log("<b>" + name + "</b>s <color=magenta>SlowOverTime</color> start", "Condition");
 
         // set speed
         currSpeed = slowedSpeed;
@@ -176,10 +214,11 @@ public class LivingEntity
             
             // set player to not slowed
             slowedOverTime = false;
-            /*Debug.Log("<b>" + name + "</b>s SlowOverTime stop");*/
+            CustomDebug.Log("<b>" + name + "</b>s <color=magenta>SlowOverTime</color> stop", "Condition");
 
             // set speed to noemal speed
             if (!Slowed) { currSpeed = moveSpeed; }
+            if (launching) { currSpeed = launchSpeed; }
         }
     }
 
@@ -196,7 +235,7 @@ public class LivingEntity
 
         // set player knockUped
         knockUped = true;
-        Debug.Log("<b>" + name + "</b> is <color=magenta>KnockUped</color> for <color=magenta>" + inAirTime + "</color> sec");
+        CustomDebug.Log("<b>" + name + "</b> is <color=magenta>KnockUped</color> for <color=magenta>" + inAirTime + "</color> sec", "Condition");
 
         // add velocity
         instance.velocity.x = 0;
@@ -206,7 +245,7 @@ public class LivingEntity
         Thread.Sleep(Convert.ToInt32(Util.ConvertSecondsToMilliseconds(Convert.ToDouble(inAirTime))));
 
         // check if knockUp should end or if there is a newer nockUp
-        if (currIndex == knockUpIndex) { knockUped = false; Debug.Log("<b>" + name + "</b>s <color=magenta>KnockUp</color> stop"); }
+        if (currIndex == knockUpIndex) { knockUped = false; CustomDebug.Log("<b>" + name + "</b>s <color=magenta>KnockUp</color> stop", "Condition"); }
     }
 
     private void PlayerKnockBack(float _xDistance, float _yDistance)
@@ -223,9 +262,9 @@ public class LivingEntity
 
         // set player knockedBack
         knockBacked = true;
+        CustomDebug.Log("<b>" + name + "</b> is <color=magenta>KnockBacked</color> for <color=magenta>" + inAirTime + "</color> sec", "Condition");
 
         // add velocity
-        Debug.Log("x: " + _xDistance + "\ny: " + _yDistance);
         instance.velocity.x = _xDistance / inAirTime;
         instance.velocity.y = knockUpStrenght * inAirTime;
 
@@ -233,14 +272,14 @@ public class LivingEntity
         Thread.Sleep(Convert.ToInt32(Util.ConvertSecondsToMilliseconds(Convert.ToDouble(inAirTime))));
 
         // check if knockBack should end or if there is a newer knockBack
-        if (currIndex == knockBackIndex) { knockBacked = false; Debug.Log("<b>" + name + "</b>s <color=magenta>KockBack</color> stop"); }
+        if (currIndex == knockBackIndex) { knockBacked = false; CustomDebug.Log("<b>" + name + "</b>s <color=magenta>KockBack</color> stop", "Condition"); }
     }
     
     private void Dash(float _xDistance, int _time)
     {
         // set player to dashing
         dashing = true;
-        /*Debug.Log("<b>" + name + "</b>s Dash start");*/
+        CustomDebug.Log("<b>" + name + "</b>s <color=manta>Dash</color> start", "Condition");
 
         //add velocity
         instance.velocity.x = _xDistance / (float)Util.ConvertMillisecondsToSeconds(_time);
@@ -250,7 +289,7 @@ public class LivingEntity
 
         // stop dashing
         dashing = false;
-        /*Debug.Log("<b>" + name + "</b>s Dash stop");*/
+        CustomDebug.Log("<b>" + name + "</b>s <color=magenta>Dash</color> stop", "Condition");
     }
     #endregion
     #endregion
