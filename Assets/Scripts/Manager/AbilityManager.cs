@@ -27,7 +27,7 @@ public class AbilityManager : MonoBehaviour
                 case "Virgo": spells[6] = abilities[i]; break;
                 case "Libra": spells[7] = abilities[i]; break;
                 case "Scorpio": spells[8] = abilities[i]; break;
-                case "Saggitarius": spells[9] = abilities[i]; break;
+                case "Sagittarius": spells[9] = abilities[i]; break;
                 case "Capricorn": spells[10] = abilities[i]; break;
                 case "Aquarius": spells[11] = abilities[i]; break;
                 case "Pisces": spells[12] = abilities[i]; break;
@@ -56,6 +56,7 @@ public class AbilityManager : MonoBehaviour
 
     public Attacks CreateSaggitarius()
     {
+        Debug.Log("Found bullet: " + spells[9].bullet);
         return new Saggitarius(spells[9].damage, spells[9].castTime, spells[9].bulletSpeed, spells[9].duration, spells[9].cooldown, spells[9].range, spells[9].targets, spells[9].directions, spells[9].bullet, spells[9].timeToGetMaxRange, spells[9].minRange, spells[9].stickArrowPerCent, spells[9].castSlow);
     }
 

@@ -392,38 +392,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 11435204, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: abilities.Array.data[8].castSlow
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: Tags.Damage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: Tags.Spells
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: Tags.UI
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: Tags.Animation
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: Tags.Player
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: Tags.Testing
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11411430, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
-      propertyPath: Tags.Main
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
   m_IsPrefabParent: 0

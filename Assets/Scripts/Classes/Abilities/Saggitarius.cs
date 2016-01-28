@@ -75,6 +75,7 @@ public class Saggitarius : Attacks {
             // wait castTime
 
             // cast spell
+            CustomDebug.Log("Found bullet: " + bullet != null, "Testing");
             playerScript.FireSkillShot(this, bullet);
             CustomDebug.Log("<b>" + caster.GetComponent<Player>().playerVitals.Name + "</b> casted<b><color=white> " + Name + "</color></b>", "Spells");
 
