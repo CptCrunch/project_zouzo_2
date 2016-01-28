@@ -31,6 +31,7 @@ public class AbilityManager : MonoBehaviour
                 case "Capricorn": spells[10] = abilities[i]; break;
                 case "Aquarius": spells[11] = abilities[i]; break;
                 case "Pisces": spells[12] = abilities[i]; break;
+                default: Debug.LogError(abilities[i].name + " is not a accepted value"); break;
             }
         }
     }
