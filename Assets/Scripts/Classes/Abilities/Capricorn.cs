@@ -91,7 +91,7 @@ public class Capricorn : Attacks {
         LivingEntity Vitals = _target.GetComponent<Player>().playerVitals;
 
         // knock the target up and deal damage
-        try { Vitals.ApplyPlayerKnockUp(height); }
+        try { Vitals.ApplyKnockUp(height); }
         catch (OverflowException) { Debug.LogError("Is Outside range of Int32 tyoe."); }
 
         // deal damage
@@ -101,20 +101,22 @@ public class Capricorn : Attacks {
     public void UseCapricorn2(GameObject _caster, GameObject _target)
     {
         // get the vitals of the target
-        LivingEntity Vitals = _target.GetComponent<Player>().playerVitals;
+        LivingEntity targetVitals = _target.GetComponent<Player>().playerVitals;
 
         // get distance between caster and target
         float dirX = _target.transform.position.x - _caster.transform.position.x;
         float dirY = _target.transform.position.y - _caster.transform.position.y;
 
         // get mutiplicator
-        float multi = 1 / Mathf.Sqrt(dirX * dirX + dirY * dirY);
-        
+        float multi = Mathf.Sqrt(1 / (dirX * dirX + dirY * dirY));
+
         // kock target away form caster
-        _target.GetComponent<Player>().playerVitals.ApplyPlayerKnockBack(dirX * multi * knockBackStrenght, dirY * multi * knockBackStrenght);
+        float time = targetVitals.ApplyKnockUp(dirY * multi * knockBackStrenght);
+        Debug.Log("KnockUpTime: " + time);
+        targetVitals.ApplyKnockBack(dirX * multi * knockBackStrenght, time);
 
         // deal damage
-        Vitals.GetDamage(Damage);
+        targetVitals.GetDamage(Damage);
 
         // disable Capricorn2
         usedInAir = true;
