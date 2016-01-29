@@ -25,11 +25,16 @@ public class LivingEntity
     private bool launching = false;
     private bool knockUped = false;
     private int knockUpIndex = 0;
+    private float knockUpTime = 0;
     private bool knockBacked = false;
     private int knockBackIndex = 0;
     private bool dashing = false;
 
-    private float knockUpTime = 0;
+    private Attacks stunSpell;
+    private Attacks slowSpell;
+    private Attacks slowOverTimeSpell;
+    private Attacks knockUpSpell;
+    private Attacks knockBackSpell;
 
     Thread StunThread;
     Thread SlowOverTimeThread;
@@ -70,6 +75,11 @@ public class LivingEntity
     public bool KnockUped { get { return knockUped; } }
     public bool KnockBacked { get { return knockBacked; } }
     public bool Dashing { get { return dashing; } }
+    public Attacks StunSpell { get { return stunSpell; } }
+    public Attacks SlowSpell { get { return slowSpell; } }
+    public Attacks SlowOverTimeSpell { get { return slowOverTimeSpell; } }
+    public Attacks KnockUpSpell { get { return knockUpSpell; } }
+    public Attacks KnockBackSpell { get { return knockBackSpell; } }
     #endregion
 
     #region Functions
@@ -92,20 +102,22 @@ public class LivingEntity
 
     #region Conditions
     #region apply condition
-    public void ApplyStun(int _time)
+    public void ApplyStun(float _time, Attacks _spell)
     {
+        stunSpell = _spell;
         StunThread = new Thread(() => Stun(_time));
 
         try { StunThread.Start(); }
         catch (ThreadStateException) { Debug.LogError("Error with StunThread Thread"); }
     }
 
-    public void ApplySlow(bool _toggle)
+    public void ApplySlow(bool _toggle, Attacks _spell)
     {
         if (_toggle)
         {
             if (currSpeed > slowedSpeed)
             {
+                slowSpell = _spell;
                 currSpeed = slowedSpeed;
                 slowed = true;
                 CustomDebug.Log("<b>" + name + "</b>s <color=magenta>Slow</color> start", "Condition");
@@ -122,8 +134,9 @@ public class LivingEntity
         }
     }
 
-    public void ApplySlowOverTime(int _time)
+    public void ApplySlowOverTime(int _time, Attacks _spell)
     {
+        slowOverTimeSpell = _spell;
         SlowOverTimeThread = new Thread(() => SlowOverTime(_time));
 
         try { SlowOverTimeThread.Start(); }
@@ -154,8 +167,9 @@ public class LivingEntity
         }
     }
 
-    public float ApplyKnockUp(float _height)
+    public float ApplyKnockUp(float _height, Attacks _spell)
     {
+        knockUpSpell = _spell;
         KnockUpThread = new Thread(() => KnockUp(_height));
 
         try { KnockUpThread.Start(); }
@@ -164,8 +178,9 @@ public class LivingEntity
         return knockUpTime;
     }
 
-    public void ApplyKnockBack(float _xDistance, float _time)
+    public void ApplyKnockBack(float _xDistance, float _time, Attacks _spell)
     {
+        knockBackSpell = _spell;
         KnockBackThread = new Thread(() => KnockBack(_xDistance, _time));
 
         try { KnockBackThread.Start(); }
@@ -182,7 +197,7 @@ public class LivingEntity
     #endregion
 
     #region Thread Conditions
-    private void Stun(int _time) {
+    private void Stun(float _time) {
         // add stunIndex
         stunIndex++;
         int currIndex = stunIndex;
@@ -195,7 +210,7 @@ public class LivingEntity
         instance.velocity.x = 0;
 
         // wait till player isn't stunned
-        Thread.Sleep(_time);
+        Thread.Sleep(Convert.ToInt32(Util.ConvertSecondsToMilliseconds(Convert.ToDouble(_time))));
 
         // check if stun should end or if there is a newer stun
         if (currIndex == stunIndex) { stunned = false; CustomDebug.Log("<b>" + name + "</b>s <color=magenta>Stuny/color> stop", "Condition"); }
@@ -265,7 +280,6 @@ public class LivingEntity
     
     private void KnockBack(float _xDistance, float _time)
     {
-
         // add knockBackIndex
         knockBackIndex++;
         int currIndex = knockBackIndex;

@@ -132,10 +132,10 @@ public class Player : MonoBehaviour
         Debug.Log(debugText);*/
 
         // set starter abilities
-        abilityArray[0] = AbilityManager.Instance.CreateBasic();           // basic
-        abilityArray[1] = AbilityManager.Instance.CreateVirgo();           // spell_1
-        abilityArray[2] = AbilityManager.Instance.CreateCapricorn();             // spell_2
-        abilityArray[3] = AbilityManager.Instance.CreateSaggitarius();     // spell_3
+        abilityArray[0] = AbilityManager.Instance.CreateBasic(gameObject);           // basic
+        abilityArray[1] = AbilityManager.Instance.CreateVirgo(gameObject);           // spell_1
+        abilityArray[2] = AbilityManager.Instance.CreateCapricorn(gameObject);       // spell_2
+        abilityArray[3] = AbilityManager.Instance.CreateSaggitarius(gameObject);     // spell_3
 
         controller = GetComponent<Controller2D>();
         _animator = GetComponent<Animator>();
@@ -153,7 +153,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (playerVitals.KnockUped) { gameObject.GetComponent<SpriteRenderer>().flipY = true; } else { if (gameObject.GetComponent<SpriteRenderer>().flipY == true) { gameObject.GetComponent<SpriteRenderer>().flipY = false; } }
         // Imobelised
         if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked || playerVitals.Dashing) { disabled = true; }
         else { disabled = false; }
@@ -182,6 +181,17 @@ public class Player : MonoBehaviour
         if (Input.GetKeyUp(playerControles[4])) { abilityArray[3].AfterCast(); } // spell_3
 
         /*Debug.Log(name + " health: " + playerVitals.CurrHealth);*/
+
+        // virgo stun
+        if (controller.collisions.left || controller.collisions.right)
+        {
+            // ckeck if player is knockBacked from a virgo spell
+            if (playerVitals.KnockBacked && playerVitals.KnockBackSpell.ID == 6)
+            {
+                Virgo virgoSpell = (Virgo)playerVitals.KnockBackSpell;
+                playerVitals.ApplyStun(virgoSpell.StunTime, virgoSpell);
+            }
+        }
 
         // Get movement input ( controler / keyboard )
         input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
