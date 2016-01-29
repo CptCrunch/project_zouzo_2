@@ -29,6 +29,8 @@ public class LivingEntity
     private int knockBackIndex = 0;
     private bool dashing = false;
 
+    private float knockUpTime = 0;
+
     Thread StunThread;
     Thread SlowOverTimeThread;
     Thread KnockUpThread;
@@ -57,14 +59,17 @@ public class LivingEntity
     public float CurrHealth { get { return currHealth; } }
 
     public bool Stunned { get { return stunned; } }
-    public bool Slowed {
-        get {
+    public bool Slowed
+    {
+        get
+        {
             if (!slowed && !slowedOverTime) { return false; }
             else { return true;  }
         }
     }
     public bool KnockUped { get { return knockUped; } }
     public bool KnockBacked { get { return knockBacked; } }
+    public bool Dashing { get { return dashing; } }
     #endregion
 
     #region Functions
@@ -149,28 +154,30 @@ public class LivingEntity
         }
     }
 
-    public void ApplyPlayerKnockUp(float _height)
+    public float ApplyKnockUp(float _height)
     {
-        KnockUpThread = new Thread(() => PlayerKnockUp(_height));
+        KnockUpThread = new Thread(() => KnockUp(_height));
 
         try { KnockUpThread.Start(); }
         catch (ThreadStateException) { Debug.LogError("Error with PlayerKnockUp Thread"); }
+
+        return knockUpTime;
     }
 
-    public void ApplyPlayerKnockBack(float _xDistance, float _yDistance)
+    public void ApplyKnockBack(float _xDistance, float _time)
     {
-        KnockBackThread = new Thread(() => PlayerKnockBack(_xDistance, _yDistance));
+        KnockBackThread = new Thread(() => KnockBack(_xDistance, _time));
 
         try { KnockBackThread.Start(); }
         catch (ThreadStateException) { Debug.LogError("Error with KnockBackThread Thread"); }
     }
 
-    public void ApplyDash(float _xDistance, int _time)
+    public void ApplyDash(float _xDistance, float _time)
     {
         DashThread = new Thread(() => Dash(_xDistance, _time));
 
-        try { StunThread.Start(); }
-        catch (ThreadStateException) { Debug.LogError("Error with StunThread Thread"); }
+        try { DashThread.Start(); }
+        catch (ThreadStateException) { Debug.LogError("Error with DashThread Thread"); }
     }
     #endregion
 
@@ -222,7 +229,11 @@ public class LivingEntity
         }
     }
 
-    private void PlayerKnockUp(float _height) {
+    private void KnockUp(float _height) {
+        // per cent of knockup
+        float knockUpPerCent = 1f;
+        knockUpPerCent *= 4;
+        
         // add knockUpIndex
         knockUpIndex++;
         int currIndex = knockUpIndex;
@@ -241,13 +252,39 @@ public class LivingEntity
         instance.velocity.x = 0;
         instance.velocity.y = knockUpStrenght * inAirTime;
 
+        // save time
+        knockUpTime = inAirTime;
+
         // wait till player isn't knockUped
-        Thread.Sleep(Convert.ToInt32(Util.ConvertSecondsToMilliseconds(Convert.ToDouble(inAirTime))));
+        Thread.Sleep(Convert.ToInt32(Util.ConvertSecondsToMilliseconds(Convert.ToDouble(inAirTime * knockUpPerCent))));
 
         // check if knockUp should end or if there is a newer nockUp
         if (currIndex == knockUpIndex) { knockUped = false; CustomDebug.Log("<b>" + name + "</b>s <color=magenta>KnockUp</color> stop", "Condition"); }
+
+    }
+    
+    private void KnockBack(float _xDistance, float _time)
+    {
+
+        // add knockBackIndex
+        knockBackIndex++;
+        int currIndex = knockBackIndex;
+
+        // set player knockedBack
+        knockBacked = true;
+        CustomDebug.Log("<b>" + name + "</b> is <color=magenta>KnockBacked</color> for <color=magenta>" + _time + "</color> sec", "Condition");
+
+        // add velocity
+        instance.velocity.x = _xDistance / _time;
+
+        // wait till player isn't knockBacked
+        Thread.Sleep(Convert.ToInt32(Util.ConvertSecondsToMilliseconds(Convert.ToDouble(_time))));
+
+        // check if knockBack should end or if there is a newer knockBack
+        if (currIndex == knockBackIndex) { knockBacked = false; CustomDebug.Log("<b>" + name + "</b>s <color=magenta>KockBack</color> stop", "Condition"); }
     }
 
+    /* Original KockBack
     private void PlayerKnockBack(float _xDistance, float _yDistance)
     {
         // add knockBackIndex
@@ -274,19 +311,20 @@ public class LivingEntity
         // check if knockBack should end or if there is a newer knockBack
         if (currIndex == knockBackIndex) { knockBacked = false; CustomDebug.Log("<b>" + name + "</b>s <color=magenta>KockBack</color> stop", "Condition"); }
     }
-    
-    private void Dash(float _xDistance, int _time)
+    */
+
+    private void Dash(float _xDistance, float _time)
     {
         // set player to dashing
         dashing = true;
         CustomDebug.Log("<b>" + name + "</b>s <color=manta>Dash</color> start", "Condition");
 
-        //add velocity
-        instance.velocity.x = _xDistance / (float)Util.ConvertMillisecondsToSeconds(_time);
+        // add velocity
+        instance.velocity.x = _xDistance / _time;
 
         // wait till dash is finished
-        Thread.Sleep(_time);
-
+        Thread.Sleep(Convert.ToInt32(Util.ConvertSecondsToMilliseconds(Convert.ToDouble(_time))));
+        
         // stop dashing
         dashing = false;
         CustomDebug.Log("<b>" + name + "</b>s <color=magenta>Dash</color> stop", "Condition");

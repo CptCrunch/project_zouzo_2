@@ -51,13 +51,16 @@ public class AbilityManager : MonoBehaviour
         return new Leo(spells[5].damage, spells[5].castTime, spells[5].travelTime, spells[5].duration, spells[5].cooldown, spells[5].range, spells[5].targets, spells[5].directions, spells[5].charges, spells[5].chargeCooldown);
     }
 
-    public Attacks CreateVirgo() { return null; }
+    public Attacks CreateVirgo()
+    {
+        return new Virgo(spells[6].damage, spells[6].castTime, spells[6].travelTime, spells[6].duration, spells[6].cooldown, spells[6].range, spells[6].targets, spells[6].directions, spells[6].dashStrenght, spells[6].dashTime, spells[6].knockBackStrenght, spells[6].knockBackTime);
+    }
+
     public Attacks CreateLibra() { return null; }
     public Attacks CreateScorpio() { return null; }
 
     public Attacks CreateSaggitarius()
     {
-        Debug.Log("Found bullet: " + spells[9].bullet);
         return new Saggitarius(spells[9].damage, spells[9].castTime, spells[9].bulletSpeed, spells[9].duration, spells[9].cooldown, spells[9].range, spells[9].targets, spells[9].directions, spells[9].bullet, spells[9].timeToGetMaxRange, spells[9].minRange, spells[9].stickArrowPerCent, spells[9].castSlow);
     }
 
@@ -88,6 +91,7 @@ public struct Abilities
     [Tooltip("the amount of directions the spell can be aimed (2, 4, 8)")]
     [Range(2, 8)]
     public uint directions;
+
     [Header("Meeles")]
     [Tooltip("the time that the spell needs to reach max range (0 is instand) [time in seconds]")]
     public float travelTime;
@@ -102,8 +106,14 @@ public struct Abilities
     public float knockUpHeght;
     [Tooltip("nessesary for: capricorn(2)")]
     public float knockBackRange;
-    [Tooltip("nessesary for: capricorn(2)\nthe distance the enemy gets kocked back")]
+    [Tooltip("nessesary for: virgo, capricorn(2)\nthe distance the enemy gets kocked back")]
     public float knockBackStrenght;
+    [Tooltip("nessesary for: virgo")]
+    public float knockBackTime;
+    [Tooltip("nessesary for: virgo")]
+    public float dashStrenght;
+    [Tooltip("nessesary for: virgo")]
+    public float dashTime;
     [Tooltip("nessesary for: leo")]
     public int charges;
     [Tooltip("nessesary for: leo")]

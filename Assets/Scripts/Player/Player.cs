@@ -133,8 +133,8 @@ public class Player : MonoBehaviour
 
         // set starter abilities
         abilityArray[0] = AbilityManager.Instance.CreateBasic();           // basic
-        abilityArray[1] = AbilityManager.Instance.CreateCapricorn();       // spell_1
-        abilityArray[2] = AbilityManager.Instance.CreateLeo();             // spell_2
+        abilityArray[1] = AbilityManager.Instance.CreateVirgo();           // spell_1
+        abilityArray[2] = AbilityManager.Instance.CreateCapricorn();             // spell_2
         abilityArray[3] = AbilityManager.Instance.CreateSaggitarius();     // spell_3
 
         controller = GetComponent<Controller2D>();
@@ -153,8 +153,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (playerVitals.KnockUped) { gameObject.GetComponent<SpriteRenderer>().flipY = true; } else { if (gameObject.GetComponent<SpriteRenderer>().flipY == true) { gameObject.GetComponent<SpriteRenderer>().flipY = false; } }
         // Imobelised
-        if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked) { disabled = true; }
+        if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked || playerVitals.Dashing) { disabled = true; }
         else { disabled = false; }
 
         // update Cooldowns / timeBetweenCasts
