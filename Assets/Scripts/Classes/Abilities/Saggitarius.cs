@@ -15,8 +15,8 @@ public class Saggitarius : Attacks {
     private GameObject caster;
 
 
-    public Saggitarius(float damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir, GameObject bullet, float timeToGetMaxRange, float minRange, float stickArrowPerCent, float castSlow) : base(
-        9, "saggitarius", "skillshot", targets, damage, castTime, delay, duration, cooldown, 0, spellDir)
+    public Saggitarius(GameObject caster, float damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir, GameObject bullet, float timeToGetMaxRange, float minRange, float stickArrowPerCent, float castSlow) : base(
+        caster, 9, "saggitarius", "skillshot", targets, damage, castTime, delay, duration, cooldown, 0, spellDir)
     {
         instanceCount++;
         this.bullet = bullet;
@@ -53,7 +53,7 @@ public class Saggitarius : Attacks {
         }
 
         // debug that spell is on cooldown
-        else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Spells"); }
+        else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Cooldown"); }
     }
 
     public override void AfterCast()

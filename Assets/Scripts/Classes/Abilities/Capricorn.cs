@@ -9,8 +9,8 @@ public class Capricorn : Attacks {
     private bool usedInAir = false;
     private float knockBackStrenght;
 
-    public Capricorn(float damage, float castTime, float travleTime, float duration, float cooldown, float range, int targets, uint spellDir, float height, float knockBackRange, float knockBackStrenght) : base(
-        10, "capricorn", "CC", targets, damage, castTime, travleTime, duration, cooldown, range, spellDir)
+    public Capricorn(GameObject caster, float damage, float castTime, float travleTime, float duration, float cooldown, float range, int targets, uint spellDir, float height, float knockBackRange, float knockBackStrenght) : base(
+        caster, 10, "capricorn", "CC", targets, damage, castTime, travleTime, duration, cooldown, range, spellDir)
     {
         this.height = height;
         this.knockBackRange = knockBackRange;
@@ -47,7 +47,7 @@ public class Capricorn : Attacks {
             }
 
             // debug that spell is on cooldown
-            else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Spells"); }
+            else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Cooldown"); }
         }
 
         else
@@ -76,7 +76,7 @@ public class Capricorn : Attacks {
                 // debug that spell is on cooldown
                 else { CustomDebug.Log("no target in range for <b><color=white>" + Name + "2</color></b>", "Spells"); }
             }
-            else { Debug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec"); }
+            else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Cooldown"); }
         }
     }
     
@@ -91,7 +91,7 @@ public class Capricorn : Attacks {
         LivingEntity Vitals = _target.GetComponent<Player>().playerVitals;
 
         // knock the target up and deal damage
-        try { Vitals.ApplyKnockUp(height); }
+        try { Vitals.ApplyKnockUp(height, this); }
         catch (OverflowException) { Debug.LogError("Is Outside range of Int32 tyoe."); }
 
         // deal damage
@@ -111,9 +111,9 @@ public class Capricorn : Attacks {
         float multi = Mathf.Sqrt(1 / (dirX * dirX + dirY * dirY));
 
         // kock target away form caster
-        float time = targetVitals.ApplyKnockUp(dirY * multi * knockBackStrenght);
+        float time = targetVitals.ApplyKnockUp(dirY * multi * knockBackStrenght, this);
         Debug.Log("KnockUpTime: " + time);
-        targetVitals.ApplyKnockBack(dirX * multi * knockBackStrenght, time);
+        targetVitals.ApplyKnockBack(dirX * multi * knockBackStrenght, time, this);
 
         // deal damage
         targetVitals.GetDamage(Damage);

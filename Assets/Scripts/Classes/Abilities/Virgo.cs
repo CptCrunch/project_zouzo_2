@@ -8,15 +8,19 @@ public class Virgo : Attacks {
     private float knockBackStrength;
     private float knockBackTime;
     private float knockBackDirection;
+    private float stunTime;
 
-    public Virgo(float damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir, float dashStrength, float dashTime, float knockBackStrength, float knockBackTime) : base(
-        6, "virgo", "utility ", targets, damage, castTime, delay, duration, cooldown, range, spellDir)
+    public Virgo(GameObject caster, float damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir, float dashStrength, float dashTime, float knockBackStrength, float knockBackTime, float stunTime) : base(
+        caster, 6, "virgo", "utility ", targets, damage, castTime, delay, duration, cooldown, range, spellDir)
     {
         this.knockBackStrength = knockBackStrength;
         this.knockBackTime = knockBackTime;
         this.dashStrength = dashStrength;
         this.dashTime = dashTime;
+        this.stunTime = stunTime;
     }
+
+    public float StunTime { get { return stunTime; } }
 
     public override void Cast(GameObject _caster)
     {
@@ -49,7 +53,7 @@ public class Virgo : Attacks {
         }
 
         // debug that spell is on cooldown
-        else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Spells"); }
+        else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Cooldown"); }
     }
 
     public override void AfterCast()
@@ -62,7 +66,7 @@ public class Virgo : Attacks {
         LivingEntity targetVitals = _target.GetComponent<Player>().playerVitals;
 
         // knock target back
-        targetVitals.ApplyKnockBack(knockBackStrength * knockBackDirection, knockBackTime);
+        targetVitals.ApplyKnockBack(knockBackStrength * knockBackDirection, knockBackTime, this);
 
         // deal damage
         targetVitals.GetDamage(Damage);

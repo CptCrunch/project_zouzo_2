@@ -13,14 +13,13 @@ public class Leo : Attacks {
     private int attackAnim = 0;
     private float animReset = 0.0f;
 
-    public Leo(float damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir, int maxCharge, float maxChargeCooldown) : base(
-        5, "leo", "meele", targets, damage, castTime, delay, duration, cooldown, range, spellDir)
+    public Leo(GameObject caster, float damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir, int maxCharge, float maxChargeCooldown) : base(
+        caster, 5, "leo", "meele", targets, damage, castTime, delay, duration, cooldown, range, spellDir)
     {
         instanceCount++;
         this.maxCharge = maxCharge;
         this.currCharge = this.maxCharge;
         this.maxChargeCooldown = maxChargeCooldown;
-        this.currChargeCooldown = currChargeCooldown;
     }
 
     public override void Cast(GameObject _caster)
@@ -54,7 +53,7 @@ public class Leo : Attacks {
         }
 
         // debug that spell is on cooldown
-        else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Spells"); }
+        else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Cooldown"); }
     }
 
     public override void AfterCast()

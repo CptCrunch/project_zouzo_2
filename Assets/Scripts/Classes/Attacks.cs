@@ -3,6 +3,8 @@ using System.Collections;
 
 public abstract class Attacks {
 
+    private GameObject caster;
+
     private uint id;
     private string name;
     private string type;
@@ -28,8 +30,9 @@ public abstract class Attacks {
     public Attacks() { }
     
     //Constructor with Heal
-    public Attacks(uint id, string name, string type, int maxTargets, float damage, float castTime, float delay, float duration, float cooldown, float range, uint spellDir)
+    public Attacks(GameObject caster, uint id, string name, string type, int maxTargets, float damage, float castTime, float delay, float duration, float cooldown, float range, uint spellDir)
     {
+        this.caster = caster;
         this.id = id;
         this.name = name;
         this.type = type;

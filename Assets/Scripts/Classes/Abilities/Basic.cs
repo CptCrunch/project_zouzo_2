@@ -7,8 +7,8 @@ public class Basic : Attacks {
 
     private static int instanceCount = 0;
 
-    public Basic(float damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir) : base(
-        0, "basic", "meele", targets, damage, castTime, delay, duration, cooldown, range, spellDir) { instanceCount++; }
+    public Basic(GameObject caster, float damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir) : base(
+        caster, 0, "basic", "meele", targets, damage, castTime, delay, duration, cooldown, range, spellDir) { instanceCount++; }
 
     public override void Cast(GameObject _caster)
     {
@@ -39,7 +39,7 @@ public class Basic : Attacks {
         }
 
         // debug that spell is on cooldown
-        else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Spells"); }
+        else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Cooldown"); }
     }
 
     public override void AfterCast()
