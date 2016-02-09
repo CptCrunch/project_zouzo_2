@@ -7,8 +7,8 @@ public class Basic : Attacks {
 
     private static int instanceCount = 0;
 
-    public Basic(float damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir) : base(
-        0, "basic", "meele", targets, damage, castTime, delay, duration, cooldown, range, spellDir) { instanceCount++; }
+    public Basic(GameObject caster, float damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir) : base(
+        caster, 0, "basic", "meele", targets, damage, castTime, delay, duration, cooldown, range, spellDir) { instanceCount++; }
 
     public override void Cast(GameObject _caster)
     {
@@ -22,24 +22,29 @@ public class Basic : Attacks {
             // set animation
             _caster.GetComponent<Animator>().SetInteger("AttackRan", UnityEngine.Random.Range(1, 4));
             _caster.GetComponent<Animator>().SetTrigger("Attack");
-            /*Debug.Log("should play attack animation");*/
+            CustomDebug.Log("<b>" + _caster.GetComponent<Player>().playerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
 
             // cast spell
             playerScript.castedMeeleSpell = this;
+            CustomDebug.Log("<b>" + _caster.GetComponent<Player>().playerVitals.Name + "</b> casted<b><color=white> " + Name + "</color></b>", "Spells");
+
+            // set spell as casted
+            IsCasted = true;
+
+            // reset TimeBetweenCasts
+            TimeBeteewnCasts = 0;
 
             // set spell on cooldown
             SetCooldown();
         }
 
         // debug that spell is on cooldown
-        else { Debug.Log("basic is on cooldown for: " + CurrCooldown); }
-
-        IsAbilityCasted = true;
+        else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Cooldown"); }
     }
 
     public override void AfterCast()
     {
-        IsAbilityCasted = false;
+        IsCasted = false;
     }
 
     public override void Use(GameObject _target, GameObject _caster)

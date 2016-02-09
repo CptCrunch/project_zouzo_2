@@ -35,6 +35,10 @@ public static class Util{
         return newArray;
     }
 
+    /// <summary>checks if a GameObject is included in an Array</summary>
+    /// <param name="_entrys">the Array</param>
+    /// <param name="_newEntry">the GameObject</param>
+    /// <returns>true if GameObject is included</returns>
     public static bool IsGameObjectIncluded(GameObject[] _entrys, GameObject _newEntry)
     {
         // check each entry
@@ -50,16 +54,16 @@ public static class Util{
         return false;
     }
 
+    /// <summary>adds an GameObject to a Array</summary>
+    /// <param name="_entrys">the Array</param>
+    /// <param name="_newEntry">the GameObject</param>
     public static void IncludeGameObject(GameObject[] _entrys, GameObject _newEntry)
     {
         // check each entry
         for (int i = 0; i < _entrys.Length; i++)
         {
-            // check if entry is null
-            if (_entrys[i] == null)
-            {
-                _entrys[i] = _newEntry;
-            }
+            // check if entry is null and adds new entry
+            if (_entrys[i] == null) { _entrys[i] = _newEntry; }
         }
     }
 
@@ -280,6 +284,61 @@ public static class Util{
         }
 
         return direction;
+    }
+
+    public static Vector2 GetAimDirection(Attacks _spell, Player _playerInstance)
+    {
+        string playerAxis = _playerInstance.playerAxis;
+        bool mirror = _playerInstance.Mirror;
+
+        switch (_spell.SpellDir)
+        {
+            case 2:
+                // get the aim direction
+                switch (Util.Aim2Direction(new Vector2(Input.GetAxis(playerAxis + "_Vertical"), Input.GetAxis(playerAxis + "_Horizontal"))))
+                {
+                    case "right": return new Vector2(1, 0);
+                    case "left": return new Vector2(-1, 0);
+                    case "noAim":
+                        if (mirror) { return new Vector2(1, 0); }
+                        else { return new Vector2(-1, 0); }
+                }
+                break;
+
+            case 4:
+                // get the aim direction
+                switch (Util.Aim4Direction(new Vector2(Input.GetAxis(playerAxis + "_Vertical"), Input.GetAxis(playerAxis + "_Horizontal"))))
+                {
+                    case "up": return new Vector2(0, 1);
+                    case "right": return new Vector2(1, 0);
+                    case "down": return new Vector2(0, -1);
+                    case "left": return new Vector2(-1, 0);
+                    case "noAim":
+                        if (mirror) { return new Vector2(1, 0); }
+                        else { return new Vector2(-1, 0); }
+                }
+                break;
+
+            case 8:
+                // get the aim direction
+                switch (Util.Aim8Direction(new Vector2(Input.GetAxis(playerAxis + "_Vertical"), Input.GetAxis(playerAxis + "_Horizontal"))))
+                {
+                    case "up": return new Vector2(0, 1);
+                    case "upRight": return new Vector2(0.5f, 0.5f);
+                    case "right": return new Vector2(1, 0);
+                    case "downRight": return new Vector2(0.5f, -0.5f);
+                    case "down": return new Vector2(0, -1);
+                    case "downLeft": return new Vector2(-0.5f, -0.5f);
+                    case "left": return new Vector2(-1, 0);
+                    case "upLeft": return new Vector2(-1, 0.5f);
+                    case "noAim":
+                        if (mirror) { return new Vector2(1, 0); }
+                        else { return new Vector2(-1, 0); }
+                }
+                break;
+        }
+
+        return new Vector2(0, 0);
     }
     #endregion
 }
