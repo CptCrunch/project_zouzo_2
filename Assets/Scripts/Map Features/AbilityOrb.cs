@@ -29,9 +29,16 @@ public class AbilityOrb : MonoBehaviour {
         GetRandomAttack();
     }
 
-    public void PickUp()
+    void OnTriggerEnter2D(Collider2D other)
     {
-
+        if(other.gameObject.tag == "Player")
+        {
+            if (attack != null)
+            {
+                other.gameObject.GetComponent<Player>().PickupOrb(attack);
+                DestroyPrefab();
+            }
+        }
     }
 
     public void DestroyPrefab()

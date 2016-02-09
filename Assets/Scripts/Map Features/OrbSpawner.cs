@@ -3,14 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class OrbSpawner : MonoBehaviour {
+    protected OrbSpawner() { }
+    private static OrbSpawner _instance = null;
 
     //Orb Spawn
     [Header("Orb Spawn")]
     public string orbTag = "Orb";
     public GameObject orbPrefab;
 
+    public float spawnRate = 1.5f;
+    private int random;
+
     private GameObject[] spawnPoints = new GameObject[4];
-    private Spawnpoint[] spawnPointsCheck = new Spawnpoint[4];
+    public Spawnpoint[] spawnPointsCheck = new Spawnpoint[4];
 
     void Start()
     {
@@ -24,28 +29,27 @@ public class OrbSpawner : MonoBehaviour {
             spawnPointsCheck[count].active = false;
             count++;
         }
+
+        InvokeRepeating("SpawnOrbs", 0.5f , spawnRate);
     }
 	
-    private IEnumerator SpawnOrbs(float time)
+    private void SpawnOrbs()
     {
-        while(Gamerules._instance.Running)
+        random = Random.Range(0, spawnPoints.Length);
+        if (!spawnPointsCheck[random].active)
         {
-            int random = Random.Range(0, spawnPoints.Length);
-            if(!spawnPointsCheck[random].active)
-            {
-                GameObject go = Instantiate(orbPrefab, spawnPointsCheck[random].spawnPoint.transform.position, Quaternion.identity) as GameObject;
-                spawnPointsCheck[random].active = true;
-            }
+            spawnPointsCheck[random].orbPrefab = Instantiate(orbPrefab, spawnPointsCheck[random].spawnPoint.transform.position, Quaternion.identity) as GameObject;
+            spawnPointsCheck[random].active = true;
         }
-
-        return null;
     }
 
+    public static OrbSpawner Instance { get { return OrbSpawner._instance == null ? new OrbSpawner() : OrbSpawner._instance; } }
 }
 
 public struct Spawnpoint
 {
     public GameObject spawnPoint;
+    public GameObject orbPrefab;
     public int index;
     public bool active;
 }

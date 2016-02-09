@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Ability Variables
-    private Attacks[] abilityArray = new Attacks[4];
+    public Attacks[] abilityArray = new Attacks[4];
     private bool isAttacking;
 
     private GameObject[] registeredEnemies = new GameObject[4];
@@ -486,6 +486,29 @@ public class Player : MonoBehaviour
             castedMeeleSpell.ShallTravel = true;
             castedMeeleSpell = null;
         }
+    }
+
+    public void PickupOrb(Attacks attack)
+    {
+        Attacks firstSpell  =   abilityArray[1];
+        Attacks secondSpell =   abilityArray[2];
+        Attacks thirdSpell  =   abilityArray[3];
+
+        int count = 0;
+        foreach(Attacks item in abilityArray)
+        {
+            if(item == attack)
+            {
+
+            }
+            count++;
+        }
+
+        abilityArray[1] = attack;
+        abilityArray[2] = firstSpell;
+        abilityArray[3] = secondSpell;
+
+        CustomDebug.LogArray(abilityArray);
     }
 
     public void FireSkillShot(Attacks _spell, GameObject _bullet)
