@@ -187,8 +187,10 @@ public class Player : MonoBehaviour
             // ckeck if player is knockBacked from a virgo spell
             if (playerVitals.KnockBacked && playerVitals.KnockBackSpell.ID == 6)
             {
+                // transfer knockBackSpell to virgoSpell
+                Virgo virgoSpell = (Virgo)playerVitals.KnockBackSpell;
                 // stun target
-                playerVitals.ApplyStun(virgoSpell.StunTime, KnockBackSpell);
+                playerVitals.ApplyStun(virgoSpell.StunTime, playerVitals.KnockBackSpell);
             }
         }
 
