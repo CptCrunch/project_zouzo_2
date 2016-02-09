@@ -18,7 +18,8 @@ namespace UnityEngine
             {"Cooldown", false},
             {"UI", false},
             {"Animation", false},
-            {"Condition", false}
+            {"Condition", false},
+            {"Controles", false}
         };
 
         #region Extras

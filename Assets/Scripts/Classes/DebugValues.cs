@@ -15,8 +15,9 @@ public class DebugValues
     public bool UI;
     public bool Animation;
     public bool Condition;
+    public bool Controles;
 
-    public DebugValues(bool active, bool Main, bool Testing, bool Player, bool Damage, bool Spells, bool Cooldown, bool UI, bool Animation, bool Condition)
+    public DebugValues(bool active, bool Main, bool Testing, bool Player, bool Damage, bool Spells, bool Cooldown, bool UI, bool Animation, bool Condition, bool Controles)
     {
         this.Active = active;
         this.Main = Main;
@@ -28,6 +29,7 @@ public class DebugValues
         this.UI = UI;
         this.Animation = Animation;
         this.Condition = Condition;
+        this.Controles = Controles;
     }
 
     public void SetAllValues(bool value)
@@ -42,6 +44,7 @@ public class DebugValues
         CustomDebug.EnableTag("UI", value);
         CustomDebug.EnableTag("Animation", value);
         CustomDebug.EnableTag("Condition", value);
+        CustomDebug.EnableTag("Controles", value);
     }
 
     public void ResetValues()
@@ -56,5 +59,6 @@ public class DebugValues
         CustomDebug.EnableTag("UI", false);
         CustomDebug.EnableTag("Animation", false);
         CustomDebug.EnableTag("Condition", false);
+        CustomDebug.EnableTag("Controles", false);
     }
 }

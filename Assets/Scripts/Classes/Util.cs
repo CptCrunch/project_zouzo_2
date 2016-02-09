@@ -35,6 +35,10 @@ public static class Util{
         return newArray;
     }
 
+    /// <summary>checks if a GameObject is included in an Array</summary>
+    /// <param name="_entrys">the Array</param>
+    /// <param name="_newEntry">the GameObject</param>
+    /// <returns>true if GameObject is included</returns>
     public static bool IsGameObjectIncluded(GameObject[] _entrys, GameObject _newEntry)
     {
         // check each entry
@@ -50,16 +54,16 @@ public static class Util{
         return false;
     }
 
+    /// <summary>adds an GameObject to a Array</summary>
+    /// <param name="_entrys">the Array</param>
+    /// <param name="_newEntry">the GameObject</param>
     public static void IncludeGameObject(GameObject[] _entrys, GameObject _newEntry)
     {
         // check each entry
         for (int i = 0; i < _entrys.Length; i++)
         {
-            // check if entry is null
-            if (_entrys[i] == null)
-            {
-                _entrys[i] = _newEntry;
-            }
+            // check if entry is null and adds new entry
+            if (_entrys[i] == null) { _entrys[i] = _newEntry; }
         }
     }
 
