@@ -11,6 +11,7 @@ public class OrbSpawner : MonoBehaviour {
     [Header("Orb Spawn")]
     public string orbTag = "Orb";
     public GameObject orbPrefab;
+    public Sprite[] orbSprites;
 
     public float spawnRate = 1.5f;
     private int random;
@@ -55,3 +56,4 @@ public struct Spawnpoint
     public int index;
     public bool active;
 }
+    

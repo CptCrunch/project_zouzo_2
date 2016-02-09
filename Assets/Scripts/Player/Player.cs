@@ -450,25 +450,30 @@ public class Player : MonoBehaviour
 
     public void PickupOrb(Attacks attack)
     {
-        Attacks firstSpell  =   abilityArray[1];
-        Attacks secondSpell =   abilityArray[2];
-        Attacks thirdSpell  =   abilityArray[3];
-
-        int count = 0;
-        foreach(Attacks item in abilityArray)
+        if (attack != null)
         {
-            if(item == attack)
+            Attacks firstSpell = abilityArray[1];
+            Attacks secondSpell = abilityArray[2];
+            Attacks thirdSpell = abilityArray[3];
+
+            int count = 0;
+            foreach (Attacks item in abilityArray)
             {
-
+                if (item == attack)
+                {
+                    abilityArray[count] = attack;
+                }
+                else
+                {
+                    abilityArray[1] = attack;
+                    abilityArray[2] = firstSpell;
+                    abilityArray[3] = secondSpell;
+                }
+                count++;
             }
-            count++;
+
+            CustomDebug.LogArray(abilityArray);
         }
-
-        abilityArray[1] = attack;
-        abilityArray[2] = firstSpell;
-        abilityArray[3] = secondSpell;
-
-        CustomDebug.LogArray(abilityArray);
     }
 
     public void FireSkillShot(Attacks _spell, GameObject _bullet)

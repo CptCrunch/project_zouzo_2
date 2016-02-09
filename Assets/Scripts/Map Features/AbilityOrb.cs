@@ -3,10 +3,10 @@ using System.Collections;
 
 public class AbilityOrb : MonoBehaviour {
 
-    private Attacks attack;
-
-    public void GetRandomAttack(GameObject caster)
+    /*public Attacks GetRandomAttack(GameObject caster)
     {
+        Attacks attack = null;
+
         switch (Random.Range(1, AbilityManager.Instance.spells.Length))
         {
             case 1: attack  = AbilityManager.Instance.CreateAries(caster); break;
@@ -22,31 +22,35 @@ public class AbilityOrb : MonoBehaviour {
             case 11: attack = AbilityManager.Instance.CreateAquarius(caster); break;
             case 12: attack = AbilityManager.Instance.CreatePisces(caster); break;
         }
-    }
 
-    void Start()
+        return attack;
+    }*/
+
+    public Attacks GetRandomAttack(GameObject caster)
     {
-        /*GetRandomAttack();*/
+        Attacks attack = null;
+
+        switch (Random.Range(1, 4))
+        {
+            case 1: attack = AbilityManager.Instance.CreateLeo(caster); break;
+            case 2: attack = AbilityManager.Instance.CreateSaggitarius(caster); break;
+            case 3: attack = AbilityManager.Instance.CreateCapricorn(caster); break;
+        }
+
+        return attack;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.tag == "Player")
         {
-            GetRandomAttack(other.gameObject);
-
-            if (attack != null)
-            {
-                other.gameObject.GetComponent<Player>().PickupOrb(attack);
-                DestroyPrefab();
-            }
+            other.gameObject.GetComponent<Player>().PickupOrb(GetRandomAttack(other.gameObject));
+            DestroyPrefab();
         }
     }
 
     public void DestroyPrefab()
     {
-
+        Destroy(gameObject);
     }
-
-    public Attacks Attack { get { return attack; } set { attack = value; } }
 }
