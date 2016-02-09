@@ -26,6 +26,9 @@ public abstract class Attacks {
     private float timeBetweenCastes = 0;
     private float bulletSpeed;
 
+    private GameObject[] hitTargets = new GameObject[4];
+    private Vector3 spellDirection = new Vector3(0, 90, 0);
+
     //Empty Constructor
     public Attacks() { }
     
@@ -66,6 +69,8 @@ public abstract class Attacks {
     public bool IsCasted { get { return isCasted; } set { isCasted = value; } }
     public float TimeBeteewnCasts { get { return timeBetweenCastes; } set { timeBetweenCastes = value; } }
     public float BulletSpeed { get { return bulletSpeed; } set { bulletSpeed = value; } }
+    public GameObject[] HitTargets { get { return hitTargets; } set { hitTargets = value; } }
+    public Vector2 SpellDirection { get { return spellDirection; } set { spellDirection = value; } }
     #endregion
 
     /// <summary> Casts spell and checks if spell can be casted </summary>
