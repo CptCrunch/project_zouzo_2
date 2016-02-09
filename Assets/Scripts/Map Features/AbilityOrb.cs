@@ -33,6 +33,8 @@ public class AbilityOrb : MonoBehaviour {
     {
         if(other.gameObject.tag == "Player")
         {
+            GetRandomAttack(other.gameObject);
+
             if (attack != null)
             {
                 other.gameObject.GetComponent<Player>().PickupOrb(attack);
