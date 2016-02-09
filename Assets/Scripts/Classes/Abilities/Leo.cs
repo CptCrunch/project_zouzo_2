@@ -13,14 +13,13 @@ public class Leo : Attacks {
     private int attackAnim = 0;
     private float animReset = 0.0f;
 
-    public Leo(float damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir, int maxCharge, float maxChargeCooldown) : base(
-        5, "leo", "meele", targets, damage, castTime, delay, duration, cooldown, range, spellDir)
+    public Leo(GameObject caster, float damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir, int maxCharge, float maxChargeCooldown) : base(
+        caster, 5, "leo", "meele", targets, damage, castTime, delay, duration, cooldown, range, spellDir)
     {
         instanceCount++;
         this.maxCharge = maxCharge;
         this.currCharge = this.maxCharge;
         this.maxChargeCooldown = maxChargeCooldown;
-        this.currChargeCooldown = currChargeCooldown;
     }
 
     public override void Cast(GameObject _caster)
@@ -37,21 +36,29 @@ public class Leo : Attacks {
             _caster.GetComponent<Animator>().SetInteger("LeoAttack", attackAnim);
             _caster.GetComponent<Animator>().SetTrigger("LeoTrigger");
             animReset = 1.0f;
-            
+            CustomDebug.Log("<b>" + _caster.GetComponent<Player>().playerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
+
             // cast spell
             playerScript.castedMeeleSpell = this;
+
+            // set spell as casted
+            IsCasted = true;
+            CustomDebug.Log("<b>" + _caster.GetComponent<Player>().playerVitals.Name + "</b> casted<b><color=white> " + Name + "</color></b>", "Spells");
+
+            // reset TimeBetweenCasts
+            TimeBeteewnCasts = 0;
 
             // set spell on cooldown
             SetCooldown();
         }
 
         // debug that spell is on cooldown
-        else { CustomDebug.Log("leo is on cooldown for: " + CurrCooldown, "Spells"); }
+        else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Cooldown"); }
     }
 
     public override void AfterCast()
     {
-        IsAbilityCasted = false;
+        IsCasted = false;
     }
 
     public override void Use(GameObject _target, GameObject _caster)
@@ -60,7 +67,7 @@ public class Leo : Attacks {
         LivingEntity Vitals = _target.GetComponent<Player>().playerVitals;
 
         // deal damage
-        Vitals.GetDamage(Damage);
+        Vitals.GetDamage(Damage + Damage * (attackAnim - 1) / 2);
     }
 
     public override void UpdateCooldowns()
@@ -114,7 +121,7 @@ public class Leo : Attacks {
         
         // sub charge
         currCharge--;
-        CustomDebug.Log("currCharges: " + currCharge, "Spells");
+        CustomDebug.Log("<b><color=white>" + Name + "</color></b>s currCharges: " + currCharge, "Spells");
 
         // disable spell if no charges are left
         if (currCharge <= 0) { IsDisabled = true; }

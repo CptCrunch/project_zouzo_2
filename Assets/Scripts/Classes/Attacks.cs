@@ -3,6 +3,8 @@ using System.Collections;
 
 public abstract class Attacks {
 
+    private GameObject caster;
+
     private uint id;
     private string name;
     private string type;
@@ -19,15 +21,21 @@ public abstract class Attacks {
     private float range;
     private int maxTargets;
     private int playersHit;
-    private bool isAbilityCasted = false;
     private uint spellDir;
+    private bool isCasted;
+    private float timeBetweenCastes = 0;
+    private float bulletSpeed;
+
+    private GameObject[] hitTargets = new GameObject[4];
+    private Vector3 spellDirection = new Vector3(0, 90, 0);
 
     //Empty Constructor
     public Attacks() { }
     
     //Constructor with Heal
-    public Attacks(uint id, string name, string type, int maxTargets, float damage, float castTime, float delay, float duration, float cooldown, float range, uint spellDir)
+    public Attacks(GameObject caster, uint id, string name, string type, int maxTargets, float damage, float castTime, float delay, float duration, float cooldown, float range, uint spellDir)
     {
+        this.caster = caster;
         this.id = id;
         this.name = name;
         this.type = type;
@@ -35,11 +43,12 @@ public abstract class Attacks {
         this.damage = damage;
         this.castTime = castTime;
         this.toTravelTime = delay;
-        this.castTime = castTime;
         this.maxCooldown = cooldown;
         this.range = range;
         this.spellDir = spellDir;
-        if(Gamerules._instance.abilityLimit != 0) { durability = Gamerules._instance.abilityLimit; }
+        if (Gamerules._instance.abilityLimit != 0) { durability = Gamerules._instance.abilityLimit; }
+        if (range > 0) { bulletSpeed = toTravelTime / range; }
+        else { bulletSpeed = toTravelTime; }
     }
 
     #region Get & Set 
@@ -54,10 +63,14 @@ public abstract class Attacks {
     public float CurrCooldown { get { return currCooldown; } set { this.currCooldown = value; } }
     public bool IsDisabled { get { return isDisabled; } set { isDisabled = value; } }
     public uint Durability { get { return durability; } }
-    public float Range { get { return range; } }
+    public float Range { get { return range; } set { range = value; } }
     public int PlayersHit { get { return playersHit; } set { playersHit = value; } }
-    public bool IsAbilityCasted { get { return isAbilityCasted; } set { value = isAbilityCasted; } }
     public uint SpellDir { get { return spellDir; } }
+    public bool IsCasted { get { return isCasted; } set { isCasted = value; } }
+    public float TimeBeteewnCasts { get { return timeBetweenCastes; } set { timeBetweenCastes = value; } }
+    public float BulletSpeed { get { return bulletSpeed; } set { bulletSpeed = value; } }
+    public GameObject[] HitTargets { get { return hitTargets; } set { hitTargets = value; } }
+    public Vector2 SpellDirection { get { return spellDirection; } set { spellDirection = value; } }
     #endregion
 
     /// <summary> Casts spell and checks if spell can be casted </summary>

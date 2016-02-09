@@ -1,54 +1,54 @@
-﻿using UnityEngine;
+﻿// -----| purpose |---------------------------------------------------------------
+// this script is used for moveing the player and using spells
+
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour
 {
-
     #region Variables
-    [HideInInspector]
-    public Controller2D controller;
-    [HideInInspector]
-    public Vector2 input;
+    [HideInInspector] public Controller2D controller;
+    [HideInInspector] public Vector2 input;
 
     [Tooltip("Define Controller: P1, P2, P3, P4, KB")]
     public string playerAxis;
 
-    private Vector2[] debugRayHitpointArray = new Vector2[4];
-
     #region Player Vitals
-    [HideInInspector]
-    public LivingEntity playerVitals;
-
     [Header("Player Vitals:")]
+
+    [HideInInspector] public LivingEntity playerVitals;
+    
     public string name = "";
+    public float maxHealth;
     public float moveSpeed = 6;
     public float slowedSpeed = 3;
-    public float maxHealth;
+
     private string[] playerControles = new string[5];
     #endregion
 
     #region Jumping
     [Header("Jumping:")]
+
+    [HideInInspector] public float gravity;
+    [HideInInspector] public Vector3 velocity;
+
     public float maxJumpHeight = 4;
     public float minJumpHeight = 1;
     [Tooltip("Time it takes to jump (Used to calculate gravity)")]
-    public float timeToJumpApex = .4f;
+    public float timeToJumpApex = 0.4f;
 
-    float accelerationTimeAirborne = .2f;
-    float accelerationTimeGrounded = .1f;
-    [HideInInspector]
-    public float gravity;
+    float accelerationTimeAirborne = 0.2f;
+    float accelerationTimeGrounded = 0.1f;
     float maxJumpVelocity;
     float minJumpVelocity;
-    [HideInInspector]
-    public Vector3 velocity;
     float velocityXSmoothing;
     #endregion
 
     #region Walljump & Sliding
     [Header("Wall Jumping & Sliding:")]
+
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
     public float wallLeap;
@@ -65,11 +65,7 @@ public class Player : MonoBehaviour
     #region Ability Variables
     public Attacks[] abilityArray = new Attacks[4];
     private bool isAttacking;
-
-    private GameObject[] registeredEnemies = new GameObject[4];
-    Vector3 spellDirection = new Vector3(0, 90, 0);
     public Attacks castedMeeleSpell;
-    private int abilityLoopindex = 0;
     #endregion
 
     #region Animations 
@@ -81,13 +77,20 @@ public class Player : MonoBehaviour
 
     #endregion
 
+    #region Getter&Setter
+    public bool Mirror { get { return mirror; } }
+    #endregion
+
     void Start()
     {
+        controller = GetComponent<Controller2D>();
+        _animator = GetComponent<Animator>();
+
+        // check if axis is set correctly
         if (playerAxis == "KB" || playerAxis == "P1" || playerAxis == "P2" || playerAxis == "P3" || playerAxis == "P4") { }
-        else { Debug.LogError("incorrect playerAxis"); }
+        else { Debug.LogError("<b>" + name + "</b> uses a incorrect playerAxis"); }
 
-        // set controles
-
+        // --- [ set standart controles ] ---
         // - keybord
         if (playerAxis == "KB")
         {
@@ -108,11 +111,12 @@ public class Player : MonoBehaviour
             playerControles[4] = "joystick " + playerAxis.Substring(1, 1) + " button 3";        // spell_3
         }
 
-        // debug player Controles
-        /*string debugText = name + " Controles:\n";
+        #region debug player Controles
+        string debugText = name + " Controles:\n";
 
-        for (int i = 0; i < playerControles.Length; i++) {
-            
+        // get all controles
+        for (int i = 0; i < playerControles.Length; i++)
+        {
             // set debug text
             switch (i)
             {
@@ -123,259 +127,235 @@ public class Player : MonoBehaviour
                 case 4: debugText += "  spell_3: "; break;
             }
 
-            // print debug text and key
-            debugText += playerControles[i] + ",";
+            // add value
+            debugText += playerControles[i];
+            // add colon
+            if (i != 4) { debugText += ","; }
         }
 
-        Debug.Log(debugText);*/
+        // print debug text and key
+        CustomDebug.Log(debugText, "Controles");
+        #endregion
 
-        // set starter abilities
-        abilityArray[0] = AbilityManager._instance.CreateBasic();           // basic
-        abilityArray[1] = AbilityManager._instance.CreateCapricorn();       // spell_1
-        abilityArray[2] = AbilityManager._instance.CreateLeo();             // spell_2
-        abilityArray[3] = AbilityManager._instance.CreateSaggitarius();     // spell_3
-
-        controller = GetComponent<Controller2D>();
-        _animator = GetComponent<Animator>();
+        // --- [ set starter abilities ] ---
+        abilityArray[0] = AbilityManager.Instance.CreateBasic(gameObject);           // basic
+        abilityArray[1] = AbilityManager.Instance.CreateVirgo(gameObject);           // spell_1
+        abilityArray[2] = AbilityManager.Instance.CreateCapricorn(gameObject);       // spell_2
+        abilityArray[3] = AbilityManager.Instance.CreateSaggitarius(gameObject);     // spell_3
 
         // create playerVitals
         playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth);
 
-        // calculate gravity
+        // --- [ calculate gravity ] ---
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
-
-        /*print("Gravity: " + gravity + "  Jump Velocity: " + maxJumpVelocity);*/
     }
 
     void Update()
     {
-        // Imobelised
-        if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked) { disabled = true; }
+        // --- [ Imobelised ] ---
+        if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked || playerVitals.Dashing) { disabled = true; }
         else { disabled = false; }
 
-        // update Cooldowns
+        // --- [ update Cooldowns / timeBetweenCasts ] ---
         foreach (Attacks _spell in abilityArray)
         {
+            // update cooldown
             _spell.UpdateCooldowns();
+            // update timeBetweenCasts
+            if (_spell.IsCasted) { _spell.TimeBeteewnCasts += Time.deltaTime; }
         }
 
-        // use ability
-       
-        // - get input (in button pressed)
+        // --- [ use ability ] ---
+        // use cast (on button pressed)
         if (Input.GetKeyDown(playerControles[1])) { abilityArray[0].Cast(gameObject); } // basic
         if (Input.GetKeyDown(playerControles[2])) { abilityArray[1].Cast(gameObject); } // spell_1
         if (Input.GetKeyDown(playerControles[3])) { abilityArray[2].Cast(gameObject); } // spell_2
         if (Input.GetKeyDown(playerControles[4])) { abilityArray[3].Cast(gameObject); } // spell_3
 
-        // - cast aftercast (on button released)
+        // use aftercast (on button released)
         if (Input.GetKeyUp(playerControles[1])) { abilityArray[0].AfterCast(); } // basic
         if (Input.GetKeyUp(playerControles[2])) { abilityArray[1].AfterCast(); } // spell_1
         if (Input.GetKeyUp(playerControles[3])) { abilityArray[2].AfterCast(); } // spell_2
         if (Input.GetKeyUp(playerControles[4])) { abilityArray[3].AfterCast(); } // spell_3
 
-        /*Debug.Log(name + " health: " + playerVitals.CurrHealth);*/
+        // --- [ virgo stun ] ---
+        // check if player is faceing a wall
+        if (controller.collisions.left || controller.collisions.right)
+        {
+            // ckeck if player is knockBacked from a virgo spell
+            if (playerVitals.KnockBacked && playerVitals.KnockBackSpell.ID == 6)
+            {
+                // stun target
+                playerVitals.ApplyStun(virgoSpell.StunTime, KnockBackSpell);
+            }
+        }
 
         // Get movement input ( controler / keyboard )
         input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
         _animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw(playerAxis + "_Horizontal")));
 
+        // check for movement
         Movement();
 
         // add gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime, input);
 
-        // Stop jumping / falling when colliding top / bottom
+        // Stop jumping / falling, when colliding top / bottom
         if (controller.collisions.above || controller.collisions.below) { velocity.y = 0; }
 
         #region Flipping
         if (flipEnable)
         {
-            if (Input.GetAxis(playerAxis + "_Horizontal") > 0 && !mirror)
-            {
-                Flip();
-            }
-            else if (Input.GetAxis(playerAxis + "_Horizontal") < 0 && mirror)
-            {
-                Flip();
-            }
+            // check if player should be fliped
+            if (Input.GetAxis(playerAxis + "_Horizontal") > 0 && !mirror) { Flip(); }
+            else if (Input.GetAxis(playerAxis + "_Horizontal") < 0 && mirror) { Flip(); }
         }
         #endregion
 
-        
-        // use meele abilities
+        #region use meele abilities
+        // check if a meelespell was used
         if (castedMeeleSpell != null)
         {
-            // disable and enable spellcasting if a spell is active
+            // disable attacking and flipping
             isAttacking = true;
-
-            // disable flipping while attacking
             flipEnable = false;
 
-            // check in how many directions the bullet can be shot
-            switch (castedMeeleSpell.SpellDir)
-            {
-                case 2:
-                    // get the aim direction
-                    switch (Util.Aim2Direction(new Vector2(Input.GetAxis(playerAxis + "_Vertical"), Input.GetAxis(playerAxis + "_Horizontal"))))
-                    {
-                        case "right": spellDirection = new Vector2(1, 0); break;
-                        case "left": spellDirection = new Vector2(-1, 0); break;
-                        case "noAim":
-                            if (mirror) { spellDirection = new Vector2(1, 0); }
-                            else { spellDirection = new Vector2(-1, 0); }
-                            break;
-                    }
-                    break;
+            // check in how many directions the spell can be aimed
+            castedMeeleSpell.SpellDirection = Util.GetAimDirection(castedMeeleSpell, this);
 
-                case 4:
-                    // get the aim direction
-                    switch (Util.Aim4Direction(new Vector2(Input.GetAxis(playerAxis + "_Vertical"), Input.GetAxis(playerAxis + "_Horizontal"))))
-                    {
-                        case "up": spellDirection = new Vector2(0, 1); break;
-                        case "right": spellDirection = new Vector2(1, 0); break;
-                        case "down": spellDirection = new Vector2(0, -1); break;
-                        case "left": spellDirection = new Vector2(-1, 0); break;
-                        case "noAim":
-                            if (mirror) { spellDirection = new Vector2(1, 0); }
-                            else { spellDirection = new Vector2(-1, 0); }
-                            break;
-                    }
-                    break;
-
-                case 8:
-                    // get the aim direction
-                    switch (Util.Aim8Direction(new Vector2(Input.GetAxis(playerAxis + "_Vertical"), Input.GetAxis(playerAxis + "_Horizontal"))))
-                    {
-                        case "up": spellDirection = new Vector2(0, 1); break;
-                        case "upRight": spellDirection = new Vector2(0.5f, 0.5f); break;
-                        case "right": spellDirection = new Vector2(1, 0); break;
-                        case "downRight": spellDirection = new Vector2(0.5f, -0.5f); break;
-                        case "down": spellDirection = new Vector2(0, -1); break;
-                        case "downLeft": spellDirection = new Vector2(-0.5f, -0.5f); break;
-                        case "left": spellDirection = new Vector2(-1, 0); break;
-                        case "upLeft": spellDirection = new Vector2(-1, 0.5f); break;
-                        case "noAim":
-                            if (mirror) { spellDirection = new Vector2(1, 0); }
-                            else { spellDirection = new Vector2(-1, 0); }
-                            break;
-                    }
-                    break;
-
-            }
-
-            // use the meele attack funktion 
+            // cast spell
             UseMeleeAttack();
         }
 
         else
         {
+            // enable attacking and flipping
             if (isAttacking) { isAttacking = false; }
             if (!flipEnable) { flipEnable = true; }
         }
-
+        #endregion
     }
 
     void Movement()
     {
+        // checkif player can move
         if (!disabled)
         {
-            // horizontal movement
+            // --- [ horizontal movement ] ---
+            // - get current movementspeed
             float targetVelocityX = input.x * playerVitals.MoveSpeed;
+            // - move player
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
 
+            // find out on which side the player is walling
             int wallDirX = (controller.collisions.left) ? -1 : 1;
+
             bool wallSliding = false;
 
-            // sticked to wall
+            // --- [ sticked to wall ] ---
+            // check if player is faceing a wall
             if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
             {
+                // active wallSliding
                 wallSliding = true;
-                flipEnable = false;
+
+                // disable flipping
+                flipEnable = true;
+
+                // set animation
                 _animator.SetBool("WallSlide", true);
                 _animator.SetBool("Fall", false);
 
                 // regulate sliding speed
                 if (velocity.y < -wallSlideSpeedMax) { velocity.y = -wallSlideSpeedMax; }
 
-                // stick to wall
+                // check if player should stick to wall
                 if (timeToWallUnstick > 0)
                 {
                     velocityXSmoothing = 0;
                     velocity.x = 0;
 
-                    if (input.x != wallDirX && input.x != 0)
-                    {
-                        timeToWallUnstick -= Time.deltaTime;
-                    }
-
-                    else
-                    {
-                        timeToWallUnstick = wallStickTime;
-                    }
+                    // sub timeToWallUnstick if player is aiming away
+                    if (input.x != wallDirX && input.x != 0) { timeToWallUnstick -= Time.deltaTime; }
+                    // reset timeToWallUnstick if player is aiming towaerds wall
+                    else { timeToWallUnstick = wallStickTime; }
                 }
 
-                else
-                {
-                    timeToWallUnstick = wallStickTime;
-                }
+                // reset timeToWallUnstick
+                else { timeToWallUnstick = wallStickTime; }
             }
+
             else
             {
+                // set animation
                 _animator.SetBool("WallSlide", false);
+                // enable flipping
                 flipEnable = true;
             }
 
-            // jump
+            // --- [ jumps ] ---
+            // check if jump button is pressed
             if (Input.GetKeyDown(playerControles[0]))
             {
+                // check if player is wallsliding
                 if (wallSliding)
                 {
+                    // set animation
                     _animator.SetBool("WallSlide", true);
                     _animator.SetBool("Falling", false);
 
-                    // wall climb
+                    // --- [ wall climb ] ---
+                    // check if player is aiming towards wall
                     if ((wallDirX < 0 && input.x < 0) || (wallDirX > 0 && input.x > 0))
                     {
                         velocity.x = -wallDirX * wallJumpClimb.x;
                         velocity.y = wallJumpClimb.y;
                     }
 
-                    // wall jump
+                    // --- [ wall jump ] ---
+                    // check if player has no aim
                     else if (input.x == 0)
                     {
                         velocity.x = -wallDirX * wallJumpOff.x;
                         velocity.y = wallJumpOff.y;
                     }
 
-                    // wall leap
+                    // --- [ wall leap ] ---
+                    // check if player is aiming away from wall
                     else
                     {
+                        // check if player should leap diagonal
                         if (Mathf.Abs(input.y) > 0.2)
                         {
+                            // set velocity
                             velocity.x = -wallDirX * wallLeap / 2;
                             velocity.y = wallLeap;
                         }
 
+                        // check if player should leap strait forward
                         else
                         {
+                            // set velocity
                             velocity.x = -wallDirX * wallLeap;
                             velocity.y = wallLeap / 4;
                         }
                     }
                 }
 
-                else
-                {
-                    _animator.SetBool("WallSlide", false);
-                }
+                // set wallslide animation off
+                else { _animator.SetBool("WallSlide", false); }
 
-                // jump on floor
+                // --- [ jump on floor ] ---
+                // check if player is on floor
                 if (controller.collisions.below)
                 {
+                    // set animation
                     _animator.SetTrigger("Jump");
+
+                    // jump (set velocity)
                     velocity.y = maxJumpVelocity;
                 }
             }
@@ -385,14 +365,17 @@ public class Player : MonoBehaviour
                 if (velocity.y > minJumpVelocity) { velocity.y = minJumpVelocity; }
             }
 
-
+            // check if player is falling (and isn't facing a wall)
             if (velocity.y < 0.1 || !controller.collisions.below || !controller.collisions.left || !controller.collisions.right)
             {
+                // set animations
                 _animator.SetBool("Fall", true);
             }
 
+            // set player standing
             if (velocity.y == 0 && controller.collisions.below)
             {
+                // set animation
                 _animator.SetBool("Fall", false);
                 _animator.SetTrigger("Land");
             }
@@ -410,17 +393,17 @@ public class Player : MonoBehaviour
     
     void UseMeleeAttack()
     {
-        // only continue if spell is still active (spell needs time to get to full range)
+        // only continue if spell is still active (spell needs time to reach full range)
         if (castedMeeleSpell.ShallTravel)
         {
             // get travel distance
             float travelDistance = castedMeeleSpell.TravelDistance();
 
             // create a Debug ray
-            Debug.DrawRay(gameObject.transform.position, spellDirection * travelDistance, Color.green);
+            Debug.DrawRay(gameObject.transform.position, castedMeeleSpell.SpellDirection * travelDistance, Color.green);
 
             // create a raycast
-            foreach (RaycastHit2D objectHit in Physics2D.RaycastAll(gameObject.transform.position, spellDirection, travelDistance))
+            foreach (RaycastHit2D objectHit in Physics2D.RaycastAll(gameObject.transform.position, castedMeeleSpell.SpellDirection, travelDistance))
             {
                 // check if hitted object is a Player
                 if (objectHit.transform.tag == "Player")
@@ -428,40 +411,17 @@ public class Player : MonoBehaviour
                     // only continue if spell didn't hit the spell caster
                     if (objectHit.transform.gameObject != gameObject)
                     {
-                        // get every already registered enemy seperat
-                        bool isEnemyRegistered = false;
-                        int firstFreeEntry = 0;
-                        int entryIndex = 0;
-
-                        foreach (GameObject enemy in registeredEnemies)
-                        {
-                            // only compare filled index
-                            if (enemy != null)
-                            {
-                                // find out if enemy is already hited
-                                if (enemy == objectHit.transform.gameObject)
-                                {
-                                    isEnemyRegistered = true;
-                                }
-                            }
-
-                            // get free entry
-                            else
-                            {
-                                firstFreeEntry = entryIndex;
-                            }
-                            entryIndex++;
-                        }
-
                         // only continue if enemy isn't registered previorsly (one anemy shall only be hitted once)
-                        if (!isEnemyRegistered)
+                        if (!Util.IsGameObjectIncluded(castedMeeleSpell.HitTargets, objectHit.transform.gameObject))
                         {
                             // register enemy
-                            registeredEnemies[firstFreeEntry] = objectHit.transform.gameObject;
+                            Util.IncludeGameObject(castedMeeleSpell.HitTargets, objectHit.transform.gameObject);
 
                             // checks if the spell already hit its max of players
                             if (!castedMeeleSpell.MaxTargetsReached())
                             {
+                                CustomDebug.Log("<b><color=white>" + castedMeeleSpell.Name + "</color></b> hit <b>" + objectHit.transform.gameObject.GetComponent<Player>().playerVitals.Name + "</b>", "Spells");
+
                                 // add player hit
                                 castedMeeleSpell.PlayersHit++;
 
@@ -471,8 +431,6 @@ public class Player : MonoBehaviour
                             }
                         }
                     }
-
-                    abilityLoopindex++;
                 }
 
             }
@@ -481,7 +439,7 @@ public class Player : MonoBehaviour
         // stop attack
         else
         {
-            registeredEnemies = new GameObject[4];
+            castedMeeleSpell.HitTargets = new GameObject[4];
             castedMeeleSpell.ResetPlayersHit();
             castedMeeleSpell.ShallTravel = true;
             castedMeeleSpell = null;
@@ -518,58 +476,9 @@ public class Player : MonoBehaviour
         {
             // instantiate bullet
             GameObject bulletInstance = Instantiate(_bullet, transform.position, transform.rotation) as GameObject;
-            
+
             // check in how many directions the bullet can be shot
-            switch (_spell.SpellDir)
-            {
-                case 2:
-                    // get the aim direction
-                    switch (Util.Aim2Direction(new Vector2(Input.GetAxis(playerAxis + "_Vertical"), Input.GetAxis(playerAxis + "_Horizontal"))))
-                    {
-                        case "right": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(1, 0); break;
-                        case "left": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(-1, 0); break;
-                        case "noAim":
-                            if (mirror) { bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(1, 0); }
-                            else { bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(-1, 0); }
-                            break;
-                    }
-                break;
-
-                case 4:
-                    // get the aim direction
-                    switch (Util.Aim4Direction(new Vector2(Input.GetAxis(playerAxis + "_Vertical"), Input.GetAxis(playerAxis + "_Horizontal"))))
-                    {
-                        case "up": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(0, 1); break;
-                        case "right": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(1, 0); break;
-                        case "down": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(0, -1); break;
-                        case "left": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(-1, 0); break;
-                        case "noAim":
-                            if (mirror) { bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(1, 0); }
-                            else { bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(-1, 0); }
-                            break;
-                    }
-                    break;
-
-                case 8:
-                    // get the aim direction
-                    switch (Util.Aim8Direction(new Vector2(Input.GetAxis(playerAxis + "_Vertical"), Input.GetAxis(playerAxis + "_Horizontal"))))
-                    {
-                        case "up": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(0, 1); break;
-                        case "upRight": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(0.5f, 0.5f); break;
-                        case "right": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(1, 0); break;
-                        case "downRight": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(0.5f, -0.5f); break;
-                        case "down": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(0, -1); break;
-                        case "downLeft": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(-0.5f, -0.5f); break;
-                        case "left": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(-1, 0); break;
-                        case "upLeft": bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(-1, 0.5f); break;
-                        case "noAim":
-                            if (mirror) { bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(1, 0); }
-                            else { bulletInstance.GetComponent<SpellBullet>().spellDir = new Vector2(-1, 0); }
-                            break;
-                    }
-                    break;
-            }
-
+            bulletInstance.GetComponent<SpellBullet>().spellDir = Util.GetAimDirection(_spell, this);
 
             // pass over bullet speed
             bulletInstance.GetComponent<SpellBullet>().usedSpell = _spell;
@@ -588,7 +497,7 @@ public class Player : MonoBehaviour
 
     public GameObject GetCapricorn2Targets()
     {
-        float range = AbilityManager._instance.spells[10].knockBackRange;
+        float range = AbilityManager.Instance.spells[10].knockBackRange;
         GameObject nearestPlayer = null;
         float distanceToPlayer = range;
 
