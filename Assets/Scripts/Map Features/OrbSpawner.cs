@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class OrbSpawner : MonoBehaviour {
+    //Singleton
     protected OrbSpawner() { }
     private static OrbSpawner _instance = null;
 
@@ -42,7 +43,8 @@ public class OrbSpawner : MonoBehaviour {
             spawnPointsCheck[random].active = true;
         }
     }
-
+    
+    //Singleton
     public static OrbSpawner Instance { get { return OrbSpawner._instance == null ? new OrbSpawner() : OrbSpawner._instance; } }
 }
 
