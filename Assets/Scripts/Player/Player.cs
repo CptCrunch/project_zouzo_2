@@ -454,25 +454,31 @@ public class Player : MonoBehaviour
         {
             Attacks firstSpell = abilityArray[1];
             Attacks secondSpell = abilityArray[2];
-            Attacks thirdSpell = abilityArray[3];
 
-            int count = 0;
-            foreach (Attacks item in abilityArray)
+            for (int i = 0; i < abilityArray.Length; i++)
             {
-                if (item == attack)
+                if (abilityArray[i].Name == attack.Name)
                 {
-                    abilityArray[count] = attack;
+                    print("Same");
+                    abilityArray[i] = attack;
+                    CustomDebug.LogArray(abilityArray);
+                    return;
                 }
-                else
+            }
+
+            for (int i = 0; i < abilityArray.Length; i++)
+            {
+                if (abilityArray[i].Name != attack.Name)
                 {
                     abilityArray[1] = attack;
                     abilityArray[2] = firstSpell;
                     abilityArray[3] = secondSpell;
+                    CustomDebug.LogArray(abilityArray);
+                    return;
                 }
-                count++;
             }
 
-            CustomDebug.LogArray(abilityArray);
+            
         }
     }
 

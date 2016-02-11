@@ -6281,8 +6281,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orbTag: Orb
   orbPrefab: {fileID: 122882, guid: 55c639cec24383348b353fbdc076f033, type: 2}
-  orbSprites: []
-  spawnRate: 1.5
+  orbSprites:
+  - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  spawnRate: .5
 --- !u!1001 &752907483
 Prefab:
   m_ObjectHideFlags: 0
@@ -8078,6 +8082,18 @@ Prefab:
     - target: {fileID: 132222, guid: b3d938f58e985734fb0d4a50e6ef1b9b, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2080376, guid: b3d938f58e985734fb0d4a50e6ef1b9b, type: 2}
+      propertyPath: m_BackGroundColor.r
+      value: .0808823705
+      objectReference: {fileID: 0}
+    - target: {fileID: 2080376, guid: b3d938f58e985734fb0d4a50e6ef1b9b, type: 2}
+      propertyPath: m_BackGroundColor.g
+      value: .0808823705
+      objectReference: {fileID: 0}
+    - target: {fileID: 2080376, guid: b3d938f58e985734fb0d4a50e6ef1b9b, type: 2}
+      propertyPath: m_BackGroundColor.b
+      value: .0808823705
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b3d938f58e985734fb0d4a50e6ef1b9b, type: 2}

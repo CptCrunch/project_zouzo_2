@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 public class OrbSpawner : MonoBehaviour {
     //Singleton
-    protected OrbSpawner() { }
     private static OrbSpawner _instance = null;
+    public static OrbSpawner Instance { get { return _instance; } }
+    void Awake() { if(_instance == null) { _instance = this; } else { _instance = new OrbSpawner(); } }
 
     //Orb Spawn
     [Header("Orb Spawn")]
@@ -17,18 +18,19 @@ public class OrbSpawner : MonoBehaviour {
     private int random;
 
     private GameObject[] spawnPoints = new GameObject[4];
-    public Spawnpoint[] spawnPointsCheck = new Spawnpoint[4];
+    private AbilityOrbValues[] spawnPointsCheck = new AbilityOrbValues[4] { new AbilityOrbValues(null, null), new AbilityOrbValues(null, null), new AbilityOrbValues(null, null), new AbilityOrbValues(null, null)};
 
     void Start()
     {
         spawnPoints = GameObject.FindGameObjectsWithTag(orbTag);
 
+        CustomDebug.LogArray(orbSprites);
+
         int count = 0;
         foreach(GameObject item in spawnPoints)
         {
-            spawnPointsCheck[count].spawnPoint = item;
-            spawnPointsCheck[count].index = 0;
-            spawnPointsCheck[count].active = false;
+            spawnPointsCheck[count].SpawnPoint = item;
+            spawnPointsCheck[count].Active = false;
             count++;
         }
 
@@ -38,22 +40,14 @@ public class OrbSpawner : MonoBehaviour {
     private void SpawnOrbs()
     {
         random = Random.Range(0, spawnPoints.Length);
-        if (!spawnPointsCheck[random].active)
+        if (!spawnPointsCheck[random].Active)
         {
-            spawnPointsCheck[random].orbPrefab = Instantiate(orbPrefab, spawnPointsCheck[random].spawnPoint.transform.position, Quaternion.identity) as GameObject;
-            spawnPointsCheck[random].active = true;
+            spawnPointsCheck[random].OrbPrefab = Instantiate(orbPrefab, spawnPointsCheck[random].SpawnPoint.transform.position, Quaternion.identity) as GameObject;
+            spawnPointsCheck[random].OrbPrefab.GetComponent<AbilityOrb>().point = spawnPointsCheck[random];
+
+            spawnPointsCheck[random].Active = true;
         }
-    }
-    
-    //Singleton
-    public static OrbSpawner Instance { get { return OrbSpawner._instance == null ? new OrbSpawner() : OrbSpawner._instance; } }
+    }  
 }
 
-public struct Spawnpoint
-{
-    public GameObject spawnPoint;
-    public GameObject orbPrefab;
-    public int index;
-    public bool active;
-}
     
