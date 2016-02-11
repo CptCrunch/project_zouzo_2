@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 481154}
   - 212: {fileID: 21261164}
   - 61: {fileID: 6144240}
+  - 114: {fileID: 11423950}
   m_Layer: 8
   m_Name: NoCorners
   m_TagString: Ground
@@ -24,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196642}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.3499999, y: .150000006, z: 0}
+  m_LocalPosition: {x: -19.5, y: -9.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -42,6 +43,23 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+--- !u!114 &11423950
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4695037a2aece46e6bbdf2cbb78dc2da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProCamera2D: {fileID: 0}
+  IsAMovingObject: 0
+  IsAChildSprite: 0
+  LocalPosition: {x: 0, y: 0}
+  SpriteScale: -2
+  _initialScale: {x: 1, y: 1, z: 1}
 --- !u!212 &21261164
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -60,7 +78,9 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
