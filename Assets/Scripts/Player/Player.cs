@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public LivingEntity playerVitals;
     
     public string name = "";
+    public string type;
     public float maxHealth;
     public float moveSpeed = 6;
     public float slowedSpeed = 3;
@@ -80,6 +81,25 @@ public class Player : MonoBehaviour
     #region Getter&Setter
     public bool Mirror { get { return mirror; } }
     #endregion
+
+    void Awake()
+    {
+        // --- [ set name and axis ] ---
+        foreach (CharacterPicture player in Gamerules._instance.charPics)
+        {
+            // check if object isn't null
+            if (player != null)
+            {
+                // check player type
+                if (player.Character == type)
+                {
+                    // set name and axis
+                    name = player.Name;
+                    playerAxis = player.Axis;
+                }
+            }
+        }
+    }
 
     void Start()
     {
@@ -450,25 +470,30 @@ public class Player : MonoBehaviour
 
     public void PickupOrb(Attacks attack)
     {
-        Attacks firstSpell  =   abilityArray[1];
-        Attacks secondSpell =   abilityArray[2];
-        Attacks thirdSpell  =   abilityArray[3];
-
-        int count = 0;
-        foreach(Attacks item in abilityArray)
+        if (attack != null)
         {
-            if(item == attack)
+            Attacks firstSpell = abilityArray[1];
+            Attacks secondSpell = abilityArray[2];
+            Attacks thirdSpell = abilityArray[3];
+
+            int count = 0;
+            foreach (Attacks item in abilityArray)
             {
-
+                if (item == attack)
+                {
+                    abilityArray[count] = attack;
+                }
+                else
+                {
+                    abilityArray[1] = attack;
+                    abilityArray[2] = firstSpell;
+                    abilityArray[3] = secondSpell;
+                }
+                count++;
             }
-            count++;
+
+            CustomDebug.LogArray(abilityArray);
         }
-
-        abilityArray[1] = attack;
-        abilityArray[2] = firstSpell;
-        abilityArray[3] = secondSpell;
-
-        CustomDebug.LogArray(abilityArray);
     }
 
     public void FireSkillShot(Attacks _spell, GameObject _bullet)

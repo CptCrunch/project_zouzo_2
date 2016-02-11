@@ -11,6 +11,7 @@ public class OrbSpawner : MonoBehaviour {
     [Header("Orb Spawn")]
     public string orbTag = "Orb";
     public GameObject orbPrefab;
+    public Sprite[] orbSprites;
 
     public float spawnRate = 1.5f;
     private int random;
@@ -39,7 +40,7 @@ public class OrbSpawner : MonoBehaviour {
         random = Random.Range(0, spawnPoints.Length);
         if (!spawnPointsCheck[random].active)
         {
-            spawnPointsCheck[random].orbPrefab = Instantiate(orbPrefab, spawnPointsCheck[random].spawnPoint.transform.position, Quaternion.identity) as GameObject;
+            //spawnPointsCheck[random].orbPrefab = Instantiate(orbPrefab, spawnPointsCheck[random].spawnPoint.transform.position, Quaternion.identity) as GameObject;
             spawnPointsCheck[random].active = true;
         }
     }
@@ -55,3 +56,4 @@ public struct Spawnpoint
     public int index;
     public bool active;
 }
+    
