@@ -6,8 +6,10 @@ public class Gamerules : MonoBehaviour {
 
     public static Gamerules _instance;
 
-    [HideInInspector]
-    public bool Running;
+    [HideInInspector] public bool Running;
+
+    [Tooltip("all scenes the Gamerules script will detect as a stage")]
+    public string[] registerdStages = new string[1];
 
     #region Gamerules Variable
     [Header("Game Rules")]
@@ -33,25 +35,29 @@ public class Gamerules : MonoBehaviour {
     // Player/Controller Selection
     [Header("Player Selection")]
     public GameObject[] playerPrefab = new GameObject[4];
-    private GameObject[] playerSpawn = new GameObject[4];
+    private GameObject[] playerSpawn;
+    private int[] randomSpawnOrder = new int[4] { 0, 1, 2, 3 };
     [Tooltip("Spawnpoints must have this given tag")]
     public string spawnTag;
 
-    [HideInInspector]
-    public Dictionary<string, bool> chosenPics = new Dictionary<string, bool>();
-    [HideInInspector]
-    public Dictionary<string, string> controllerToPlayer = new Dictionary<string, string>();
-    [HideInInspector]
-    public GameObject[] spawnedPlayer = new GameObject[4];
+    [HideInInspector] public Dictionary<string, bool> chosenPics = new Dictionary<string, bool>();
+    [HideInInspector] public Dictionary<string, string> controllerToPlayer = new Dictionary<string, string>();
+    [HideInInspector] public GameObject[] spawnedPlayer = new GameObject[4];
 
     [Header("Debug")]
     public DebugValues Tags;
     #endregion
 
-    void Awake() {
+    #region character variables
+    [HideInInspector] public CharacterPicture[] charPics = new CharacterPicture[4];
+    [HideInInspector] public GameObject[] playerOnStage = new GameObject[4];
+    #endregion
+
+    void Awake()
+    {
         // Dont destroy this object on loading a new level
         DontDestroyOnLoad(gameObject);
-
+        // set singelton instance
         if (_instance == null) { _instance = this; }
     }
 
@@ -60,25 +66,33 @@ public class Gamerules : MonoBehaviour {
         Tags.ResetValues();
         CustomDebug.Active = Tags.Active;
         CustomDebug.EnableTag("Main", Tags.Main);
+        CustomDebug.EnableTag("Testing", Tags.Testing);
         CustomDebug.EnableTag("Player", Tags.Player);
         CustomDebug.EnableTag("Damage", Tags.Damage);
         CustomDebug.EnableTag("Spells", Tags.Spells);
+        CustomDebug.EnableTag("Cooldowns", Tags.Cooldown);
         CustomDebug.EnableTag("UI", Tags.UI);
-        CustomDebug.EnableTag("Testing", Tags.Testing);
-
-        playerSpawn = GameObject.FindGameObjectsWithTag(spawnTag);
-
-        while (Running)
-        {
-
-        }
+        CustomDebug.EnableTag("Animation", Tags.Animation);
+        CustomDebug.EnableTag("Condition", Tags.Condition);
+        CustomDebug.EnableTag("Contrioles", Tags.Controles);
     }
 
     // Create All Player when the level loads
-    void OnLevelWasLoaded() {
-        foreach(var item in chosenPics)
+    void OnLevelWasLoaded()
+    {
+        // --- [ stage chack ] ---
+        bool isStage = false;
+        // check if scene is a registered stage
+        foreach (string stage in registerdStages) { if (stage == Application.loadedLevelName) { isStage = true; } }
+        // continue if scene is registered
+        if (isStage)
         {
-            if(item.Key == "Earth" && item.Value == true)
+            OnStage();
+        }
+
+        foreach (var item in chosenPics)
+        {
+            if (item.Key == "Earth" && item.Value == true)
             {
                 spawnedPlayer[0] = Instantiate(playerPrefab[0], playerSpawn[Random.Range(0, playerSpawn.Length)].transform.position, Quaternion.identity) as GameObject;
             }
@@ -116,8 +130,37 @@ public class Gamerules : MonoBehaviour {
                     AdjustAxis(i.Value, 3);
                     break;
             }
+        }
+    }
+
+    public void OnStage()
+    {
+        // find all spawns
+        playerSpawn = GameObject.FindGameObjectsWithTag(spawnTag);
+
+        // --- [ set random spawn point order ] ---
+        Util.MixArray(randomSpawnOrder);
+
+        // --- [ spawn player ] ---
+        int momSpawn = 0;
+        foreach (CharacterPicture player in charPics)
+        {
+            // check if object isn't null
+            if (player != null)
+            {
+                momSpawn++;
+                // get a random spornpoint
 
 
+                // check player type
+                switch (player.Character)
+                {
+                    case "Earth": Util.IncludeGameObject(playerOnStage, Instantiate(playerPrefab[0], playerSpawn[randomSpawnOrder[momSpawn]].transform.position, Quaternion.identity) as GameObject); break;
+                    case "Sun": Util.IncludeGameObject(playerOnStage, Instantiate(playerPrefab[1], playerSpawn[randomSpawnOrder[momSpawn]].transform.position, Quaternion.identity) as GameObject); break;
+                    case "Saturn": Util.IncludeGameObject(playerOnStage, Instantiate(playerPrefab[2], playerSpawn[randomSpawnOrder[momSpawn]].transform.position, Quaternion.identity) as GameObject); break;
+                    case "Jupitar": Util.IncludeGameObject(playerOnStage, Instantiate(playerPrefab[3], playerSpawn[randomSpawnOrder[momSpawn]].transform.position, Quaternion.identity) as GameObject); break;
+                }
+            }
         }
     }
 
