@@ -43,6 +43,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orbTag: Orb
   orbPrefab: {fileID: 0}
+  spawnRate: 1.5
 --- !u!114 &11411430
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,24 +56,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Running: 0
+  registerdStages:
+  - Prototype_Stage01
   playerAmmount: 0
   playerMaxHealth: 0
-  abilityLimit: 3
+  abilityLimit: 0
   itemSpawnrate: 0
   timeDeathSpawn: 0
-  damageModifier: 100
+  damageModifier: 0
   gameModeList:
-  - name: Life Limit
-    lifeLimit: 5
-    timeLimit: 0
-  - name: Time Limit
+  - name: 
     lifeLimit: 0
-    timeLimit: 60
+    timeLimit: 0
+  - name: 
+    lifeLimit: 0
+    timeLimit: 0
   playerPrefab:
   - {fileID: 183932, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
-  - {fileID: 183932, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
   - {fileID: 132140, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
-  - {fileID: 132140, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
+  - {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+  - {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
   spawnTag: Player Spawn
   spawnedPlayer:
   - {fileID: 0}
@@ -80,16 +83,22 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Tags:
-    Active: 1
-    Main: 1
-    Testing: 1
-    Player: 1
-    Damage: 1
-    Spells: 1
-    Cooldown: 1
-    UI: 1
-    Animation: 1
-    Condition: 1
+    Active: 0
+    Main: 0
+    Testing: 0
+    Player: 0
+    Damage: 0
+    Spells: 0
+    Cooldown: 0
+    UI: 0
+    Animation: 0
+    Condition: 0
+    Controles: 0
+  playerOnStage:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &11435204
 MonoBehaviour:
   m_ObjectHideFlags: 1
