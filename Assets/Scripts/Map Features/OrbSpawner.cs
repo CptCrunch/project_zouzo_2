@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class OrbSpawner : MonoBehaviour {
+    //Singleton
     protected OrbSpawner() { }
     private static OrbSpawner _instance = null;
 
@@ -10,6 +11,7 @@ public class OrbSpawner : MonoBehaviour {
     [Header("Orb Spawn")]
     public string orbTag = "Orb";
     public GameObject orbPrefab;
+    public Sprite[] orbSprites;
 
     public float spawnRate = 1.5f;
     private int random;
@@ -42,7 +44,8 @@ public class OrbSpawner : MonoBehaviour {
             spawnPointsCheck[random].active = true;
         }
     }
-
+    
+    //Singleton
     public static OrbSpawner Instance { get { return OrbSpawner._instance == null ? new OrbSpawner() : OrbSpawner._instance; } }
 }
 
@@ -53,3 +56,4 @@ public struct Spawnpoint
     public int index;
     public bool active;
 }
+    
