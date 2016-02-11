@@ -38,7 +38,7 @@ public class OrbSpawner : MonoBehaviour {
         random = Random.Range(0, spawnPoints.Length);
         if (!spawnPointsCheck[random].active)
         {
-            spawnPointsCheck[random].orbPrefab = Instantiate(orbPrefab, spawnPointsCheck[random].spawnPoint.transform.position, Quaternion.identity) as GameObject;
+            //spawnPointsCheck[random].orbPrefab = Instantiate(orbPrefab, spawnPointsCheck[random].spawnPoint.transform.position, Quaternion.identity) as GameObject;
             spawnPointsCheck[random].active = true;
         }
     }

@@ -4,9 +4,10 @@ using UnityEngine.UI;
 
 public class CharacterPicture
 {
-    private string tag;
-
+    private string name;
+    private string character;
     private string axis;
+
     private int index;
     private int pictureNumber;
     private bool isLocked = false;
@@ -19,87 +20,64 @@ public class CharacterPicture
     public bool pressedTwice;
     private int count;
 
-    public CharacterPicture(string axis, int index, int pictureNumber/*Sprite currImage, Image imageHolder, int index*/)
+    public CharacterPicture(string axis, int index, int pictureNumber)
     {
         this.axis = axis;
         this.index = index;
         this.pictureNumber = pictureNumber;
-        /*this.currImage = currImage;
-        this.imageHolder = imageHolder;
-        this.index = index;
-
-        imageHolder.sprite = currImage;*/
+        name = IndexToStanddartName(index);
     }
 
-    /// <summary>
-    /// Change the current image and set the image holder to the current image
-    /// </summary>
-    public void ChangePicture(Sprite imageToChange)
-    {
-        currImage = imageToChange;
-        imageHolder.overrideSprite = currImage;
-
-        switch (count)
-        {
-            case 0: tag = "Earth"; break;
-            case 1: tag = "Jupiter"; break;
-            case 2: tag = "Saturn"; break;
-            case 3: tag = "Sun"; break;
-        }
-    }
-
-    /// <summary>
-    /// Count up or down, based on the parameter
-    /// </summary>
-    /// <param name="i">If the Parameter is 1 it goes up, if its -1 it goes down</param>
-    public void CountUpDown(int i)
-    {
-        if (i == -1) count--;
-        if (i == 1) count++;
-        if (count > 3) count = 0;
-        if (count < 0) count = 3;
-    }
-
-    /// <summary>
-    /// Finalize the image, cant be changed afterwards (ingame)
-    /// </summary>
-    public void ChoseSprite()
-    {
-        chosenImage = currImage;
-        imageHolder.overrideSprite = chosenImage;
-        
-    }
-
-    /// <summary>
-    /// Reset the whole image with all it variables
-    /// </summary>
-    /// <param name="standartImage">Sprite where it resets to</param>
-    public void ResetPicture(Sprite standartImage)
-    {
-        currImage = standartImage;
-        imageHolder.overrideSprite = currImage;
-        pressed = false;
-        pressedTwice = false;
-        count = 0;
-        tag = null;
-    }
-
+    #region Getter & Setter
     public string Axis { get { return axis; } }
+    public string Name { get { return name; } set { name = value; } }
     public int Index { get { return index; } }
-    public int PictureNumber
+    public bool IsLocked { get { return isLocked; } set { isLocked = value; } }
+    public string Character { get { return character; } set { character = value; } }
+    public int PictureNumber { get { return pictureNumber; } set { pictureNumber = value; } }
+    #endregion
+
+    public string PictureNumToCharacter(int _pictureNum)
     {
-        get { return pictureNumber; }
-        set { pictureNumber = value; }
-    }
-    public bool IsLocked
-    {
-        get { return isLocked; }
-        set { isLocked = value; }
+        switch (_pictureNum)
+        {
+            case 0: return "Earth";
+            case 1: return "Sun";
+            case 2: return "Saturn";
+            case 3: return "Jupitar";
+        }
+
+        Debug.LogError("Wrong PictureNumTocharacter input");
+        return null;
     }
 
-    public string Tag { get { return tag; } }
-    public Sprite GetCurrImage { get { return currImage; } }
-    public Sprite GetChosenImage { get { return chosenImage; } }
-    public Image GetImageHolder { get { return imageHolder; } }
-    public int GetCount { get { return count; } set { value = count; } }
+    public int CharacterToPictureNum(string _character)
+    {
+        switch (_character)
+        {
+            case "Earth": return 0;
+            case "Sun": return 1;
+            case "Saturn": return 2;
+            case "Jupitar": return 3;
+        }
+
+        Debug.LogError("Wrong characterToPictureNum input");
+        return 0;
+    }
+
+    public void UpdateCharacter() { character = PictureNumToCharacter(pictureNumber); }
+
+    public string IndexToStanddartName(int _index)
+    {
+        switch (_index)
+        {
+            case 0: return "Player1";
+            case 1: return "Player2";
+            case 2: return "Player3";
+            case 3: return "Player4";
+        }
+
+        Debug.LogError("Wrong PictureNumTocharacter input");
+        return null;
+    }
 }
