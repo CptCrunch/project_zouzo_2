@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public LivingEntity playerVitals;
     
     public string name = "";
+    public string type;
     public float maxHealth;
     public float moveSpeed = 6;
     public float slowedSpeed = 3;
@@ -80,6 +81,25 @@ public class Player : MonoBehaviour
     #region Getter&Setter
     public bool Mirror { get { return mirror; } }
     #endregion
+
+    void Awake()
+    {
+        // --- [ set name and axis ] ---
+        foreach (CharacterPicture player in Gamerules._instance.charPics)
+        {
+            // check if object isn't null
+            if (player != null)
+            {
+                // check player type
+                if (player.Character == type)
+                {
+                    // set name and axis
+                    name = player.Name;
+                    playerAxis = player.Axis;
+                }
+            }
+        }
+    }
 
     void Start()
     {

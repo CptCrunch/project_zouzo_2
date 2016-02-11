@@ -26,9 +26,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 405256}
   - 61: {fileID: 6150000}
-  - 114: {fileID: 11484944}
-  - 114: {fileID: 11462642}
   - 212: {fileID: 21220066}
+  - 114: {fileID: 11462642}
+  - 114: {fileID: 11484944}
   - 95: {fileID: 9574086}
   m_Layer: 9
   m_Name: Player
@@ -44,7 +44,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191884}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .915927768, y: -1.96924353, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 407568}
@@ -57,8 +57,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 164088}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.24943113, y: 1.20637095, z: -.060546875}
-  m_LocalScale: {x: .362186491, y: .362186491, z: .362186491}
+  m_LocalPosition: {x: -1.2494311, y: 1.206371, z: -0.060546875}
+  m_LocalScale: {x: 0.3621865, y: 0.3621865, z: 0.3621865}
   m_Children: []
   m_Father: {fileID: 405256}
   m_RootOrder: 0
@@ -80,8 +80,10 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -93,12 +95,13 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191884}
   m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -.0199999996}
+  m_Offset: {x: -0.005, y: 0}
   serializedVersion: 2
-  m_Size: {x: .300000012, y: .600000024}
+  m_Size: {x: 0.55, y: 1}
 --- !u!95 &9574086
 Animator:
   serializedVersion: 3
@@ -172,19 +175,20 @@ MonoBehaviour:
   input: {x: 0, y: 0}
   playerAxis: KB
   name: Player 1
+  type: Non
+  maxHealth: 100
   moveSpeed: 6
   slowedSpeed: 3
-  maxHealth: 0
-  maxJumpHeight: 4
-  minJumpHeight: 1
-  timeToJumpApex: .400000006
   gravity: 0
   velocity: {x: 0, y: 0, z: 0}
-  wallJumpClimb: {x: 5, y: 20}
+  maxJumpHeight: 3.5
+  minJumpHeight: 1
+  timeToJumpApex: 0.4
+  wallJumpClimb: {x: 8.5, y: 17}
   wallJumpOff: {x: 8.5, y: 7}
-  wallLeap: 20
+  wallLeap: 15
   wallSlideSpeedMax: 3
-  wallStickTime: .100000001
+  wallStickTime: 0.25
 --- !u!212 &21220066
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -195,7 +199,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7e92fe90261722048926a621f93a8c49, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -203,14 +207,18 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300006, guid: bcca392178f3658478470a4e49110434, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -237,6 +245,62 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Offset.x
+      value: -0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.x
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7e92fe90261722048926a621f93a8c49, type: 2}
+    - target: {fileID: 0}
+      propertyPath: type
+      value: Non
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxJumpHeight
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: wallLeap
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: wallStickTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: wallJumpClimb.x
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: wallJumpClimb.y
+      value: 17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
