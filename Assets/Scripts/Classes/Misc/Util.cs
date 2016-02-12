@@ -67,6 +67,21 @@ public static class Util{
         }
     }
 
+    public static void MixArray(int[] _mix)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            int random1 = UnityEngine.Random.RandomRange(0, 3);
+            int random2 = UnityEngine.Random.RandomRange(0, 3);
+
+            int pos1 = _mix[random1];
+            int pos2 = _mix[random2];
+
+            _mix[random1] = pos2;
+            _mix[random2] = pos1;
+        }
+    }
+
     #region Test Joysick Axis
     public static bool LeftJoystickUp(string axis) 
     {
