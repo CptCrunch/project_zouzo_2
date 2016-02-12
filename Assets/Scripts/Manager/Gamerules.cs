@@ -22,15 +22,17 @@ public class Gamerules : MonoBehaviour {
     [Tooltip("Defines the maximal use of an ability")]
     public uint abilityLimit;
 
-    public float itemSpawnrate;
-
     [Tooltip("Time between player death and spawn")]
     public float timeDeathSpawn;
 
     [Range(0,200), Tooltip("In Percent (100% = normal Damage")]
-    public float damageModifier;
+    public float damageModifier = 100.0f;
 
-    public Gamemode[] gameModeList = new Gamemode[2];
+    public int lifeLimit;
+
+    [Tooltip("Time in Minutes")]
+    public float timeLimit = 10;
+    public float currentTime;
 
     // Player/Controller Selection
     [Header("Player Selection")]
@@ -63,6 +65,7 @@ public class Gamerules : MonoBehaviour {
 
     void Start()
     {
+        #region Debug
         Tags.ResetValues();
         CustomDebug.Active = Tags.Active;
         CustomDebug.EnableTag("Main", Tags.Main);
@@ -75,6 +78,17 @@ public class Gamerules : MonoBehaviour {
         CustomDebug.EnableTag("Animation", Tags.Animation);
         CustomDebug.EnableTag("Condition", Tags.Condition);
         CustomDebug.EnableTag("Contrioles", Tags.Controles);
+        #endregion
+
+    }
+
+    void Update()
+    {
+        if(Running)
+        {
+            currentTime = timeLimit - Time.deltaTime;
+            if (currentTime <= 0) EndGame();
+        }
     }
 
     // Create All Player when the level loads
@@ -131,6 +145,8 @@ public class Gamerules : MonoBehaviour {
                     break;
             }
         }
+        
+         StartCoroutine(WaitCoroutine());
     }
 
     public void OnStage()
@@ -164,6 +180,40 @@ public class Gamerules : MonoBehaviour {
         }
     }
 
+    private IEnumerator WaitCoroutine()
+    {
+        foreach(GameObject go in playerOnStage)
+        {
+            if (go != null)
+            {
+                go.GetComponent<Player>().playerVitals.Disabled = true;
+                CustomDebug.Log(go.GetComponent<Player>().playerVitals.Disabled, "Testing");
+            }
+        }
+
+        //TODO: Implement UI Count
+        CustomDebug.Log(3, "Testing");
+        yield return new WaitForSeconds(1);
+        CustomDebug.Log(2, "Testing");
+        yield return new WaitForSeconds(1);
+        CustomDebug.Log(1, "Testing");
+        yield return new WaitForSeconds(1);
+        CustomDebug.Log("Go", "Testing");
+        yield return new WaitForSeconds(1);
+
+        foreach (GameObject go in playerOnStage)
+        {
+            if (go != null)
+            {
+                go.GetComponent<Player>().playerVitals.Disabled = false;
+                CustomDebug.Log(go.GetComponent<Player>().playerVitals.Disabled, "Testing");
+            }
+        }
+
+        Running = true;
+        yield return null;
+    }
+
     private void AdjustAxis(string value, int index)
     {
         switch (value)
@@ -184,18 +234,18 @@ public class Gamerules : MonoBehaviour {
     }
 
     private void ChangeAxis(string axis, GameObject obj) {
-
         // Change the player axis and name
         obj.GetComponent<Player>().playerAxis = axis;
         obj.name = axis + "_Player";
     }
 
-    [System.Serializable]
-    public struct Gamemode
+    public void PlayerDeath()
     {
-        public string name;
-        public int lifeLimit;
-        [Range(0,100)]
-        public float timeLimit;
+        EndGame();
+    }
+
+    public void EndGame()
+    {
+        Running = false;
     }
 }
