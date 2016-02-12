@@ -12,7 +12,7 @@ GameObject:
   - 61: {fileID: 6191416}
   m_Layer: 8
   m_Name: JumpthroughRightFlat
-  m_TagString: Ground
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: Ground
+      value: Through
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

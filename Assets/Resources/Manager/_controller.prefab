@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 456444}
   - 114: {fileID: 11411430}
   - 114: {fileID: 11435204}
-  - 114: {fileID: 11407454}
   m_Layer: 0
   m_Name: _controller
   m_TagString: Untagged
@@ -30,20 +29,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11407454
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19686ab8d31ff824ab326e447c27f273, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orbTag: Orb
-  orbPrefab: {fileID: 0}
-  spawnRate: 1.5
 --- !u!114 &11411430
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -215,7 +200,7 @@ MonoBehaviour:
     range: 2
     targets: 1
     directions: 2
-    travelTime: 0.2
+    travelTime: .200000003
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
@@ -226,7 +211,7 @@ MonoBehaviour:
     dashTime: 0
     stunTime: 0
     charges: 3
-    chargeCooldown: 0.5
+    chargeCooldown: .5
     timeToGetMaxRange: 0
     minRange: 0
     stickArrowPerCent: 0
@@ -239,15 +224,15 @@ MonoBehaviour:
     range: 4
     targets: 0
     directions: 2
-    travelTime: 0.2
+    travelTime: .200000003
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
     knockBackRange: 0
     knockBackStrenght: 4
-    knockBackTime: 0.3
+    knockBackTime: .300000012
     dashStrenght: 2
-    dashTime: 0.2
+    dashTime: .200000003
     stunTime: 2
     charges: 0
     chargeCooldown: 0
@@ -325,7 +310,7 @@ MonoBehaviour:
     chargeCooldown: 0
     timeToGetMaxRange: 2
     minRange: 3
-    stickArrowPerCent: 0.5
+    stickArrowPerCent: .5
     castSlow: 3
   - name: Capricorn
     damage: 20
@@ -335,7 +320,7 @@ MonoBehaviour:
     range: 3
     targets: 0
     directions: 2
-    travelTime: 0.2
+    travelTime: .200000003
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 3
@@ -403,11 +388,11 @@ MonoBehaviour:
     damage: 10
     castTime: 0
     duration: 0
-    cooldown: 0.5
+    cooldown: .5
     range: 2
     targets: 1
     directions: 2
-    travelTime: 0.3
+    travelTime: .300000012
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0

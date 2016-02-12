@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         // --- [ set name and axis ] ---
-        foreach (CharacterPicture player in Gamerules._instance.charPics)
+        /*foreach (CharacterPicture player in Gamerules._instance.charPics)
         {
             // check if object isn't null
             if (player != null)
@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
                     playerAxis = player.Axis;
                 }
             }
-        }
+        }*/
     }
 
     void Start()
@@ -159,7 +159,7 @@ public class Player : MonoBehaviour
 
         // --- [ set starter abilities ] ---
         abilityArray[0] = AbilityManager.Instance.CreateBasic(gameObject);           // basic
-        abilityArray[1] = AbilityManager.Instance.CreateVirgo(gameObject);           // spell_1
+        abilityArray[1] = AbilityManager.Instance.CreateLeo(gameObject);             // spell_1
         abilityArray[2] = AbilityManager.Instance.CreateCapricorn(gameObject);       // spell_2
         abilityArray[3] = AbilityManager.Instance.CreateSaggitarius(gameObject);     // spell_3
 

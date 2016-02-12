@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 183932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -19.5300007, y: 2.06999993, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -39,13 +39,12 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 183932}
   m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -0.005, y: 0}
+  m_Offset: {x: -.00499999989, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.55, y: 1}
+  m_Size: {x: .550000012, y: 1}
 --- !u!95 &9579960
 Animator:
   serializedVersion: 3
@@ -100,18 +99,18 @@ MonoBehaviour:
   name: Earth
   type: Earth
   maxHealth: 100
-  moveSpeed: 6
+  moveSpeed: 8
   slowedSpeed: 3
   gravity: 0
   velocity: {x: 0, y: 0, z: 0}
-  maxJumpHeight: 3.5
+  maxJumpHeight: 4
   minJumpHeight: 1
-  timeToJumpApex: 0.4
-  wallJumpClimb: {x: 8.5, y: 17}
+  timeToJumpApex: .400000006
+  wallJumpClimb: {x: 8.5, y: 20}
   wallJumpOff: {x: 8.5, y: 7}
   wallLeap: 15
   wallSlideSpeedMax: 3
-  wallStickTime: 0.25
+  wallStickTime: .25
 --- !u!212 &21200258
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -133,15 +132,13 @@ SpriteRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300190, guid: 3b62faa2f2d1f96478b26120f0f5752e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
