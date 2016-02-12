@@ -46,16 +46,11 @@ MonoBehaviour:
   playerAmmount: 0
   playerMaxHealth: 0
   abilityLimit: 0
-  itemSpawnrate: 0
   timeDeathSpawn: 0
-  damageModifier: 0
-  gameModeList:
-  - name: 
-    lifeLimit: 0
-    timeLimit: 0
-  - name: 
-    lifeLimit: 0
-    timeLimit: 0
+  damageModifier: 100
+  lifeLimit: 3
+  timeLimit: 20
+  currentTime: 0
   playerPrefab:
   - {fileID: 183932, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
   - {fileID: 132140, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
@@ -68,9 +63,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Tags:
-    Active: 0
-    Main: 0
-    Testing: 0
+    Active: 1
+    Main: 1
+    Testing: 1
     Player: 0
     Damage: 0
     Spells: 0
