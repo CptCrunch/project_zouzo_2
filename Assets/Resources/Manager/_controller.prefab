@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 456444}
   - 114: {fileID: 11411430}
   - 114: {fileID: 11435204}
-  - 114: {fileID: 11407454}
   m_Layer: 0
   m_Name: _controller
   m_TagString: Untagged
@@ -30,20 +29,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11407454
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19686ab8d31ff824ab326e447c27f273, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orbTag: Orb
-  orbPrefab: {fileID: 0}
-  spawnRate: 1.5
 --- !u!114 &11411430
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -61,16 +46,11 @@ MonoBehaviour:
   playerAmmount: 0
   playerMaxHealth: 0
   abilityLimit: 0
-  itemSpawnrate: 0
   timeDeathSpawn: 0
-  damageModifier: 0
-  gameModeList:
-  - name: 
-    lifeLimit: 0
-    timeLimit: 0
-  - name: 
-    lifeLimit: 0
-    timeLimit: 0
+  damageModifier: 100
+  lifeLimit: 3
+  timeLimit: 20
+  currentTime: 0
   playerPrefab:
   - {fileID: 183932, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
   - {fileID: 132140, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
@@ -83,9 +63,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Tags:
-    Active: 0
-    Main: 0
-    Testing: 0
+    Active: 1
+    Main: 1
+    Testing: 1
     Player: 0
     Damage: 0
     Spells: 0
@@ -215,7 +195,7 @@ MonoBehaviour:
     range: 2
     targets: 1
     directions: 2
-    travelTime: 0.2
+    travelTime: .200000003
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
@@ -226,7 +206,7 @@ MonoBehaviour:
     dashTime: 0
     stunTime: 0
     charges: 3
-    chargeCooldown: 0.5
+    chargeCooldown: .5
     timeToGetMaxRange: 0
     minRange: 0
     stickArrowPerCent: 0
@@ -239,15 +219,15 @@ MonoBehaviour:
     range: 4
     targets: 0
     directions: 2
-    travelTime: 0.2
+    travelTime: .200000003
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
     knockBackRange: 0
     knockBackStrenght: 4
-    knockBackTime: 0.3
+    knockBackTime: .300000012
     dashStrenght: 2
-    dashTime: 0.2
+    dashTime: .200000003
     stunTime: 2
     charges: 0
     chargeCooldown: 0
@@ -325,7 +305,7 @@ MonoBehaviour:
     chargeCooldown: 0
     timeToGetMaxRange: 2
     minRange: 3
-    stickArrowPerCent: 0.5
+    stickArrowPerCent: .5
     castSlow: 3
   - name: Capricorn
     damage: 20
@@ -335,7 +315,7 @@ MonoBehaviour:
     range: 3
     targets: 0
     directions: 2
-    travelTime: 0.2
+    travelTime: .200000003
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 3
@@ -403,11 +383,11 @@ MonoBehaviour:
     damage: 10
     castTime: 0
     duration: 0
-    cooldown: 0.5
+    cooldown: .5
     range: 2
     targets: 1
     directions: 2
-    travelTime: 0.3
+    travelTime: .300000012
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
