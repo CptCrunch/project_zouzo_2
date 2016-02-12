@@ -16,7 +16,9 @@ public class LivingEntity
     private float launchSpeed;
     private float maxHealth;
     private float currHealth;
+    private int life;
 
+    private bool disabled = false;
     private bool stunned = false;
     private int stunIndex = 0;
     private bool slowed = false;
@@ -42,11 +44,15 @@ public class LivingEntity
     Thread KnockBackThread;
     Thread DashThread;
 
-    public LivingEntity(GameObject playerObject, string name, float moveSpeed, float slowedSpeed, float maxHealth)
+    public LivingEntity(GameObject playerObject, string name, float moveSpeed, float slowedSpeed, float maxHealth, int lifes)
     {
         // set maxHealth ( will use maxHealth from Gamerulses )
         if (Gamerules._instance.playerMaxHealth == 0) { this.maxHealth = maxHealth; } 
         else { this.maxHealth = Gamerules._instance.playerMaxHealth; }
+
+        // Set Life Limit
+        if(Gamerules._instance.lifeLimit == 0) { this.life = lifes; } 
+        else { this.life = Gamerules._instance.lifeLimit; }
 
         instance = playerObject.GetComponent<Player>();
 
@@ -63,6 +69,7 @@ public class LivingEntity
     public string Name { get { return name; } }
     public float CurrHealth { get { return currHealth; } }
 
+    public bool Disabled { get { return disabled; } set { disabled = value; } }
     public bool Stunned { get { return stunned; } }
     public bool Slowed
     {
@@ -97,7 +104,7 @@ public class LivingEntity
 
         CustomDebug.Log("<b>" + name + "</b> got <color=red>" + _ammount + " damage</color>","Damage");
         currHealth -= _ammount;
-        if (_ammount >= maxHealth || currHealth <= 0) { currHealth = 0; }
+        if (_ammount >= maxHealth || currHealth <= 0) { currHealth = 0; instance.Die(); }
     }
 
     #region Conditions

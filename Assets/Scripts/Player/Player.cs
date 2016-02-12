@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public string name = "";
     public string type;
     public float maxHealth;
+    public int lives = 3;
     public float moveSpeed = 6;
     public float slowedSpeed = 3;
 
@@ -61,6 +62,7 @@ public class Player : MonoBehaviour
 
     #region Condition Variables
     private bool disabled = false;
+    public bool gamerulesDisabled = false;
     #endregion
 
     #region Ability Variables
@@ -164,7 +166,7 @@ public class Player : MonoBehaviour
         abilityArray[3] = AbilityManager.Instance.CreateSaggitarius(gameObject);     // spell_3
 
         // create playerVitals
-        playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth);
+        playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth, lives);
 
         // --- [ calculate gravity ] ---
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
@@ -175,8 +177,10 @@ public class Player : MonoBehaviour
     void Update()
     {
         // --- [ Imobelised ] ---
-        if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked || playerVitals.Dashing) { disabled = true; }
+        if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked || playerVitals.Dashing || playerVitals.Disabled) { disabled = true; }
         else { disabled = false; }
+
+        if (playerVitals.Disabled) { Debug.Log(name + "is disabled"); }
 
         // --- [ update Cooldowns / timeBetweenCasts ] ---
         foreach (Attacks _spell in abilityArray)
@@ -552,5 +556,10 @@ public class Player : MonoBehaviour
             }
         }
         return nearestPlayer;
+    }
+
+    public void Die()
+    {
+
     }
 }
