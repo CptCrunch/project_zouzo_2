@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 439266}
   - 61: {fileID: 6171770}
+  - 114: {fileID: 11405530}
   m_Layer: 0
   m_Name: SpikeCollider
   m_TagString: Untagged
@@ -79,11 +80,24 @@ BoxCollider2D:
   m_GameObject: {fileID: 101290}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: .25}
   serializedVersion: 2
   m_Size: {x: 1, y: .5}
+--- !u!114 &11405530
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ef5cbaa77b86b4b877bf65b659e770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  invulnTime: 1
 --- !u!212 &21289664
 SpriteRenderer:
   m_ObjectHideFlags: 1
