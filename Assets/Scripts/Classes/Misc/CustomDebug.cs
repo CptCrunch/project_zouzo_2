@@ -19,7 +19,8 @@ namespace UnityEngine
             {"UI", false},
             {"Animation", false},
             {"Condition", false},
-            {"Controles", false}
+            {"Controles", false},
+            {"MapFeature", false}
         };
 
         #region Extras
@@ -224,16 +225,38 @@ namespace UnityEngine
         #endregion
 
         #region Draw Line
-        public static void DrawLine(Vector3 start, Vector3 end)
+        public static void DrawLine(Vector3 start, Vector3 end, string tag)
         {
             if (active)
-                Debug.DrawLine(start, end);
+            {
+                foreach (KeyValuePair<string, bool> item in tags)
+                {
+                    if (item.Key == tag)
+                    {
+                        if (item.Value == true)
+                        {
+                            Debug.DrawLine(start, end);
+                        }
+                    }
+                }
+            }
         }
         [ExcludeFromDocs]
-        public static void DrawLine(Vector3 start, Vector3 end, Color color)
+        public static void DrawLine(Vector3 start, Vector3 end, Color color, string tag)
         {
             if (active)
-                Debug.DrawLine(start, end, color);
+            {
+                foreach (KeyValuePair<string, bool> item in tags)
+                {
+                    if (item.Key == tag)
+                    {
+                        if (item.Value == true)
+                        {
+                            Debug.DrawLine(start, end, color);
+                        }
+                    }
+                }
+            }
         }
         [ExcludeFromDocs]
         public static void DrawLine(Vector3 start, Vector3 end, Color color, float duration)
