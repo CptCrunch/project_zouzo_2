@@ -79,6 +79,7 @@ MonoBehaviour:
   name: Sun
   type: Sun
   maxHealth: 100
+  lives: 3
   moveSpeed: 8
   slowedSpeed: 3
   gravity: 0
@@ -91,6 +92,7 @@ MonoBehaviour:
   wallLeap: 15
   wallSlideSpeedMax: 3
   wallStickTime: .25
+  gamerulesDisabled: 0
 --- !u!114 &11447046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,7 +138,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300016, guid: 7cfb1151c36690946bbb61e26dfd3daa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
