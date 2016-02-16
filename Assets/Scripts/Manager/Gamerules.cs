@@ -78,6 +78,7 @@ public class Gamerules : MonoBehaviour {
         CustomDebug.EnableTag("Animation", Tags.Animation);
         CustomDebug.EnableTag("Condition", Tags.Condition);
         CustomDebug.EnableTag("Contrioles", Tags.Controles);
+        CustomDebug.EnableTag("MapFeature", Tags.Controles);
         #endregion
 
     }
