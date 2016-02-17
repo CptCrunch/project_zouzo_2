@@ -30,6 +30,7 @@ public class LivingEntity
     private bool knockBacked = false;
     private int knockBackIndex = 0;
     private bool dashing = false;
+    private bool invuln = false;
 
     private Attacks stunSpell;
     private Attacks slowSpell;
@@ -80,6 +81,7 @@ public class LivingEntity
     public bool KnockUped { get { return knockUped; } }
     public bool KnockBacked { get { return knockBacked; } }
     public bool Dashing { get { return dashing; } }
+    public bool Invuln { get { return invuln; } set { invuln = value; } }
     public Attacks StunSpell { get { return stunSpell; } }
     public Attacks SlowSpell { get { return slowSpell; } }
     public Attacks SlowOverTimeSpell { get { return slowOverTimeSpell; } }

@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 470518}
   - 212: {fileID: 21299268}
   - 61: {fileID: 6166558}
+  - 114: {fileID: 11485504}
   m_Layer: 8
   m_Name: Spikes
   m_TagString: Ground
@@ -42,6 +43,19 @@ BoxCollider2D:
   m_Offset: {x: 0, y: -.25}
   serializedVersion: 2
   m_Size: {x: 1, y: .5}
+--- !u!114 &11485504
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ef5cbaa77b86b4b877bf65b659e770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  invulnTime: 1
 --- !u!212 &21299268
 SpriteRenderer:
   m_ObjectHideFlags: 1
