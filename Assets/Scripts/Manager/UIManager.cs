@@ -22,6 +22,10 @@ public class UIManager : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        // #get all player on the stage (gamerules)
+        // #create uiPrefabs for each one
+        // #set player Icons
+
         // --- [ set player Icons ] ---
         for (int i = 0; i < characterHolder.Length; i++)
         {
