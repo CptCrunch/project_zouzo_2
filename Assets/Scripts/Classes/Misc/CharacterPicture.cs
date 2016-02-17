@@ -37,35 +37,7 @@ public class CharacterPicture
     public int PictureNumber { get { return pictureNumber; } set { pictureNumber = value; } }
     #endregion
 
-    public string PictureNumToCharacter(int _pictureNum)
-    {
-        switch (_pictureNum)
-        {
-            case 0: return "Earth";
-            case 1: return "Sun";
-            case 2: return "Saturn";
-            case 3: return "Jupitar";
-        }
-
-        Debug.LogError("Wrong PictureNumTocharacter input");
-        return null;
-    }
-
-    public int CharacterToPictureNum(string _character)
-    {
-        switch (_character)
-        {
-            case "Earth": return 0;
-            case "Sun": return 1;
-            case "Saturn": return 2;
-            case "Jupitar": return 3;
-        }
-
-        Debug.LogError("Wrong characterToPictureNum input");
-        return 0;
-    }
-
-    public void UpdateCharacter() { character = PictureNumToCharacter(pictureNumber); }
+    public void UpdateCharacter() { character = Gamerules._instance.GetPlayerNameByIndex(pictureNumber); }
 
     public string IndexToStanddartName(int _index)
     {

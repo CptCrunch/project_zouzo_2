@@ -22,6 +22,23 @@ public class UIManager : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        GameObject[] playerOnStage = Gamerules._instance.PlayerOnStage;
+
+        // get all player on the stage (gamerules)
+        for (int i = 0; i < playerOnStage.Length; i++)
+        {
+            // check if entry is filled
+            if (playerOnStage[i] == null)
+            {
+                // create ui
+                GameObject newUI = Instantiate(uiPrefab, uiPositions[i], new Quaternion(0, 0, 0, 0)) as GameObject;
+
+                // set ui on canvas
+                newUI.transform.parent = gameObject.transform;
+            }
+        }
+        // #set player Icons
+
         // --- [ set player Icons ] ---
         for (int i = 0; i < characterHolder.Length; i++)
         {
