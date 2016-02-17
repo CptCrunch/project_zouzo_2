@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         // --- [ set name and axis ] ---
-        /*foreach (CharacterPicture player in Gamerules._instance.charPics)
+        foreach (CharacterPicture player in Gamerules._instance.charPics)
         {
             // check if object isn't null
             if (player != null)
@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
                     playerAxis = player.Axis;
                 }
             }
-        }*/
+        }
     }
 
     void Start()
@@ -180,7 +180,7 @@ public class Player : MonoBehaviour
         if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked || playerVitals.Dashing || gamerulesDisabled) { disabled = true; }
         else { disabled = false; }
 
-        if (gamerulesDisabled) { Debug.Log(name + "is disabled"); }
+        /*if (gamerulesDisabled) { Debug.Log(name + " is disabled"); }*/
 
         // --- [ update Cooldowns / timeBetweenCasts ] ---
         foreach (Attacks _spell in abilityArray)
