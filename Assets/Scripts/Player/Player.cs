@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
 
     #region Condition Variables
     private bool disabled = false;
-    private bool gamerulesDisabled = false;
+    [HideInInspector] public bool gamerulesDisabled = false;
     #endregion
 
     #region Ability Variables
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         // --- [ set name and axis ] ---
-        /*foreach (CharacterPicture player in Gamerules._instance.charPics)
+        foreach (CharacterPicture player in Gamerules._instance.charPics)
         {
             // check if object isn't null
             if (player != null)
@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
                     playerAxis = player.Axis;
                 }
             }
-        }*/
+        }
     }
 
     void Start()
@@ -178,7 +178,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         // --- [ Imobelised ] ---
-        if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked || playerVitals.Dashing || playerVitals.Disabled) { disabled = true; }
+        if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked || playerVitals.Dashing || gamerulesDisabled) { disabled = true; }
         else { disabled = false; }
 
         // --- [ Condition Animations ] ---

@@ -49,19 +49,9 @@ MonoBehaviour:
   timeDeathSpawn: 0
   damageModifier: 100
   lifeLimit: 3
-  timeLimit: 20
+  timeLimit: 10
   currentTime: 0
-  playerPrefab:
-  - {fileID: 183932, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
-  - {fileID: 132140, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
-  - {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
-  - {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
   spawnTag: Player Spawn
-  spawnedPlayer:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   Tags:
     Active: 1
     Main: 1
@@ -74,11 +64,24 @@ MonoBehaviour:
     Animation: 0
     Condition: 0
     Controles: 0
-  playerOnStage:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+    MapFeature: 0
+  playerInfo:
+  - name: Earth
+    prefab: {fileID: 183932, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
+    standardSplashart: {fileID: 21300000, guid: 8a514571e0fd61d4aa422b8bca6b1fbf,
+      type: 3}
+    lockedSplashart: {fileID: 21300000, guid: f15d4a5ef4a9df1419928360f4f6b5f3, type: 3}
+    blockedSplashart: {fileID: 21300000, guid: 05e18ba4c3dd2a34d80c05428a970266, type: 3}
+    standardIcon: {fileID: 21300010, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
+    deathIcon: {fileID: 21300012, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
+  - name: Sun
+    prefab: {fileID: 132140, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
+    standardSplashart: {fileID: 21300000, guid: 6037ebf26904d6241b77b31011af2c9c,
+      type: 3}
+    lockedSplashart: {fileID: 21300000, guid: e882879f46fd9c4468b3557da5f76d54, type: 3}
+    blockedSplashart: {fileID: 21300000, guid: ccf77c4c00f0ec04182c5a25d05310ec, type: 3}
+    standardIcon: {fileID: 21300022, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
+    deathIcon: {fileID: 21300016, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
 --- !u!114 &11435204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,7 +198,7 @@ MonoBehaviour:
     range: 2
     targets: 1
     directions: 2
-    travelTime: .200000003
+    travelTime: 0.2
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
@@ -206,7 +209,7 @@ MonoBehaviour:
     dashTime: 0
     stunTime: 0
     charges: 3
-    chargeCooldown: .5
+    chargeCooldown: 0.5
     timeToGetMaxRange: 0
     minRange: 0
     stickArrowPerCent: 0
@@ -219,15 +222,15 @@ MonoBehaviour:
     range: 4
     targets: 0
     directions: 2
-    travelTime: .200000003
+    travelTime: 0.2
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
     knockBackRange: 0
     knockBackStrenght: 4
-    knockBackTime: .300000012
+    knockBackTime: 0.3
     dashStrenght: 2
-    dashTime: .200000003
+    dashTime: 0.2
     stunTime: 2
     charges: 0
     chargeCooldown: 0
@@ -305,7 +308,7 @@ MonoBehaviour:
     chargeCooldown: 0
     timeToGetMaxRange: 2
     minRange: 3
-    stickArrowPerCent: .5
+    stickArrowPerCent: 0.5
     castSlow: 3
   - name: Capricorn
     damage: 20
@@ -315,7 +318,7 @@ MonoBehaviour:
     range: 3
     targets: 0
     directions: 2
-    travelTime: .200000003
+    travelTime: 0.2
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 3
@@ -383,11 +386,11 @@ MonoBehaviour:
     damage: 10
     castTime: 0
     duration: 0
-    cooldown: .5
+    cooldown: 0.5
     range: 2
     targets: 1
     directions: 2
-    travelTime: .300000012
+    travelTime: 0.3
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
