@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
 
     #region Condition Variables
     private bool disabled = false;
-    public bool gamerulesDisabled = false;
+    private bool gamerulesDisabled = false;
     #endregion
 
     #region Ability Variables
@@ -72,10 +72,11 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Animations 
-    private Animator _animator;
+    [HideInInspector] public Animator _animator;
     private bool mirror = false;
     private bool death = false;
     private bool flipEnable = true;
+    private bool stunFlip = false;
     #endregion
 
     #endregion
@@ -161,7 +162,7 @@ public class Player : MonoBehaviour
 
         // --- [ set starter abilities ] ---
         abilityArray[0] = AbilityManager.Instance.CreateBasic(gameObject);           // basic
-        abilityArray[1] = AbilityManager.Instance.CreateLeo(gameObject);             // spell_1
+        abilityArray[1] = AbilityManager.Instance.CreateVirgo(gameObject);             // spell_1
         abilityArray[2] = AbilityManager.Instance.CreateCapricorn(gameObject);       // spell_2
         abilityArray[3] = AbilityManager.Instance.CreateSaggitarius(gameObject);     // spell_3
 
@@ -180,7 +181,24 @@ public class Player : MonoBehaviour
         if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked || playerVitals.Dashing || playerVitals.Disabled) { disabled = true; }
         else { disabled = false; }
 
-        if (playerVitals.Disabled) { Debug.Log(name + "is disabled"); }
+        // --- [ Condition Animations ] ---
+        _animator.SetBool("Stunned", playerVitals.Stunned);
+
+        _animator.SetBool("KnockUp", playerVitals.KnockUped);
+
+        _animator.SetBool("KnockBack", playerVitals.KnockBacked);
+
+        if (playerVitals.KnockBacked) {
+            if (!stunFlip && velocity.x < 0) {
+                stunFlip = true;
+                flipEnable = false;
+
+            } else {
+                stunFlip = true;
+                flipEnable = false;
+            }
+        }
+        if (!playerVitals.KnockBacked) { stunFlip = false; flipEnable = true; }
 
         // --- [ update Cooldowns / timeBetweenCasts ] ---
         foreach (Attacks _spell in abilityArray)
@@ -409,12 +427,13 @@ public class Player : MonoBehaviour
         }
     }
     
-    void Flip()
+    public void Flip()
     {
         mirror = !mirror;
         Vector2 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+        print(mirror);
     }
     
     void UseMeleeAttack()
