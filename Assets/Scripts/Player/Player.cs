@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
 
     #region Condition Variables
     private bool disabled = false;
-    public bool gamerulesDisabled = false;
+    [HideInInspector] public bool gamerulesDisabled = false;
     #endregion
 
     #region Ability Variables
@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
     private Animator _animator;
     private bool mirror = false;
     private bool death = false;
-    private bool flipEnable = true;
+    [HideInInspector] public bool flipEnable = true;
     #endregion
 
     #endregion
@@ -177,10 +177,10 @@ public class Player : MonoBehaviour
     void Update()
     {
         // --- [ Imobelised ] ---
-        if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked || playerVitals.Dashing || playerVitals.Disabled) { disabled = true; }
+        if (playerVitals.Stunned || playerVitals.KnockUped || playerVitals.KnockBacked || playerVitals.Dashing || gamerulesDisabled) { disabled = true; }
         else { disabled = false; }
 
-        if (playerVitals.Disabled) { Debug.Log(name + "is disabled"); }
+        if (gamerulesDisabled) { Debug.Log(name + "is disabled"); }
 
         // --- [ update Cooldowns / timeBetweenCasts ] ---
         foreach (Attacks _spell in abilityArray)

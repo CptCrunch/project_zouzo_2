@@ -49,19 +49,14 @@ MonoBehaviour:
   timeDeathSpawn: 0
   damageModifier: 100
   lifeLimit: 3
-  timeLimit: 20
+  timeLimit: 10
   currentTime: 0
-  playerPrefab:
+  playerPrefabs:
   - {fileID: 183932, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
   - {fileID: 132140, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
-  - {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
-  - {fileID: 191884, guid: 28233dfa6ccbc234d84a5d951d3b772b, type: 2}
+  - {fileID: 183932, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
+  - {fileID: 132140, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
   spawnTag: Player Spawn
-  spawnedPlayer:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   Tags:
     Active: 1
     Main: 1
