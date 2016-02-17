@@ -36,15 +36,12 @@ public class Gamerules : MonoBehaviour {
 
     // Player/Controller Selection
     [Header("Player Selection")]
-    public GameObject[] playerPrefab = new GameObject[4];
+    public GameObject[] playerPrefabs = new GameObject[4] { null, null, null, null };
+
     private GameObject[] playerSpawn;
     private int[] randomSpawnOrder = new int[4] { 0, 1, 2, 3 };
     [Tooltip("Spawnpoints must have this given tag")]
     public string spawnTag;
-
-    [HideInInspector] public Dictionary<string, bool> chosenPics = new Dictionary<string, bool>();
-    [HideInInspector] public Dictionary<string, string> controllerToPlayer = new Dictionary<string, string>();
-    [HideInInspector] public GameObject[] spawnedPlayer = new GameObject[4];
 
     [Header("Debug")]
     public DebugValues Tags;
@@ -52,7 +49,7 @@ public class Gamerules : MonoBehaviour {
 
     #region character variables
     [HideInInspector] public CharacterPicture[] charPics = new CharacterPicture[4];
-    [HideInInspector] public GameObject[] playerOnStage = new GameObject[4];
+     public GameObject[] playerOnStage = new GameObject[4] { null, null, null, null };
     #endregion
 
     void Awake()
@@ -104,48 +101,6 @@ public class Gamerules : MonoBehaviour {
             OnStage();
         }
 
-        foreach (var item in chosenPics)
-        {
-            if (item.Key == "Earth" && item.Value == true)
-            {
-                spawnedPlayer[0] = Instantiate(playerPrefab[0], playerSpawn[Random.Range(0, playerSpawn.Length)].transform.position, Quaternion.identity) as GameObject;
-            }
-
-            if (item.Key == "Saturn" && item.Value == true)
-            {
-                spawnedPlayer[1] = Instantiate(playerPrefab[1], playerSpawn[Random.Range(0, playerSpawn.Length)].transform.position, Quaternion.identity) as GameObject;
-            }
-
-            if (item.Key == "Jupiter" && item.Value == true)
-            {
-                spawnedPlayer[2] = Instantiate(playerPrefab[2], playerSpawn[Random.Range(0, playerSpawn.Length)].transform.position, Quaternion.identity) as GameObject;
-            }
-
-            if (item.Key == "Sun" && item.Value == true)
-            {
-                spawnedPlayer[3] = Instantiate(playerPrefab[3], playerSpawn[Random.Range(0, playerSpawn.Length)].transform.position, Quaternion.identity) as GameObject;
-            }
-        }
-
-        foreach(var i in controllerToPlayer)
-        {
-            switch(i.Key)
-            {
-                case "Earth":
-                    AdjustAxis(i.Value, 0);
-                    break;
-                case "Jupiter":
-                    AdjustAxis(i.Value, 1);
-                    break;
-                case "Saturn":
-                    AdjustAxis(i.Value, 2);
-                    break;
-                case "Sun":
-                    AdjustAxis(i.Value, 3);
-                    break;
-            }
-        }
-        
          StartCoroutine(WaitCoroutine());
     }
 
@@ -167,14 +122,21 @@ public class Gamerules : MonoBehaviour {
                 momSpawn++;
                 // get a random spornpoint
 
-
                 // check player type
                 switch (player.Character)
                 {
-                    case "Earth": Util.IncludeGameObject(playerOnStage, Instantiate(playerPrefab[0], playerSpawn[randomSpawnOrder[momSpawn]].transform.position, Quaternion.identity) as GameObject); break;
-                    case "Sun": Util.IncludeGameObject(playerOnStage, Instantiate(playerPrefab[1], playerSpawn[randomSpawnOrder[momSpawn]].transform.position, Quaternion.identity) as GameObject); break;
-                    case "Saturn": Util.IncludeGameObject(playerOnStage, Instantiate(playerPrefab[2], playerSpawn[randomSpawnOrder[momSpawn]].transform.position, Quaternion.identity) as GameObject); break;
-                    case "Jupitar": Util.IncludeGameObject(playerOnStage, Instantiate(playerPrefab[3], playerSpawn[randomSpawnOrder[momSpawn]].transform.position, Quaternion.identity) as GameObject); break;
+                    case "Earth":
+                        Util.IncludeGameObject(playerOnStage, Instantiate(playerPrefabs[0], playerSpawn[randomSpawnOrder[momSpawn]].transform.position, Quaternion.identity) as GameObject);
+                        break;
+                    case "Sun":
+                        Util.IncludeGameObject(playerOnStage, Instantiate(playerPrefabs[1], playerSpawn[randomSpawnOrder[momSpawn]].transform.position, Quaternion.identity) as GameObject);
+                        break;
+                    case "Saturn":
+                        Util.IncludeGameObject(playerOnStage, Instantiate(playerPrefabs[2], playerSpawn[randomSpawnOrder[momSpawn]].transform.position, Quaternion.identity) as GameObject);
+                        break;
+                    case "Jupiter":
+                        Util.IncludeGameObject(playerOnStage, Instantiate(playerPrefabs[3], playerSpawn[randomSpawnOrder[momSpawn]].transform.position, Quaternion.identity) as GameObject);
+                        break;
                 }
             }
         }
@@ -186,8 +148,9 @@ public class Gamerules : MonoBehaviour {
         {
             if (go != null)
             {
-                go.GetComponent<Player>().playerVitals.Disabled = true;
-                CustomDebug.Log(go.GetComponent<Player>().playerVitals.Disabled, "Testing");
+                go.GetComponent<Player>().gamerulesDisabled = true;
+                go.GetComponent<Player>().flipEnable = false;
+                CustomDebug.Log(go.name + ", " +go.GetComponent<Player>().gamerulesDisabled, "Testing");
             }
         }
 
@@ -202,37 +165,19 @@ public class Gamerules : MonoBehaviour {
         yield return new WaitForSeconds(1);
 
         foreach (GameObject go in playerOnStage)
-        {
+        {            
             if (go != null)
             {
-                go.GetComponent<Player>().playerVitals.Disabled = false;
-                CustomDebug.Log(go.GetComponent<Player>().playerVitals.Disabled, "Testing");
+                go.GetComponent<Player>().gamerulesDisabled = false;
+                go.GetComponent<Player>().flipEnable = true;
+                CustomDebug.Log(go.name + ", " + go.GetComponent<Player>().gamerulesDisabled, "Testing");
             }
         }
 
         Running = true;
         yield return null;
     }
-
-    private void AdjustAxis(string value, int index)
-    {
-        switch (value)
-        {
-            case "KB":
-                ChangeAxis("KB", spawnedPlayer[index]);
-                break;
-            case "P1":
-                ChangeAxis("P1", spawnedPlayer[index]);
-                break;
-            case "P2":
-                ChangeAxis("P2", spawnedPlayer[index]);
-                break;
-            case "P3":
-                ChangeAxis("P3", spawnedPlayer[index]);
-                break;
-        }
-    }
-
+    
     private void ChangeAxis(string axis, GameObject obj) {
         // Change the player axis and name
         obj.GetComponent<Player>().playerAxis = axis;

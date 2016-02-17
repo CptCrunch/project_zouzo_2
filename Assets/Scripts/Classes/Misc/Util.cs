@@ -63,7 +63,7 @@ public static class Util{
         for (int i = 0; i < _entrys.Length; i++)
         {
             // check if entry is null and adds new entry
-            if (_entrys[i] == null) { _entrys[i] = _newEntry; }
+            if (_entrys[i] == null) { _entrys[i] = _newEntry; break; }
         }
     }
 

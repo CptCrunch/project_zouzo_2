@@ -18,7 +18,6 @@ public class LivingEntity
     private float currHealth;
     private int life;
 
-    private bool disabled = false;
     private bool stunned = false;
     private int stunIndex = 0;
     private bool slowed = false;
@@ -69,7 +68,6 @@ public class LivingEntity
     public string Name { get { return name; } }
     public float CurrHealth { get { return currHealth; } }
 
-    public bool Disabled { get { return disabled; } set { disabled = value; } }
     public bool Stunned { get { return stunned; } }
     public bool Slowed
     {
