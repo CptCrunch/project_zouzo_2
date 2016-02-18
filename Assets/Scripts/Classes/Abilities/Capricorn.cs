@@ -8,6 +8,7 @@ public class Capricorn : Attacks {
     private float knockBackRange;
     private bool usedInAir = false;
     private float knockBackStrenght;
+    private bool airCast = false;
 
     public Capricorn(GameObject caster, float damage, float castTime, float travleTime, float duration, float cooldown, float range, int targets, uint spellDir, float height, float knockBackRange, float knockBackStrenght) : base(
         caster, 10, "capricorn", "CC", targets, damage, castTime, travleTime, duration, cooldown, range, spellDir)
@@ -21,26 +22,21 @@ public class Capricorn : Attacks {
     public float KnockBackStrenght { get { return knockBackStrenght; } }
     public bool UsedInAir { get { return usedInAir; } }
 
-    public override void Cast(GameObject _caster)
+    public override void StartSpell()
     {
-        // get playerScript from caster
-        Player playerScript = _caster.GetComponent<Player>();
-
-        if (_caster.GetComponent<Controller2D>().collisions.below)
+        if (Caster.GetComponent<Controller2D>().collisions.below)
         {
             if (!IsDisabled)
             {
-                // wait castTime
-
                 // set animation
-                CustomDebug.Log("<b>" + _caster.GetComponent<Player>().playerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
-
-                // cast spell
-                playerScript.castedMeeleSpell = this;
-                CustomDebug.Log("<b>" + _caster.GetComponent<Player>().playerVitals.Name + "</b> casted<b><color=white> " + Name + "</color></b>", "Spells");
+                Caster.GetComponent<Animator>().SetTrigger("CapricornKnockBack");
+                CustomDebug.Log("<b>" + Caster.GetComponent<Player>().playerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
 
                 // set spell as casted
                 IsCasted = true;
+
+                // set air cast to false
+                airCast = false;
 
                 // set spell on cooldown
                 SetCooldown();
@@ -54,17 +50,17 @@ public class Capricorn : Attacks {
         {
             if (!usedInAir)
             {
-                if (playerScript.GetCapricorn2Targets() != null)
+                if (PlayerAbilitiesScript.GetCapricorn2Targets() != null)
                 {
                     // set animation
-                    CustomDebug.Log("<b>" + _caster.GetComponent<Player>().playerVitals.Name + "</b> should play <b><color=white>" + Name + "2</color></b> attack animation", "Animation");
-
-                    // use spell
-                    UseCapricorn2(_caster, playerScript.GetCapricorn2Targets());
-                    CustomDebug.Log("<b>" + _caster.GetComponent<Player>().playerVitals.Name + "</b> casted<b><color=white> " + Name + "2</color></b>", "Spells");
+                    Caster.GetComponent<Animator>().SetTrigger("CapricornKnockUp");
+                    CustomDebug.Log("<b>" + Caster.GetComponent<Player>().playerVitals.Name + "</b> should play <b><color=white>" + Name + "2</color></b> attack animation", "Animation");
 
                     // set spell as casted
                     IsCasted = true;
+
+                    // set air cast to false
+                    airCast = true;
 
                     // reset TimeBetweenCasts
                     TimeBeteewnCasts = 0;
@@ -79,13 +75,33 @@ public class Capricorn : Attacks {
             else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Cooldown"); }
         }
     }
-    
+
+    public override void Cast()
+    {
+        if (airCast)
+        {
+            // cast spell
+            PlayerAbilitiesScript.castedMeeleSpell = this;
+            CustomDebug.Log("<b>" + Caster.GetComponent<Player>().playerVitals.Name + "</b> casted<b><color=white> " + Name + "</color></b>", "Spells");
+        }
+
+        else
+        {
+            if (PlayerAbilitiesScript.GetCapricorn2Targets() != null)
+            {
+                // use spell
+                UseCapricorn2(Caster, PlayerAbilitiesScript.GetCapricorn2Targets());
+                CustomDebug.Log("<b>" + Caster.GetComponent<Player>().playerVitals.Name + "</b> casted<b><color=white> " + Name + "2</color></b>", "Spells");
+            }
+        }
+    }
+
     public override void AfterCast()
     {
         if (IsCasted) { IsCasted = false; }
     }
 
-    public override void Use(GameObject _target, GameObject _caster)
+    public override void Use(GameObject _target)
     {
         // get the vitals of the target
         LivingEntity Vitals = _target.GetComponent<Player>().playerVitals;

@@ -4,6 +4,8 @@ using System.Collections;
 public abstract class Attacks {
 
     private GameObject caster;
+    private LivingEntity playerVitals;
+    private PlayerAbilities playerAbilitiesScript;
 
     private uint id;
     private string name;
@@ -36,6 +38,8 @@ public abstract class Attacks {
     public Attacks(GameObject caster, uint id, string name, string type, int maxTargets, float damage, float castTime, float delay, float duration, float cooldown, float range, uint spellDir)
     {
         this.caster = caster;
+        playerAbilitiesScript = caster.GetComponent<PlayerAbilities>();
+        playerVitals = caster.GetComponent<Player>().playerVitals;
         this.id = id;
         this.name = name;
         this.type = type;
@@ -52,6 +56,9 @@ public abstract class Attacks {
     }
 
     #region Get & Set 
+    public GameObject Caster { get { return caster; } }
+    public PlayerAbilities PlayerAbilitiesScript { get { return playerAbilitiesScript; } }
+    public LivingEntity PlayerVitals { get { return playerVitals; } }
     public uint ID { get { return id; } }
     public string Name { get { return name; } }
     public string Type { get { return type; } }
@@ -73,14 +80,16 @@ public abstract class Attacks {
     public Vector2 SpellDirection { get { return spellDirection; } set { spellDirection = value; } }
     #endregion
 
+    public abstract void StartSpell();
+
     /// <summary> Casts spell and checks if spell can be casted </summary>
-    public abstract void Cast(GameObject _caster);
+    public abstract void Cast();
 
     /// <summary> Used at button release </summary>
     public abstract void AfterCast();
 
     /// <summary> uses spell (deals damage, applys conditions) </summary>
-    public abstract void Use(GameObject _target, GameObject _caster);
+    public abstract void Use(GameObject _target);
 
     /// <summary> checks if spell hits his maximum targets </summary>
     public bool MaxTargetsReached()

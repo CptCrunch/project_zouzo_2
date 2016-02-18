@@ -101,6 +101,7 @@ public class LivingEntity
 
     // damage Player
     public void GetDamage(float _ammount) {
+        if (!stunned || !knockBacked || !knockUped) { instance._animator.SetTrigger("Damage"); }
 
         CustomDebug.Log("<b>" + name + "</b> got <color=red>" + _ammount + " damage</color>","Damage");
         currHealth -= _ammount;
@@ -178,6 +179,8 @@ public class LivingEntity
     {
         knockUpSpell = _spell;
         KnockUpThread = new Thread(() => KnockUp(_height));
+
+        //instance._animator.SetTrigger("KnockUp");
 
         try { KnockUpThread.Start(); }
         catch (ThreadStateException) { Debug.LogError("Error with PlayerKnockUp Thread"); }

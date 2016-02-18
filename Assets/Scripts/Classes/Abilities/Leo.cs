@@ -22,28 +22,20 @@ public class Leo : Attacks {
         this.maxChargeCooldown = maxChargeCooldown;
     }
 
-    public override void Cast(GameObject _caster)
+    public override void StartSpell()
     {
-        // get playerScript from caster
-        Player playerScript = _caster.GetComponent<Player>();
-
         if (!IsDisabled && !castDisable)
         {
-            // wait castTime
-
             // set animation
             attackAnim++;
-            _caster.GetComponent<Animator>().SetInteger("LeoAttack", attackAnim);
-            _caster.GetComponent<Animator>().SetTrigger("LeoTrigger");
+            Caster.GetComponent<Animator>().SetInteger("LeoAttack", attackAnim);
+            Caster.GetComponent<Animator>().SetTrigger("LeoTrigger");
             animReset = 1.0f;
-            CustomDebug.Log("<b>" + _caster.GetComponent<Player>().playerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
-
-            // cast spell
-            playerScript.castedMeeleSpell = this;
+            CustomDebug.Log("<b>" + PlayerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
 
             // set spell as casted
             IsCasted = true;
-            CustomDebug.Log("<b>" + _caster.GetComponent<Player>().playerVitals.Name + "</b> casted<b><color=white> " + Name + "</color></b>", "Spells");
+            CustomDebug.Log("<b>" + PlayerVitals.Name + "</b> casted<b><color=white> " + Name + "</color></b>", "Spells");
 
             // reset TimeBetweenCasts
             TimeBeteewnCasts = 0;
@@ -54,6 +46,13 @@ public class Leo : Attacks {
 
         // debug that spell is on cooldown
         else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Cooldown"); }
+
+    }
+
+    public override void Cast()
+    {
+        // cast spell
+        PlayerAbilitiesScript.castedMeeleSpell = this;
     }
 
     public override void AfterCast()
@@ -61,7 +60,7 @@ public class Leo : Attacks {
         IsCasted = false;
     }
 
-    public override void Use(GameObject _target, GameObject _caster)
+    public override void Use(GameObject _target)
     {
         // get the vitals of the target
         LivingEntity Vitals = _target.GetComponent<Player>().playerVitals;
