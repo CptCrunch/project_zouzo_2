@@ -83,6 +83,9 @@ public class Gamerules : MonoBehaviour {
         CustomDebug.EnableTag("Contrioles", Tags.Controles);
         CustomDebug.EnableTag("MapFeature", Tags.MapFeature);
         #endregion
+
+        // check if scene is a stage and start OnStage metod if so
+        if (IsStage()) { OnStage(); }
     }
 
     void Update()
@@ -97,17 +100,10 @@ public class Gamerules : MonoBehaviour {
     // Create All Player when the level loads
     void OnLevelWasLoaded()
     {
-        // --- [ stage chack ] ---
-        bool isStage = false;
-        // check if scene is a registered stage
-        foreach (string stage in registerdStages) { if (stage == Application.loadedLevelName) { isStage = true; } }
-        // continue if scene is registered
-        if (isStage)
-        {
-            OnStage();
-        }
+        // check if scene is a stage and start OnStage metod if so
+        if (IsStage()) { OnStage(); }
 
-         StartCoroutine(WaitCoroutine());
+        StartCoroutine(WaitCoroutine());
     }
 
     public void OnStage()
@@ -119,6 +115,28 @@ public class Gamerules : MonoBehaviour {
         Util.MixArray(randomSpawnOrder);
 
         // --- [ spawn player ] ---
+        GameObject[] basePlayer = GameObject.FindGameObjectsWithTag("Player");
+
+        CustomDebug.LogArray(basePlayer);
+
+        for (int i = 0; i < basePlayer.Length; i++)
+        {
+            for (int o = 0; o < charPics.Length; o++)
+            {
+                // check if entry is null and adds new entry
+                if (charPics[o] == null)
+                {
+                    charPics[o] = new CharacterPicture(basePlayer[i].GetComponent<Player>().playerAxis, i, GetPlayerIndexByName(basePlayer[i].GetComponent<Player>().type));
+                    break;
+                }
+            }
+        }
+
+        foreach (CharacterPicture pic in charPics)
+        {
+            if (pic != null) { Debug.Log(pic.Character); }
+        }
+
         int momSpawn = 0;
         foreach (CharacterPicture player in charPics)
         {
@@ -143,7 +161,7 @@ public class Gamerules : MonoBehaviour {
             {
                 go.GetComponent<Player>().gamerulesDisabled = true;
                 go.GetComponent<Player>().flipEnable = false;
-                CustomDebug.Log(go.name + ", " +go.GetComponent<Player>().gamerulesDisabled, "Testing");
+                /*CustomDebug.Log(go.name + ", " + go.GetComponent<Player>().gamerulesDisabled, "Testing");*/
             }
         }
 
@@ -185,6 +203,15 @@ public class Gamerules : MonoBehaviour {
     public void EndGame()
     {
         Running = false;
+    }
+
+    public bool IsStage()
+    {
+        // --- [ stage chack ] ---
+        // check if scene is a registered stage
+        foreach (string stage in registerdStages) { if (stage == Application.loadedLevelName) { return true; } }
+        // continue if scene is registered
+        return false;
     }
 
     private PlayerInfo GetPlayerInfoByName(string _name)

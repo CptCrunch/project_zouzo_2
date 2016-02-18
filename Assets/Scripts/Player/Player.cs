@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        // --- [ set name and axis ] ---
+        /*/ --- [ set name and axis ] ---
         foreach (CharacterPicture player in Gamerules._instance.charPics)
         {
             // check if object isn't null
@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
                     playerAxis = player.Axis;
                 }
             }
-        }
+        }*/
     }
 
     void Start()
