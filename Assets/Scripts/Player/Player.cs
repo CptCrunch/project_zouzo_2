@@ -186,6 +186,8 @@ public class Player : MonoBehaviour
 
         _animator.SetBool("KnockUp", playerVitals.KnockUped);
 
+        _animator.SetBool("Virgo", playerVitals.Dashing);
+
         _animator.SetBool("KnockBack", playerVitals.KnockBacked);
 
         if (playerVitals.KnockBacked) {
