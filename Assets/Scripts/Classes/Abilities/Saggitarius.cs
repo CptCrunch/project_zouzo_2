@@ -29,13 +29,10 @@ public class Saggitarius : Attacks {
 
     public bool IsSticky { get { return isSticky; } }
 
-    public override void Cast(GameObject _caster)
+    public override void StartSpell()
     {
         if (!IsDisabled)
         {
-            // set caster
-            caster = _caster;
-
             // set spell as casted
             IsCasted = true;
 
@@ -46,15 +43,15 @@ public class Saggitarius : Attacks {
             TimeBeteewnCasts = 0;
 
             // set animation
-            CustomDebug.Log("<b>" + _caster.GetComponent<Player>().playerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
+            CustomDebug.Log("<b>" + PlayerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
 
-            // save cater
-            caster = _caster;
         }
 
         // debug that spell is on cooldown
         else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Cooldown"); }
     }
+
+    public override void Cast() { }
 
     public override void AfterCast()
     {
@@ -69,14 +66,11 @@ public class Saggitarius : Attacks {
             // check if arrow is sticky
             if (TimeBeteewnCasts >= timeToGetMaxRange * stickArrowPerCent) { isSticky = true; }
 
-            // get playerScript from caster
-            Player playerScript = caster.GetComponent<Player>();
-
             // wait castTime
 
             // cast spell
             CustomDebug.Log("Found bullet: " + bullet != null, "Testing");
-            playerScript.FireSkillShot(this, bullet);
+            PlayerAbilitiesScript.FireSkillShot(this, bullet);
             CustomDebug.Log("<b>" + caster.GetComponent<Player>().playerVitals.Name + "</b> casted<b><color=white> " + Name + "</color></b>", "Spells");
 
             // set norm speed
@@ -87,7 +81,7 @@ public class Saggitarius : Attacks {
         }
     }
 
-    public override void Use(GameObject _target, GameObject _caster)
+    public override void Use(GameObject _target)
     {
         // get the vitals of the target
         LivingEntity Vitals = _target.GetComponent<Player>().playerVitals;

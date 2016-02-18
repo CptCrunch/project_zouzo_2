@@ -22,28 +22,19 @@ public class Virgo : Attacks {
 
     public float StunTime { get { return stunTime; } }
 
-    public override void Cast(GameObject _caster)
+    public override void StartSpell()
     {
-        // get playerScript from caster
-        Player playerScript = _caster.GetComponent<Player>();
-
         if (!IsDisabled)
         {
-            // wait castTime
-
             // set animation
-            CustomDebug.Log("<b>" + playerScript.playerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
-
-            // cast spell
-            playerScript.castedMeeleSpell = this;
-            CustomDebug.Log("<b>" + playerScript.playerVitals.Name + "</b> casted<b><color=white> " + Name + "</color></b>", "Spells");
+            CustomDebug.Log("<b>" + PlayerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
 
             // set spell as casted
             IsCasted = true;
 
             // player dash
-            if (playerScript.Mirror) { playerScript.playerVitals.ApplyDash(-dashStrength, dashTime); knockBackDirection = 1; }
-            else { playerScript.playerVitals.ApplyDash(dashStrength, dashTime); knockBackDirection = -1; }
+            if (Caster.GetComponent<Player>().Mirror) { PlayerVitals.ApplyDash(-dashStrength, dashTime); knockBackDirection = 1; }
+            else { Caster.GetComponent<Player>().playerVitals.ApplyDash(dashStrength, dashTime); knockBackDirection = -1; }
 
             // reset TimeBetweenCasts
             TimeBeteewnCasts = 0;
@@ -56,11 +47,18 @@ public class Virgo : Attacks {
         else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Cooldown"); }
     }
 
+    public override void Cast()
+    {
+        // cast spell
+        PlayerAbilitiesScript.castedMeeleSpell = this;
+        CustomDebug.Log("<b>" + PlayerVitals.Name + "</b> casted<b><color=white> " + Name + "</color></b>", "Spells");
+    }
+
     public override void AfterCast()
     {
         IsCasted = false;
     }
-    public override void Use(GameObject _target, GameObject _caster)
+    public override void Use(GameObject _target)
     {
         // get the vitals of the target
         LivingEntity targetVitals = _target.GetComponent<Player>().playerVitals;

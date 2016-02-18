@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     public float moveSpeed = 6;
     public float slowedSpeed = 3;
 
-    private string[] playerControles = new string[5];
+    public string[] playerControles = new string[5];
     #endregion
 
     #region Jumping
@@ -66,19 +66,17 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Ability Variables
-    public Attacks[] abilityArray = new Attacks[4];
-    private bool isAttacking;
-    public Attacks castedMeeleSpell;
+    
     #endregion
 
     #region Animations 
     [HideInInspector] public Animator _animator;
     private bool mirror = false;
     private bool death = false;
-    private bool flipEnable = true;
+    public bool flipEnable = true;
     private bool stunFlip = false;
     #endregion
-
+    private PlayerAbilities playerAbilitiesScript;
     #endregion
 
     #region Getter&Setter
@@ -87,7 +85,8 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        // --- [ set name and axis ] ---
+        playerAbilitiesScript = gameObject.GetComponent<PlayerAbilities>();
+        /*/ --- [ set name and axis ] ---
         foreach (CharacterPicture player in Gamerules._instance.charPics)
         {
             // check if object isn't null
@@ -101,7 +100,7 @@ public class Player : MonoBehaviour
                     playerAxis = player.Axis;
                 }
             }
-        }
+        }*/
     }
 
     void Start()
@@ -160,12 +159,6 @@ public class Player : MonoBehaviour
         CustomDebug.Log(debugText, "Controles");
         #endregion
 
-        // --- [ set starter abilities ] ---
-        abilityArray[0] = AbilityManager.Instance.CreateBasic(gameObject);           // basic
-        abilityArray[1] = AbilityManager.Instance.CreateVirgo(gameObject);             // spell_1
-        abilityArray[2] = AbilityManager.Instance.CreateCapricorn(gameObject);       // spell_2
-        abilityArray[3] = AbilityManager.Instance.CreateLeo(gameObject);     // spell_3
-
         // create playerVitals
         playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth, lives);
 
@@ -193,43 +186,8 @@ public class Player : MonoBehaviour
                 ConditionFlip();
             }
         }
+        
         if (!playerVitals.KnockBacked) { stunFlip = false; flipEnable = true; }
-
-        // --- [ update Cooldowns / timeBetweenCasts ] ---
-        foreach (Attacks _spell in abilityArray)
-        {
-            // update cooldown
-            _spell.UpdateCooldowns();
-            // update timeBetweenCasts
-            if (_spell.IsCasted) { _spell.TimeBeteewnCasts += Time.deltaTime; }
-        }
-
-        // --- [ use ability ] ---
-        // use cast (on button pressed)
-        if (Input.GetKeyDown(playerControles[1])) { abilityArray[0].Cast(gameObject); } // basic
-        if (Input.GetKeyDown(playerControles[2])) { abilityArray[1].Cast(gameObject); } // spell_1
-        if (Input.GetKeyDown(playerControles[3])) { abilityArray[2].Cast(gameObject); } // spell_2
-        if (Input.GetKeyDown(playerControles[4])) { abilityArray[3].Cast(gameObject); } // spell_3
-
-        // use aftercast (on button released)
-        if (Input.GetKeyUp(playerControles[1])) { abilityArray[0].AfterCast(); } // basic
-        if (Input.GetKeyUp(playerControles[2])) { abilityArray[1].AfterCast(); } // spell_1
-        if (Input.GetKeyUp(playerControles[3])) { abilityArray[2].AfterCast(); } // spell_2
-        if (Input.GetKeyUp(playerControles[4])) { abilityArray[3].AfterCast(); } // spell_3
-
-        // --- [ virgo stun ] ---
-        // check if player is faceing a wall
-        if (controller.collisions.left || controller.collisions.right)
-        {
-            // ckeck if player is knockBacked from a virgo spell
-            if (playerVitals.KnockBacked && playerVitals.KnockBackSpell.ID == 6)
-            {
-                // transfer knockBackSpell to virgoSpell
-                Virgo virgoSpell = (Virgo)playerVitals.KnockBackSpell;
-                // stun target
-                playerVitals.ApplyStun(virgoSpell.StunTime, playerVitals.KnockBackSpell);
-            }
-        }
 
         // Get movement input ( controler / keyboard )
         input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
@@ -251,29 +209,6 @@ public class Player : MonoBehaviour
             // check if player should be fliped
             if (Input.GetAxis(playerAxis + "_Horizontal") > 0 && !mirror) { Flip(); }
             else if (Input.GetAxis(playerAxis + "_Horizontal") < 0 && mirror) { Flip(); }
-        }
-        #endregion
-
-        #region use meele abilities
-        // check if a meelespell was used
-        if (castedMeeleSpell != null)
-        {
-            // disable attacking and flipping
-            isAttacking = true;
-            flipEnable = false;
-
-            // check in how many directions the spell can be aimed
-            castedMeeleSpell.SpellDirection = Util.GetAimDirection(castedMeeleSpell, this);
-
-            // cast spell
-            UseMeleeAttack();
-        }
-
-        else
-        {
-            // enable attacking and flipping
-            if (isAttacking) { isAttacking = false; }
-            if (!flipEnable) { flipEnable = true; }
         }
         #endregion
     }
@@ -441,145 +376,38 @@ public class Player : MonoBehaviour
         transform.localScale = scale;
     }
 
-    void UseMeleeAttack()
-    {
-        // only continue if spell is still active (spell needs time to reach full range)
-        if (castedMeeleSpell.ShallTravel)
-        {
-            // get travel distance
-            float travelDistance = castedMeeleSpell.TravelDistance();
-
-            // create a Debug ray
-            Debug.DrawRay(gameObject.transform.position, castedMeeleSpell.SpellDirection * travelDistance, Color.green);
-
-            // create a raycast
-            foreach (RaycastHit2D objectHit in Physics2D.RaycastAll(gameObject.transform.position, castedMeeleSpell.SpellDirection, travelDistance))
-            {
-                // check if hitted object is a Player
-                if (objectHit.transform.tag == "Player")
-                {
-                    // only continue if spell didn't hit the spell caster
-                    if (objectHit.transform.gameObject != gameObject)
-                    {
-                        // only continue if enemy isn't registered previorsly (one anemy shall only be hitted once)
-                        if (!Util.IsGameObjectIncluded(castedMeeleSpell.HitTargets, objectHit.transform.gameObject))
-                        {
-                            // register enemy
-                            Util.IncludeGameObject(castedMeeleSpell.HitTargets, objectHit.transform.gameObject);
-
-                            // checks if the spell already hit its max of players
-                            if (!castedMeeleSpell.MaxTargetsReached())
-                            {
-                                CustomDebug.Log("<b><color=white>" + castedMeeleSpell.Name + "</color></b> hit <b>" + objectHit.transform.gameObject.GetComponent<Player>().playerVitals.Name + "</b>", "Spells");
-
-                                // add player hit
-                                castedMeeleSpell.PlayersHit++;
-
-                                // use spell
-                                castedMeeleSpell.Use(objectHit.transform.gameObject, gameObject);
-                                break;
-                            }
-                        }
-                    }
-                }
-
-            }
-        }
-
-        // stop attack
-        else
-        {
-            castedMeeleSpell.HitTargets = new GameObject[4];
-            castedMeeleSpell.ResetPlayersHit();
-            castedMeeleSpell.ShallTravel = true;
-            castedMeeleSpell = null;
-        }
-    }
-
     public void PickupOrb(Attacks attack)
     {
         if (attack != null)
         {
-            Attacks firstSpell = abilityArray[1];
-            Attacks secondSpell = abilityArray[2];
+            Attacks firstSpell = playerAbilitiesScript.abilityArray[1];
+            Attacks secondSpell = playerAbilitiesScript.abilityArray[2];
 
-            for (int i = 0; i < abilityArray.Length; i++)
+            for (int i = 0; i < playerAbilitiesScript.abilityArray.Length; i++)
             {
-                if (abilityArray[i].Name == attack.Name)
+                if (playerAbilitiesScript.abilityArray[i].Name == attack.Name)
                 {
                     print("Same");
-                    abilityArray[i] = attack;
-                    CustomDebug.LogArray(abilityArray);
+                    playerAbilitiesScript.abilityArray[i] = attack;
+                    CustomDebug.LogArray(playerAbilitiesScript.abilityArray);
                     return;
                 }
             }
 
-            for (int i = 0; i < abilityArray.Length; i++)
+            for (int i = 0; i < playerAbilitiesScript.abilityArray.Length; i++)
             {
-                if (abilityArray[i].Name != attack.Name)
+                if (playerAbilitiesScript.abilityArray[i].Name != attack.Name)
                 {
-                    abilityArray[1] = attack;
-                    abilityArray[2] = firstSpell;
-                    abilityArray[3] = secondSpell;
-                    CustomDebug.LogArray(abilityArray);
+                    playerAbilitiesScript.abilityArray[1] = attack;
+                    playerAbilitiesScript.abilityArray[2] = firstSpell;
+                    playerAbilitiesScript.abilityArray[3] = secondSpell;
+                    CustomDebug.LogArray(playerAbilitiesScript.abilityArray);
                     return;
                 }
             }
 
             
         }
-    }
-
-    public void FireSkillShot(Attacks _spell, GameObject _bullet)
-    {
-        // check if bullet is flound
-        if (_bullet != null)
-        {
-            // instantiate bullet
-            GameObject bulletInstance = Instantiate(_bullet, transform.position, transform.rotation) as GameObject;
-
-            // check in how many directions the bullet can be shot
-            bulletInstance.GetComponent<SpellBullet>().spellDir = Util.GetAimDirection(_spell, this);
-
-            // pass over bullet speed
-            bulletInstance.GetComponent<SpellBullet>().usedSpell = _spell;
-
-            // pass over caster
-            bulletInstance.GetComponent<SpellBullet>().caster = gameObject;
-
-            // destroy bullet, if still existing, after secounds 
-            try { Destroy(bulletInstance, 4); }
-            catch (System.NullReferenceException) { }
-        }
-
-        // send error log if bullet is not found
-        else { Debug.LogError(_spell.Name + "bullet not found"); }
-    }
-
-    public GameObject GetCapricorn2Targets()
-    {
-        float range = AbilityManager.Instance.spells[10].knockBackRange;
-        GameObject nearestPlayer = null;
-        float distanceToPlayer = range;
-
-        // get all player objects
-        foreach (GameObject targetObject in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            // get kocked up players
-            if (targetObject.GetComponent<Player>().playerVitals.KnockUped)
-            {
-                // get the distance to the knock uped player
-                float distance = Mathf.Abs(Vector2.Distance(transform.position, targetObject.transform.position));
-
-                // compair if player is in range & get nearest player
-                if (distanceToPlayer >= distance)
-                {
-                    nearestPlayer = targetObject;
-                    distanceToPlayer = distance;
-                }
-            }
-        }
-        return nearestPlayer;
     }
 
     public void Die()

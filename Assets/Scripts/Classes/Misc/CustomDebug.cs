@@ -143,6 +143,7 @@ namespace UnityEngine
         #region Log, Error, Warning
         public static void Log(object message, string tag)
         {
+            #if UNITY_EDITOR
             if (active)
             {
                 foreach (KeyValuePair<string, bool> item in tags)
@@ -156,6 +157,7 @@ namespace UnityEngine
                     }
                 }
             }
+            #endif
         }
         public static void LogError(object message, string tag)
         {

@@ -43,6 +43,8 @@ MonoBehaviour:
   Running: 0
   registerdStages:
   - Prototype_Stage01
+  - Prototype_Stage02
+  - Stage_Template
   playerAmmount: 0
   playerMaxHealth: 0
   abilityLimit: 0
