@@ -179,6 +179,8 @@ public class LivingEntity
         knockUpSpell = _spell;
         KnockUpThread = new Thread(() => KnockUp(_height));
 
+        //instance._animator.SetTrigger("KnockUp");
+
         try { KnockUpThread.Start(); }
         catch (ThreadStateException) { Debug.LogError("Error with PlayerKnockUp Thread"); }
 
