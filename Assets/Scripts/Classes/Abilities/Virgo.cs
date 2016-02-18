@@ -32,6 +32,8 @@ public class Virgo : Attacks {
             // wait castTime
 
             // set animation
+            //_caster.GetComponent<Animator>().SetBool("Virgo", true);
+
             CustomDebug.Log("<b>" + playerScript.playerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
 
             // cast spell
@@ -50,6 +52,8 @@ public class Virgo : Attacks {
 
             // set spell on cooldown
             SetCooldown();
+
+            //_caster.GetComponent<Animator>().SetBool("Virgo", false);
         }
 
         // debug that spell is on cooldown
