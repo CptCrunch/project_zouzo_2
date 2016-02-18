@@ -30,6 +30,7 @@ public class LivingEntity
     private bool knockBacked = false;
     private int knockBackIndex = 0;
     private bool dashing = false;
+    private bool virgoDash = false;
     private bool invuln = false;
 
     private Attacks stunSpell;
@@ -81,6 +82,7 @@ public class LivingEntity
     public bool KnockUped { get { return knockUped; } }
     public bool KnockBacked { get { return knockBacked; } }
     public bool Dashing { get { return dashing; } }
+    public bool VirgoDash { get { return virgoDash; } set { virgoDash = value; } }
     public bool Invuln { get { return invuln; } set { invuln = value; } }
     public Attacks StunSpell { get { return stunSpell; } }
     public Attacks SlowSpell { get { return slowSpell; } }
@@ -308,35 +310,6 @@ public class LivingEntity
         if (currIndex == knockBackIndex) { knockBacked = false; CustomDebug.Log("<b>" + name + "</b>s <color=magenta>KockBack</color> stop", "Condition"); }
     }
 
-    /* Original KockBack
-    private void PlayerKnockBack(float _xDistance, float _yDistance)
-    {
-        // add knockBackIndex
-        knockBackIndex++;
-        int currIndex = knockBackIndex;
-
-        // get in air time
-        float inAirTime = Mathf.Sqrt((Mathf.Abs(_xDistance) + Mathf.Abs(_yDistance)) / 2 / -instance.gravity);
-
-        // get in strength
-        float knockUpStrenght = 2 * -instance.gravity + inAirTime;
-
-        // set player knockedBack
-        knockBacked = true;
-        CustomDebug.Log("<b>" + name + "</b> is <color=magenta>KnockBacked</color> for <color=magenta>" + inAirTime + "</color> sec", "Condition");
-
-        // add velocity
-        instance.velocity.x = _xDistance / inAirTime;
-        instance.velocity.y = knockUpStrenght * inAirTime;
-
-        // wait till player isn't knockBacked
-        Thread.Sleep(Convert.ToInt32(Util.ConvertSecondsToMilliseconds(Convert.ToDouble(inAirTime))));
-
-        // check if knockBack should end or if there is a newer knockBack
-        if (currIndex == knockBackIndex) { knockBacked = false; CustomDebug.Log("<b>" + name + "</b>s <color=magenta>KockBack</color> stop", "Condition"); }
-    }
-    */
-
     private void Dash(float _xDistance, float _time)
     {
         // set player to dashing
@@ -351,6 +324,7 @@ public class LivingEntity
         
         // stop dashing
         dashing = false;
+        virgoDash = false;
         CustomDebug.Log("<b>" + name + "</b>s <color=magenta>Dash</color> stop", "Condition");
     }
     #endregion

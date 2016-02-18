@@ -38,8 +38,9 @@ public abstract class Attacks {
     public Attacks(GameObject caster, uint id, string name, string type, int maxTargets, float damage, float castTime, float delay, float duration, float cooldown, float range, uint spellDir)
     {
         this.caster = caster;
-        playerAbilitiesScript = caster.GetComponent<PlayerAbilities>();
-        playerVitals = caster.GetComponent<Player>().playerVitals;
+        this.playerVitals = caster.GetComponent<Player>().playerVitals;
+        Debug.Log("vitals: " + playerVitals.Name);
+        this.playerAbilitiesScript = caster.GetComponent<PlayerAbilities>();
         this.id = id;
         this.name = name;
         this.type = type;
@@ -57,8 +58,8 @@ public abstract class Attacks {
 
     #region Get & Set 
     public GameObject Caster { get { return caster; } }
-    public PlayerAbilities PlayerAbilitiesScript { get { return playerAbilitiesScript; } }
     public LivingEntity PlayerVitals { get { return playerVitals; } }
+    public PlayerAbilities PlayerAbilitiesScript { get { return playerAbilitiesScript; } }
     public uint ID { get { return id; } }
     public string Name { get { return name; } }
     public string Type { get { return type; } }

@@ -61,6 +61,9 @@ public class PlayerAbilities : MonoBehaviour {
             }
         }
 
+        // --- [ Virgo dash animation off ] ---
+        if(!playerScrpt.playerVitals.VirgoDash) { gameObject.GetComponent<Animator>().SetBool("Virgo", false); }
+
         #region use meele abilities
         // check if a meelespell was used
         if (castedMeeleSpell != null)
@@ -126,7 +129,6 @@ public class PlayerAbilities : MonoBehaviour {
                         }
                     }
                 }
-
             }
         }
 
@@ -192,5 +194,5 @@ public class PlayerAbilities : MonoBehaviour {
         return nearestPlayer;
     }
 
-    public void CastSpell() { castedAbility.Cast(); castedAbility = null; }
+    public void CastSpell() { print(castedAbility.Name); castedAbility.Cast(); castedAbility = null;  }
 }

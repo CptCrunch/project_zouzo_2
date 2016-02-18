@@ -26,15 +26,15 @@ public class Virgo : Attacks {
     {
         if (!IsDisabled)
         {
+            // virgo dash
+            PlayerVitals.VirgoDash = true;
+
             // set animation
+            Caster.GetComponent<Animator>().SetBool("Virgo", true);
             CustomDebug.Log("<b>" + PlayerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
 
             // set spell as casted
             IsCasted = true;
-
-            // player dash
-            if (Caster.GetComponent<Player>().Mirror) { PlayerVitals.ApplyDash(-dashStrength, dashTime); knockBackDirection = 1; }
-            else { Caster.GetComponent<Player>().playerVitals.ApplyDash(dashStrength, dashTime); knockBackDirection = -1; }
 
             // reset TimeBetweenCasts
             TimeBeteewnCasts = 0;
@@ -49,6 +49,10 @@ public class Virgo : Attacks {
 
     public override void Cast()
     {
+        // player dash
+        if (Caster.GetComponent<Player>().Mirror) { PlayerVitals.ApplyDash(-dashStrength, dashTime); knockBackDirection = 1; }
+        else { PlayerVitals.ApplyDash(dashStrength, dashTime); knockBackDirection = -1; }
+
         // cast spell
         PlayerAbilitiesScript.castedMeeleSpell = this;
         CustomDebug.Log("<b>" + PlayerVitals.Name + "</b> casted<b><color=white> " + Name + "</color></b>", "Spells");

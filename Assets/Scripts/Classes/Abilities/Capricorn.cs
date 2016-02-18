@@ -78,8 +78,10 @@ public class Capricorn : Attacks {
 
     public override void Cast()
     {
-        if (airCast)
+        if (!airCast)
         {
+            Debug.Log("eir kast eini");
+
             // cast spell
             PlayerAbilitiesScript.castedMeeleSpell = this;
             CustomDebug.Log("<b>" + Caster.GetComponent<Player>().playerVitals.Name + "</b> casted<b><color=white> " + Name + "</color></b>", "Spells");
@@ -87,6 +89,8 @@ public class Capricorn : Attacks {
 
         else
         {
+            Debug.Log("eini");
+
             if (PlayerAbilitiesScript.GetCapricorn2Targets() != null)
             {
                 // use spell

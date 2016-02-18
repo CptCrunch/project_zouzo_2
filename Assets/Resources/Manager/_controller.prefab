@@ -59,14 +59,14 @@ MonoBehaviour:
     Main: 1
     Testing: 1
     Player: 0
-    Damage: 0
+    Damage: 1
     Spells: 0
     Cooldown: 0
     UI: 0
     Animation: 0
     Condition: 0
     Controles: 0
-    MapFeature: 0
+    MapFeature: 1
   playerInfo:
   - name: Earth
     prefab: {fileID: 183932, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
@@ -200,7 +200,7 @@ MonoBehaviour:
     range: 2
     targets: 1
     directions: 2
-    travelTime: 0.2
+    travelTime: .200000003
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
@@ -211,7 +211,7 @@ MonoBehaviour:
     dashTime: 0
     stunTime: 0
     charges: 3
-    chargeCooldown: 0.5
+    chargeCooldown: .5
     timeToGetMaxRange: 0
     minRange: 0
     stickArrowPerCent: 0
@@ -220,19 +220,19 @@ MonoBehaviour:
     damage: 10
     castTime: 0
     duration: 0
-    cooldown: 4
+    cooldown: 2
     range: 4
     targets: 0
     directions: 2
-    travelTime: 0.2
+    travelTime: .200000003
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
     knockBackRange: 0
     knockBackStrenght: 4
-    knockBackTime: 0.3
+    knockBackTime: .300000012
     dashStrenght: 2
-    dashTime: 0.2
+    dashTime: .200000003
     stunTime: 2
     charges: 0
     chargeCooldown: 0
@@ -310,17 +310,17 @@ MonoBehaviour:
     chargeCooldown: 0
     timeToGetMaxRange: 2
     minRange: 3
-    stickArrowPerCent: 0.5
+    stickArrowPerCent: .5
     castSlow: 3
   - name: Capricorn
     damage: 20
     castTime: 0
     duration: 0
-    cooldown: 5
-    range: 3
+    cooldown: 1
+    range: 2
     targets: 0
     directions: 2
-    travelTime: 0.2
+    travelTime: .800000012
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 3
@@ -388,11 +388,11 @@ MonoBehaviour:
     damage: 10
     castTime: 0
     duration: 0
-    cooldown: 0.5
+    cooldown: .5
     range: 2
     targets: 1
     directions: 2
-    travelTime: 0.3
+    travelTime: .300000012
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0

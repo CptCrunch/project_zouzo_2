@@ -86,6 +86,10 @@ public class Player : MonoBehaviour
     void Awake()
     {
         playerAbilitiesScript = gameObject.GetComponent<PlayerAbilities>();
+
+        // create playerVitals
+        playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth, lives);
+
         /*/ --- [ set name and axis ] ---
         foreach (CharacterPicture player in Gamerules._instance.charPics)
         {
@@ -159,9 +163,6 @@ public class Player : MonoBehaviour
         CustomDebug.Log(debugText, "Controles");
         #endregion
 
-        // create playerVitals
-        playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth, lives);
-
         // --- [ calculate gravity ] ---
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -179,13 +180,12 @@ public class Player : MonoBehaviour
 
         _animator.SetBool("KnockUp", playerVitals.KnockUped);
 
-        _animator.SetBool("Virgo", playerVitals.Dashing);
-
         _animator.SetBool("KnockBack", playerVitals.KnockBacked);
 
         if (playerVitals.KnockBacked) {
             if ((!mirror && velocity.x < 0) || (mirror && velocity.x > 0)) {
                 ConditionFlip();
+                flipEnable = false;
             }
         }
         
