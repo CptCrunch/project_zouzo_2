@@ -116,7 +116,7 @@ public class Gamerules : MonoBehaviour {
         // --- [ set random spawn point order ] ---
         Util.MixArray(randomSpawnOrder);
 
-        // --- [ register player(s) on stage ] ---
+        /*/ --- [ register player(s) on stage ] --- not usefull do not be to creat
         GameObject[] basePlayer = GameObject.FindGameObjectsWithTag("Player");
 
         for (int i = 0; i < basePlayer.Length; i++)
@@ -131,7 +131,14 @@ public class Gamerules : MonoBehaviour {
                     break;
                 }
             }
+        }*/
+
+        // --- [ register player on stage ] ---
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            Util.IncludeGameObject(playerOnStage, player);
         }
+
 
         // --- [ spawn player ] ---
         int momSpawn = 0;
