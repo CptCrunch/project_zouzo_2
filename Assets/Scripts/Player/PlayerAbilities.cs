@@ -31,7 +31,7 @@ public class PlayerAbilities : MonoBehaviour {
             // update cooldown
             _spell.UpdateCooldowns();
             // update timeBetweenCasts
-            if (_spell.IsCasted) { _spell.TimeBeteewnCasts += Time.deltaTime; }
+            if (_spell.IsCast) { _spell.TimeBeteewnCasts += Time.deltaTime; }
         }
 
         // --- [ use ability ] ---
