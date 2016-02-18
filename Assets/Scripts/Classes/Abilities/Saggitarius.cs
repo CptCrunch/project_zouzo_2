@@ -32,9 +32,9 @@ public class Saggitarius : Attacks {
     public override void StartSpell()
     {
         if (!IsDisabled)
-        {
-            // set spell as casted
-            IsCasted = true;
+        {   
+            // set spell as started
+            IsStarted = true;
 
             // slow player
             caster.GetComponent<Player>().playerVitals.ApplyLaunch(true, castSlow);
@@ -51,14 +51,19 @@ public class Saggitarius : Attacks {
         else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Cooldown"); }
     }
 
-    public override void Cast() { }
+    public override void Cast()
+    {
+        // set spell as not started
+        IsStarted = false;
+
+        // set spell as cast
+        IsCast = true;
+    }
 
     public override void AfterCast()
     {
-        if (IsCasted)
+        if (IsCast)
         {
-            IsCasted = false;
-
             // get range
             if (TimeBeteewnCasts >= timeToGetMaxRange) { Range = 0; }
             else { Range = minRange + (maxRange - minRange) * TimeBeteewnCasts / timeToGetMaxRange; }
@@ -79,6 +84,16 @@ public class Saggitarius : Attacks {
             // set spell on cooldown
             SetCooldown();
         }
+
+        else
+        {
+            // set spell on a low cooldown
+            CurrCooldown = MaxCooldown / 4;
+            IsDisabled = true;
+        }
+
+        // set spell as not cast
+        IsCast = false;
     }
 
     public override void Use(GameObject _target)
