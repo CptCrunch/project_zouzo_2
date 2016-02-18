@@ -26,16 +26,15 @@ public class Leo : Attacks {
     {
         if (!IsDisabled && !castDisable)
         {
+            // set spell as started
+            IsStarted = true;
+
             // set animation
             attackAnim++;
             Caster.GetComponent<Animator>().SetInteger("LeoAttack", attackAnim);
             Caster.GetComponent<Animator>().SetTrigger("LeoTrigger");
             animReset = 1.0f;
             CustomDebug.Log("<b>" + PlayerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
-
-            // set spell as casted
-            IsCasted = true;
-            CustomDebug.Log("<b>" + PlayerVitals.Name + "</b> casted<b><color=white> " + Name + "</color></b>", "Spells");
 
             // reset TimeBetweenCasts
             TimeBeteewnCasts = 0;
@@ -51,13 +50,20 @@ public class Leo : Attacks {
 
     public override void Cast()
     {
+        // set spell as not started
+        IsStarted = false;
+
+        // set spell as cast
+        IsCast = true;
+
         // cast spell
         PlayerAbilitiesScript.castedMeeleSpell = this;
     }
 
     public override void AfterCast()
     {
-        IsCasted = false;
+        // set spell as not cast
+        IsCast = false;
     }
 
     public override void Use(GameObject _target)

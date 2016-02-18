@@ -24,7 +24,8 @@ public abstract class Attacks {
     private int maxTargets;
     private int playersHit;
     private uint spellDir;
-    private bool isCasted;
+    private bool isStarted = false;
+    private bool isCast = false;
     private float timeBetweenCastes = 0;
     private float bulletSpeed;
 
@@ -73,7 +74,8 @@ public abstract class Attacks {
     public float Range { get { return range; } set { range = value; } }
     public int PlayersHit { get { return playersHit; } set { playersHit = value; } }
     public uint SpellDir { get { return spellDir; } }
-    public bool IsCasted { get { return isCasted; } set { isCasted = value; } }
+    public bool IsCast { get { return isCast; } set { isCast = value; } }
+    public bool IsStarted { get { return isStarted; } set { isStarted = value; } }
     public float TimeBeteewnCasts { get { return timeBetweenCastes; } set { timeBetweenCastes = value; } }
     public float BulletSpeed { get { return bulletSpeed; } set { bulletSpeed = value; } }
     public GameObject[] HitTargets { get { return hitTargets; } set { hitTargets = value; } }

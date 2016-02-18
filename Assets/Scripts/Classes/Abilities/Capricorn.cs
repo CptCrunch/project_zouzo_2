@@ -28,6 +28,9 @@ public class Capricorn : Attacks {
         {
             if (!IsDisabled)
             {
+                // set spell as started
+                IsStarted = true;
+
                 // set animation
                 Caster.GetComponent<Animator>().SetTrigger("CapricornKnockBack");
                 CustomDebug.Log("<b>" + Caster.GetComponent<Player>().playerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
@@ -52,6 +55,9 @@ public class Capricorn : Attacks {
             {
                 if (PlayerAbilitiesScript.GetCapricorn2Targets() != null)
                 {
+                    // set spell as started
+                    IsStarted = true;
+
                     // set animation
                     Caster.GetComponent<Animator>().SetTrigger("CapricornKnockUp");
                     CustomDebug.Log("<b>" + Caster.GetComponent<Player>().playerVitals.Name + "</b> should play <b><color=white>" + Name + "2</color></b> attack animation", "Animation");
@@ -78,6 +84,12 @@ public class Capricorn : Attacks {
 
     public override void Cast()
     {
+        // set spell as not started
+        IsStarted = false;
+
+        // set spell as cast
+        IsCast = true;
+
         if (airCast)
         {
             // cast spell
@@ -98,7 +110,8 @@ public class Capricorn : Attacks {
 
     public override void AfterCast()
     {
-        if (IsCasted) { IsCasted = false; }
+        // set spell as not cast
+        IsCast = false;
     }
 
     public override void Use(GameObject _target)
