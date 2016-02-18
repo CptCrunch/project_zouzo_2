@@ -101,6 +101,7 @@ public class LivingEntity
 
     // damage Player
     public void GetDamage(float _ammount) {
+        if (!stunned || !knockBacked || !knockUped) { instance._animator.SetTrigger("Damage"); }
 
         CustomDebug.Log("<b>" + name + "</b> got <color=red>" + _ammount + " damage</color>","Damage");
         currHealth -= _ammount;

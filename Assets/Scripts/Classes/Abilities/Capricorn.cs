@@ -32,7 +32,9 @@ public class Capricorn : Attacks {
             {
                 // wait castTime
 
+
                 // set animation
+                _caster.GetComponent<Animator>().SetTrigger("CapricornKnockBack");
                 CustomDebug.Log("<b>" + _caster.GetComponent<Player>().playerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
 
                 // cast spell
@@ -57,6 +59,7 @@ public class Capricorn : Attacks {
                 if (playerScript.GetCapricorn2Targets() != null)
                 {
                     // set animation
+                    _caster.GetComponent<Animator>().SetTrigger("CapricornKnockUp");
                     CustomDebug.Log("<b>" + _caster.GetComponent<Player>().playerVitals.Name + "</b> should play <b><color=white>" + Name + "2</color></b> attack animation", "Animation");
 
                     // use spell
@@ -79,6 +82,8 @@ public class Capricorn : Attacks {
             else { CustomDebug.Log("<b><color=white>" + Name + "</color></b> is on <color=blue>cooldown</color> for: <color=blue>" + CurrCooldown + "</color> sec", "Cooldown"); }
         }
     }
+
+    
     
     public override void AfterCast()
     {
