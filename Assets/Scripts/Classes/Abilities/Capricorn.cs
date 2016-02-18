@@ -35,9 +35,6 @@ public class Capricorn : Attacks {
                 Caster.GetComponent<Animator>().SetTrigger("CapricornKnockBack");
                 CustomDebug.Log("<b>" + Caster.GetComponent<Player>().playerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
 
-                // set spell as casted
-                IsCasted = true;
-
                 // set air cast to false
                 airCast = false;
 
@@ -61,9 +58,6 @@ public class Capricorn : Attacks {
                     // set animation
                     Caster.GetComponent<Animator>().SetTrigger("CapricornKnockUp");
                     CustomDebug.Log("<b>" + Caster.GetComponent<Player>().playerVitals.Name + "</b> should play <b><color=white>" + Name + "2</color></b> attack animation", "Animation");
-
-                    // set spell as casted
-                    IsCasted = true;
 
                     // set air cast to false
                     airCast = true;

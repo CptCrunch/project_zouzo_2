@@ -71,6 +71,7 @@ public class PlayerAbilities : MonoBehaviour {
                 // check if sagittarius spell is casting
                 if (ability.IsCast)
                 {
+                    // get aim
                     switch (Util.Aim8Direction(new Vector2(Input.GetAxis(playerScrpt.playerAxis + "_Vertical"), Input.GetAxis(playerScrpt.playerAxis + "_Horizontal"))))
                     {
                         case "up": break;
@@ -82,8 +83,9 @@ public class PlayerAbilities : MonoBehaviour {
                         case "left": break;
                         case "upLeft": break;
                         case "noAim":
-                            if (playerScrpt.Mirror) { break; }
-                            else { break; }
+                            if (playerScrpt.Mirror) { }
+                            else { }
+                            break; 
                     }
                 }
             }
