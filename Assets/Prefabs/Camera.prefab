@@ -28,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 144278}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.39999998, z: -29}
+  m_LocalPosition: {x: 0, y: -1.4, z: -29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -42,18 +42,18 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
-  near clip plane: .300000012
+  near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 16.25
+  orthographic size: 6.09375
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -65,7 +65,7 @@ Camera:
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
-  m_StereoSeparation: .0219999999
+  m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
 --- !u!81 &8154034
 AudioListener:
@@ -99,7 +99,7 @@ MonoBehaviour:
   Zoom: 1
   SnapMovementToGrid: 0
   DrawGrid: 0
-  GridColor: {r: 1, g: 0, b: 0, a: .100000001}
+  GridColor: {r: 1, g: 0, b: 0, a: 0.1}
   GridDensity: 0
 --- !u!114 &11466078
 MonoBehaviour:
@@ -116,20 +116,20 @@ MonoBehaviour:
   FollowHorizontal: 1
   FollowVertical: 1
   GameCamera: {fileID: 2089686}
-  HorizontalFollowSmoothness: .150000006
-  VerticalFollowSmoothness: .150000006
+  HorizontalFollowSmoothness: 0.15
+  VerticalFollowSmoothness: 0.15
   LimitMaxHorizontalSpeed: 0
-  MaxHorizontalSpeed: .200000003
+  MaxHorizontalSpeed: 0.2
   LimitMaxVerticalSpeed: 0
-  MaxVerticalSpeed: .200000003
+  MaxVerticalSpeed: 0.2
   ZoomWithFOV: 0
   CameraTargets: []
   OverallOffset: {x: 0, y: 0}
   UpdateType: 0
   LimitHorizontalCameraDistance: 0
-  MaxHorizontalTargetDistance: .800000012
+  MaxHorizontalTargetDistance: 0.8
   LimitVerticalCameraDistance: 0
-  MaxVerticalTargetDistance: .800000012
+  MaxVerticalTargetDistance: 0.8
   CenterTargetOnStart: 0
   CurrentZoomTriggerID: 0
   IsCameraPositionLeftBounded: 0

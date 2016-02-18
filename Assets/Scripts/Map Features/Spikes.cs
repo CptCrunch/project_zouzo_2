@@ -9,7 +9,7 @@ public class Spikes : MonoBehaviour {
     [Tooltip("accepted parameters: right, left, top, bottom")]
     public string colliderDirction;
 
-    void Start() { if (colliderDirction != "right" && colliderDirction != "left" && colliderDirction != "top" && colliderDirction != "bottom") { Debug.LogError("Wrong colliderDirection parameter"); } }
+    void Start() { if (colliderDirction != "right" && colliderDirction != "left" && colliderDirction != "top" && colliderDirction != "bottom") { Debug.LogError(gameObject.name + " spikes has wrong collider direction parameter"); } }
 
     void Update()
     {
