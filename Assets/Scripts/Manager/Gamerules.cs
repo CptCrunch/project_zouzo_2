@@ -142,7 +142,7 @@ public class Gamerules : MonoBehaviour {
             if (go != null)
             {
                 go.GetComponent<Player>().gamerulesDisabled = true;
-                go.GetComponent<Player>().flipEnable = false;
+                //go.GetComponent<Player>().flipEnable = false;
                 CustomDebug.Log(go.name + ", " +go.GetComponent<Player>().gamerulesDisabled, "Testing");
             }
         }
@@ -162,7 +162,7 @@ public class Gamerules : MonoBehaviour {
             if (go != null)
             {
                 go.GetComponent<Player>().gamerulesDisabled = false;
-                go.GetComponent<Player>().flipEnable = true;
+                //go.GetComponent<Player>().flipEnable = true;
                 CustomDebug.Log(go.name + ", " + go.GetComponent<Player>().gamerulesDisabled, "Testing");
             }
         }

@@ -32588,6 +32588,10 @@ Prefab:
       propertyPath: abilities.Array.data[5].cooldown
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11435204, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
+      propertyPath: abilities.Array.data[9].dashStrenght
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6dfc9d1748640044e82badc6ce571bb4, type: 2}
   m_IsPrefabParent: 0

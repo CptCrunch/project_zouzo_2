@@ -164,7 +164,7 @@ public class Player : MonoBehaviour
         abilityArray[0] = AbilityManager.Instance.CreateBasic(gameObject);           // basic
         abilityArray[1] = AbilityManager.Instance.CreateVirgo(gameObject);             // spell_1
         abilityArray[2] = AbilityManager.Instance.CreateCapricorn(gameObject);       // spell_2
-        abilityArray[3] = AbilityManager.Instance.CreateSaggitarius(gameObject);     // spell_3
+        abilityArray[3] = AbilityManager.Instance.CreateLeo(gameObject);     // spell_3
 
         // create playerVitals
         playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth, lives);
@@ -189,13 +189,8 @@ public class Player : MonoBehaviour
         _animator.SetBool("KnockBack", playerVitals.KnockBacked);
 
         if (playerVitals.KnockBacked) {
-            if (!stunFlip && velocity.x < 0) {
-                stunFlip = true;
-                flipEnable = false;
-
-            } else {
-                stunFlip = true;
-                flipEnable = false;
+            if ((!mirror && velocity.x < 0) || (mirror && velocity.x > 0)) {
+                ConditionFlip();
             }
         }
         if (!playerVitals.KnockBacked) { stunFlip = false; flipEnable = true; }
@@ -429,13 +424,23 @@ public class Player : MonoBehaviour
     
     public void Flip()
     {
+        if (!disabled)
+        {
+            mirror = !mirror;
+            Vector2 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+        }
+    }
+
+    public void ConditionFlip()
+    {
         mirror = !mirror;
         Vector2 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
-        print(mirror);
     }
-    
+
     void UseMeleeAttack()
     {
         // only continue if spell is still active (spell needs time to reach full range)

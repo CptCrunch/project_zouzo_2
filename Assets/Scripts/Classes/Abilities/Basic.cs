@@ -54,7 +54,6 @@ public class Basic : Attacks {
 
         // deal damage
         Vitals.GetDamage(Damage);
-        _target.GetComponent<Animator>().SetTrigger("Damage");
     }
 
     public int InstanceCount { get { return instanceCount; } }
