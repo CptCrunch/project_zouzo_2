@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
         // create playerVitals
         playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth, lives);
 
-        /*/ --- [ set name and axis ] ---
+        // --- [ set name and axis ] ---
         foreach (CharacterPicture player in Gamerules._instance.charPics)
         {
             // check if object isn't null
@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
                     playerAxis = player.Axis;
                 }
             }
-        }*/
+        }
     }
 
     void Start()

@@ -116,16 +116,17 @@ public class Gamerules : MonoBehaviour {
         // --- [ set random spawn point order ] ---
         Util.MixArray(randomSpawnOrder);
 
-        // --- [ register player on stage ] ---
+        /*/ --- [ register player on stage ] ---
         foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
         {
             Util.IncludeGameObject(playerOnStage, player);
-        }
+        }*/
 
         // --- [ spawn player ] ---
         int momSpawn = 0;
         foreach (CharacterPicture player in charPics)
         {
+            Debug.Log(player.Character);
             // check if object isn't null
             if (player != null)
             {
