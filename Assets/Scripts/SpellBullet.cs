@@ -18,6 +18,29 @@ public class SpellBullet : MonoBehaviour {
 	
 	void Update ()
     {
+        // set sprit angle
+        switch (Util.Aim8Direction(spellDir))
+        {
+            case "up":
+                break;
+            case "upRight":
+                break;
+            case "right":
+                break;
+            case "downRight":
+                break;
+            case "down":
+                break;
+            case "downLeft":
+                break;
+            case "left":
+                break;
+            case "upLeft":
+                break;
+            case "noAim":
+                break;
+        }
+
         // destroy gameObject if it reached its max range
         if (Vector2.Distance(transform.position, startPosition) > usedSpell.Range && usedSpell.Range > 0) { Destroy(gameObject); }
 

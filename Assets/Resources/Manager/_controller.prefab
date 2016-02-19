@@ -61,7 +61,7 @@ MonoBehaviour:
     Player: 0
     Damage: 0
     Spells: 0
-    Cooldown: 0
+    Cooldown: 1
     UI: 0
     Animation: 1
     Condition: 1
@@ -292,13 +292,13 @@ MonoBehaviour:
     damage: 500
     castTime: 0
     duration: 0
-    cooldown: 4
+    cooldown: 2
     range: 6
     targets: 0
     directions: 8
     travelTime: 0
     bullet: {fileID: 193644, guid: cd83b1fd26d5b2b408c90360880b7752, type: 2}
-    bulletSpeed: 10
+    bulletSpeed: 20
     knockUpHeght: 0
     knockBackRange: 0
     knockBackStrenght: 0
