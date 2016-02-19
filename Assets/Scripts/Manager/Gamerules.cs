@@ -66,6 +66,8 @@ public class Gamerules : MonoBehaviour {
         for (int i = 0; i < playerInfo.Length; i++) { playerNames[i] = playerInfo[i].name; }
     }
 
+    public GameObject[] PlayerOnStage { get { return playerOnStage; } }
+
     void Start()
     {
         #region Debug
@@ -114,29 +116,13 @@ public class Gamerules : MonoBehaviour {
         // --- [ set random spawn point order ] ---
         Util.MixArray(randomSpawnOrder);
 
+        // --- [ register player on stage ] ---
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            Util.IncludeGameObject(playerOnStage, player);
+        }
+
         // --- [ spawn player ] ---
-        GameObject[] basePlayer = GameObject.FindGameObjectsWithTag("Player");
-
-        CustomDebug.LogArray(basePlayer);
-
-        for (int i = 0; i < basePlayer.Length; i++)
-        {
-            for (int o = 0; o < charPics.Length; o++)
-            {
-                // check if entry is null and adds new entry
-                if (charPics[o] == null)
-                {
-                    charPics[o] = new CharacterPicture(basePlayer[i].GetComponent<Player>().playerAxis, i, GetPlayerIndexByName(basePlayer[i].GetComponent<Player>().type));
-                    break;
-                }
-            }
-        }
-
-        foreach (CharacterPicture pic in charPics)
-        {
-            if (pic != null) { Debug.Log(pic.Character); }
-        }
-
         int momSpawn = 0;
         foreach (CharacterPicture player in charPics)
         {
@@ -150,8 +136,6 @@ public class Gamerules : MonoBehaviour {
             }
         }
     }
-
-    public GameObject[] PlayerOnStage { get { return playerOnStage; } }
 
     private IEnumerator WaitCoroutine()
     {
@@ -238,7 +222,7 @@ public class Gamerules : MonoBehaviour {
         // return prafab
         if (info.prefab != null) { return info.prefab; }
         // if there is no prefab print an error and return null
-        else { Debug.LogError("<b>" + _name + "</b> is not an accepted entry for <b>GetPlayerPrefab</b> or the prefab is not declarated"); }
+        else { Debug.LogError("<b>" + _name + "</b> is not an accepted entry for <b>GetPlayerPrefabByName</b> or the prefab is not declarated"); }
         return null;
     }
 
@@ -249,7 +233,7 @@ public class Gamerules : MonoBehaviour {
         // return prafab
         if (info.standardSplashart != null) { return info.standardSplashart; }
         // if there is no prefab print an error and return null
-        else { Debug.LogError("<b>" + _name + "</b> is not an accepted entry for <b>GetPlayerPrefab</b> or the standard splashart is not declarated"); }
+        else { Debug.LogError("<b>" + _name + "</b> is not an accepted entry for <b>GetPlayerInfoByName</b> or the standard splashart is not declarated"); }
         return null;
     }
 
@@ -260,7 +244,7 @@ public class Gamerules : MonoBehaviour {
         // return prafab
         if (info.lockedSplashart != null) { return info.lockedSplashart; }
         // if there is no prefab print an error and return null
-        else { Debug.LogError("<b>" + _name + "</b> is not an accepted entry for <b>GetPlayerPrefab</b> or the locked splashart is not declarated"); }
+        else { Debug.LogError("<b>" + _name + "</b> is not an accepted entry for <b>GetPlayerLockedSplashartByName</b> or the locked splashart is not declarated"); }
         return null;
     }
 
@@ -271,7 +255,7 @@ public class Gamerules : MonoBehaviour {
         // return prafab
         if (info.blockedSplashart != null) { return info.blockedSplashart; }
         // if there is no prefab print an error and return null
-        else { Debug.LogError("<b>" + _name + "</b> is not an accepted entry for <b>GetPlayerPrefab</b> or the blocked splashart is not declarated"); }
+        else { Debug.LogError("<b>" + _name + "</b> is not an accepted entry for <b>GetPlayerBlockedSplashartByName</b> or the blocked splashart is not declarated"); }
         return null;
     }
 
@@ -282,7 +266,7 @@ public class Gamerules : MonoBehaviour {
         // return prafab
         if (info.standardIcon != null) { return info.standardIcon; }
         // if there is no prefab print an error and return null
-        else { Debug.LogError("<b>" + _name + "</b> is not an accepted entry for <b>GetPlayerPrefab</b> or the standard icon is not declarated"); }
+        else { Debug.LogError("<b>" + _name + "</b> is not an accepted entry for <b>GetPlayerStandardIconByName</b> or the standard icon is not declarated"); }
         return null;
     }
 
@@ -293,18 +277,19 @@ public class Gamerules : MonoBehaviour {
         // return prafab
         if (info.deathIcon != null) { return info.deathIcon; }
         // if there is no prefab print an error and return null
-        else { Debug.LogError("<b>" + _name + "</b> is not an accepted entry for <b>GetPlayerPrefab</b> or the standart icon is not declarated"); }
+        else { Debug.LogError("<b>" + _name + "</b> is not an accepted entry for <b>GetPlayerDeathIconByName</b> or the standart icon is not declarated"); }
         return null;
     }
 
     public int GetPlayerIndexByName(string _name)
     {
-        // get info
-        PlayerInfo info = GetPlayerInfoByName(_name);
         // return index
-        if (info.deathIcon != null) { return System.Array.IndexOf(playerInfo, info); }
+        for (int i = 0; i < playerInfo.Length; i++)
+        {
+            if (playerInfo[i].name == _name) { return i; }
+        }
         // if there is no prefab print an error and return null
-        else { Debug.LogError("<b>" + _name + "</b> is not an accepted entry for <b>GetPlayerPrefab</b> or the standart icon is not declarated"); }
+        Debug.LogError("<b>" + _name + "</b> is not an accepted entry for <b>GetPlayerIndexByName</b> or the standart icon is not declarated");
         return 0;
     }
     #endregion

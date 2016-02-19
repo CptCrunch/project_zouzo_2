@@ -8,10 +8,9 @@ public class UIManager : MonoBehaviour {
 
     public Vector2[] uiPositions = new Vector2[4];
     public GameObject uiPrefab;
+    public GameObject[] UIs = new GameObject[4];
 
     private Image[] characterHolder = new Image[4];
-    public Sprite[] playerIcons = new Sprite[4];
-    public Sprite[] playerDeathIcons = new Sprite[4];
 
     void Awake()
     {
@@ -19,12 +18,11 @@ public class UIManager : MonoBehaviour {
         else { Debug.LogError("UIManager has already been instantiated"); }
     }
 
-    // Use this for initialization
     void Start ()
     {
-        GameObject[] playerOnStage = Gamerules._instance.PlayerOnStage;
-
+        // --- [ create UI for each player ] ---
         // get all player on the stage (gamerules)
+        GameObject[] playerOnStage = Gamerules._instance.PlayerOnStage;
         for (int i = 0; i < playerOnStage.Length; i++)
         {
             // check if entry is filled
@@ -35,22 +33,28 @@ public class UIManager : MonoBehaviour {
 
                 // set ui on canvas
                 newUI.transform.parent = gameObject.transform;
+
+                // set ui possition
+                newUI.transform.position = uiPositions[i];
+
+                // add ui to UIs
+                Util.IncludeGameObject(UIs, newUI);
             }
         }
         // #set player Icons
 
-        // --- [ set player Icons ] ---
+        /*/ --- [ set player Icons ] ---
         for (int i = 0; i < characterHolder.Length; i++)
         {
             // check if objet isn't null
             if (characterHolder[i] != null) { characterHolder[i].overrideSprite = playerIcons[i]; }
-        }
+        }*/
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-	
+        Debug.Log(UIs[0].transform.position);
 	}
 
     public UIManager Instance { get { return instance; } }
