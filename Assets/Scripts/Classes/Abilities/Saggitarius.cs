@@ -37,12 +37,13 @@ public class Saggitarius : Attacks {
             IsStarted = true;
 
             // slow player
-            caster.GetComponent<Player>().playerVitals.ApplyLaunch(true, castSlow);
+            PlayerVitals.ApplyLaunch(true, castSlow);
 
             // reset TimeBetweenCasts
             TimeBeteewnCasts = 0;
 
             // set animation
+            Caster.GetComponent<Animator>().SetBool("SagittariusActive", true);
             CustomDebug.Log("<b>" + PlayerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
 
         }
@@ -71,15 +72,10 @@ public class Saggitarius : Attacks {
             // check if arrow is sticky
             if (TimeBeteewnCasts >= timeToGetMaxRange * stickArrowPerCent) { isSticky = true; }
 
-            // wait castTime
-
             // cast spell
             CustomDebug.Log("Found bullet: " + bullet != null, "Testing");
             PlayerAbilitiesScript.FireSkillShot(this, bullet);
-            CustomDebug.Log("<b>" + caster.GetComponent<Player>().playerVitals.Name + "</b> casted<b><color=white> " + Name + "</color></b>", "Spells");
-
-            // set norm speed
-            caster.GetComponent<Player>().playerVitals.ApplyLaunch(false, castSlow);
+            CustomDebug.Log("<b>" + PlayerVitals.Name + "</b> casted<b><color=white> " + Name + "</color></b>", "Spells");
 
             // set spell on cooldown
             SetCooldown();
@@ -91,6 +87,11 @@ public class Saggitarius : Attacks {
             CurrCooldown = MaxCooldown / 4;
             IsDisabled = true;
         }
+        // set norm speed
+        PlayerVitals.ApplyLaunch(false, castSlow);
+
+        // animation set false
+        Caster.GetComponent<Animator>().SetBool("SagittariusActive", false);
 
         // set spell as not cast
         IsCast = false;

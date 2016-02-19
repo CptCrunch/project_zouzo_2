@@ -18,7 +18,7 @@ public class PlayerAbilities : MonoBehaviour {
     {
         // --- [ set starter abilities ] ---
         abilityArray[0] = AbilityManager.Instance.CreateBasic(gameObject);          // basic
-        abilityArray[1] = AbilityManager.Instance.CreateVirgo(gameObject);          // spell_1
+        abilityArray[1] = AbilityManager.Instance.CreateSaggitarius(gameObject);    // spell_1
         abilityArray[2] = AbilityManager.Instance.CreateCapricorn(gameObject);      // spell_2
         abilityArray[3] = AbilityManager.Instance.CreateLeo(gameObject);            // spell_3
     }
@@ -82,22 +82,37 @@ public class PlayerAbilities : MonoBehaviour {
             if (ability.ID == 9)
             {
                 // check if sagittarius spell is casting
-                if (ability.IsCast)
+                if (/*ability.IsCast &&*/ gameObject.GetComponent<Animator>().GetBool("SagittariusActive"))
                 {
                     // get aim
                     switch (Util.Aim8Direction(new Vector2(Input.GetAxis(playerScrpt.playerAxis + "_Vertical"), Input.GetAxis(playerScrpt.playerAxis + "_Horizontal"))))
                     {
-                        case "up": break;
-                        case "upRight": break;
-                        case "right": break;
-                        case "downRight": break;
-                        case "down": break;
-                        case "downLeft": break;
-                        case "left": break;
-                        case "upLeft": break;
+                        case "up":
+                            gameObject.GetComponent<Animator>().SetInteger("SagittariusDir", 1);
+                            break;
+                        case "upRight":
+                            gameObject.GetComponent<Animator>().SetInteger("SagittariusDir", 2);
+                            break;
+                        case "right":
+                            gameObject.GetComponent<Animator>().SetInteger("SagittariusDir", 3);
+                            break;
+                        case "downRight":
+                            gameObject.GetComponent<Animator>().SetInteger("SagittariusDir", 4);
+                            break;
+                        case "down":
+                            gameObject.GetComponent<Animator>().SetInteger("SagittariusDir", 5);
+                            break;
+                        case "downLeft":
+                            gameObject.GetComponent<Animator>().SetInteger("SagittariusDir", 4);
+                            break;
+                        case "left":
+                            gameObject.GetComponent<Animator>().SetInteger("SagittariusDir", 3);
+                            break;
+                        case "upLeft":
+                            gameObject.GetComponent<Animator>().SetInteger("SagittariusDir", 2);
+                            break;
                         case "noAim":
-                            if (playerScrpt.Mirror) { }
-                            else { }
+                            gameObject.GetComponent<Animator>().SetInteger("SagittariusDir", 3);
                             break; 
                     }
                 }

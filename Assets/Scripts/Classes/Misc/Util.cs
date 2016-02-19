@@ -82,6 +82,20 @@ public static class Util{
         }
     }
 
+    public static void FlipX(GameObject _object)
+    {
+        Vector2 scale = _object.transform.localScale;
+        scale.x *= -1;
+        _object.transform.localScale = scale;
+    }
+
+    public static void FlipY(GameObject _object)
+    {
+        Vector2 scale = _object.transform.localScale;
+        scale.y *= -1;
+        _object.transform.localScale = scale;
+    }
+
     #region Test Joysick Axis
     public static bool LeftJoystickUp(string axis) 
     {

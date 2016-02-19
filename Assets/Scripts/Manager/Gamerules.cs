@@ -122,7 +122,7 @@ public class Gamerules : MonoBehaviour {
             Util.IncludeGameObject(playerOnStage, player);
         }*/
 
-        // --- [ spawn player ] ---
+        /*/ --- [ spawn player ] ---
         int momSpawn = 0;
         foreach (CharacterPicture player in charPics)
         {
@@ -135,7 +135,7 @@ public class Gamerules : MonoBehaviour {
                 // create player
                 Util.IncludeGameObject(playerOnStage, Instantiate(GetPlayerPrefabByName(player.Character), playerSpawn[randomSpawnOrder[momSpawn]].transform.position, Quaternion.identity) as GameObject);
             }
-        }
+        }*/
     }
 
     private IEnumerator WaitCoroutine()
