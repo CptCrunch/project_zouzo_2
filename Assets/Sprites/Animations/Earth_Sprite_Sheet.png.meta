@@ -1,0 +1,929 @@
+fileFormatVersion: 2
+guid: d74ae9b9b425fb04088459c24cd3e91c
+timeCreated: 1455874413
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Earth_Sprite_Sheet_0
+    21300002: Earth_Sprite_Sheet_1
+    21300004: Earth_Sprite_Sheet_2
+    21300006: Earth_Sprite_Sheet_3
+    21300008: Earth_Sprite_Sheet_4
+    21300010: Earth_Sprite_Sheet_5
+    21300012: Earth_Sprite_Sheet_6
+    21300014: Earth_Sprite_Sheet_7
+    21300016: Earth_Sprite_Sheet_8
+    21300018: Earth_Sprite_Sheet_9
+    21300020: Earth_Sprite_Sheet_10
+    21300022: Earth_Sprite_Sheet_11
+    21300024: Earth_Sprite_Sheet_12
+    21300026: Earth_Sprite_Sheet_13
+    21300028: Earth_Sprite_Sheet_14
+    21300030: Earth_Sprite_Sheet_15
+    21300032: Earth_Sprite_Sheet_16
+    21300034: Earth_Sprite_Sheet_17
+    21300036: Earth_Sprite_Sheet_18
+    21300038: Earth_Sprite_Sheet_19
+    21300040: Earth_Sprite_Sheet_20
+    21300042: Earth_Sprite_Sheet_21
+    21300044: Earth_Sprite_Sheet_22
+    21300046: Earth_Sprite_Sheet_23
+    21300048: Earth_Sprite_Sheet_24
+    21300050: Earth_Sprite_Sheet_25
+    21300052: Earth_Sprite_Sheet_26
+    21300054: Earth_Sprite_Sheet_27
+    21300056: Earth_Sprite_Sheet_28
+    21300058: Earth_Sprite_Sheet_29
+    21300060: Earth_Sprite_Sheet_30
+    21300062: Earth_Sprite_Sheet_31
+    21300064: Earth_Sprite_Sheet_32
+    21300066: Earth_Sprite_Sheet_33
+    21300068: Earth_Sprite_Sheet_34
+    21300070: Earth_Sprite_Sheet_35
+    21300072: Earth_Sprite_Sheet_36
+    21300074: Earth_Sprite_Sheet_37
+    21300076: Earth_Sprite_Sheet_38
+    21300078: Earth_Sprite_Sheet_39
+    21300080: Earth_Sprite_Sheet_40
+    21300082: Earth_Sprite_Sheet_41
+    21300084: Earth_Sprite_Sheet_42
+    21300086: Earth_Sprite_Sheet_43
+    21300088: Earth_Sprite_Sheet_44
+    21300090: Earth_Sprite_Sheet_45
+    21300092: Earth_Sprite_Sheet_46
+    21300094: Earth_Sprite_Sheet_47
+    21300096: Earth_Sprite_Sheet_48
+    21300098: Earth_Sprite_Sheet_49
+    21300100: Earth_Sprite_Sheet_50
+    21300102: Earth_Sprite_Sheet_51
+    21300104: Earth_Sprite_Sheet_52
+    21300106: Earth_Sprite_Sheet_53
+    21300108: Earth_Sprite_Sheet_54
+    21300110: Earth_Sprite_Sheet_55
+    21300112: Earth_Sprite_Sheet_56
+    21300114: Earth_Sprite_Sheet_57
+    21300116: Earth_Sprite_Sheet_58
+    21300118: Earth_Sprite_Sheet_59
+    21300120: Earth_Sprite_Sheet_60
+    21300122: Earth_Sprite_Sheet_61
+    21300124: Earth_Sprite_Sheet_62
+    21300126: Earth_Sprite_Sheet_63
+    21300128: Earth_Sprite_Sheet_64
+    21300130: Earth_Sprite_Sheet_65
+    21300132: Earth_Sprite_Sheet_66
+    21300134: Earth_Sprite_Sheet_67
+    21300136: Earth_Sprite_Sheet_68
+    21300138: Earth_Sprite_Sheet_69
+    21300140: Earth_Sprite_Sheet_70
+    21300142: Earth_Sprite_Sheet_71
+    21300144: Earth_Sprite_Sheet_72
+    21300146: Earth_Sprite_Sheet_73
+    21300148: Earth_Sprite_Sheet_74
+    21300150: Earth_Sprite_Sheet_75
+    21300152: Earth_Sprite_Sheet_76
+    21300154: Earth_Sprite_Sheet_77
+    21300156: Earth_Sprite_Sheet_78
+    21300158: Earth_Sprite_Sheet_79
+    21300160: Earth_Sprite_Sheet_80
+    21300162: Earth_Sprite_Sheet_81
+    21300164: Earth_Sprite_Sheet_82
+    21300166: Earth_Sprite_Sheet_83
+    21300168: Earth_Sprite_Sheet_84
+    21300170: Earth_Sprite_Sheet_85
+    21300172: Earth_Sprite_Sheet_86
+    21300174: Earth_Sprite_Sheet_87
+    21300176: Earth_Sprite_Sheet_88
+    21300178: Earth_Sprite_Sheet_89
+    21300180: Earth_Sprite_Sheet_90
+    21300182: Earth_Sprite_Sheet_91
+    21300184: Earth_Sprite_Sheet_92
+    21300186: Earth_Sprite_Sheet_93
+    21300188: Earth_Sprite_Sheet_94
+    21300190: Earth_Sprite_Sheet_95
+    21300192: Earth_Sprite_Sheet_96
+    21300194: Earth_Sprite_Sheet_97
+    21300196: Earth_Sprite_Sheet_98
+    21300198: Earth_Sprite_Sheet_99
+    21300200: Earth_Sprite_Sheet_100
+    21300202: Earth_Sprite_Sheet_101
+    21300204: Earth_Sprite_Sheet_102
+    21300206: Earth_Sprite_Sheet_103
+    21300208: Earth_Sprite_Sheet_104
+    21300210: Earth_Sprite_Sheet_105
+    21300212: Earth_Sprite_Sheet_106
+    21300214: Earth_Sprite_Sheet_107
+    21300216: Earth_Sprite_Sheet_108
+    21300218: Earth_Sprite_Sheet_109
+    21300220: Earth_Sprite_Sheet_110
+    21300222: Earth_Sprite_Sheet_111
+    21300224: Earth_Sprite_Sheet_112
+    21300226: Earth_Sprite_Sheet_113
+    21300228: Earth_Sprite_Sheet_114
+    21300230: Earth_Sprite_Sheet_115
+    21300232: Earth_Sprite_Sheet_116
+    21300234: Earth_Sprite_Sheet_117
+    21300236: Earth_Sprite_Sheet_118
+    21300238: Earth_Sprite_Sheet_119
+    21300240: Earth_Sprite_Sheet_120
+    21300242: Earth_Sprite_Sheet_121
+    21300244: Earth_Sprite_Sheet_122
+    21300246: Earth_Sprite_Sheet_123
+    21300248: Earth_Sprite_Sheet_124
+    21300250: Earth_Sprite_Sheet_125
+    21300252: Earth_Sprite_Sheet_126
+    21300254: Earth_Sprite_Sheet_127
+    21300256: Earth_Sprite_Sheet_128
+    21300258: Earth_Sprite_Sheet_129
+    21300260: Earth_Sprite_Sheet_130
+    21300262: Earth_Sprite_Sheet_131
+    21300264: Earth_Sprite_Sheet_132
+    21300266: Earth_Sprite_Sheet_133
+    21300268: Earth_Sprite_Sheet_134
+    21300270: Earth_Sprite_Sheet_135
+    21300272: Earth_Sprite_Sheet_136
+    21300274: Earth_Sprite_Sheet_137
+    21300276: Earth_Sprite_Sheet_138
+    21300278: Earth_Sprite_Sheet_139
+    21300280: Earth_Sprite_Sheet_140
+    21300282: Earth_Sprite_Sheet_141
+    21300284: Earth_Sprite_Sheet_142
+    21300286: Earth_Sprite_Sheet_143
+    21300288: Earth_Sprite_Sheet_144
+    21300290: Earth_Sprite_Sheet_145
+    21300292: Earth_Sprite_Sheet_146
+    21300294: Earth_Sprite_Sheet_147
+    21300296: Earth_Sprite_Sheet_148
+    21300298: Earth_Sprite_Sheet_149
+    21300300: Earth_Sprite_Sheet_150
+    21300302: Earth_Sprite_Sheet_151
+    21300304: Earth_Sprite_Sheet_152
+    21300306: Earth_Sprite_Sheet_153
+    21300308: Earth_Sprite_Sheet_154
+    21300310: Earth_Sprite_Sheet_155
+    21300312: Earth_Sprite_Sheet_156
+    21300314: Earth_Sprite_Sheet_157
+    21300316: Earth_Sprite_Sheet_158
+    21300318: Earth_Sprite_Sheet_159
+    21300320: Earth_Sprite_Sheet_160
+    21300322: Earth_Sprite_Sheet_161
+    21300324: Earth_Sprite_Sheet_162
+    21300326: Earth_Sprite_Sheet_163
+    21300328: Earth_Sprite_Sheet_164
+    21300330: Earth_Sprite_Sheet_165
+    21300332: Earth_Sprite_Sheet_166
+    21300334: Earth_Sprite_Sheet_167
+    21300336: Earth_Sprite_Sheet_168
+    21300338: Earth_Sprite_Sheet_169
+    21300340: Earth_Sprite_Sheet_170
+    21300342: Earth_Sprite_Sheet_171
+    21300344: Earth_Sprite_Sheet_172
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -2
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 64
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Earth_Sprite_Sheet_100
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_101
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_102
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_103
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_104
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_105
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_106
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_107
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_108
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_109
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_110
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_111
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_112
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_113
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_114
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_115
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_116
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_117
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_118
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_119
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_120
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_121
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_122
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_126
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_127
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_128
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_129
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_130
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_131
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_132
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_133
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_134
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_135
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_136
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_137
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_138
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_139
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_140
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_141
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_142
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_143
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_144
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_145
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_146
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_147
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_148
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_149
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_150
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_151
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_152
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_153
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_154
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_155
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_156
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_157
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_158
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_159
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_160
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_161
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_162
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_163
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_164
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_165
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_166
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_167
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_168
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_169
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_170
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_171
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Earth_Sprite_Sheet_172
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
