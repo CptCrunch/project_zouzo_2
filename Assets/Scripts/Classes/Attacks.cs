@@ -52,7 +52,7 @@ public abstract class Attacks {
         this.maxCooldown = cooldown;
         this.range = range;
         this.spellDir = spellDir;
-        if (Gamerules._instance.abilityLimit != 0) { durability = Gamerules._instance.abilityLimit; }
+        if (GameManager._instance.abilityLimit != 0) { durability = GameManager._instance.abilityLimit; }
         if (range > 0) { bulletSpeed = toTravelTime / range; }
         else { bulletSpeed = toTravelTime; }
     }

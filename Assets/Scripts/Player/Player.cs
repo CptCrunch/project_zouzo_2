@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
         playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth, lives);
 
         // --- [ set name and axis ] ---
-        foreach (CharacterPicture player in Gamerules._instance.charPics)
+        foreach (CharacterPicture player in GameManager._instance.charPics)
         {
             // check if object isn't null
             if (player != null)

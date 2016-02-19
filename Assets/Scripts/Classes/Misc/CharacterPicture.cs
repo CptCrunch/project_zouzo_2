@@ -37,7 +37,7 @@ public class CharacterPicture
     public int PictureNumber { get { return pictureNumber; } set { pictureNumber = value; } }
     #endregion
 
-    public void UpdateCharacter() { character = Gamerules._instance.GetPlayerNameByIndex(pictureNumber); }
+    public void UpdateCharacter() { character = GameManager._instance.GetPlayerNameByIndex(pictureNumber); }
 
     public string IndexToStanddartName(int _index)
     {

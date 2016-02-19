@@ -48,12 +48,12 @@ public class LivingEntity
     public LivingEntity(GameObject playerObject, string name, float moveSpeed, float slowedSpeed, float maxHealth, int lifes)
     {
         // set maxHealth ( will use maxHealth from Gamerulses )
-        if (Gamerules._instance.playerMaxHealth == 0) { this.maxHealth = maxHealth; } 
-        else { this.maxHealth = Gamerules._instance.playerMaxHealth; }
+        if (GameManager._instance.playerMaxHealth == 0) { this.maxHealth = maxHealth; } 
+        else { this.maxHealth = GameManager._instance.playerMaxHealth; }
 
         // Set Life Limit
-        if(Gamerules._instance.lifeLimit == 0) { this.life = lifes; } 
-        else { this.life = Gamerules._instance.lifeLimit; }
+        if(GameManager._instance.lifeLimit == 0) { this.life = lifes; } 
+        else { this.life = GameManager._instance.lifeLimit; }
 
         instance = playerObject.GetComponent<Player>();
 
