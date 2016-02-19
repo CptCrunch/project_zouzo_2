@@ -7,7 +7,7 @@ public class PlayerAbilities : MonoBehaviour {
     public Attacks[] abilityArray = new Attacks[4];
     private bool isAttacking;
     public Attacks castedMeeleSpell;
-    public Attacks castedAbility;
+    public Attacks startedAbility;
 
     void Awake()
     {
@@ -31,15 +31,15 @@ public class PlayerAbilities : MonoBehaviour {
             // update cooldown
             _spell.UpdateCooldowns();
             // update timeBetweenCasts
-            if (_spell.IsCasted) { _spell.TimeBeteewnCasts += Time.deltaTime; }
+            if (_spell.IsCast) { _spell.TimeBeteewnCasts += Time.deltaTime; }
         }
 
         // --- [ use ability ] ---
         // start spell (on button pressed)
-        if (Input.GetKeyDown(playerScrpt.playerControles[1])) { castedAbility = abilityArray[0]; abilityArray[0].StartSpell(); } // basic
-        if (Input.GetKeyDown(playerScrpt.playerControles[2])) { castedAbility = abilityArray[1]; abilityArray[1].StartSpell(); } // spell_1
-        if (Input.GetKeyDown(playerScrpt.playerControles[3])) { castedAbility = abilityArray[2]; abilityArray[2].StartSpell(); } // spell_2
-        if (Input.GetKeyDown(playerScrpt.playerControles[4])) { castedAbility = abilityArray[3]; abilityArray[3].StartSpell(); } // spell_3
+        if (Input.GetKeyDown(playerScrpt.playerControles[1])) { startedAbility = abilityArray[0]; abilityArray[0].StartSpell(); } // basic
+        if (Input.GetKeyDown(playerScrpt.playerControles[2])) { startedAbility = abilityArray[1]; abilityArray[1].StartSpell(); } // spell_1
+        if (Input.GetKeyDown(playerScrpt.playerControles[3])) { startedAbility = abilityArray[2]; abilityArray[2].StartSpell(); } // spell_2
+        if (Input.GetKeyDown(playerScrpt.playerControles[4])) { startedAbility = abilityArray[3]; abilityArray[3].StartSpell(); } // spell_3
 
         // use aftercast (on button released)
         if (Input.GetKeyUp(playerScrpt.playerControles[1])) { abilityArray[0].AfterCast(); } // basic
@@ -61,8 +61,48 @@ public class PlayerAbilities : MonoBehaviour {
             }
         }
 
-        // --- [ Virgo dash animation off ] ---
-        if(!playerScrpt.playerVitals.VirgoDash) { gameObject.GetComponent<Animator>().SetBool("Virgo", false); }
+        // --- [ virgo animation stop ] ---
+        foreach (Attacks ability in abilityArray)
+        {
+            // check if the ability is a virgo spell
+            if (ability.ID == 6)
+            {
+                if(!ability.IsStarted && !playerScrpt.playerVitals.VirgoDash)
+                {
+                    gameObject.GetComponent<Animator>().SetBool("Virgo", false);
+                }
+            }
+        }
+
+        // --- [ sagittarius cast animation ] ---
+        // get all of the players abilities
+        foreach (Attacks ability in abilityArray)
+        {
+            // check if the ability is a sagittarius spell
+            if (ability.ID == 9)
+            {
+                // check if sagittarius spell is casting
+                if (ability.IsCast)
+                {
+                    // get aim
+                    switch (Util.Aim8Direction(new Vector2(Input.GetAxis(playerScrpt.playerAxis + "_Vertical"), Input.GetAxis(playerScrpt.playerAxis + "_Horizontal"))))
+                    {
+                        case "up": break;
+                        case "upRight": break;
+                        case "right": break;
+                        case "downRight": break;
+                        case "down": break;
+                        case "downLeft": break;
+                        case "left": break;
+                        case "upLeft": break;
+                        case "noAim":
+                            if (playerScrpt.Mirror) { }
+                            else { }
+                            break; 
+                    }
+                }
+            }
+        }
 
         #region use meele abilities
         // check if a meelespell was used
@@ -194,5 +234,5 @@ public class PlayerAbilities : MonoBehaviour {
         return nearestPlayer;
     }
 
-    public void CastSpell() { print(castedAbility.Name); castedAbility.Cast(); castedAbility = null;  }
+    public void CastSpell() { startedAbility.Cast(); startedAbility = null; }
 }

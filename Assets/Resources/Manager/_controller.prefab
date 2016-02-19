@@ -59,14 +59,14 @@ MonoBehaviour:
     Main: 1
     Testing: 1
     Player: 0
-    Damage: 1
+    Damage: 0
     Spells: 0
     Cooldown: 0
     UI: 0
-    Animation: 0
-    Condition: 0
+    Animation: 1
+    Condition: 1
     Controles: 0
-    MapFeature: 1
+    MapFeature: 0
   playerInfo:
   - name: Earth
     prefab: {fileID: 183932, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
@@ -317,10 +317,10 @@ MonoBehaviour:
     castTime: 0
     duration: 0
     cooldown: 1
-    range: 2
+    range: 1.5
     targets: 0
     directions: 2
-    travelTime: .800000012
+    travelTime: .5
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 3

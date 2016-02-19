@@ -14,13 +14,13 @@ public class Basic : Attacks {
     {
         if (!IsDisabled)
         {
+            // set spell as started
+            IsStarted = true;
+
             // set animation
             Caster.GetComponent<Animator>().SetInteger("AttackRan", UnityEngine.Random.Range(1, 4));
             Caster.GetComponent<Animator>().SetTrigger("Attack");
             CustomDebug.Log("<b>" + PlayerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
-
-            // set spell as casted
-            IsCasted = true;
 
             // reset TimeBetweenCasts
             TimeBeteewnCasts = 0;
@@ -35,6 +35,12 @@ public class Basic : Attacks {
 
     public override void Cast()
     {
+        // set spell as not started
+        IsStarted = false;
+
+        // set spell as cast
+        IsCast = true;
+
         // cast spell
         PlayerAbilitiesScript.castedMeeleSpell = this;
         CustomDebug.Log("<b>" + PlayerVitals.Name + "</b> casted<b><color=white> " + Name + "</color></b>", "Spells");
@@ -42,7 +48,8 @@ public class Basic : Attacks {
 
     public override void AfterCast()
     {
-        IsCasted = false;
+        // set spell as not cast
+        IsCast = false;
     }
 
     public override void Use(GameObject _target)

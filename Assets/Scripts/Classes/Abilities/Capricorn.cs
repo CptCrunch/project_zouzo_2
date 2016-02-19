@@ -24,16 +24,17 @@ public class Capricorn : Attacks {
 
     public override void StartSpell()
     {
+        //check if knockUp should be used
         if (Caster.GetComponent<Controller2D>().collisions.below)
         {
             if (!IsDisabled)
             {
+                // set spell as started
+                IsStarted = true;
+
                 // set animation
                 Caster.GetComponent<Animator>().SetTrigger("CapricornKnockBack");
                 CustomDebug.Log("<b>" + Caster.GetComponent<Player>().playerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
-
-                // set spell as casted
-                IsCasted = true;
 
                 // set air cast to false
                 airCast = false;
@@ -52,12 +53,12 @@ public class Capricorn : Attacks {
             {
                 if (PlayerAbilitiesScript.GetCapricorn2Targets() != null)
                 {
+                    // set spell as started
+                    IsStarted = true;
+
                     // set animation
                     Caster.GetComponent<Animator>().SetTrigger("CapricornKnockUp");
                     CustomDebug.Log("<b>" + Caster.GetComponent<Player>().playerVitals.Name + "</b> should play <b><color=white>" + Name + "2</color></b> attack animation", "Animation");
-
-                    // set spell as casted
-                    IsCasted = true;
 
                     // set air cast to false
                     airCast = true;
@@ -78,10 +79,14 @@ public class Capricorn : Attacks {
 
     public override void Cast()
     {
+        // set spell as not started
+        IsStarted = false;
+
+        // set spell as cast
+        IsCast = true;
+
         if (!airCast)
         {
-            Debug.Log("eir kast eini");
-
             // cast spell
             PlayerAbilitiesScript.castedMeeleSpell = this;
             CustomDebug.Log("<b>" + Caster.GetComponent<Player>().playerVitals.Name + "</b> casted<b><color=white> " + Name + "</color></b>", "Spells");
@@ -89,8 +94,6 @@ public class Capricorn : Attacks {
 
         else
         {
-            Debug.Log("eini");
-
             if (PlayerAbilitiesScript.GetCapricorn2Targets() != null)
             {
                 // use spell
@@ -102,7 +105,8 @@ public class Capricorn : Attacks {
 
     public override void AfterCast()
     {
-        if (IsCasted) { IsCasted = false; }
+        // set spell as not cast
+        IsCast = false;
     }
 
     public override void Use(GameObject _target)
