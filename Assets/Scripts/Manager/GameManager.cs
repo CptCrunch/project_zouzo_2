@@ -2,16 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Gamerules : MonoBehaviour {
+public class GameManager : MonoBehaviour {
 
-    public static Gamerules _instance;
+    public static GameManager _instance;
 
     [HideInInspector] public bool Running;
 
-    [Tooltip("all scenes the Gamerules script will detect as a stage")]
+    [Tooltip("all scenes the GameManager script will detect as a stage")]
     public string[] registerdStages = new string[1];
 
-    #region Gamerules Variable
+    #region GameManager Variable
     [Header("Game Rules")]
 
     [Range(0, 4)]
@@ -146,7 +146,7 @@ public class Gamerules : MonoBehaviour {
             {
                 go.GetComponent<Player>().gamerulesDisabled = true;
                 go.GetComponent<Player>().flipEnable = false;
-                /*CustomDebug.Log(go.name + ", " + go.GetComponent<Player>().gamerulesDisabled, "Testing");*/
+                go.GetComponent<Player>()._animator.SetTrigger("Spawn");
             }
         }
 

@@ -51,10 +51,10 @@ public class PlayerSelection : MonoBehaviour
         for (int i = 0; i < characterHolder.Length; i++) { characterHolder[i].overrideSprite = notConnectedImg[i]; }
 
         // set scrollsplasharts lenght
-        scrollSplasharts = new Sprite[Gamerules._instance.GetPlayerInfoLength()];
+        scrollSplasharts = new Sprite[GameManager._instance.GetPlayerInfoLength()];
 
         // set scrollSplasharts images
-        for (int i = 0; i < Gamerules._instance.PlayerNames.Length; i++) { scrollSplasharts[i] = Gamerules._instance.GetPlayerStandardSplashartByName(Gamerules._instance.PlayerNames[i]); }
+        for (int i = 0; i < GameManager._instance.PlayerNames.Length; i++) { scrollSplasharts[i] = GameManager._instance.GetPlayerStandardSplashartByName(GameManager._instance.PlayerNames[i]); }
 
         // disable ReadyScreen
         ReadyScreen.active = false;
@@ -78,11 +78,11 @@ public class PlayerSelection : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick2Button0) || Input.GetKeyDown(KeyCode.Joystick3Button0) || Input.GetKeyDown(KeyCode.Joystick4Button0))
             {
                 // save picture data
-                Gamerules._instance.charPics = characterPicture;
+                GameManager._instance.charPics = characterPicture;
 
                 bool isStage = false;
                 // check if levelToLoad is a registered stage
-                foreach (string stage in Gamerules._instance.registerdStages) { if (stage == levelToLoad) { isStage = true; break; } }
+                foreach (string stage in GameManager._instance.registerdStages) { if (stage == levelToLoad) { isStage = true; break; } }
                 
                 // load level if it is registered
                 if (isStage) { Application.LoadLevel(levelToLoad); }
@@ -291,9 +291,9 @@ public class PlayerSelection : MonoBehaviour
         if (!isCharLocked)
         {
             // replace the splash arts to the blocked one in scrollSplasharts
-            scrollSplasharts[character.PictureNumber] = Gamerules._instance.GetPlayerBlockedSplashartByName(character.Character);
+            scrollSplasharts[character.PictureNumber] = GameManager._instance.GetPlayerBlockedSplashartByName(character.Character);
             // replace the players splashart to the locked one
-            characterHolder[character.Index].overrideSprite = Gamerules._instance.GetPlayerLockedSplashartByName(character.Character);
+            characterHolder[character.Index].overrideSprite = GameManager._instance.GetPlayerLockedSplashartByName(character.Character);
             // set the isLocked variable of the instance to true
             character.IsLocked = true;
             // update character
@@ -322,7 +322,7 @@ public class PlayerSelection : MonoBehaviour
     private void DelockCharacter(CharacterPicture character)
     {
         // replace the splash arts to the not blocked one in scrollSplasharts
-        scrollSplasharts[character.PictureNumber] = Gamerules._instance.GetPlayerStandardSplashartByName(character.Character);
+        scrollSplasharts[character.PictureNumber] = GameManager._instance.GetPlayerStandardSplashartByName(character.Character);
         // set the isLocked variable of the instance to false
         character.IsLocked = false;
         // sub one from player locked count

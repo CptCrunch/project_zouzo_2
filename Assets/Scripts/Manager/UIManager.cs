@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour {
     {
         // --- [ create UI for each player ] ---
         // get all player on the stage (gamerules)
-        GameObject[] playerOnStage = Gamerules._instance.PlayerOnStage;
+        GameObject[] playerOnStage = GameManager._instance.PlayerOnStage;
         for (int i = 0; i < playerOnStage.Length; i++)
         {
             // check if entry is filled
