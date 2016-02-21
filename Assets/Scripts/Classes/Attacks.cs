@@ -19,7 +19,7 @@ public abstract class Attacks {
     private float maxCooldown;
     private float currCooldown = 0;
     private bool isDisabled = false;
-    private uint durability;
+    private int durability;
     private float range;
     private int maxTargets;
     private int playersHit;
@@ -71,7 +71,7 @@ public abstract class Attacks {
     public float MaxCooldown { get { return maxCooldown; } }
     public float CurrCooldown { get { return currCooldown; } set { this.currCooldown = value; } }
     public bool IsDisabled { get { return isDisabled; } set { isDisabled = value; } }
-    public uint Durability { get { return durability; } }
+    public int Durability { get { return durability; } }
     public float Range { get { return range; } set { range = value; } }
     public int PlayersHit { get { return playersHit; } set { playersHit = value; } }
     public uint SpellDir { get { return spellDir; } }

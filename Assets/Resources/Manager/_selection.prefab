@@ -39,27 +39,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb26b35122e8cc040b6ed01b182e11cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: Prototype_Stage01
+  levelToLoad: 1
   notConnectedImg:
   - {fileID: 21300000, guid: 411ab82fd61930d4091caa6f51f446cd, type: 3}
   - {fileID: 21300000, guid: 6543147c7447dd843beff37bbf109e34, type: 3}
   - {fileID: 21300000, guid: d68dd21b426b6ee41adcefbc92728889, type: 3}
   - {fileID: 21300000, guid: 3a790fdb1e2dae1409442e0d98520207, type: 3}
-  characterSplashart:
-  - {fileID: 21300000, guid: 8a514571e0fd61d4aa422b8bca6b1fbf, type: 3}
-  - {fileID: 21300000, guid: 155137b948fdc9845a98436aa11e1cc3, type: 3}
-  - {fileID: 21300000, guid: 6037ebf26904d6241b77b31011af2c9c, type: 3}
-  - {fileID: 21300000, guid: 1203cedf11b3487418c68b1d0d1156e6, type: 3}
-  characterSplashartLocked:
-  - {fileID: 21300000, guid: f15d4a5ef4a9df1419928360f4f6b5f3, type: 3}
-  - {fileID: 21300000, guid: 8bf73d55867ca524299a321779c5550a, type: 3}
-  - {fileID: 21300000, guid: e882879f46fd9c4468b3557da5f76d54, type: 3}
-  - {fileID: 21300000, guid: a9ec7409424852d41b4978b13a80ecb9, type: 3}
-  characterSplashartBlocked:
-  - {fileID: 21300000, guid: 05e18ba4c3dd2a34d80c05428a970266, type: 3}
-  - {fileID: 21300000, guid: d0d53f9b49aff04459571c69441ef539, type: 3}
-  - {fileID: 21300000, guid: ccf77c4c00f0ec04182c5a25d05310ec, type: 3}
-  - {fileID: 21300000, guid: 9c0305cc6dd17974184a52454f006c68, type: 3}
   characterHolder:
   - {fileID: 0}
   - {fileID: 0}
