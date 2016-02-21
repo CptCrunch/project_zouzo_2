@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(Controller2D))]
+[RequireComponent(typeof(PlayerAbilities))]
 public class Player : MonoBehaviour
 {
     #region Variables
@@ -24,18 +25,17 @@ public class Player : MonoBehaviour
     public string type;
     public float maxHealth;
     public int lives = 3;
-    public float moveSpeed = 6;
+    public float moveSpeed = 6; 
     public float slowedSpeed = 3;
 
-    public string[] playerControles = new string[5];
+    [HideInInspector] public string[] playerControles = new string[5];
     #endregion
 
     #region Jumping
-    [Header("Jumping:")]
-
     [HideInInspector] public float gravity;
     [HideInInspector] public Vector3 velocity;
 
+    [Header("Jumping:")]
     public float maxJumpHeight = 4;
     public float minJumpHeight = 1;
     [Tooltip("Time it takes to jump (Used to calculate gravity)")]
@@ -73,9 +73,16 @@ public class Player : MonoBehaviour
     [HideInInspector] public Animator _animator;
     private bool mirror = false;
     private bool death = false;
-    public bool flipEnable = true;
+    [HideInInspector] public bool flipEnable = true;
     private bool stunFlip = false;
+    private bool dead = false;
+
+    [Header("Getting Hit")]
+    public Color hitColor = Color.red;
+    [Tooltip("Time it takes to change back to the original color")]
+    public float changebackTime = 0.2f;
     #endregion
+
     private PlayerAbilities playerAbilitiesScript;
     #endregion
 
@@ -412,8 +419,44 @@ public class Player : MonoBehaviour
         }
     }
 
+    #region Die
     public void Die()
     {
-
+        if (!dead) {
+            CustomDebug.Log("Died", "Testing");
+            _animator.SetTrigger("Death");
+            dead = true;
+        }
     }
+
+    private IEnumerator IDie() {
+        GetComponent<Animator>().enabled = false;
+        gamerulesDisabled = true;
+        flipEnable = false;
+        yield return new WaitForSeconds(GameManager._instance.timeDeathSpawn);
+        GameManager._instance.PlayerDeath(playerVitals);
+        Destroy(gameObject);
+        yield return null;
+    }
+    #endregion
+
+    #region Getting Hit
+    /// <summary>
+    /// Change Color when hit
+    /// </summary>
+    /// <param name="t">Time between changes</param>
+    /// <returns></returns>
+    public void ChangeToHitColor(float t) {
+        StartCoroutine(ChangeToColor(t));
+    }
+
+    private IEnumerator ChangeToColor(float t) {
+        Color tmpColor = GetComponent<SpriteRenderer>().color;
+
+        gameObject.GetComponent<SpriteRenderer>().color = hitColor;
+        yield return new WaitForSeconds(t);
+        gameObject.GetComponent<SpriteRenderer>().color = tmpColor;
+        yield return null;
+    }
+    #endregion
 }

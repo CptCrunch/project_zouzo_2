@@ -50,28 +50,29 @@ public class AbilityOrb : MonoBehaviour {
     {
         chosenAttackName = attacks[Random.Range(0, attacks.Length)];
 
-        /*switch(chosenAttackName)
-        {
-            case "Aries": SetSprite(OrbSpawner.Instance.orbSprites[0]); break;
-            case "Taurus": SetSprite(OrbSpawner.Instance.orbSprites[1]); break;
-            case "Gemini": SetSprite(OrbSpawner.Instance.orbSprites[2]); break;
-            case "Cancer": SetSprite(OrbSpawner.Instance.orbSprites[3]); break;
-            case "Leo": SetSprite(OrbSpawner.Instance.orbSprites[3]); break;
-            case "Virgo": SetSprite(OrbSpawner.Instance.orbSprites[4]); break;
-            case "Libra": SetSprite(OrbSpawner.Instance.orbSprites[5]); break;
-            case "Scorpio": SetSprite(OrbSpawner.Instance.orbSprites[6]); break;
-            case "Saggitarius": SetSprite(OrbSpawner.Instance.orbSprites[7]); break;
-            case "Capricorn": SetSprite(OrbSpawner.Instance.orbSprites[8]); break;
-            case "Aquarius": SetSprite(OrbSpawner.Instance.orbSprites[9]); break;
-            case "Pisces": SetSprite(OrbSpawner.Instance.orbSprites[10]); break;
-        }*/
+        if (OrbSpawner.Instance.orbSprites.Length > 0) {
+            /*switch(chosenAttackName)
+            {
+                case "Aries": SetSprite(OrbSpawner.Instance.orbSprites[0]); break;
+                case "Taurus": SetSprite(OrbSpawner.Instance.orbSprites[1]); break;
+                case "Gemini": SetSprite(OrbSpawner.Instance.orbSprites[2]); break;
+                case "Cancer": SetSprite(OrbSpawner.Instance.orbSprites[3]); break;
+                case "Leo": SetSprite(OrbSpawner.Instance.orbSprites[3]); break;
+                case "Virgo": SetSprite(OrbSpawner.Instance.orbSprites[4]); break;
+                case "Libra": SetSprite(OrbSpawner.Instance.orbSprites[5]); break;
+                case "Scorpio": SetSprite(OrbSpawner.Instance.orbSprites[6]); break;
+                case "Saggitarius": SetSprite(OrbSpawner.Instance.orbSprites[7]); break;
+                case "Capricorn": SetSprite(OrbSpawner.Instance.orbSprites[8]); break;
+                case "Aquarius": SetSprite(OrbSpawner.Instance.orbSprites[9]); break;
+                case "Pisces": SetSprite(OrbSpawner.Instance.orbSprites[10]); break;
+            }*/
 
-        switch (chosenAttackName)
-        {
-            case "Leo": SetSprite(OrbSpawner.Instance.orbSprites[0]); break;
-            case "Virgo": SetSprite(OrbSpawner.Instance.orbSprites[1]); break;
-            case "Saggitarius": SetSprite(OrbSpawner.Instance.orbSprites[2]); break;
-            case "Capricorn": SetSprite(OrbSpawner.Instance.orbSprites[3]); break;
+            switch (chosenAttackName) {
+                case "Leo": SetSprite(OrbSpawner.Instance.orbSprites[0]); break;
+                case "Virgo": SetSprite(OrbSpawner.Instance.orbSprites[1]); break;
+                case "Saggitarius": SetSprite(OrbSpawner.Instance.orbSprites[2]); break;
+                case "Capricorn": SetSprite(OrbSpawner.Instance.orbSprites[3]); break;
+            }
         }
     }
 

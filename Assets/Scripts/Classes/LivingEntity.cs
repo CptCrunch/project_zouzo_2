@@ -105,7 +105,10 @@ public class LivingEntity
     public void GetDamage(float _ammount) {
         if (!stunned || !knockBacked || !knockUped) { instance._animator.SetTrigger("Damage"); }
 
+        instance.ChangeToHitColor(instance.changebackTime);
+
         CustomDebug.Log("<b>" + name + "</b> got <color=red>" + _ammount + " damage</color>","Damage");
+
         currHealth -= _ammount;
         if (_ammount >= maxHealth || currHealth <= 0) { currHealth = 0; instance.Die(); }
     }

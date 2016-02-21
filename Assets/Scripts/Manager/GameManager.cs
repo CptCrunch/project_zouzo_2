@@ -12,46 +12,31 @@ public class GameManager : MonoBehaviour {
     public string[] registerdStages = new string[1];
 
     #region GameManager Variable
-    [Header("Game Rules")]
-
-    [Range(0, 4)]
     public int playerAmmount = 0;
-
-    public float playerMaxHealth = 0;
-
-    [Tooltip("Defines the maximal use of an ability")]
-    public uint abilityLimit;
-
-    [Tooltip("Time between player death and spawn")]
-    public float timeDeathSpawn;
-
-    [Range(0, 200), Tooltip("In Percent (100% = normal Damage")]
+    public int abilityLimit;
     public float damageModifier = 100.0f;
-
     public int lifeLimit;
-
-    [Tooltip("Time in Minutes")]
     public float timeLimit = 10;
-    public float currentTime;
+    private float currentTime;
 
     // Player/Controller Selection
-    [Header("Player Selection")]
     private GameObject[] playerSpawn;
     private int[] randomSpawnOrder = new int[4] { 0, 1, 2, 3 };
-    [Tooltip("Spawnpoints must have this given tag")]
     public string spawnTag;
-
-    [Header("Debug")]
-    public DebugValues Tags;
     #endregion
 
     #region character variables
+    public float playerMaxHealth = 0;
+    public float timeDeathSpawn;
     public PlayerInfo[] playerInfo = new PlayerInfo[0];
     private string[] playerNames;
 
     [HideInInspector] public CharacterPicture[] charPics = new CharacterPicture[4];
     private GameObject[] playerOnStage = new GameObject[4] { null, null, null, null };
     #endregion
+
+    [Header("Debug")]
+    public DebugValues Tags;
 
     void Awake()
     {
@@ -180,9 +165,10 @@ public class GameManager : MonoBehaviour {
         obj.name = axis + "_Player";
     }
 
-    public void PlayerDeath()
+    //TODO: Implement To spawn new player
+    public void PlayerDeath(LivingEntity playerVitals)
     {
-        EndGame();
+        
     }
 
     public void EndGame()

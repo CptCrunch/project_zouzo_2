@@ -44,29 +44,14 @@ MonoBehaviour:
   registerdStages:
   - Prototype_Stage01
   - Prototype_Stage02
-  - Stage_Template
-  playerAmmount: 0
-  playerMaxHealth: 0
+  playerAmmount: 1
   abilityLimit: 0
-  timeDeathSpawn: 0
-  damageModifier: 100
+  damageModifier: 0
   lifeLimit: 3
   timeLimit: 10
-  currentTime: 0
   spawnTag: Player Spawn
-  Tags:
-    Active: 1
-    Main: 1
-    Testing: 1
-    Player: 0
-    Damage: 0
-    Spells: 0
-    Cooldown: 1
-    UI: 0
-    Animation: 1
-    Condition: 1
-    Controles: 0
-    MapFeature: 0
+  playerMaxHealth: 0
+  timeDeathSpawn: 2
   playerInfo:
   - name: Earth
     prefab: {fileID: 183932, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
@@ -78,12 +63,25 @@ MonoBehaviour:
     deathIcon: {fileID: 21300012, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
   - name: Sun
     prefab: {fileID: 132140, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
-    standardSplashart: {fileID: 21300000, guid: 6037ebf26904d6241b77b31011af2c9c,
+    standardSplashart: {fileID: 21300000, guid: 155137b948fdc9845a98436aa11e1cc3,
       type: 3}
-    lockedSplashart: {fileID: 21300000, guid: e882879f46fd9c4468b3557da5f76d54, type: 3}
-    blockedSplashart: {fileID: 21300000, guid: ccf77c4c00f0ec04182c5a25d05310ec, type: 3}
+    lockedSplashart: {fileID: 21300000, guid: 8bf73d55867ca524299a321779c5550a, type: 3}
+    blockedSplashart: {fileID: 21300000, guid: d0d53f9b49aff04459571c69441ef539, type: 3}
     standardIcon: {fileID: 21300022, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
     deathIcon: {fileID: 21300016, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
+  Tags:
+    Active: 1
+    Main: 1
+    Testing: 1
+    Player: 0
+    Damage: 0
+    Spells: 0
+    Cooldown: 0
+    UI: 0
+    Animation: 0
+    Condition: 0
+    Controles: 0
+    MapFeature: 0
 --- !u!114 &11435204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -389,10 +387,10 @@ MonoBehaviour:
     castTime: 0
     duration: 0
     cooldown: .5
-    range: 2
+    range: 1
     targets: 1
     directions: 2
-    travelTime: .300000012
+    travelTime: .100000001
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
