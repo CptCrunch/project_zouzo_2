@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         // set singelton instance
         if (_instance == null) { _instance = this; }
-        
+
         // set playerNames length
         playerNames = new string[playerInfo.Length];
         // set playerNames
@@ -101,26 +101,25 @@ public class GameManager : MonoBehaviour {
         // --- [ set random spawn point order ] ---
         Util.MixArray(randomSpawnOrder);
 
-        /*/ --- [ register player on stage ] ---
-        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            Util.IncludeGameObject(playerOnStage, player);
-        }*/
-
-        /*/ --- [ spawn player ] ---
+        // --- [ spawn player ] ---
         int momSpawn = 0;
         foreach (CharacterPicture player in charPics)
         {
-            Debug.Log(player.Character);
             // check if object isn't null
             if (player != null)
             {
                 momSpawn++;
 
                 // create player
-                Util.IncludeGameObject(playerOnStage, Instantiate(GetPlayerPrefabByName(player.Character), playerSpawn[randomSpawnOrder[momSpawn]].transform.position, Quaternion.identity) as GameObject);
+                Instantiate(GetPlayerPrefabByName(player.Character), playerSpawn[randomSpawnOrder[momSpawn]].transform.position, Quaternion.identity);
             }
-        }*/
+        }
+
+        // --- [ register player on stage ] ---
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            Util.IncludeGameObject(playerOnStage, player);
+        }
     }
 
     private IEnumerator WaitCoroutine()

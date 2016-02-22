@@ -44,6 +44,7 @@ MonoBehaviour:
   registerdStages:
   - Prototype_Stage01
   - Prototype_Stage02
+  - Stage_Template
   playerAmmount: 1
   abilityLimit: 0
   damageModifier: 0
@@ -198,7 +199,7 @@ MonoBehaviour:
     range: 2
     targets: 1
     directions: 2
-    travelTime: .200000003
+    travelTime: 0.2
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
@@ -209,7 +210,7 @@ MonoBehaviour:
     dashTime: 0
     stunTime: 0
     charges: 3
-    chargeCooldown: .5
+    chargeCooldown: 0.5
     timeToGetMaxRange: 0
     minRange: 0
     stickArrowPerCent: 0
@@ -222,15 +223,15 @@ MonoBehaviour:
     range: 4
     targets: 0
     directions: 2
-    travelTime: .200000003
+    travelTime: 0.2
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
     knockBackRange: 0
     knockBackStrenght: 4
-    knockBackTime: .300000012
+    knockBackTime: 0.3
     dashStrenght: 2
-    dashTime: .200000003
+    dashTime: 0.2
     stunTime: 2
     charges: 0
     chargeCooldown: 0
@@ -308,7 +309,7 @@ MonoBehaviour:
     chargeCooldown: 0
     timeToGetMaxRange: 2
     minRange: 3
-    stickArrowPerCent: .5
+    stickArrowPerCent: 0.5
     castSlow: 3
   - name: Capricorn
     damage: 20
@@ -318,7 +319,7 @@ MonoBehaviour:
     range: 1.5
     targets: 0
     directions: 2
-    travelTime: .5
+    travelTime: 0.5
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 3
@@ -386,11 +387,11 @@ MonoBehaviour:
     damage: 10
     castTime: 0
     duration: 0
-    cooldown: .5
+    cooldown: 0.5
     range: 1
     targets: 1
     directions: 2
-    travelTime: .100000001
+    travelTime: 0.1
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
