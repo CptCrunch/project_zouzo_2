@@ -51,7 +51,7 @@ MonoBehaviour:
   lifeLimit: 3
   timeLimit: 10
   spawnTag: Player Spawn
-  playerMaxHealth: 0
+  playerMaxHealth: 100
   timeDeathSpawn: 2
   playerInfo:
   - name: Earth
@@ -199,7 +199,7 @@ MonoBehaviour:
     range: 2
     targets: 1
     directions: 2
-    travelTime: 0.2
+    travelTime: .200000003
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
@@ -210,7 +210,7 @@ MonoBehaviour:
     dashTime: 0
     stunTime: 0
     charges: 3
-    chargeCooldown: 0.5
+    chargeCooldown: .5
     timeToGetMaxRange: 0
     minRange: 0
     stickArrowPerCent: 0
@@ -223,15 +223,15 @@ MonoBehaviour:
     range: 4
     targets: 0
     directions: 2
-    travelTime: 0.2
+    travelTime: .200000003
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
     knockBackRange: 0
     knockBackStrenght: 4
-    knockBackTime: 0.3
+    knockBackTime: .300000012
     dashStrenght: 2
-    dashTime: 0.2
+    dashTime: .200000003
     stunTime: 2
     charges: 0
     chargeCooldown: 0
@@ -309,7 +309,7 @@ MonoBehaviour:
     chargeCooldown: 0
     timeToGetMaxRange: 2
     minRange: 3
-    stickArrowPerCent: 0.5
+    stickArrowPerCent: .5
     castSlow: 3
   - name: Capricorn
     damage: 20
@@ -319,7 +319,7 @@ MonoBehaviour:
     range: 1.5
     targets: 0
     directions: 2
-    travelTime: 0.5
+    travelTime: .5
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 3
@@ -387,11 +387,11 @@ MonoBehaviour:
     damage: 10
     castTime: 0
     duration: 0
-    cooldown: 0.5
+    cooldown: .5
     range: 1
     targets: 1
     directions: 2
-    travelTime: 0.1
+    travelTime: .100000001
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0

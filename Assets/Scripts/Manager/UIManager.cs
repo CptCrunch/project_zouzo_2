@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour {
     public Vector2[] uiPositions = new Vector2[4];
     public GameObject uiPrefab;
     public GameObject[] userInterfaces = new GameObject[4];
+    public Canvas canvas;
 
     private Image[] characterHolder = new Image[4];
 
@@ -29,7 +30,8 @@ public class UIManager : MonoBehaviour {
             if (playerOnStage[i] != null)
             {
                 // create ui
-                GameObject newUI = Instantiate(uiPrefab, uiPositions[i], new Quaternion(0, 0, 0, 0)) as GameObject;
+                GameObject newUI = Instantiate(uiPrefab, uiPositions[i], Quaternion.identity) as GameObject;
+                newUI.transform.SetParent(canvas.transform);
 
                 // add ui to UIs
                 Util.IncludeGameObject(userInterfaces, newUI);
