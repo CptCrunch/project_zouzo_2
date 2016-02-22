@@ -144,7 +144,10 @@ public class GameManagerEditor : Editor {
             if (S.enabled) {
                 string name = S.path.Substring(S.path.LastIndexOf('/') + 1);
                 name = name.Substring(0, name.Length - 6);
-                temp.Add(name);
+                if (name.Contains("Stage"))
+                {
+                    temp.Add(name);
+                }
             }
         }
         return temp.ToArray();
