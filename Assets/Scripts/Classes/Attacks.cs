@@ -40,7 +40,6 @@ public abstract class Attacks {
     {
         this.caster = caster;
         this.playerVitals = caster.GetComponent<Player>().playerVitals;
-        Debug.Log("vitals: " + playerVitals.Name);
         this.playerAbilitiesScript = caster.GetComponent<PlayerAbilities>();
         this.id = id;
         this.name = name;
