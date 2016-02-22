@@ -7,6 +7,14 @@ public class SpellBullet : MonoBehaviour {
     [HideInInspector] public Vector2 spellDir;
     [HideInInspector] public Vector2 startPosition;
     [HideInInspector] public GameObject caster;
+    public Sprite[] bulletSprites = new Sprite[2];
+
+    private SpriteRenderer spriteRenderer;
+    private BoxCollider2D collider;
+
+    private float colliderSiteX;
+    private float colliderSiteY;
+    private float colliderBiggestSide;
 
     private GameObject[] targetsHit = new GameObject[3];
 
@@ -14,33 +22,64 @@ public class SpellBullet : MonoBehaviour {
     {
         // save start position
         startPosition = transform.position;
-	}
-	
-	void Update ()
-    {
+
+        // get spriteRenderer
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
+        // get collider
+        collider = gameObject.GetComponent<BoxCollider2D>();
+
+        // save collider sice
+        colliderSiteX = collider.size.x;
+        colliderSiteY = collider.size.y;
+
+        if (colliderSiteX < colliderSiteY) { colliderBiggestSide = colliderSiteY; }
+        else { colliderBiggestSide = colliderSiteX; }
+
         // set sprit angle
-        switch (Util.Aim8Direction(spellDir))
+        switch (Util.Aim8Direction(new Vector2(spellDir.y, spellDir.x)))
         {
             case "up":
+                collider.size = new Vector2(colliderSiteY, colliderSiteX);
+                spriteRenderer.sprite = bulletSprites[1];
                 break;
             case "upRight":
+                collider.size = new Vector2(colliderBiggestSide, colliderBiggestSide);
+                spriteRenderer.sprite = bulletSprites[2];
+                spriteRenderer.flipX = true;
                 break;
             case "right":
+                spriteRenderer.flipX = true;
                 break;
             case "downRight":
+                collider.size = new Vector2(colliderBiggestSide, colliderBiggestSide);
+                spriteRenderer.sprite = bulletSprites[2];
+                spriteRenderer.flipX = true;
+                spriteRenderer.flipY = true;
                 break;
             case "down":
+                collider.size = new Vector2(colliderSiteY, colliderSiteX);
+                spriteRenderer.sprite = bulletSprites[1];
+                spriteRenderer.flipY = true;
                 break;
             case "downLeft":
+                collider.size = new Vector2(colliderBiggestSide, colliderBiggestSide);
+                spriteRenderer.sprite = bulletSprites[2];
+                spriteRenderer.flipY = true;
                 break;
             case "left":
                 break;
             case "upLeft":
+                collider.size = new Vector2(colliderBiggestSide, colliderBiggestSide);
+                spriteRenderer.sprite = bulletSprites[2];
                 break;
             case "noAim":
                 break;
         }
-
+    }
+	
+	void Update ()
+    {
         // destroy gameObject if it reached its max range
         if (Vector2.Distance(transform.position, startPosition) > usedSpell.Range && usedSpell.Range > 0) { Destroy(gameObject); }
 
@@ -53,7 +92,7 @@ public class SpellBullet : MonoBehaviour {
     void TargetCollision()
     {
         // draw a DebugRay
-        Debug.DrawRay(transform.position, spellDir * (GetComponent<BoxCollider2D>().bounds.size.x / 2 + 0.2f), Color.blue);
+        Debug.DrawRay(transform.position, spellDir * (GetComponent<BoxCollider2D>().bounds.size.x + 0.2f), Color.blue);
         
         // create a raycast
         foreach (RaycastHit2D other in Physics2D.RaycastAll(transform.position, spellDir, GetComponent<BoxCollider2D>().bounds.size.x / 2 + 0.2f))
@@ -110,7 +149,42 @@ public class SpellBullet : MonoBehaviour {
                         // checks if arrow  is diagonal
                         if (spellDir.x != 0 && spellDir.y != 0)
                         {
-                            direction = GetTipeOfHit(spellDir);
+                            direction = GetTipeOfHit();
+
+                            // check if the arrow shoud flip vertical
+                            if (direction == "vertical")
+                            {
+                                collider.size = new Vector2(colliderSiteY, colliderSiteX);
+                                spriteRenderer.sprite = bulletSprites[1];
+                                spriteRenderer.flipX = false;
+
+                                if (Util.Aim8Direction(new Vector2(spellDir.y, spellDir.x)) == "upRight" || Util.Aim8Direction(new Vector2(spellDir.y, spellDir.x)) == "upLeft")
+                                {
+                                    spriteRenderer.flipY = false;
+                                }
+
+                                else
+                                {
+                                    spriteRenderer.flipY = true;
+                                }
+                            }
+
+                            else
+                            {
+                                collider.size = new Vector2(colliderSiteX, colliderSiteY);
+                                spriteRenderer.sprite = bulletSprites[0];
+                                spriteRenderer.flipY = false;
+
+                                if (Util.Aim8Direction(new Vector2(spellDir.y, spellDir.x)) == "upRight" || Util.Aim8Direction(new Vector2(spellDir.y, spellDir.x)) == "downRight")
+                                {
+                                    spriteRenderer.flipX = true;
+                                }
+
+                                else
+                                {
+                                    spriteRenderer.flipX = false;
+                                }
+                            }
                         }
 
                         else
@@ -145,27 +219,36 @@ public class SpellBullet : MonoBehaviour {
         }
     }
 
-    private string GetTipeOfHit(Vector2 _spellDir)
+    private string GetTipeOfHit()
     {
-        // get origen
-        Vector2 origen = new Vector2(transform.position.x + GetComponent<BoxCollider2D>().bounds.size.x / 2 * _spellDir.x,
-                                     transform.position.y + GetComponent<BoxCollider2D>().bounds.size.y / 2 * _spellDir.y);
+        Bounds colliderBounds = GetComponent<BoxCollider2D>().bounds;
+
+        // get collider origen
+        Vector2 origen = new Vector2(colliderBounds.center.x + (colliderBounds.size.x - 0.3f) / 2 * spellDir.x,
+                                     colliderBounds.center.y + (colliderBounds.size.y - 0.3f) / 2 * spellDir.y);
+
+        // make a debu ray for the horizontal axis
+        CustomDebug.DrawLine(origen, origen + new Vector2(0, spellDir.y), Color.red, "Spells");
 
         // ceck if object hit a ceiling or floor
-        foreach (RaycastHit2D hit in Physics2D.RaycastAll(origen, new Vector2(0, _spellDir.y), 0.04f))
+        foreach (RaycastHit2D hit in Physics2D.RaycastAll(origen, new Vector2(0, spellDir.y), 0.5f))
         {
             GameObject objectHit = hit.transform.gameObject;
-
-            if (objectHit != null && objectHit.tag == "Ground") { return "vertical"; }
+            
+            if (objectHit != null && objectHit.tag == "Ground") { Debug.Log(objectHit); return "vertical"; }
         }
 
+        // make a debu ray for the vertical axis
+        CustomDebug.DrawLine(origen, origen + new Vector2(spellDir.x, 0), Color.red, "Spells");
+
         // ceck if object hit a wall
-        foreach (RaycastHit2D hit in Physics2D.RaycastAll(origen, new Vector2(_spellDir.x, 0), 0.04f))
+        foreach (RaycastHit2D hit in Physics2D.RaycastAll(origen, new Vector2(spellDir.x, 0), 0.5f))
         {
             GameObject objectHit = hit.transform.gameObject;
 
             if (objectHit != null && objectHit.tag == "Ground") { return "horizontal"; }
         }
-        return "horizontal";
+
+        return "no hit";
     }
 }
