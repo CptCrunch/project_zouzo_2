@@ -9,3 +9,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Prototyp/Prototype_Stage01.unity
   - enabled: 1
     path: Assets/Scenes/Prototyp/Prototype_Stage02.unity
+  - enabled: 1
+    path: Assets/Scenes/Player_Selection.unity
