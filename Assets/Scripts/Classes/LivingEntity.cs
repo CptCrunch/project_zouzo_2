@@ -48,7 +48,7 @@ public class LivingEntity
     public LivingEntity(GameObject playerObject, string name, float moveSpeed, float slowedSpeed, float maxHealth, int lifes)
     {
         // set maxHealth ( will use maxHealth from Gamerulses )
-        if (GameManager._instance.playerMaxHealth == 0) { this.maxHealth = maxHealth; } 
+        if (GameManager._instance.playerMaxHealth <= 0) { this.maxHealth = maxHealth; } 
         else { this.maxHealth = GameManager._instance.playerMaxHealth; }
 
         // Set Life Limit

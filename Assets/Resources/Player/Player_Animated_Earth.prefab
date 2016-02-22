@@ -110,7 +110,7 @@ MonoBehaviour:
   playerAxis: P1
   name: Earth
   type: Earth
-  maxHealth: 100
+  maxHealth: 20
   lives: 3
   moveSpeed: 8
   slowedSpeed: 3
@@ -203,7 +203,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxHealth
-      value: 100
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

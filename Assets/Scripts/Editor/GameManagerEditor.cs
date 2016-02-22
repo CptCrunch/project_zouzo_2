@@ -42,6 +42,8 @@ public class GameManagerEditor : Editor {
             myTarget.damageModifier = CreateFloatSlider("Damage Modifier", "In Percent (100% = normal Damage)", myTarget.damageModifier, 0, 200);
             //Life Limit
             myTarget.lifeLimit = EditorGUILayout.IntField(new GUIContent("Life Limit", "Defines the maximal lifes for every player"), myTarget.lifeLimit);
+            //Life lose per Death
+            myTarget.lifeLosePerDeath = EditorGUILayout.IntField(new GUIContent("Life lose per Death", "Defines how many lifes are subtracted per death"), myTarget.lifeLosePerDeath);
             //Time Limit
             myTarget.timeLimit = EditorGUILayout.FloatField(new GUIContent("Time Limit", "Time in Minutes"), myTarget.timeLimit);
             //Player Spawn Tag
