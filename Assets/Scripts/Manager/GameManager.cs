@@ -190,7 +190,7 @@ public class GameManager : MonoBehaviour {
         //Disable the new object for the animation
         go.GetComponent<Player>().gamerulesDisabled = true;
         //Transfer the abilies to the new player
-        go.GetComponent<Player>().playerAbilitiesScript = playerGO.GetComponent<Player>().playerAbilitiesScript;
+        //go.GetComponent<Player>().playerAbilitiesScript = playerGO.GetComponent<Player>().playerAbilitiesScript;
         //Trigger spawn animation
         go.GetComponent<Player>()._animator.SetTrigger("Spawn");
         yield return new WaitForSeconds(1.5f);
