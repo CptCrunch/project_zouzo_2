@@ -14,7 +14,7 @@ public class LivingEntity
     private float slowedSpeed;
     private float currSpeed;
     private float launchSpeed;
-    private float maxHealth;
+    private int maxHealth;
     private float currHealth;
     private int life;
 
@@ -45,18 +45,12 @@ public class LivingEntity
     Thread KnockBackThread;
     Thread DashThread;
 
-    public LivingEntity(GameObject playerObject, string name, float moveSpeed, float slowedSpeed, float maxHealth, int lifes)
+    public LivingEntity(GameObject playerObject, string name, float moveSpeed, float slowedSpeed, int maxHealth, int lifes)
     {
-        // set maxHealth ( will use maxHealth from Gamerulses )
-        if (GameManager._instance.playerMaxHealth == 0) { this.maxHealth = maxHealth; } 
-        else { this.maxHealth = GameManager._instance.playerMaxHealth; }
-
-        // Set Life Limit
-        if(GameManager._instance.lifeLimit == 0) { this.life = lifes; } 
-        else { this.life = GameManager._instance.lifeLimit; }
-
         instance = playerObject.GetComponent<Player>();
 
+        this.life = lifes;
+        this.maxHealth = maxHealth;
         this.name = name;
         this.moveSpeed = moveSpeed;
         currSpeed = moveSpeed;
@@ -259,7 +253,8 @@ public class LivingEntity
         }
     }
 
-    private void KnockUp(float _height) {
+    private void KnockUp(float _height)
+    {
         // per cent of knockup
         float knockUpPerCent = 1f;
         knockUpPerCent *= 4;
@@ -284,6 +279,7 @@ public class LivingEntity
 
         // save time
         knockUpTime = inAirTime;
+        Debug.Log(inAirTime);
 
         // wait till player isn't knockUped
         Thread.Sleep(Convert.ToInt32(Util.ConvertSecondsToMilliseconds(Convert.ToDouble(inAirTime * knockUpPerCent))));
