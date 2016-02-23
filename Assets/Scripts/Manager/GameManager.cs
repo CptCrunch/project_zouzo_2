@@ -6,9 +6,8 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager _instance;
 
-    [HideInInspector] public bool Running;
+    public bool Running;
 
-    [Tooltip("all scenes the GameManager script will detect as a stage")]
     public string[] registerdStages = new string[1];
 
     #region GameManager Variable
@@ -33,12 +32,13 @@ public class GameManager : MonoBehaviour {
     public PlayerInfo[] playerInfo = new PlayerInfo[0];
     private string[] playerNames;
 
-    [HideInInspector] public CharacterPicture[] charPics = new CharacterPicture[4];
+    public CharacterPicture[] charPics = new CharacterPicture[4];
     public GameObject[] playerOnStage = new GameObject[4] { null, null, null, null };
     #endregion
 
     [Header("Debug")]
     public DebugValues Tags;
+    public bool showFPS = false;
 
     void Awake()
     {

@@ -8,6 +8,8 @@ public class GameManagerEditor : Editor {
 
     bool showStages, showPlayer, showGameOptions, showDebug = false;
 
+    
+
     public override void OnInspectorGUI() {
         serializedObject.Update();
         GameManager myTarget = (GameManager)target;
@@ -49,10 +51,18 @@ public class GameManagerEditor : Editor {
             //Player Spawn Tag
             myTarget.spawnTag = EditorGUILayout.TextField(new GUIContent("Spawnpoint Tag", "Spawnpoints must have this given tag"), myTarget.spawnTag);
 
+            //Register Players on stage
             if(GUILayout.Button("Register Player on Stage"))
             {
-                myTarget.playerOnStage = GameObject.FindGameObjectsWithTag("Player");
-                CustomDebug.LogArray(myTarget.playerOnStage);
+                GameObject[] stagePlayers = GameObject.FindGameObjectsWithTag("Player");
+
+                for(int i = 0; i < stagePlayers.Length; i++) {
+                    myTarget.charPics[i] = new CharacterPicture("Testing", i, i + 1);
+                    Debug.Log("<color=red>Player "+ stagePlayers[i].name +" registered</color>");
+                }
+
+                myTarget.playerOnStage = stagePlayers;
+
             }
 
             EditorGUILayout.EndVertical();
@@ -117,6 +127,15 @@ public class GameManagerEditor : Editor {
             EditorGUILayout.BeginHorizontal();
             myTarget.Tags.MapFeature = CreateBoolCheck("MapFeature", "", myTarget.Tags.MapFeature);
             EditorGUILayout.EndVertical();
+
+            if (GUILayout.Button("Show FPS")) {
+                if (myTarget.showFPS)
+                    myTarget.showFPS = false;
+                else
+                    myTarget.showFPS = true;
+            }
+
+            EditorGUILayout.HelpBox("Press F to enable the FPS-Counter in game!", MessageType.Info);
         }
     }
 

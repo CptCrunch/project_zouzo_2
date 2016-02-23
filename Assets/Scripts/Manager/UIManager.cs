@@ -11,6 +11,14 @@ public class UIManager : MonoBehaviour {
 
     private Image[] characterHolder = new Image[4];
 
+    // -- [ FPS Counter ] --
+    public Text fpsCount;
+    int frameCount = 0;
+    float dt = 0.0f;
+    float fps = 0.0f;
+    float updateRate = 4.0f;
+    //----------------------
+ 
     void Awake()
     {
         if (instance == null) { instance = this; }
@@ -45,7 +53,31 @@ public class UIManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-	}
+        // -- [ FPS Counter ] --
+        if(Input.GetKeyDown(KeyCode.F)) {
+            if (GameManager._instance.showFPS)
+                GameManager._instance.showFPS = false;
+            else
+                GameManager._instance.showFPS = true;
+        }
+
+        if (GameManager._instance.showFPS) {
+            fpsCount.enabled = true;
+
+            frameCount++;
+            dt += Time.deltaTime;
+            if (dt > 1.0f / updateRate) {
+                fps = frameCount / dt;
+                frameCount = 0;
+                dt -= 1.0f / updateRate;
+            }
+
+            fpsCount.text = Mathf.RoundToInt(fps).ToString();
+        } else {
+            fpsCount.enabled = false;
+        }
+        //----------------------
+    }
 
     public UIManager Instance { get { return instance; } }
 }

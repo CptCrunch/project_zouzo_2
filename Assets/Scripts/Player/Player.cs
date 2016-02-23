@@ -100,27 +100,26 @@ public class Player : MonoBehaviour
         // create playerVitals
         playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth, lives);
 
-        // --- [ set name and axis ] ---
-        foreach (CharacterPicture player in GameManager._instance.charPics)
-        {
-            // check if object isn't null
-            if (player != null)
-            {
-                // check player type
-                if (player.Character == type)
-                {
-                    // set name and axis
-                    name = player.Name;
-                    playerAxis = player.Axis;
-                }
-            }
-        }
+        
     }
 
     void Start()
     {
         controller = GetComponent<Controller2D>();
         _animator = GetComponent<Animator>();
+
+        // --- [ set name and axis ] ---
+        foreach (CharacterPicture player in GameManager._instance.charPics) {
+            // check if object isn't null
+            if (player != null) {
+                // check player type
+                if (player.Character == type) {
+                    // set name and axis
+                    name = player.Name;
+                    playerAxis = player.Axis;
+                }
+            }
+        }
 
         // check if axis is set correctly
         if (playerAxis == "KB" || playerAxis == "P1" || playerAxis == "P2" || playerAxis == "P3" || playerAxis == "P4") { }
