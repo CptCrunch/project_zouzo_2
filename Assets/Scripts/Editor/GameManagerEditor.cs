@@ -59,7 +59,7 @@ public class GameManagerEditor : Editor {
         if (showPlayer) {
             EditorGUILayout.BeginVertical();
             //Player Max Health
-            myTarget.playerMaxHealth = EditorGUILayout.FloatField("Player Max Health", myTarget.playerMaxHealth);
+            myTarget.playerMaxHealth = EditorGUILayout.IntField("Player Max Health", myTarget.playerMaxHealth);
             //Ability Limit
             myTarget.abilityLimit = EditorGUILayout.IntField(new GUIContent("Ability Limit", "Defines the maximal use of an ability"), myTarget.abilityLimit);
             //Time Death/Spawn
