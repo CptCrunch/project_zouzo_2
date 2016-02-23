@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     #region character variables
-    public float playerMaxHealth = 0;
+    public int playerMaxHealth = 0;
     public float timeDeathSpawn;
     public PlayerInfo[] playerInfo = new PlayerInfo[0];
     private string[] playerNames;
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         // set singelton instance
         if (_instance == null) { _instance = this; }
+        else { Debug.LogError("GameManager has already been instantiated"); Destroy(gameObject); }
 
         // set playerNames length
         playerNames = new string[playerInfo.Length];

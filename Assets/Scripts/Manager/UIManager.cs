@@ -6,8 +6,6 @@ public class UIManager : MonoBehaviour {
 
     private static UIManager instance;
 
-    public Vector2[] uiPositions = new Vector2[4];
-    public GameObject uiPrefab;
     public GameObject[] userInterfaces = new GameObject[4];
     public Canvas canvas;
 
@@ -16,7 +14,7 @@ public class UIManager : MonoBehaviour {
     void Awake()
     {
         if (instance == null) { instance = this; }
-        else { Debug.LogError("UIManager has already been instantiated"); }
+        else { Debug.LogError("UIManager has already been instantiated"); Destroy(gameObject); }
     }
 
     void Start ()
@@ -29,14 +27,11 @@ public class UIManager : MonoBehaviour {
             // check if entry is filled
             if (playerOnStage[i] != null)
             {
-                // create ui
-                GameObject newUI = Instantiate(uiPrefab, uiPositions[i], Quaternion.identity) as GameObject;
-                newUI.transform.SetParent(canvas.transform);
-
-                // add ui to UIs
-                Util.IncludeGameObject(userInterfaces, newUI);
+                // enable UI
+                playerOnStage[i].active = true;
             }
         }
+
         // #set player Icons
 
         /*/ --- [ set player Icons ] ---
