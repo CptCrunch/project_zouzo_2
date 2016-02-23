@@ -13,7 +13,7 @@ public class Leo : Attacks {
     private int attackAnim = 0;
     private float animReset = 0.0f;
 
-    public Leo(GameObject caster, float damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir, int maxCharge, float maxChargeCooldown) : base(
+    public Leo(GameObject caster, int damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir, int maxCharge, float maxChargeCooldown) : base(
         caster, 5, "leo", "meele", targets, damage, castTime, delay, duration, cooldown, range, spellDir)
     {
         instanceCount++;

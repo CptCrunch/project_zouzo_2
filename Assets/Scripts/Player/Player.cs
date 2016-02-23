@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     
     public string name = "";
     public string type;
-    public float maxHealth;
+    public int maxHealth;
     public int lives = 3;
     public float moveSpeed = 6; 
     public float slowedSpeed = 3;
@@ -93,6 +93,9 @@ public class Player : MonoBehaviour
     void Awake()
     {
         playerAbilitiesScript = gameObject.GetComponent<PlayerAbilities>();
+
+        if (GameManager._instance != null && GameManager._instance.playerMaxHealth != 0) { maxHealth = GameManager._instance.playerMaxHealth; }
+        if (GameManager._instance != null && GameManager._instance.lifeLimit != 0) { lives = GameManager._instance.lifeLimit; }
 
         // create playerVitals
         playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth, lives);

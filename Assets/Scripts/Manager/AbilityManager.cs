@@ -78,7 +78,7 @@ public class AbilityManager : MonoBehaviour
 public struct Abilities
 {
     public string name;
-    public float damage;
+    public int damage;
     [Tooltip("the time it takes the spell to start [time in seconds]")]
     public float castTime;
     public float duration;

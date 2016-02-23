@@ -10,7 +10,7 @@ public abstract class Attacks {
     private uint id;
     private string name;
     private string type;
-    private float damage;
+    private int damage;
     private float castTime;
     private float toTravelTime;
     private float traveltTime;
@@ -36,7 +36,7 @@ public abstract class Attacks {
     public Attacks() { }
     
     //Constructor with Heal
-    public Attacks(GameObject caster, uint id, string name, string type, int maxTargets, float damage, float castTime, float delay, float duration, float cooldown, float range, uint spellDir)
+    public Attacks(GameObject caster, uint id, string name, string type, int maxTargets, int damage, float castTime, float delay, float duration, float cooldown, float range, uint spellDir)
     {
         this.caster = caster;
         this.playerVitals = caster.GetComponent<Player>().playerVitals;
@@ -63,7 +63,7 @@ public abstract class Attacks {
     public uint ID { get { return id; } }
     public string Name { get { return name; } }
     public string Type { get { return type; } }
-    public float Damage { get { return damage; } set { this.damage = value; } }
+    public int Damage { get { return damage; } set { this.damage = value; } }
     public float CastTime { get { return castTime; } }
     public float ToTravelTime { get { return toTravelTime;  } }
     public bool ShallTravel { get { return shallTravel; } set { shallTravel = value; } }
