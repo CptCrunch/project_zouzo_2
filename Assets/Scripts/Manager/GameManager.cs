@@ -15,7 +15,9 @@ public class GameManager : MonoBehaviour {
     public int playerAmmount = 0;
     public int abilityLimit;
     public float damageModifier = 100.0f;
-    public int lifeLimit;
+    public int lifeLimit = 3;
+    public int lifeLosePerDeath = 1;
+    private int[] lifeLimitPlayer = new int[2] { 0, 0 };
     public float timeLimit = 10;
     private float currentTime;
 
@@ -26,7 +28,7 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     #region character variables
-    public float playerMaxHealth = 0;
+    public int playerMaxHealth = 0;
     public float timeDeathSpawn;
     public PlayerInfo[] playerInfo = new PlayerInfo[0];
     private string[] playerNames;
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         // set singelton instance
         if (_instance == null) { _instance = this; }
+        else { Debug.LogError("GameManager has already been instantiated"); Destroy(gameObject); }
 
         // set playerNames length
         playerNames = new string[playerInfo.Length];
@@ -73,6 +76,9 @@ public class GameManager : MonoBehaviour {
 
         // check if scene is a stage and start OnStage metod if so
         if (IsStage()) { OnStage(); }
+
+        //Set Life Limit for every player
+        for(int i = 0; i < lifeLimitPlayer.Length; i++) { lifeLimitPlayer[i] = lifeLimit; }
     }
 
     void Update()
@@ -124,16 +130,17 @@ public class GameManager : MonoBehaviour {
 
     private IEnumerator WaitCoroutine()
     {
+        //Deactivate all registered players and trigger their spawn animation
         foreach(GameObject go in playerOnStage)
         {
             if (go != null)
             {
                 go.GetComponent<Player>().gamerulesDisabled = true;
-                go.GetComponent<Player>().flipEnable = false;
                 go.GetComponent<Player>()._animator.SetTrigger("Spawn");
             }
         }
 
+        //Count down before the game starts
         //TODO: Implement UI Count
         CustomDebug.Log(3, "Testing");
         yield return new WaitForSeconds(1);
@@ -144,17 +151,18 @@ public class GameManager : MonoBehaviour {
         CustomDebug.Log("Go", "Testing");
         yield return new WaitForSeconds(1);
 
+        //Enable all registered players 
         foreach (GameObject go in playerOnStage)
         {            
             if (go != null)
             {
                 go.GetComponent<Player>().gamerulesDisabled = false;
-                go.GetComponent<Player>().flipEnable = true;
-                CustomDebug.Log(go.name + ", " + go.GetComponent<Player>().gamerulesDisabled, "Testing");
             }
         }
 
+        //Set running to true => Game starts!
         Running = true;
+
         yield return null;
     }
     
@@ -164,11 +172,33 @@ public class GameManager : MonoBehaviour {
         obj.name = axis + "_Player";
     }
 
-    //TODO: Implement To spawn new player
-    public void PlayerDeath(LivingEntity playerVitals)
-    {
-        
+    #region Spawn new player
+    // --- [ Spawn new player ] ---
+    public void SpawnNewPlayer(GameObject playerGO) {
+        StartCoroutine(ISpawnNewPlayer(playerGO));
     }
+
+    private IEnumerator ISpawnNewPlayer(GameObject playerGO) {
+        //Subtract Lifes
+        switch(playerGO.GetComponent<Player>().type) {
+            case "Earth": lifeLimitPlayer[0] -= lifeLosePerDeath; CustomDebug.Log("Lifes:" + lifeLimitPlayer[0], "Testing"); break;
+            case "Sun": lifeLimitPlayer[1] -= lifeLosePerDeath; CustomDebug.Log("Lifes:" + lifeLimitPlayer[0], "Testing"); break;
+        }
+
+        //Instantiate new player
+        GameObject go = Instantiate(GetPlayerPrefabByName(playerGO.GetComponent<Player>().type), playerSpawn[Random.Range(0, playerSpawn.Length)].transform.position, Quaternion.identity) as GameObject;
+        //Disable the new object for the animation
+        go.GetComponent<Player>().gamerulesDisabled = true;
+        //Transfer the abilies to the new player
+        go.GetComponent<Player>().playerAbilitiesScript = playerGO.GetComponent<Player>().playerAbilitiesScript;
+        //Trigger spawn animation
+        go.GetComponent<Player>()._animator.SetTrigger("Spawn");
+        yield return new WaitForSeconds(1.5f);
+        //Enable the gameobject
+        go.GetComponent<Player>().gamerulesDisabled = false;
+        yield return null;
+    }
+    #endregion
 
     public void EndGame()
     {

@@ -39,7 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb26b35122e8cc040b6ed01b182e11cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: Stage_Template
+  levelToLoad: Prototype_Stage02
   notConnectedImg:
   - {fileID: 21300000, guid: 411ab82fd61930d4091caa6f51f446cd, type: 3}
   - {fileID: 21300000, guid: 6543147c7447dd843beff37bbf109e34, type: 3}
