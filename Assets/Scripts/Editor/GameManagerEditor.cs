@@ -46,6 +46,13 @@ public class GameManagerEditor : Editor {
             myTarget.timeLimit = EditorGUILayout.FloatField(new GUIContent("Time Limit", "Time in Minutes"), myTarget.timeLimit);
             //Player Spawn Tag
             myTarget.spawnTag = EditorGUILayout.TextField(new GUIContent("Spawnpoint Tag", "Spawnpoints must have this given tag"), myTarget.spawnTag);
+
+            if(GUILayout.Button("Register Player on Stage"))
+            {
+                myTarget.playerOnStage = GameObject.FindGameObjectsWithTag("Player");
+                CustomDebug.LogArray(myTarget.playerOnStage);
+            }
+
             EditorGUILayout.EndVertical();
         }
         //----------------------------------------------------------------------------

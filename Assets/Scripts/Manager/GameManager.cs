@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
     private string[] playerNames;
 
     [HideInInspector] public CharacterPicture[] charPics = new CharacterPicture[4];
-    private GameObject[] playerOnStage = new GameObject[4] { null, null, null, null };
+    public GameObject[] playerOnStage = new GameObject[4] { null, null, null, null };
     #endregion
 
     [Header("Debug")]
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < playerInfo.Length; i++) { playerNames[i] = playerInfo[i].name; }
     }
 
-    public GameObject[] PlayerOnStage { get { return playerOnStage; } }
+    public GameObject[] PlayerOnStage { get { return playerOnStage; } set { PlayerOnStage = value; } }
 
     void Start()
     {
