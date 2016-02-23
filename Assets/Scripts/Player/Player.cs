@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Condition Variables
-    [HideInInspector] public bool disabled = false;
+    private bool disabled = false;
     [HideInInspector] public bool gamerulesDisabled = false;
     #endregion
 
@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
     public float changebackTime = 0.2f;
     #endregion
 
-    [HideInInspector] public PlayerAbilities playerAbilitiesScript;
+    private PlayerAbilities playerAbilitiesScript;
     #endregion
 
     #region Getter&Setter
@@ -93,8 +93,6 @@ public class Player : MonoBehaviour
     void Awake()
     {
         playerAbilitiesScript = gameObject.GetComponent<PlayerAbilities>();
-        _animator = GetComponent<Animator>();
-        controller = GetComponent<Controller2D>();
 
         if (GameManager._instance != null && GameManager._instance.playerMaxHealth != 0) { maxHealth = GameManager._instance.playerMaxHealth; }
         if (GameManager._instance != null && GameManager._instance.lifeLimit != 0) { lives = GameManager._instance.lifeLimit; }
@@ -121,6 +119,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        controller = GetComponent<Controller2D>();
+        _animator = GetComponent<Animator>();
 
         // check if axis is set correctly
         if (playerAxis == "KB" || playerAxis == "P1" || playerAxis == "P2" || playerAxis == "P3" || playerAxis == "P4") { }
@@ -203,6 +203,7 @@ public class Player : MonoBehaviour
 
         // Get movement input ( controler / keyboard )
         input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
+        _animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw(playerAxis + "_Horizontal")));
 
         // check for movement
         Movement();
@@ -229,9 +230,6 @@ public class Player : MonoBehaviour
         // checkif player can move
         if (!disabled)
         {
-            //Movement Animation
-            _animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw(playerAxis + "_Horizontal")));
-
             // --- [ horizontal movement ] ---
             // - get current movementspeed
             float targetVelocityX = input.x * playerVitals.MoveSpeed;
@@ -427,26 +425,19 @@ public class Player : MonoBehaviour
     #region Die
     public void Die()
     {
-        //Trigger animation once
         if (!dead) {
             CustomDebug.Log("Died", "Testing");
-            //Animation trigger the Coroutine IDie()
             _animator.SetTrigger("Death");
             dead = true;
         }
     }
 
     private IEnumerator IDie() {
-        //Disable the animator
         GetComponent<Animator>().enabled = false;
-        //Disable the movement
         gamerulesDisabled = true;
-        //Wait till the new player gets spawned
+        flipEnable = false;
         yield return new WaitForSeconds(GameManager._instance.timeDeathSpawn);
-        //Call spawn function in the game manager
-        GameManager._instance.SpawnNewPlayer(gameObject);
-        gamerulesDisabled = false;
-        //Destroy the current object
+        //GameManager._instance.PlayerDeath(playerVitals);
         Destroy(gameObject);
         yield return null;
     }
