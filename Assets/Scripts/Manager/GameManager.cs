@@ -14,10 +14,13 @@ public class GameManager : MonoBehaviour {
     public int playerAmmount = 0;
     public int abilityLimit;
     public float damageModifier = 100.0f;
+    //Life ---------------------
     public int lifeLimit = 3;
     public int lifeLosePerDeath = 1;
-    private int[] lifeLimitPlayer = new int[2] { 0, 0 };
-    public float timeLimit = 10;
+    public int[] lifeLimitPlayer = new int[2] { 0, 0 };
+    //Timer---------------------
+    public float timeLimit = 60f;
+    //--------------------------
     private float currentTime;
 
     // Player/Controller Selection
@@ -70,8 +73,9 @@ public class GameManager : MonoBehaviour {
         CustomDebug.EnableTag("UI", Tags.UI);
         CustomDebug.EnableTag("Animation", Tags.Animation);
         CustomDebug.EnableTag("Condition", Tags.Condition);
-        CustomDebug.EnableTag("Contrioles", Tags.Controles);
+        CustomDebug.EnableTag("Controles", Tags.Controles);
         CustomDebug.EnableTag("MapFeature", Tags.MapFeature);
+        CustomDebug.EnableTag("Time", Tags.Time);
         #endregion
 
         // check if scene is a stage and start OnStage metod if so
@@ -85,9 +89,21 @@ public class GameManager : MonoBehaviour {
     {
         if(Running)
         {
-            currentTime = timeLimit - Time.deltaTime;
-            if (currentTime <= 0) EndGame();
+            timeLimit -= Time.deltaTime;
+            CustomDebug.Log(timeLimit.ToString("f0"), "Time");
+            //UIManager.Instance.SetTimer(timeLimit);
+
+            if(timeLimit <= 0) {
+                EndGame();
+            }
+
+            foreach (int i in lifeLimitPlayer) {
+                if (i <= 0) {
+                    EndGame();
+                }
+            }
         }
+
     }
 
     // Create All Player when the level loads
@@ -190,7 +206,7 @@ public class GameManager : MonoBehaviour {
         //Disable the new object for the animation
         go.GetComponent<Player>().gamerulesDisabled = true;
         //Transfer the abilies to the new player
-        //go.GetComponent<Player>().playerAbilitiesScript = playerGO.GetComponent<Player>().playerAbilitiesScript;
+        go.GetComponent<Player>().playerAbilitiesScript = playerGO.GetComponent<Player>().playerAbilitiesScript;
         //Trigger spawn animation
         go.GetComponent<Player>()._animator.SetTrigger("Spawn");
         yield return new WaitForSeconds(1.5f);
@@ -202,12 +218,13 @@ public class GameManager : MonoBehaviour {
 
     public void EndGame()
     {
+        CustomDebug.Log("<color=red> Game End </color>", "Main");
         Running = false;
     }
 
     public bool IsStage()
     {
-        // --- [ stage chack ] ---
+        // --- [ stage check ] ---
         // check if scene is a registered stage
         foreach (string stage in registerdStages) { if (stage == Application.loadedLevelName) { return true; } }
         // continue if scene is registered

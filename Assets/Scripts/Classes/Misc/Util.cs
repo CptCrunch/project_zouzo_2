@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -95,6 +96,35 @@ public static class Util{
         scale.y *= -1;
         _object.transform.localScale = scale;
     }
+
+    #region Editor Functions
+    public static float CreateFloatSlider(string labelName, string tooltip, float sliderPosition, float leftValue, float rightValue) {
+        GUILayout.BeginHorizontal();
+        GUILayout.Label(new GUIContent(labelName, tooltip));
+        sliderPosition = EditorGUILayout.Slider(sliderPosition, leftValue, rightValue, null);
+        GUILayout.EndHorizontal();
+
+        return sliderPosition;
+    }
+
+    public static int CreateIntSlider(string labelName, string tooltip, int sliderPosition, int leftValue, int rightValue) {
+        GUILayout.BeginHorizontal();
+        GUILayout.Label(new GUIContent(labelName, tooltip));
+        sliderPosition = EditorGUILayout.IntSlider(sliderPosition, leftValue, rightValue, null);
+        GUILayout.EndHorizontal();
+
+        return sliderPosition;
+    }
+
+    public static bool CreateBoolCheck(string labelName, string tooltip, bool value) {
+        GUILayout.BeginHorizontal();
+        GUILayout.Label(new GUIContent(labelName, tooltip), GUILayout.MaxWidth(64));
+        value = EditorGUILayout.Toggle(value, GUILayout.MaxWidth(32));
+        GUILayout.EndHorizontal();
+
+        return value;
+    }
+    #endregion
 
     #region Test Joysick Axis
     public static bool LeftJoystickUp(string axis) 

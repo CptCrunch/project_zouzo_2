@@ -18,7 +18,11 @@ public class UIManager : MonoBehaviour {
     float fps = 0.0f;
     float updateRate = 4.0f;
     //----------------------
- 
+
+    // -- [ Time Display ] --
+    public Text timer;
+    //-----------------------
+
     void Awake()
     {
         if (instance == null) { instance = this; }
@@ -79,5 +83,11 @@ public class UIManager : MonoBehaviour {
         //----------------------
     }
 
-    public UIManager Instance { get { return instance; } }
+    // -- [ Timer ] --
+    public void SetTimer(float t) {
+        if(timer != null)
+            timer.text = t.ToString("f0");
+    }
+
+    public static UIManager Instance { get { return instance; } }
 }
