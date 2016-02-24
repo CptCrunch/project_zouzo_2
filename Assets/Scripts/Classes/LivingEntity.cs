@@ -264,22 +264,22 @@ public class LivingEntity
         int currIndex = knockUpIndex;
 
         // get in air time
-        float inAirTime = Mathf.Sqrt(_height / 2 / -instance.gravity);
+        float inAirTime = Mathf.Sqrt(Mathf.Abs(_height / 2 / -instance.gravity));
 
         // get in strength
         float knockUpStrenght = 2 * -instance.gravity + inAirTime;
 
         // set player knockUped
         knockUped = true;
-        CustomDebug.Log("<b>" + name + "</b> is <color=magenta>KnockUped</color> for <color=magenta>" + inAirTime + "</color> sec", "Condition");
+        CustomDebug.Log("<b>" + name + "</b> is <color=magenta>KnockUped</color> for <color=magenta>" + inAirTime * knockUpPerCent + "</color> sec", "Condition");
 
         // add velocity
         instance.velocity.x = 0;
-        instance.velocity.y = knockUpStrenght * inAirTime;
+        if (_height < 0) { instance.velocity.y = -knockUpStrenght * inAirTime; }
+        else { instance.velocity.y = knockUpStrenght * inAirTime; }
 
         // save time
         knockUpTime = inAirTime;
-        Debug.Log(inAirTime);
 
         // wait till player isn't knockUped
         Thread.Sleep(Convert.ToInt32(Util.ConvertSecondsToMilliseconds(Convert.ToDouble(inAirTime * knockUpPerCent))));

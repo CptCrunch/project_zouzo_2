@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 7d623be2cbc10a64a9062c89d3284696
-timeCreated: 1455619844
+timeCreated: 1456223800
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -68,127 +68,93 @@ TextureImporter:
     - name: IngameUI_Sheet_new_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 292
+        x: 0
+        y: 352
         width: 160
-        height: 53
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -80, y: 26.5}
-        - {x: -80, y: -26.5}
-        - {x: 80, y: -26.5}
-        - {x: 80, y: 26.5}
+      - - {x: -80, y: 28}
+        - {x: -80, y: -29}
+        - {x: 78, y: -29}
+        - {x: 80, y: -28}
+        - {x: 80, y: 28}
     - name: IngameUI_Sheet_new_1
       rect:
         serializedVersion: 2
-        x: 1
-        y: 164
-        width: 251
-        height: 121
+        x: 0
+        y: 224
+        width: 256
+        height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -115.5, y: 60.5}
-        - {x: -125.5, y: 57.5}
-        - {x: -125.5, y: -60.5}
-        - {x: 116.5, y: -60.5}
-        - {x: 125.5, y: -50.5}
-        - {x: 125.5, y: 43.5}
-        - {x: 11.5, y: 60.5}
+      - - {x: -22, y: 43}
+        - {x: -48, y: 62}
+        - {x: -105, y: 62}
+        - {x: -128, y: 53}
+        - {x: -128, y: -63}
+        - {x: 113, y: -63}
+        - {x: 127, y: -54}
+        - {x: 127, y: 43}
     - name: IngameUI_Sheet_new_2
       rect:
         serializedVersion: 2
-        x: 22
-        y: 143
-        width: 219
-        height: 17
+        x: 0
+        y: 192
+        width: 224
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -80, y: 26.5}
-        - {x: -80, y: -26.5}
-        - {x: 80, y: -26.5}
-        - {x: 80, y: 26.5}
-        - {x: -80, y: 26.5}
-        - {x: -80, y: -26.5}
-        - {x: 80, y: -26.5}
-        - {x: 80, y: 26.5}
-        - {x: -80, y: 26.5}
-        - {x: -80, y: -26.5}
-        - {x: 80, y: -26.5}
-        - {x: 80, y: 26.5}
-      - - {x: -80, y: 26.5}
-        - {x: -80, y: -26.5}
-        - {x: 80, y: -26.5}
-        - {x: 80, y: 26.5}
-        - {x: -80, y: 26.5}
-        - {x: -80, y: -26.5}
-        - {x: 80, y: -26.5}
-        - {x: 80, y: 26.5}
-      - - {x: -80, y: 26.5}
-        - {x: -80, y: -26.5}
-        - {x: 80, y: -26.5}
-        - {x: 80, y: 26.5}
+      - - {x: -112, y: -8}
+        - {x: -111, y: -11}
+        - {x: 111, y: -11}
+        - {x: 111, y: 10}
+        - {x: -112, y: 10}
     - name: IngameUI_Sheet_new_3
       rect:
         serializedVersion: 2
-        x: 22
-        y: 123
-        width: 217
-        height: 17
+        x: 0
+        y: 160
+        width: 224
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -80, y: 26.5}
-        - {x: -80, y: -26.5}
-        - {x: 80, y: -26.5}
-        - {x: 80, y: 26.5}
-        - {x: -80, y: 26.5}
-        - {x: -80, y: -26.5}
-        - {x: 80, y: -26.5}
-        - {x: 80, y: 26.5}
-        - {x: -80, y: 26.5}
-        - {x: -80, y: -26.5}
-        - {x: 80, y: -26.5}
-        - {x: 80, y: 26.5}
-        - {x: -80, y: 26.5}
-        - {x: -80, y: -26.5}
-        - {x: 80, y: -26.5}
-        - {x: 80, y: 26.5}
-      - - {x: -80, y: 26.5}
-        - {x: -80, y: -26.5}
-        - {x: 80, y: -26.5}
-        - {x: 80, y: 26.5}
-        - {x: -80, y: 26.5}
-        - {x: -80, y: -26.5}
-        - {x: 80, y: -26.5}
-        - {x: 80, y: 26.5}
-        - {x: -80, y: 26.5}
-        - {x: -80, y: -26.5}
-        - {x: 80, y: -26.5}
-        - {x: 80, y: 26.5}
-      - - {x: -80, y: 26.5}
-        - {x: -80, y: -26.5}
-        - {x: 80, y: -26.5}
-        - {x: 80, y: 26.5}
-        - {x: -80, y: 26.5}
-        - {x: -80, y: -26.5}
-        - {x: 80, y: -26.5}
-        - {x: 80, y: 26.5}
-      - - {x: -80, y: 26.5}
-        - {x: -80, y: -26.5}
-        - {x: 80, y: -26.5}
-        - {x: 80, y: 26.5}
+      - - {x: -109, y: 11}
+        - {x: -111, y: 9}
+        - {x: -111, y: -8}
+        - {x: -109, y: -10}
+        - {x: 107, y: -10}
+        - {x: 110, y: -7}
+        - {x: 110, y: 8}
+        - {x: 107, y: 11}
+    - name: IngameUI_Sheet_new_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 68
+        width: 62
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -31, y: 30}
+        - {x: -31, y: -30}
+        - {x: 31, y: -30}
+        - {x: 31, y: 30}
     - name: IngameUI_Sheet_new_5
       rect:
         serializedVersion: 2
         x: 0
-        y: 60
+        y: 8
         width: 62
         height: 60
       alignment: 0
@@ -202,8 +168,8 @@ TextureImporter:
     - name: IngameUI_Sheet_new_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 62
+        y: 68
         width: 62
         height: 60
       alignment: 0
@@ -218,7 +184,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 62
-        y: 0
+        y: 8
         width: 62
         height: 60
       alignment: 0
@@ -233,7 +199,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 124
-        y: 0
+        y: 68
         width: 62
         height: 60
       alignment: 0
@@ -247,8 +213,8 @@ TextureImporter:
     - name: IngameUI_Sheet_new_9
       rect:
         serializedVersion: 2
-        x: 186
-        y: 0
+        x: 124
+        y: 8
         width: 62
         height: 60
       alignment: 0
@@ -262,8 +228,8 @@ TextureImporter:
     - name: IngameUI_Sheet_new_10
       rect:
         serializedVersion: 2
-        x: 62
-        y: 60
+        x: 186
+        y: 68
         width: 62
         height: 60
       alignment: 0
@@ -277,8 +243,8 @@ TextureImporter:
     - name: IngameUI_Sheet_new_11
       rect:
         serializedVersion: 2
-        x: 124
-        y: 60
+        x: 186
+        y: 8
         width: 62
         height: 60
       alignment: 0
@@ -292,60 +258,39 @@ TextureImporter:
     - name: IngameUI_Sheet_new_12
       rect:
         serializedVersion: 2
-        x: 186
-        y: 60
-        width: 62
-        height: 60
+        x: 256
+        y: 160
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -31, y: 30}
-        - {x: -31, y: -30}
-        - {x: 31, y: -30}
-        - {x: 31, y: 30}
+      - - {x: -31, y: 38}
+        - {x: -31, y: -32}
+        - {x: -16, y: -33}
+        - {x: 38, y: -32}
+        - {x: 38, y: 28}
+        - {x: 37, y: 38}
     - name: IngameUI_Sheet_new_13
       rect:
         serializedVersion: 2
         x: 256
-        y: 74
-        width: 72
-        height: 72
+        y: 64
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -34, y: 33}
-        - {x: -34, y: -36}
-        - {x: 35, y: -36}
-        - {x: 35, y: 21}
-        - {x: 34, y: 33}
-      - - {x: 1, y: 2}
-        - {x: 3, y: 6}
-        - {x: 19, y: -27}
-        - {x: -11, y: -25}
-    - name: IngameUI_Sheet_new_14
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 72
-        height: 72
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -19, y: 29}
-        - {x: -30, y: 25}
-        - {x: -30, y: -35}
-        - {x: -25, y: -36}
-        - {x: 35, y: -36}
-        - {x: 35, y: 26}
-        - {x: 24, y: 29}
-      - - {x: -17, y: 10}
-        - {x: -1, y: 5}
-        - {x: 19, y: 7}
-        - {x: -10, y: -24}
+      - - {x: -15, y: 34}
+        - {x: -31, y: 31}
+        - {x: -31, y: -30}
+        - {x: -24, y: -31}
+        - {x: 33, y: -31}
+        - {x: 34, y: -27}
+        - {x: 34, y: 29}
+        - {x: 23, y: 34}
     outline: []
   spritePackingTag: 
   userData: 

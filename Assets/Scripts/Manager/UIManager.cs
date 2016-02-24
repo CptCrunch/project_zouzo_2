@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour {
     void Awake()
     {
         if (instance == null) { instance = this; }
-        else { Debug.LogError("UIManager has already been instantiated"); Destroy(gameObject); }
+        else { Debug.LogWarning("UIManager has already been instantiated"); Destroy(gameObject); }
     }
 
     void Start ()
@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour {
             if (playerOnStage[i] != null)
             {
                 // enable UI
-                playerOnStage[i].active = true;
+                userInterfaces[i].active = true;
             }
         }
 

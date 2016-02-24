@@ -401,7 +401,7 @@ public class Player : MonoBehaviour
                 {
                     print("Same");
                     playerAbilitiesScript.abilityArray[i] = attack;
-                    CustomDebug.LogArray(playerAbilitiesScript.abilityArray);
+                    //CustomDebug.LogArray(playerAbilitiesScript.abilityArray);
                     return;
                 }
             }
@@ -413,7 +413,7 @@ public class Player : MonoBehaviour
                     playerAbilitiesScript.abilityArray[1] = attack;
                     playerAbilitiesScript.abilityArray[2] = firstSpell;
                     playerAbilitiesScript.abilityArray[3] = secondSpell;
-                    CustomDebug.LogArray(playerAbilitiesScript.abilityArray);
+                    //CustomDebug.LogArray(playerAbilitiesScript.abilityArray);
                     return;
                 }
             }
