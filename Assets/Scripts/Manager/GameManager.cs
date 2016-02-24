@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         // set singelton instance
         if (_instance == null) { _instance = this; }
-        else { Debug.LogError("GameManager has already been instantiated"); Destroy(gameObject); }
+        else { Debug.LogWarning("GameManager has already been instantiated"); Destroy(gameObject); }
 
         // set playerNames length
         playerNames = new string[playerInfo.Length];
@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour {
             if (go != null)
             {
                 go.GetComponent<Player>().gamerulesDisabled = true;
-                go.GetComponent<Player>()._animator.SetTrigger("Spawn");
+                //go.GetComponent<Player>()._animator.SetTrigger("Spawn");
             }
         }
 

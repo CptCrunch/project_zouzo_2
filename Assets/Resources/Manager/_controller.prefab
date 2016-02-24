@@ -49,9 +49,10 @@ MonoBehaviour:
   abilityLimit: 0
   damageModifier: 0
   lifeLimit: 3
+  lifeLosePerDeath: 1
   timeLimit: 10
   spawnTag: Player Spawn
-  playerMaxHealth: 100
+  playerMaxHealth: 0
   timeDeathSpawn: 2
   playerInfo:
   - name: Earth
@@ -60,16 +61,21 @@ MonoBehaviour:
       type: 3}
     lockedSplashart: {fileID: 21300000, guid: f15d4a5ef4a9df1419928360f4f6b5f3, type: 3}
     blockedSplashart: {fileID: 21300000, guid: 05e18ba4c3dd2a34d80c05428a970266, type: 3}
-    standardIcon: {fileID: 21300010, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
-    deathIcon: {fileID: 21300012, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
+    standardIcon: {fileID: 21300008, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
+    deathIcon: {fileID: 21300010, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
   - name: Sun
     prefab: {fileID: 132140, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
     standardSplashart: {fileID: 21300000, guid: 155137b948fdc9845a98436aa11e1cc3,
       type: 3}
     lockedSplashart: {fileID: 21300000, guid: 8bf73d55867ca524299a321779c5550a, type: 3}
     blockedSplashart: {fileID: 21300000, guid: d0d53f9b49aff04459571c69441ef539, type: 3}
-    standardIcon: {fileID: 21300022, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
-    deathIcon: {fileID: 21300016, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
+    standardIcon: {fileID: 21300016, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
+    deathIcon: {fileID: 21300018, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
+  playerOnStage:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Tags:
     Active: 1
     Main: 1
@@ -192,14 +198,14 @@ MonoBehaviour:
     stickArrowPerCent: 0
     castSlow: 0
   - name: Leo
-    damage: 5
+    damage: 0
     castTime: 0
     duration: 0
     cooldown: 2
     range: 2
     targets: 1
     directions: 2
-    travelTime: .200000003
+    travelTime: 0.2
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
@@ -210,28 +216,28 @@ MonoBehaviour:
     dashTime: 0
     stunTime: 0
     charges: 3
-    chargeCooldown: .5
+    chargeCooldown: 0.5
     timeToGetMaxRange: 0
     minRange: 0
     stickArrowPerCent: 0
     castSlow: 0
   - name: Virgo
-    damage: 10
+    damage: 0
     castTime: 0
     duration: 0
     cooldown: 2
     range: 4
     targets: 0
     directions: 2
-    travelTime: .200000003
+    travelTime: 0.2
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
     knockBackRange: 0
     knockBackStrenght: 4
-    knockBackTime: .300000012
+    knockBackTime: 0.3
     dashStrenght: 2
-    dashTime: .200000003
+    dashTime: 0.2
     stunTime: 2
     charges: 0
     chargeCooldown: 0
@@ -288,7 +294,7 @@ MonoBehaviour:
     stickArrowPerCent: 0
     castSlow: 0
   - name: Sagittarius
-    damage: 500
+    damage: 0
     castTime: 0
     duration: 0
     cooldown: 2
@@ -309,17 +315,17 @@ MonoBehaviour:
     chargeCooldown: 0
     timeToGetMaxRange: 2
     minRange: 3
-    stickArrowPerCent: .5
+    stickArrowPerCent: 0.5
     castSlow: 3
   - name: Capricorn
-    damage: 20
+    damage: 0
     castTime: 0
     duration: 0
     cooldown: 1
     range: 1.5
     targets: 0
     directions: 2
-    travelTime: .5
+    travelTime: 0.5
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 3
@@ -384,14 +390,14 @@ MonoBehaviour:
     stickArrowPerCent: 0
     castSlow: 0
   - name: Basic
-    damage: 10
+    damage: 0
     castTime: 0
     duration: 0
-    cooldown: .5
+    cooldown: 0.5
     range: 1
     targets: 1
     directions: 2
-    travelTime: .100000001
+    travelTime: 0.1
     bullet: {fileID: 0}
     bulletSpeed: 0
     knockUpHeght: 0
