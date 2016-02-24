@@ -47,11 +47,13 @@ MonoBehaviour:
   - Stage_Template
   playerAmmount: 1
   abilityLimit: 0
-  damageModifier: 0
+  damageModifier: 100
   lifeLimit: 3
+  lifeLosePerDeath: 1
+  lifeLimitPlayer: 0000000000000000
   timeLimit: 10
   spawnTag: Player Spawn
-  playerMaxHealth: 100
+  playerMaxHealth: 20
   timeDeathSpawn: 2
   playerInfo:
   - name: Earth
@@ -70,6 +72,11 @@ MonoBehaviour:
     blockedSplashart: {fileID: 21300000, guid: d0d53f9b49aff04459571c69441ef539, type: 3}
     standardIcon: {fileID: 21300022, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
     deathIcon: {fileID: 21300016, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
+  playerOnStage:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Tags:
     Active: 1
     Main: 1
@@ -83,6 +90,8 @@ MonoBehaviour:
     Condition: 0
     Controles: 0
     MapFeature: 0
+    Time: 1
+  showFPS: 0
 --- !u!114 &11435204
 MonoBehaviour:
   m_ObjectHideFlags: 1

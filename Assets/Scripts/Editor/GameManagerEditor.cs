@@ -7,12 +7,11 @@ using System.Collections.Generic;
 public class GameManagerEditor : Editor {
 
     bool showStages, showPlayer, showGameOptions, showDebug = false;
-
+    GameManager myTarget;
     
-
     public override void OnInspectorGUI() {
         serializedObject.Update();
-        GameManager myTarget = (GameManager)target;
+        myTarget = (GameManager)target;
 
         //Registerd Stages Array------------------------------------------------------
         showStages = EditorGUILayout.Foldout(showStages, "Stage Options");
@@ -39,14 +38,14 @@ public class GameManagerEditor : Editor {
         if (showGameOptions) {
             EditorGUILayout.BeginVertical();
             //Player Ammount Slider
-            myTarget.playerAmmount = CreateIntSlider("Player Ammount","Maximum ammount of Player", myTarget.playerAmmount, 1, 4);
+            myTarget.playerAmmount = Util.CreateIntSlider("Player Ammount","Maximum ammount of Player", myTarget.playerAmmount, 1, 4);
             //Damage Modifier Slider
-            myTarget.damageModifier = CreateFloatSlider("Damage Modifier", "In Percent (100% = normal Damage)", myTarget.damageModifier, 0, 200);
+            myTarget.damageModifier = Util.CreateFloatSlider("Damage Modifier", "In Percent (100% = normal Damage)", 100.0f, 0, 200);
             //Life Limit
             myTarget.lifeLimit = EditorGUILayout.IntField(new GUIContent("Life Limit", "Defines the maximal lifes for every player"), myTarget.lifeLimit);
             //Life lose per Death
             myTarget.lifeLosePerDeath = EditorGUILayout.IntField(new GUIContent("Life lose per Death", "Defines how many lifes are subtracted per death"), myTarget.lifeLosePerDeath);
-            //Time Limit
+            //Time Limit 
             myTarget.timeLimit = EditorGUILayout.FloatField(new GUIContent("Time Limit", "Time in Minutes"), myTarget.timeLimit);
             //Player Spawn Tag
             myTarget.spawnTag = EditorGUILayout.TextField(new GUIContent("Spawnpoint Tag", "Spawnpoints must have this given tag"), myTarget.spawnTag);
@@ -58,7 +57,7 @@ public class GameManagerEditor : Editor {
 
                 for(int i = 0; i < stagePlayers.Length; i++) {
                     myTarget.charPics[i] = new CharacterPicture("Testing", i, i + 1);
-                    Debug.Log("<color=red>Player "+ stagePlayers[i].name +" registered</color>");
+                    Debug.Log("<color=green>Player "+ stagePlayers[i].name +" registered</color>");
                 }
 
                 myTarget.playerOnStage = stagePlayers;
@@ -101,31 +100,32 @@ public class GameManagerEditor : Editor {
         showDebug = EditorGUILayout.Foldout(showDebug, "Debug Options");
         if (showDebug) {
             EditorGUILayout.BeginVertical();
-            myTarget.Tags.Active = CreateBoolCheck("Active", "", myTarget.Tags.Active);
+            myTarget.Tags.Active = Util.CreateBoolCheck("Active", "", myTarget.Tags.Active);
             EditorGUILayout.Space();
 
             EditorGUILayout.BeginHorizontal();
-            myTarget.Tags.Main = CreateBoolCheck("Main", "", myTarget.Tags.Main);
-            myTarget.Tags.Testing = CreateBoolCheck("Testing", "", myTarget.Tags.Testing);
+            myTarget.Tags.Main = Util.CreateBoolCheck("Main", "", myTarget.Tags.Main);
+            myTarget.Tags.Testing = Util.CreateBoolCheck("Testing", "", myTarget.Tags.Testing);
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
-            myTarget.Tags.Player = CreateBoolCheck("Player", "", myTarget.Tags.Player);
-            myTarget.Tags.Damage = CreateBoolCheck("Damage", "", myTarget.Tags.Damage);
+            myTarget.Tags.Player = Util.CreateBoolCheck("Player", "", myTarget.Tags.Player);
+            myTarget.Tags.Damage = Util.CreateBoolCheck("Damage", "", myTarget.Tags.Damage);
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
-            myTarget.Tags.Spells = CreateBoolCheck("Spells", "", myTarget.Tags.Spells);
-            myTarget.Tags.Cooldown = CreateBoolCheck("Cooldown", "", myTarget.Tags.Cooldown);
+            myTarget.Tags.Spells = Util.CreateBoolCheck("Spells", "", myTarget.Tags.Spells);
+            myTarget.Tags.Cooldown = Util.CreateBoolCheck("Cooldown", "", myTarget.Tags.Cooldown);
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
-            myTarget.Tags.UI = CreateBoolCheck("UI", "", myTarget.Tags.UI);
-            myTarget.Tags.Animation = CreateBoolCheck("Animation", "", myTarget.Tags.Animation);
+            myTarget.Tags.UI = Util.CreateBoolCheck("UI", "", myTarget.Tags.UI);
+            myTarget.Tags.Animation = Util.CreateBoolCheck("Animation", "", myTarget.Tags.Animation);
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
-            myTarget.Tags.Condition = CreateBoolCheck("Condition", "", myTarget.Tags.Condition);
-            myTarget.Tags.Controles = CreateBoolCheck("Controles", "", myTarget.Tags.Controles);
+            myTarget.Tags.Condition = Util.CreateBoolCheck("Condition", "", myTarget.Tags.Condition);
+            myTarget.Tags.Controles = Util.CreateBoolCheck("Controles", "", myTarget.Tags.Controles);
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
-            myTarget.Tags.MapFeature = CreateBoolCheck("MapFeature", "", myTarget.Tags.MapFeature);
+            myTarget.Tags.MapFeature = Util.CreateBoolCheck("MapFeature", "", myTarget.Tags.MapFeature);
+            myTarget.Tags.Time = Util.CreateBoolCheck("Time", "", myTarget.Tags.Time);
             EditorGUILayout.EndVertical();
 
             if (GUILayout.Button("Show FPS")) {
@@ -134,37 +134,12 @@ public class GameManagerEditor : Editor {
                 else
                     myTarget.showFPS = true;
             }
-
             EditorGUILayout.HelpBox("Press F to enable the FPS-Counter in game!", MessageType.Info);
         }
+        
     }
 
-    private bool CreateBoolCheck(string labelName, string tooltip, bool value) {
-        GUILayout.BeginHorizontal();
-        GUILayout.Label(new GUIContent(labelName, tooltip), GUILayout.MaxWidth(64));
-        value = EditorGUILayout.Toggle(value, GUILayout.MaxWidth(32));
-        GUILayout.EndHorizontal();
-
-        return value;
-    }
-
-    private float CreateFloatSlider(string labelName, string tooltip, float sliderPosition, float leftValue, float rightValue) {
-        GUILayout.BeginHorizontal();
-        GUILayout.Label(new GUIContent(labelName, tooltip));
-        sliderPosition = EditorGUILayout.Slider(sliderPosition, leftValue, rightValue, null);
-        GUILayout.EndHorizontal();
-
-        return sliderPosition;
-    }
-
-    private int CreateIntSlider(string labelName, string tooltip, int sliderPosition, int leftValue, int rightValue) {
-        GUILayout.BeginHorizontal();
-        GUILayout.Label(new GUIContent(labelName, tooltip));
-        sliderPosition = EditorGUILayout.IntSlider(sliderPosition, leftValue, rightValue, null);
-        GUILayout.EndHorizontal();
-
-        return sliderPosition;
-    }
+    
 
     private static string[] ReadNames() {
         List<string> temp = new List<string>();
@@ -180,4 +155,5 @@ public class GameManagerEditor : Editor {
         }
         return temp.ToArray();
     }
+
 }

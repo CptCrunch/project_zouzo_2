@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
     public float changebackTime = 0.2f;
     #endregion
 
-    private PlayerAbilities playerAbilitiesScript;
+    public PlayerAbilities playerAbilitiesScript;
     #endregion
 
     #region Getter&Setter
@@ -92,6 +92,9 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
+        controller = GetComponent<Controller2D>();
+        _animator = GetComponent<Animator>();
+
         playerAbilitiesScript = gameObject.GetComponent<PlayerAbilities>();
 
         if (GameManager._instance != null && GameManager._instance.playerMaxHealth != 0) { maxHealth = GameManager._instance.playerMaxHealth; }
@@ -100,14 +103,10 @@ public class Player : MonoBehaviour
         // create playerVitals
         playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth, lives);
 
-        
     }
 
     void Start()
     {
-        controller = GetComponent<Controller2D>();
-        _animator = GetComponent<Animator>();
-
         // --- [ set name and axis ] ---
         foreach (CharacterPicture player in GameManager._instance.charPics) {
             // check if object isn't null
@@ -202,7 +201,6 @@ public class Player : MonoBehaviour
 
         // Get movement input ( controler / keyboard )
         input = new Vector2(Input.GetAxisRaw(playerAxis + "_Horizontal"), Input.GetAxisRaw(playerAxis + "_Vertical"));
-        _animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw(playerAxis + "_Horizontal")));
 
         // check for movement
         Movement();
@@ -229,6 +227,7 @@ public class Player : MonoBehaviour
         // checkif player can move
         if (!disabled)
         {
+            _animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw(playerAxis + "_Horizontal")));
             // --- [ horizontal movement ] ---
             // - get current movementspeed
             float targetVelocityX = input.x * playerVitals.MoveSpeed;
@@ -436,7 +435,19 @@ public class Player : MonoBehaviour
         gamerulesDisabled = true;
         flipEnable = false;
         yield return new WaitForSeconds(GameManager._instance.timeDeathSpawn);
-        //GameManager._instance.PlayerDeath(playerVitals);
+        switch(type) {
+            case "Earth":
+                if(GameManager._instance.lifeLimitPlayer[0] > 0) {
+                    GameManager._instance.SpawnNewPlayer(gameObject);
+                }
+                break;
+            case "Sun":
+                if (GameManager._instance.lifeLimitPlayer[1] > 0) {
+                    GameManager._instance.SpawnNewPlayer(gameObject);
+                }
+                break;
+        }
+       
         Destroy(gameObject);
         yield return null;
     }

@@ -20,7 +20,8 @@ namespace UnityEngine
             {"Animation", false},
             {"Condition", false},
             {"Controles", false},
-            {"MapFeature", false}
+            {"MapFeature", false},
+            {"Time", false }
         };
 
         #region Extras

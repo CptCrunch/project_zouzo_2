@@ -17,8 +17,9 @@ public class DebugValues
     public bool Condition;
     public bool Controles;
     public bool MapFeature;
+    public bool Time;
 
-    public DebugValues(bool active, bool Main, bool Testing, bool Player, bool Damage, bool Spells, bool Cooldown, bool UI, bool Animation, bool Condition, bool Controles, bool MapFeature)
+    public DebugValues(bool active, bool Main, bool Testing, bool Player, bool Damage, bool Spells, bool Cooldown, bool UI, bool Animation, bool Condition, bool Controles, bool MapFeature, bool Time)
     {
         this.Active = active;
         this.Main = Main;
@@ -32,6 +33,7 @@ public class DebugValues
         this.Condition = Condition;
         this.Controles = Controles;
         this.MapFeature = MapFeature;
+        this.Time = Time;
     }
 
     public void SetAllValues(bool value)
@@ -48,6 +50,7 @@ public class DebugValues
         CustomDebug.EnableTag("Condition", value);
         CustomDebug.EnableTag("Controles", value);
         CustomDebug.EnableTag("MapFeature", value);
+        CustomDebug.EnableTag("Time", value);
     }
 
     public void ResetValues()
@@ -64,5 +67,6 @@ public class DebugValues
         CustomDebug.EnableTag("Condition", false);
         CustomDebug.EnableTag("Controles", false);
         CustomDebug.EnableTag("MapFeature", false);
+        CustomDebug.EnableTag("Time", false);
     }
 }

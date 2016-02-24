@@ -213,6 +213,7 @@ public class GridEditor : Editor
         return null;
     }
 
+    
     void FillArea(Vector3 _StartPosition, Vector3 _EndPosition)
     {
 
@@ -298,5 +299,6 @@ public class GridEditor : Editor
         } while (currentXTileNumber < numberOfTilesToFill.x);
 
     }
+   
 }
 #endif
