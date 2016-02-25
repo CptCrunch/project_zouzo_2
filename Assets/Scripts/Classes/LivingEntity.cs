@@ -10,6 +10,7 @@ public class LivingEntity
     private Player instance;
 
     private string name;
+    private string character;
     private float moveSpeed;
     private float slowedSpeed;
     private float currSpeed;
@@ -45,13 +46,14 @@ public class LivingEntity
     Thread KnockBackThread;
     Thread DashThread;
 
-    public LivingEntity(GameObject playerObject, string name, float moveSpeed, float slowedSpeed, int maxHealth, int lifes)
+    public LivingEntity(GameObject playerObject, string name, string character, float moveSpeed, float slowedSpeed, int maxHealth, int lifes)
     {
         instance = playerObject.GetComponent<Player>();
 
         this.life = lifes;
         this.maxHealth = maxHealth;
         this.name = name;
+        this.character = character;
         this.moveSpeed = moveSpeed;
         currSpeed = moveSpeed;
         this.slowedSpeed = slowedSpeed;
@@ -62,6 +64,7 @@ public class LivingEntity
     #region Get & Set
     public float MoveSpeed { get { return currSpeed; } }
     public string Name { get { return name; } }
+    public string Character { get { return character; } }
     public float CurrHealth { get { return currHealth; } }
 
     public bool Stunned { get { return stunned; } }
