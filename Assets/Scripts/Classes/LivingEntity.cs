@@ -66,6 +66,7 @@ public class LivingEntity
     public string Name { get { return name; } }
     public string Character { get { return character; } }
     public float CurrHealth { get { return currHealth; } }
+    public float MaxHealth { get { return maxHealth; } }
 
     public bool Stunned { get { return stunned; } }
     public bool Slowed
@@ -104,9 +105,10 @@ public class LivingEntity
 
         instance.ChangeToHitColor(instance.changebackTime);
 
-        CustomDebug.Log("<b>" + name + "</b> got <color=red>" + _ammount + " damage</color>","Damage");
-
         currHealth -= _ammount;
+
+        CustomDebug.Log("<b>" + name + "</b> got <color=red>" + _ammount + " damage</color>, now has " + currHealth + " health","Damage");
+
         if (_ammount >= maxHealth || currHealth <= 0) { currHealth = 0; instance.Die(); }
     }
 

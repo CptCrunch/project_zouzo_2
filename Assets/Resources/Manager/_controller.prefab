@@ -53,7 +53,7 @@ MonoBehaviour:
   lifeLimitPlayer: 0000000000000000
   timeLimit: 10
   spawnTag: Player Spawn
-  playerMaxHealth: 20
+  playerMaxHealth: 100
   timeDeathSpawn: 2
   playerInfo:
   - name: Earth
@@ -112,6 +112,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -136,6 +137,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -160,6 +162,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -184,6 +187,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -208,6 +212,10 @@ MonoBehaviour:
     range: 2
     targets: 1
     directions: 2
+    icons:
+    - {fileID: 21300004, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
+    - {fileID: 21300006, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
+    - {fileID: 21300008, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
     travelTime: 0.2
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -232,6 +240,8 @@ MonoBehaviour:
     range: 4
     targets: 0
     directions: 2
+    icons:
+    - {fileID: 21300012, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
     travelTime: 0.2
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -256,6 +266,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -280,6 +291,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -304,6 +316,8 @@ MonoBehaviour:
     range: 6
     targets: 0
     directions: 8
+    icons:
+    - {fileID: 21300010, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
     travelTime: 0
     bullet: {fileID: 193644, guid: cd83b1fd26d5b2b408c90360880b7752, type: 2}
     bulletSpeed: 20
@@ -328,6 +342,9 @@ MonoBehaviour:
     range: 1.5
     targets: 0
     directions: 2
+    icons:
+    - {fileID: 21300000, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
+    - {fileID: 21300002, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
     travelTime: 0.5
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -352,6 +369,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -376,6 +394,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -400,6 +419,7 @@ MonoBehaviour:
     range: 1
     targets: 1
     directions: 2
+    icons: []
     travelTime: 0.1
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -425,6 +445,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -449,6 +470,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -473,6 +495,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -497,6 +520,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -521,6 +545,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -545,6 +570,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -569,6 +595,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -593,6 +620,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -617,6 +645,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -641,6 +670,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -665,6 +695,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -689,6 +720,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -713,6 +745,7 @@ MonoBehaviour:
     range: 0
     targets: 0
     directions: 0
+    icons: []
     travelTime: 0
     bullet: {fileID: 0}
     bulletSpeed: 0

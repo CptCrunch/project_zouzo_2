@@ -10,8 +10,8 @@ public class Capricorn : Attacks {
     private float knockBackStrenght;
     private bool airCast = false;
 
-    public Capricorn(GameObject caster, int damage, float castTime, float travleTime, float duration, float cooldown, float range, int targets, uint spellDir, float height, float knockBackRange, float knockBackStrenght) : base(
-        caster, 10, "capricorn", "CC", targets, damage, castTime, travleTime, duration, cooldown, range, spellDir)
+    public Capricorn(GameObject caster, Sprite[] icons, int damage, float castTime, float travleTime, float duration, float cooldown, float range, int targets, uint spellDir, float height, float knockBackRange, float knockBackStrenght) : base(
+        caster, 10, icons, "capricorn", "CC", targets, damage, castTime, travleTime, duration, cooldown, range, spellDir)
     {
         this.height = height;
         this.knockBackRange = knockBackRange;

@@ -111,7 +111,7 @@ MonoBehaviour:
   playerAxis: KB
   name: Earth
   type: Earth
-  maxHealth: 20
+  maxHealth: 100
   lives: 3
   moveSpeed: 8
   slowedSpeed: 3
@@ -136,6 +136,7 @@ MonoBehaviour:
   flipEnable: 1
   hitColor: {r: 0.9117647, g: 0.2547578, b: 0.2547578, a: 1}
   changebackTime: 0.2
+  playerAbilitiesScript: {fileID: 0}
 --- !u!212 &21200258
 SpriteRenderer:
   m_ObjectHideFlags: 1

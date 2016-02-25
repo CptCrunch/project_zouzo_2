@@ -8,6 +8,7 @@ public abstract class Attacks {
     private PlayerAbilities playerAbilitiesScript;
 
     private uint id;
+    private Sprite[] icons;
     private string name;
     private string type;
     private int damage;
@@ -36,12 +37,13 @@ public abstract class Attacks {
     public Attacks() { }
     
     //Constructor with Heal
-    public Attacks(GameObject caster, uint id, string name, string type, int maxTargets, int damage, float castTime, float delay, float duration, float cooldown, float range, uint spellDir)
+    public Attacks(GameObject caster, uint id, Sprite[] icons, string name, string type, int maxTargets, int damage, float castTime, float delay, float duration, float cooldown, float range, uint spellDir)
     {
         this.caster = caster;
         this.playerVitals = caster.GetComponent<Player>().playerVitals;
         this.playerAbilitiesScript = caster.GetComponent<PlayerAbilities>();
         this.id = id;
+        this.icons = icons;
         this.name = name;
         this.type = type;
         this.maxTargets = maxTargets;
@@ -60,6 +62,7 @@ public abstract class Attacks {
     public GameObject Caster { get { return caster; } }
     public LivingEntity PlayerVitals { get { return playerVitals; } }
     public PlayerAbilities PlayerAbilitiesScript { get { return playerAbilitiesScript; } }
+    public Sprite[] Icons { get { return icons; } }
     public uint ID { get { return id; } }
     public string Name { get { return name; } }
     public string Type { get { return type; } }
