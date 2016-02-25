@@ -20,7 +20,7 @@ public class PlayerAbilities : MonoBehaviour {
         abilityArray[0] = AbilityManager.Instance.CreateBasic(gameObject);          // basic
         abilityArray[1] = AbilityManager.Instance.CreateSaggitarius(gameObject);    // spell_1
         abilityArray[2] = AbilityManager.Instance.CreateCapricorn(gameObject);      // spell_2
-        abilityArray[3] = AbilityManager.Instance.CreateLeo(gameObject);            // spell_3
+        abilityArray[3] = AbilityManager.Instance.CreateVirgo(gameObject);          // spell_3
     }
 
     void Update()

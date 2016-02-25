@@ -229,10 +229,13 @@ public class Player : MonoBehaviour
         {
             _animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw(playerAxis + "_Horizontal")));
             // --- [ horizontal movement ] ---
-            // - get current movementspeed
+            // get current movementspeed
             float targetVelocityX = input.x * playerVitals.MoveSpeed;
-            // - move player
-            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+            // move player
+            if ((input.x < 0 && !controller.collisions.left) || (input.x > 0 && !controller.collisions.right))
+            {
+                velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+            }
 
             // find out on which side the player is walling
             int wallDirX = (controller.collisions.left) ? -1 : 1;
@@ -399,7 +402,7 @@ public class Player : MonoBehaviour
                 {
                     print("Same");
                     playerAbilitiesScript.abilityArray[i] = attack;
-                    CustomDebug.LogArray(playerAbilitiesScript.abilityArray);
+                    //CustomDebug.LogArray(playerAbilitiesScript.abilityArray);
                     return;
                 }
             }
@@ -411,7 +414,7 @@ public class Player : MonoBehaviour
                     playerAbilitiesScript.abilityArray[1] = attack;
                     playerAbilitiesScript.abilityArray[2] = firstSpell;
                     playerAbilitiesScript.abilityArray[3] = secondSpell;
-                    CustomDebug.LogArray(playerAbilitiesScript.abilityArray);
+                    //CustomDebug.LogArray(playerAbilitiesScript.abilityArray);
                     return;
                 }
             }
