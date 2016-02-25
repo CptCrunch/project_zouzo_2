@@ -232,10 +232,10 @@ public class Player : MonoBehaviour
             // get current movementspeed
             float targetVelocityX = input.x * playerVitals.MoveSpeed;
             // move player
-            if ((input.x < 0 && !controller.collisions.left) || (input.x > 0 && !controller.collisions.right))
-            {
-                velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
-            }
+            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+
+            // kock player away from wall
+            if ((input.x < 0 && controller.collisions.left) || (input.x > 0 && controller.collisions.right)) { velocity.x = -input.x; }
 
             // find out on which side the player is walling
             int wallDirX = (controller.collisions.left) ? -1 : 1;
