@@ -37,6 +37,12 @@ public class UIManager : MonoBehaviour {
                 // enable UI
                 userInterfaces[i].active = true;
             }
+
+            else
+            {
+                // disable UI
+                userInterfaces[i].active = false;
+            }
         }
 
         // --- [ set player Icons ] ---
@@ -108,26 +114,28 @@ public class UIManager : MonoBehaviour {
 
                     if (ability.CurrCooldown > 0)
                     {
-                        spellIcons[o].transform.GetChild(0).gameObject.active = true;
-                        spellIcons[o].transform.GetChild(0).gameObject.GetComponent<Text>().text = ability.CurrCooldown.ToString();
-                    }
-
-                    else
-                    {
-                        if (spellIcons[o].transform.GetChild(0).gameObject.active) { spellIcons[o].transform.GetChild(0).gameObject.active = false; }
-                    }
-
-                    if (ability.ID == 5)
-                    {
-                        Leo leo = (Leo)ability;
-                        if (!spellIcons[o].transform.GetChild(1).gameObject.active) { spellIcons[o].transform.GetChild(1).gameObject.active = true; }
-                        spellIcons[o].transform.GetChild(1).gameObject.GetComponent<Text>().text = leo.CurrCharge.ToString();
+                        spellIcons[o].transform.GetChild(1).gameObject.active = true;
+                        spellIcons[o].transform.GetChild(1).gameObject.GetComponent<Text>().text = ability.CurrCooldown.ToString();
                     }
 
                     else
                     {
                         if (spellIcons[o].transform.GetChild(1).gameObject.active) { spellIcons[o].transform.GetChild(1).gameObject.active = false; }
                     }
+
+                    if (ability.ID == 5)
+                    {
+                        Leo leo = (Leo)ability;
+                        if (!spellIcons[o].transform.GetChild(2).gameObject.active) { spellIcons[o].transform.GetChild(2).gameObject.active = true; }
+                        spellIcons[o].transform.GetChild(2).gameObject.GetComponent<Text>().text = leo.CurrCharge.ToString();
+                    }
+
+                    else
+                    {
+                        if (spellIcons[o].transform.GetChild(2).gameObject.active) { spellIcons[o].transform.GetChild(2).gameObject.active = false; }
+                    }
+
+                    spellIcons[o].transform.GetChild(0).gameObject.GetComponent<Scrollbar>().size = ability.CurrCooldown / ability.MaxCooldown;
                 }
             }
         }
