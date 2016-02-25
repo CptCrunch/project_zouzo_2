@@ -10,7 +10,6 @@ public class Leo : Attacks {
     private float currChargeCooldown;
     private bool castDisable = false;
 
-    private int attackAnim = 0;
     private float animReset = 0.0f;
 
     public Leo(GameObject caster, Sprite[] icons, int damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir, int maxCharge, float maxChargeCooldown) : base(
@@ -30,8 +29,8 @@ public class Leo : Attacks {
             IsStarted = true;
 
             // set animation
-            attackAnim++;
-            Caster.GetComponent<Animator>().SetInteger("LeoAttack", attackAnim);
+            Caster.GetComponent<Animator>().SetInteger("LeoAttack", spellCount + 1);
+            if (spellCount < maxCharge - 1) { spellCount++; }
             Caster.GetComponent<Animator>().SetTrigger("LeoTrigger");
             animReset = 1.0f;
             CustomDebug.Log("<b>" + PlayerVitals.Name + "</b> should play <b><color=white>" + Name + "</color></b> attack animation", "Animation");
@@ -72,7 +71,7 @@ public class Leo : Attacks {
         LivingEntity Vitals = _target.GetComponent<Player>().playerVitals;
 
         // deal damage
-        Vitals.GetDamage(Damage + Damage * (attackAnim - 1) / 2);
+        Vitals.GetDamage(Damage + Damage * (spellCount - 1) / 2);
     }
 
     public override void UpdateCooldowns()
@@ -86,7 +85,7 @@ public class Leo : Attacks {
         if(animReset <= 0)
         {
             animReset = 0;
-            attackAnim = 0;
+            spellCount = 0;
         }
 
         // enable casting if cooldown is over
@@ -134,4 +133,5 @@ public class Leo : Attacks {
     }
 
     public int InstanceCount { get { return instanceCount; } }
+    public int CurrCharge { get { return currCharge; } }
 }

@@ -18,7 +18,7 @@ public class PlayerAbilities : MonoBehaviour {
     {
         // --- [ set starter abilities ] ---
         abilityArray[0] = AbilityManager.Instance.CreateBasic(gameObject);          // basic
-        abilityArray[1] = AbilityManager.Instance.CreateSaggitarius(gameObject);    // spell_1
+        abilityArray[1] = AbilityManager.Instance.CreateLeo(gameObject);            // spell_1
         abilityArray[2] = AbilityManager.Instance.CreateCapricorn(gameObject);      // spell_2
         abilityArray[3] = AbilityManager.Instance.CreateVirgo(gameObject);          // spell_3
     }
@@ -36,10 +36,13 @@ public class PlayerAbilities : MonoBehaviour {
 
         // --- [ use ability ] ---
         // start spell (on button pressed)
-        if (Input.GetKeyDown(playerScrpt.playerControles[1])) { startedAbility = abilityArray[0]; abilityArray[0].StartSpell(); } // basic
-        if (Input.GetKeyDown(playerScrpt.playerControles[2])) { startedAbility = abilityArray[1]; abilityArray[1].StartSpell(); } // spell_1
-        if (Input.GetKeyDown(playerScrpt.playerControles[3])) { startedAbility = abilityArray[2]; abilityArray[2].StartSpell(); } // spell_2
-        if (Input.GetKeyDown(playerScrpt.playerControles[4])) { startedAbility = abilityArray[3]; abilityArray[3].StartSpell(); } // spell_3
+        if (startedAbility == null)
+        {
+            if (Input.GetKeyDown(playerScrpt.playerControles[1])) { startedAbility = abilityArray[0]; abilityArray[0].StartSpell(); } // basic
+            if (Input.GetKeyDown(playerScrpt.playerControles[2])) { startedAbility = abilityArray[1]; abilityArray[1].StartSpell(); } // spell_1
+            if (Input.GetKeyDown(playerScrpt.playerControles[3])) { startedAbility = abilityArray[2]; abilityArray[2].StartSpell(); } // spell_2
+            if (Input.GetKeyDown(playerScrpt.playerControles[4])) { startedAbility = abilityArray[3]; abilityArray[3].StartSpell(); } // spell_3
+        }
 
         // use aftercast (on button released)
         if (Input.GetKeyUp(playerScrpt.playerControles[1])) { abilityArray[0].AfterCast(); } // basic
@@ -62,22 +65,19 @@ public class PlayerAbilities : MonoBehaviour {
         }
 
         // --- [ virgo animation stop ] ---
+        // get all of the players abilities
         foreach (Attacks ability in abilityArray)
         {
             // check if the ability is a virgo spell
             if (ability.ID == 6)
             {
-                if(!ability.IsStarted && !playerScrpt.playerVitals.VirgoDash)
+                if (!ability.IsStarted && !playerScrpt.playerVitals.VirgoDash)
                 {
                     gameObject.GetComponent<Animator>().SetBool("Virgo", false);
                 }
             }
-        }
 
-        // --- [ sagittarius cast animation ] ---
-        // get all of the players abilities
-        foreach (Attacks ability in abilityArray)
-        {
+            // --- [ sagittarius cast animation ] ---
             // check if the ability is a sagittarius spell
             if (ability.ID == 9)
             {
@@ -113,11 +113,26 @@ public class PlayerAbilities : MonoBehaviour {
                             break;
                         case "noAim":
                             gameObject.GetComponent<Animator>().SetInteger("SagittariusDir", 3);
-                            break; 
+                            break;
                     }
                 }
             }
-        }
+
+            // --- [ capricorn type ] ---
+            // check if the ability is a capricorn spell
+            if (ability.ID == 10)
+            {
+                if (GetCapricorn2Targets() != null)
+                {
+                    if (ability.SpellCount != 1) { ability.SpellCount = 1; }
+                }
+
+                else
+                {
+                    if (ability.SpellCount != 0) { ability.SpellCount = 0; }
+                }
+            }
+    }
 
         #region use meele abilities
         // check if a meelespell was used

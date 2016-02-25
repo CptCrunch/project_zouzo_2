@@ -83,14 +83,16 @@ public class UIManager : MonoBehaviour {
 
                 for (int o = 0; o < spellIcons.Length; o++)
                 {
+                    Attacks ability = playerAbilitiesScript.abilityArray[o + 1];
+
                     // check  if the player has a ability in slot 1
-                    if (playerAbilitiesScript.abilityArray[0 + 1] != null)
+                    if (ability != null)
                     {
                         // check if icon has correct sprite
-                        if (spellIcons[o].sprite != playerAbilitiesScript.abilityArray[o + 1].Icons[0])
+                        if (spellIcons[o].sprite != ability.Icons[ability.SpellCount])
                         {
                             spellIcons[o].gameObject.active = true;
-                            spellIcons[o].sprite = playerAbilitiesScript.abilityArray[o + 1].Icons[0];
+                            spellIcons[o].sprite = ability.Icons[ability.SpellCount];
                         }
                     }
 
@@ -102,6 +104,29 @@ public class UIManager : MonoBehaviour {
                             spellIcons[o].gameObject.active = false;
                             spellIcons[o].sprite = null;
                         }
+                    }
+
+                    if (ability.CurrCooldown > 0)
+                    {
+                        spellIcons[o].transform.GetChild(0).gameObject.active = true;
+                        spellIcons[o].transform.GetChild(0).gameObject.GetComponent<Text>().text = ability.CurrCooldown.ToString();
+                    }
+
+                    else
+                    {
+                        if (spellIcons[o].transform.GetChild(0).gameObject.active) { spellIcons[o].transform.GetChild(0).gameObject.active = false; }
+                    }
+
+                    if (ability.ID == 5)
+                    {
+                        Leo leo = (Leo)ability;
+                        if (!spellIcons[o].transform.GetChild(1).gameObject.active) { spellIcons[o].transform.GetChild(1).gameObject.active = true; }
+                        spellIcons[o].transform.GetChild(1).gameObject.GetComponent<Text>().text = leo.CurrCharge.ToString();
+                    }
+
+                    else
+                    {
+                        if (spellIcons[o].transform.GetChild(1).gameObject.active) { spellIcons[o].transform.GetChild(1).gameObject.active = false; }
                     }
                 }
             }

@@ -9,6 +9,7 @@ public abstract class Attacks {
 
     private uint id;
     private Sprite[] icons;
+    protected int spellCount = 0;
     private string name;
     private string type;
     private int damage;
@@ -63,6 +64,7 @@ public abstract class Attacks {
     public LivingEntity PlayerVitals { get { return playerVitals; } }
     public PlayerAbilities PlayerAbilitiesScript { get { return playerAbilitiesScript; } }
     public Sprite[] Icons { get { return icons; } }
+    public int SpellCount { get { return spellCount; } set { spellCount = value; } }
     public uint ID { get { return id; } }
     public string Name { get { return name; } }
     public string Type { get { return type; } }
