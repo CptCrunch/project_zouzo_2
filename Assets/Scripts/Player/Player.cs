@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
         if (GameManager._instance != null && GameManager._instance.lifeLimit != 0) { lives = GameManager._instance.lifeLimit; }
 
         // create playerVitals
-        playerVitals = new LivingEntity(gameObject, name, moveSpeed, slowedSpeed, maxHealth, lives);
+        playerVitals = new LivingEntity(gameObject, name, type, moveSpeed, slowedSpeed, maxHealth, lives);
 
     }
 
