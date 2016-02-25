@@ -43,13 +43,70 @@ public class UIManager : MonoBehaviour {
         for (int i = 0; i < userInterfaces.Length; i++)
         {
             // check if objet is visible
-            if (userInterfaces[i].active) { userInterfaces[i].transform.GetChild(3).gameObject.GetComponent<Image>().overrideSprite = GameManager._instance.GetPlayerStandardIconByName(playerOnStage[i].GetComponent<Player>().playerVitals.Character); }
+            if (userInterfaces[i].active) { userInterfaces[i].transform.GetChild(2).gameObject.GetComponent<Image>().overrideSprite = GameManager._instance.GetPlayerStandardIconByName(playerOnStage[i].GetComponent<Player>().playerVitals.Character); }
         }
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+        // get all player on the stage (gamerules)
+        GameObject[] playerOnStage = GameManager._instance.PlayerOnStage;
+
+        // --- [ set ui for each player ] ---
+        for (int i = 0; i < userInterfaces.Length; i++)
+        {
+            if (playerOnStage[i] != null)
+            {
+                // get player script
+                PlayerAbilities playerAbilitiesScript = playerOnStage[i].GetComponent<PlayerAbilities>();
+
+                // get player vitals
+                LivingEntity playerVitals = playerOnStage[i].GetComponent<Player>().playerVitals;
+
+                // --- [ set healthbar ] ---
+                // check if objet is visible
+                if (userInterfaces[i].active) { userInterfaces[i].transform.GetChild(0).gameObject.GetComponent<Scrollbar>().size = playerVitals.CurrHealth / playerVitals.MaxHealth; }
+
+                // --- [ set death icon ] ---
+                if (playerVitals.CurrHealth <= 0) { if (userInterfaces[i].transform.GetChild(2).gameObject.GetComponent<Image>() != GameManager._instance.GetPlayerDeathIconByName(playerVitals.Character)) { userInterfaces[i].transform.GetChild(2).gameObject.GetComponent<Image>().overrideSprite = GameManager._instance.GetPlayerDeathIconByName(playerVitals.Character); } }
+
+                // -- [ set standard icon ] ---
+                else { if (userInterfaces[i].transform.GetChild(2).gameObject.GetComponent<Image>() != GameManager._instance.GetPlayerStandardIconByName(playerVitals.Character)) { userInterfaces[i].transform.GetChild(2).gameObject.GetComponent<Image>().overrideSprite = GameManager._instance.GetPlayerStandardIconByName(playerVitals.Character); } }
+
+                // --- [ set spell icons ] ---
+                Image spellOneIcon = userInterfaces[i].transform.GetChild(3).gameObject.GetComponent<Image>();
+                Image spellTwoIcon = userInterfaces[i].transform.GetChild(4).gameObject.GetComponent<Image>();
+                Image spellThreeIcon = userInterfaces[i].transform.GetChild(5).gameObject.GetComponent<Image>();
+
+                Image[] spellIcons = new Image[3] { spellOneIcon, spellTwoIcon, spellThreeIcon };
+
+                for (int o = 0; o < spellIcons.Length; o++)
+                {
+                    // check  if the player has a ability in slot 1
+                    if (playerAbilitiesScript.abilityArray[0 + 1] != null)
+                    {
+                        // check if icon has correct sprite
+                        if (spellIcons[o].sprite != playerAbilitiesScript.abilityArray[o + 1].Icons[0])
+                        {
+                            spellIcons[o].gameObject.active = true;
+                            spellIcons[o].sprite = playerAbilitiesScript.abilityArray[o + 1].Icons[0];
+                        }
+                    }
+
+                    // set icon invislible if the player has no ability in slot 1
+                    else
+                    {
+                        if (spellIcons[o].gameObject.active)
+                        {
+                            spellIcons[o].gameObject.active = false;
+                            spellIcons[o].sprite = null;
+                        }
+                    }
+                }
+            }
+        }
+
         /*/ -- [ FPS Counter ] --
         if(Input.GetKeyDown(KeyCode.F))
         {

@@ -15,8 +15,8 @@ public class Saggitarius : Attacks {
     private GameObject caster;
 
 
-    public Saggitarius(GameObject caster, int damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir, GameObject bullet, float timeToGetMaxRange, float minRange, float stickArrowPerCent, float castSlow) : base(
-        caster, 9, "saggitarius", "skillshot", targets, damage, castTime, delay, duration, cooldown, 0, spellDir)
+    public Saggitarius(GameObject caster, Sprite[] icons, int damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir, GameObject bullet, float timeToGetMaxRange, float minRange, float stickArrowPerCent, float castSlow) : base(
+        caster, 9, icons, "saggitarius", "skillshot", targets, damage, castTime, delay, duration, cooldown, 0, spellDir)
     {
         instanceCount++;
         this.bullet = bullet;

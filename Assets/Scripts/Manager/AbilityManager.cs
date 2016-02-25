@@ -38,7 +38,7 @@ public class AbilityManager : MonoBehaviour
 
     public Attacks CreateBasic(GameObject caster)
     {
-        return new Basic(caster, spells[0].damage, spells[0].castTime, spells[0].travelTime, spells[0].duration, spells[0].cooldown, spells[0].range, spells[0].targets, spells[0].directions);
+        return new Basic(caster, spells[0].icons, spells[0].damage, spells[0].castTime, spells[0].travelTime, spells[0].duration, spells[0].cooldown, spells[0].range, spells[0].targets, spells[0].directions);
     }
 
     public Attacks CreateAries(GameObject caster) { return null; }
@@ -48,12 +48,12 @@ public class AbilityManager : MonoBehaviour
 
     public Attacks CreateLeo(GameObject caster)
     {
-        return new Leo(caster, spells[5].damage, spells[5].castTime, spells[5].travelTime, spells[5].duration, spells[5].cooldown, spells[5].range, spells[5].targets, spells[5].directions, spells[5].charges, spells[5].chargeCooldown);
+        return new Leo(caster, spells[5].icons, spells[5].damage, spells[5].castTime, spells[5].travelTime, spells[5].duration, spells[5].cooldown, spells[5].range, spells[5].targets, spells[5].directions, spells[5].charges, spells[5].chargeCooldown);
     }
 
     public Attacks CreateVirgo(GameObject caster)
     {
-        return new Virgo(caster, spells[6].damage, spells[6].castTime, spells[6].travelTime, spells[6].duration, spells[6].cooldown, spells[6].range, spells[6].targets, spells[6].directions, spells[6].dashStrenght, spells[6].dashTime, spells[6].knockBackStrenght, spells[6].knockBackTime, spells[6].stunTime);
+        return new Virgo(caster, spells[6].icons, spells[6].damage, spells[6].castTime, spells[6].travelTime, spells[6].duration, spells[6].cooldown, spells[6].range, spells[6].targets, spells[6].directions, spells[6].dashStrenght, spells[6].dashTime, spells[6].knockBackStrenght, spells[6].knockBackTime, spells[6].stunTime);
     }
 
     public Attacks CreateLibra(GameObject caster) { return null; }
@@ -61,12 +61,12 @@ public class AbilityManager : MonoBehaviour
 
     public Attacks CreateSaggitarius(GameObject caster)
     {
-        return new Saggitarius(caster, spells[9].damage, spells[9].castTime, spells[9].bulletSpeed, spells[9].duration, spells[9].cooldown, spells[9].range, spells[9].targets, spells[9].directions, spells[9].bullet, spells[9].timeToGetMaxRange, spells[9].minRange, spells[9].stickArrowPerCent, spells[9].castSlow);
+        return new Saggitarius(caster, spells[9].icons, spells[9].damage, spells[9].castTime, spells[9].bulletSpeed, spells[9].duration, spells[9].cooldown, spells[9].range, spells[9].targets, spells[9].directions, spells[9].bullet, spells[9].timeToGetMaxRange, spells[9].minRange, spells[9].stickArrowPerCent, spells[9].castSlow);
     }
 
     public Attacks CreateCapricorn(GameObject caster)
     {
-        return new Capricorn(caster, spells[10].damage, spells[10].castTime, spells[10].travelTime, spells[10].duration, spells[10].cooldown, spells[10].range, spells[10].targets, spells[10].directions, spells[10].knockUpHeght, spells[10].knockBackRange, spells[10].knockBackStrenght);
+        return new Capricorn(caster, spells[10].icons, spells[10].damage, spells[10].castTime, spells[10].travelTime, spells[10].duration, spells[10].cooldown, spells[10].range, spells[10].targets, spells[10].directions, spells[10].knockUpHeght, spells[10].knockBackRange, spells[10].knockBackStrenght);
     }
 
     public Attacks CreateAquarius(GameObject caster) { return null; }
@@ -91,6 +91,7 @@ public struct Abilities
     [Tooltip("the amount of directions the spell can be aimed (2, 4, 8)")]
     [Range(2, 8)]
     public uint directions;
+    public Sprite[] icons;
 
     [Header("Meeles")]
     [Tooltip("the time that the spell needs to reach max range (0 is instand) [time in seconds]")]

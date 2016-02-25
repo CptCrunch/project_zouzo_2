@@ -10,8 +10,8 @@ public class Virgo : Attacks {
     private float knockBackDirection;
     private float stunTime;
 
-    public Virgo(GameObject caster, int damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir, float dashStrength, float dashTime, float knockBackStrength, float knockBackTime, float stunTime) : base(
-        caster, 6, "virgo", "utility ", targets, damage, castTime, delay, duration, cooldown, range, spellDir)
+    public Virgo(GameObject caster, Sprite[] icons, int damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir, float dashStrength, float dashTime, float knockBackStrength, float knockBackTime, float stunTime) : base(
+        caster, 6, icons, "virgo", "utility ", targets, damage, castTime, delay, duration, cooldown, range, spellDir)
     {
         this.knockBackStrength = knockBackStrength;
         this.knockBackTime = knockBackTime;

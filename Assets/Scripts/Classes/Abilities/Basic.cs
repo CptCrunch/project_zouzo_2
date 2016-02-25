@@ -7,8 +7,8 @@ public class Basic : Attacks {
 
     private static int instanceCount = 0;
 
-    public Basic(GameObject caster, int damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir) : base(
-        caster, 0, "basic", "meele", targets, damage, castTime, delay, duration, cooldown, range, spellDir) { instanceCount++; }
+    public Basic(GameObject caster, Sprite[] icons, int damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir) : base(
+        caster, 0, icons, "basic", "meele", targets, damage, castTime, delay, duration, cooldown, range, spellDir) { instanceCount++; }
 
     public override void StartSpell()
     {
