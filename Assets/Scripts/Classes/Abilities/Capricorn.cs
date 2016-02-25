@@ -136,7 +136,6 @@ public class Capricorn : Attacks {
 
         // kock target away form caster
         float time = targetVitals.ApplyKnockUp(dirY * multi * knockBackStrenght, this);
-        Debug.Log("KnockUpTime: " + time);
         targetVitals.ApplyKnockBack(dirX * multi * knockBackStrenght, time, this);
 
         // deal damage
