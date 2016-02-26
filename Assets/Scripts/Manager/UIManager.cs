@@ -94,8 +94,14 @@ public class UIManager : MonoBehaviour {
                 if (playerVitals.Life > 5)
                 {
                     childCount = 6;
+                    Debug.Log(userInterfaces[i].name);
+                    // get liveContainer
+                    GameObject liveContainer = userInterfaces[i].transform.GetChild(childLiveContainer).gameObject;
+                    // get additionalLives
+                    GameObject additionalLives = liveContainer.transform.GetChild(5).gameObject;
+
                     // set additional life text
-                    userInterfaces[i].transform.GetChild(childLiveContainer).transform.GetChild(5).gameObject.GetComponent<Text>().text = "+" + (playerVitals.Life - 5);
+                    additionalLives.GetComponent<Text>().text = "+" + (playerVitals.Life - 5);
                 }
 
                 else { childCount = playerVitals.Life; }
