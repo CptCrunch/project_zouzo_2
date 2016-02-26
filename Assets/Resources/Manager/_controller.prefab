@@ -208,7 +208,7 @@ MonoBehaviour:
     damage: 5
     castTime: 0
     duration: 0
-    cooldown: 2
+    cooldown: 0.5
     range: 2
     targets: 1
     directions: 2
@@ -227,7 +227,7 @@ MonoBehaviour:
     dashTime: 0
     stunTime: 0
     charges: 3
-    chargeCooldown: 0.5
+    chargeCooldown: 2
     timeToGetMaxRange: 0
     minRange: 0
     stickArrowPerCent: 0
