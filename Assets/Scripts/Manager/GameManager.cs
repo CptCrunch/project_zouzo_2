@@ -81,8 +81,8 @@ public class GameManager : MonoBehaviour {
         // check if scene is a stage and start OnStage metod if so
         if (IsStage()) { OnStage(); }
 
-        // set fife Limit for every player
-        for(int i = 0; i < lifeLimitPlayer.Length; i++) { lifeLimitPlayer[i] = lifeLimit; }
+        /*/ set fife Limit for every player
+        for(int i = 0; i < lifeLimitPlayer.Length; i++) { lifeLimitPlayer[i] = lifeLimit; }*/
     }
 
     void Update()
@@ -143,9 +143,16 @@ public class GameManager : MonoBehaviour {
         }
 
         // --- [ register player on stage ] ---
+        int onStageIndex = 0;
         foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
         {
+            // get Player script
+            Player playerSript = player.GetComponent<Player>();
+
             Util.IncludeGameObject(playerOnStage, player);
+            playerSript.onStageIndex = onStageIndex;
+            playerSript.playerVitals.Life = lifeLimit;
+            onStageIndex++;
         }
     }
 
@@ -201,13 +208,20 @@ public class GameManager : MonoBehaviour {
 
     private IEnumerator ISpawnNewPlayer(GameObject playerGO) {
         //Subtract Lifes
-        switch(playerGO.GetComponent<Player>().type) {
+        /*switch(playerGO.GetComponent<Player>().type) {
             case "Earth": lifeLimitPlayer[0] -= lifeLosePerDeath; CustomDebug.Log("Lifes:" + lifeLimitPlayer[0], "Testing"); break;
             case "Sun": lifeLimitPlayer[1] -= lifeLosePerDeath; CustomDebug.Log("Lifes:" + lifeLimitPlayer[0], "Testing"); break;
-        }
+        }*/
+
+        playerGO.GetComponent<Player>().playerVitals.Life--;
+        CustomDebug.Log("Lifes:" + playerGO.GetComponent<Player>().playerVitals.Life, "Testing");
 
         //Instantiate new player
-        GameObject go = Instantiate(GetPlayerPrefabByName(playerGO.GetComponent<Player>().type), playerSpawn[Random.Range(0, playerSpawn.Length)].transform.position, Quaternion.identity) as GameObject;
+        GameObject go = Instantiate(GetPlayerPrefabByName(playerGO.GetComponent<Player>().playerVitals.Character), playerSpawn[Random.Range(0, playerSpawn.Length)].transform.position, Quaternion.identity) as GameObject;
+        //Add to playerOnStage array
+        playerOnStage[playerGO.GetComponent<Player>().onStageIndex] = go;
+        //Set correct lifes
+        go.GetComponent<Player>().lives = playerGO.GetComponent<Player>().lives;
         //Disable the new object for the animation
         go.GetComponent<Player>().gamerulesDisabled = true;
         //Transfer the abilies to the new player

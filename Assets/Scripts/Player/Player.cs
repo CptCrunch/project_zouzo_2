@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     [Tooltip("Define Controller: P1, P2, P3, P4, KB")]
     public string playerAxis;
+    [HideInInspector] public int onStageIndex;
 
     #region Player Vitals
     [Header("Player Vitals:")]
@@ -422,7 +423,8 @@ public class Player : MonoBehaviour
     #region Die
     public void Die()
     {
-        if (!dead) {
+        if (!dead)
+        {
             CustomDebug.Log("Died", "Testing");
             _animator.SetTrigger("Death");
             dead = true;
@@ -434,7 +436,7 @@ public class Player : MonoBehaviour
         gamerulesDisabled = true;
         flipEnable = false;
         yield return new WaitForSeconds(GameManager._instance.timeDeathSpawn);
-        switch(type) {
+        /*switch(type) {
             case "Earth":
                 if(GameManager._instance.lifeLimitPlayer[0] > 0) {
                     GameManager._instance.SpawnNewPlayer(gameObject);
@@ -445,8 +447,13 @@ public class Player : MonoBehaviour
                     GameManager._instance.SpawnNewPlayer(gameObject);
                 }
                 break;
+        }*/
+
+        if (playerVitals.Life > 0)
+        {
+            GameManager._instance.SpawnNewPlayer(gameObject);
         }
-       
+
         Destroy(gameObject);
         yield return null;
     }
