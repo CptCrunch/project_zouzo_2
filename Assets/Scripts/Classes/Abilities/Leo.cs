@@ -181,9 +181,8 @@ public class Leo : Attacks {
     public override void SetCooldown()
     {
         // set cooldown
-        currChargeCooldown = maxChargeCooldown;
         CurrCooldown = MaxCooldown;
-
+        if (currCharge >= maxCharge) { currChargeCooldown = maxChargeCooldown; }
         // disable casting
         castDisable = true;
 
@@ -198,4 +197,6 @@ public class Leo : Attacks {
 
     public int InstanceCount { get { return instanceCount; } }
     public int CurrCharge { get { return currCharge; } }
+    public float CurrChargeCooldown { get { return currChargeCooldown; } }
+    public float MaxChargeCooldown { get { return maxChargeCooldown; } }
 }
