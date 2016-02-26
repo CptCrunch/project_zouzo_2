@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour {
         // check if scene is a stage and start OnStage metod if so
         if (IsStage()) { OnStage(); }
 
-        //Set Life Limit for every player
+        // set fife Limit for every player
         for(int i = 0; i < lifeLimitPlayer.Length; i++) { lifeLimitPlayer[i] = lifeLimit; }
     }
 
@@ -91,19 +91,24 @@ public class GameManager : MonoBehaviour {
         {
             timeLimit -= Time.deltaTime;
             CustomDebug.Log(timeLimit.ToString("f0"), "Time");
-            //UIManager.Instance.SetTimer(timeLimit);
+            /*UIManager.Instance.SetTimer(timeLimit);*/
 
-            if(timeLimit <= 0) {
-                EndGame();
+            // --- [ end game ] ---
+            if (timeLimit <= 10)
+            {
+                // warn player that the game will end shortly
+                Debug.Log("Game will end in <color=red>" + timeLimit + "</color> secounds");
+
+                // check if game ends
+                if (timeLimit <= 0) { EndGame(); }
             }
 
-            foreach (int i in lifeLimitPlayer) {
-                if (i <= 0) {
-                    EndGame();
-                }
+            // makes no sence to me, we need to check if only one player has more lifes than one, not if one has no lifes
+            foreach (int i in lifeLimitPlayer)
+            {
+                if (i <= 0) { EndGame(); }
             }
         }
-
     }
 
     // Create All Player when the level loads

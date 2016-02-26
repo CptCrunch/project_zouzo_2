@@ -181,13 +181,13 @@ public class Player : MonoBehaviour
 
         // --- [ Condition Animations ] ---
         _animator.SetBool("Stunned", playerVitals.Stunned);
-
         _animator.SetBool("KnockUp", playerVitals.KnockUped);
-
         _animator.SetBool("KnockBack", playerVitals.KnockBacked);
 
-        if (playerVitals.KnockBacked) {
-            if ((!mirror && velocity.x < 0) || (mirror && velocity.x > 0)) {
+        if (playerVitals.KnockBacked)
+        {
+            if ((!mirror && velocity.x < 0) || (mirror && velocity.x > 0))
+            {
                 ConditionFlip();
                 flipEnable = false;
             }
