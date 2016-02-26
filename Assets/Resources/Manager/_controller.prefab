@@ -48,7 +48,7 @@ MonoBehaviour:
   playerAmmount: 1
   abilityLimit: 0
   damageModifier: 100
-  lifeLimit: 5
+  lifeLimit: 7
   lifeLosePerDeath: 1
   lifeLimitPlayer: 0000000000000000
   timeLimit: 10

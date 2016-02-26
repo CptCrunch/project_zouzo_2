@@ -177,8 +177,15 @@ MonoBehaviour:
   name: Player 1
   type: Non
   maxHealth: 100
+  lives: 7
   moveSpeed: 6
   slowedSpeed: 3
+  playerControles:
+  - 
+  - 
+  - 
+  - 
+  - 
   gravity: 0
   velocity: {x: 0, y: 0, z: 0}
   maxJumpHeight: 3.5
@@ -189,6 +196,12 @@ MonoBehaviour:
   wallLeap: 15
   wallSlideSpeedMax: 3
   wallStickTime: 0.25
+  gamerulesDisabled: 0
+  _animator: {fileID: 0}
+  flipEnable: 1
+  hitColor: {r: 1, g: 0, b: 0, a: 1}
+  changebackTime: 0.2
+  playerAbilitiesScript: {fileID: 0}
 --- !u!212 &21220066
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -301,6 +314,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: wallJumpClimb.y
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lives
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
