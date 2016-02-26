@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour {
     public GameObject[] userInterfaces = new GameObject[4];
 
     // ui variables
+    // ui children
     private int childHealthBar = 0;
     private int childHPText = 1;
     private int childPlayerIcon = 3;
@@ -85,33 +86,54 @@ public class UIManager : MonoBehaviour {
                 // get player vitals
                 LivingEntity playerVitals = playerOnStage[i].GetComponent<Player>().playerVitals;
 
+                #region lifes
+                #region additional
                 // --- [ set lives ] ---
                 int childCount = 0;
+                // --- [ get life amount ] ---
                 if (playerVitals.Life > 5)
                 {
                     childCount = 6;
+                    // set additional life text
                     userInterfaces[i].transform.GetChild(childLiveContainer).transform.GetChild(5).gameObject.GetComponent<Text>().text = "+" + (playerVitals.Life - 5);
                 }
 
-                else
-                {
-                    childCount = playerVitals.Life;
-                }
+                else { childCount = playerVitals.Life; }
 
-                Debug.Log("Life: " + playerVitals.Life);
-
+                // --- [ set lifes visible / invisible ] ---
                 for (int o = 0; o < 6; o++)
                 {
-                    if (childCount > o)
-                    {
-                        if (!userInterfaces[i].transform.GetChild(childLiveContainer).transform.GetChild(o).gameObject.active) { userInterfaces[i].transform.GetChild(childLiveContainer).transform.GetChild(o).gameObject.active = true; }
-                    }
+                    if (childCount > o) { if (!userInterfaces[i].transform.GetChild(childLiveContainer).transform.GetChild(o).gameObject.active) { userInterfaces[i].transform.GetChild(childLiveContainer).transform.GetChild(o).gameObject.active = true; } }
+                    else { if (userInterfaces[i].transform.GetChild(childLiveContainer).transform.GetChild(o).gameObject.active) { userInterfaces[i].transform.GetChild(childLiveContainer).transform.GetChild(o).gameObject.active = false; } }
+                }
+                #endregion
 
-                    else
+                #region multiplication
+                /*/ --- [ set lives ] ---
+                // --- [ get life amount ] ---
+                if (playerVitals.Life > 5)
+                {
+                    // set additional life text
+                    userInterfaces[i].transform.GetChild(childLiveContainer).transform.GetChild(5).gameObject.GetComponent<Text>().text = "x" + (playerVitals.Life);
+
+                    // set first life visible
+                    if (!userInterfaces[i].transform.GetChild(childLiveContainer).transform.GetChild(0).gameObject.active) { userInterfaces[i].transform.GetChild(childLiveContainer).transform.GetChild(0).gameObject.active = true; }
+                    for (int o = 1; o < 5; o++)
                     {
                         if (userInterfaces[i].transform.GetChild(childLiveContainer).transform.GetChild(o).gameObject.active) { userInterfaces[i].transform.GetChild(childLiveContainer).transform.GetChild(o).gameObject.active = false; }
                     }
                 }
+
+                else
+                {
+                    for (int o = 0; o < 6; o++)
+                    {
+                        if (playerVitals.Life > o) { if (!userInterfaces[i].transform.GetChild(childLiveContainer).transform.GetChild(o).gameObject.active) { userInterfaces[i].transform.GetChild(childLiveContainer).transform.GetChild(o).gameObject.active = true; } }
+                        else { if (userInterfaces[i].transform.GetChild(childLiveContainer).transform.GetChild(o).gameObject.active) { userInterfaces[i].transform.GetChild(childLiveContainer).transform.GetChild(o).gameObject.active = false; } }
+                    }
+                }*/
+                #endregion
+                #endregion
 
                 // --- [ set healthbar ] ---
                 // check if objet is visible
