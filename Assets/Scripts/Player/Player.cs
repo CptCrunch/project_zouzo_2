@@ -65,10 +65,6 @@ public class Player : MonoBehaviour
     [HideInInspector] public bool gamerulesDisabled = false;
     #endregion
 
-    #region Ability Variables
-    
-    #endregion
-
     #region Animations 
     [HideInInspector] public Animator _animator;
     private bool mirror = false;

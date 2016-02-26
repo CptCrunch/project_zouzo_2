@@ -9,6 +9,8 @@ public class PlayerAbilities : MonoBehaviour {
     public Attacks castedMeeleSpell;
     public Attacks startedAbility;
 
+    public bool attackEnable = true;
+
     void Awake()
     {
         playerScrpt = gameObject.GetComponent<Player>();
@@ -36,7 +38,7 @@ public class PlayerAbilities : MonoBehaviour {
 
         // --- [ use ability ] ---
         // start spell (on button pressed)
-        if (startedAbility == null)
+        if (attackEnable)
         {
             if (Input.GetKeyDown(playerScrpt.playerControles[1])) { startedAbility = abilityArray[0]; abilityArray[0].StartSpell(); } // basic
             if (Input.GetKeyDown(playerScrpt.playerControles[2])) { startedAbility = abilityArray[1]; abilityArray[1].StartSpell(); } // spell_1
@@ -265,4 +267,6 @@ public class PlayerAbilities : MonoBehaviour {
     }
 
     public void CastSpell() { startedAbility.Cast(); startedAbility = null; }
+
+    public void EnaleAttack() { attackEnable = true; }
 }

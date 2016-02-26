@@ -74,7 +74,7 @@ public class Leo : Attacks {
         Vitals.GetDamage(Damage + Damage * (spellCount - 1) / 2);
     }
 
-    public override void UpdateCooldowns()
+    /*public override void UpdateCooldowns()
     {
         // reduce current cooldown
         CurrCooldown -= Time.deltaTime;
@@ -106,15 +106,61 @@ public class Leo : Attacks {
             // else add max cooldown to restart charg stacking
             else
             {
-                CurrCooldown += MaxCooldown;
-                
                 // add one charge
                 currCharge++;
+
+                if (currCharge >= maxCharge) { CurrCooldown = 0; }
+                else { CurrCooldown += MaxCooldown; }
+                
+            }
+        }
+    }*/
+
+    public override void UpdateCooldowns()
+    {
+        // reduce current cooldown
+        CurrCooldown -= Time.deltaTime;
+        currChargeCooldown -= Time.deltaTime;
+        animReset -= Time.deltaTime;
+
+        //Animation Reset
+        if (animReset <= 0)
+        {
+            animReset = 0;
+            spellCount = 0;
+        }
+
+        // enable casting if cooldown is over
+        if (CurrCooldown <= 0)
+        {
+            CurrCooldown = 0;
+            castDisable = false;
+        }
+
+        // check if cooldown is over 
+        if (currChargeCooldown <= 0)
+        {
+            // enable spell
+            IsDisabled = false;
+
+            // if charges are max stacked set cooldown to 0
+            if (currCharge >= maxCharge) { currChargeCooldown = 0; }
+            // else add max cooldown to restart charg stacking
+            else
+            {
+                // add one charge
+                currCharge++;
+
+                // check if max charges are now reached
+                if (currCharge >= maxCharge) { currChargeCooldown = 0; }
+                // reset cooldown if not
+                else { currChargeCooldown += maxChargeCooldown; }
+
             }
         }
     }
 
-    public override void SetCooldown()
+    /*public override void SetCooldown()
     {
         // set cooldown
         CurrCooldown = MaxCooldown;
@@ -123,6 +169,24 @@ public class Leo : Attacks {
         // disable casting
         castDisable = true;
         
+        // sub charge
+        currCharge--;
+        CustomDebug.Log("<b><color=white>" + Name + "</color></b>s currCharges: " + currCharge, "Spells");
+
+        // disable spell if no charges are left
+        if (currCharge <= 0) { IsDisabled = true; }
+        else if (IsDisabled) { IsDisabled = false; }
+    }*/
+
+    public override void SetCooldown()
+    {
+        // set cooldown
+        currChargeCooldown = maxChargeCooldown;
+        CurrCooldown = MaxCooldown;
+
+        // disable casting
+        castDisable = true;
+
         // sub charge
         currCharge--;
         CustomDebug.Log("<b><color=white>" + Name + "</color></b>s currCharges: " + currCharge, "Spells");
