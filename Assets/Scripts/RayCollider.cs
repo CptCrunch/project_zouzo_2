@@ -11,6 +11,7 @@ public class RayCollider : MonoBehaviour
 
     public struct directionBool
     {
+        public bool any;
         public bool top;
         public bool bottom;
         public bool right;
@@ -27,6 +28,7 @@ public class RayCollider : MonoBehaviour
 
     public struct directionGameObject
     {
+        public GameObject any;
         public GameObject top;
         public GameObject bottom;
         public GameObject right;
@@ -124,6 +126,19 @@ public class RayCollider : MonoBehaviour
             collision.gameObject.left = LeftCollider();
             collision.value.left = collision.gameObject.left != null;
         }
+
+        if (collision.value.top || collision.value.bottom || collision.value.right || collision.value.left)
+        {
+            collision.value.any = true;
+
+            if (collision.gameObject.top != null) { collision.gameObject.any = collision.gameObject.top; }
+            else if (collision.gameObject.bottom != null) { collision.gameObject.any = collision.gameObject.bottom; }
+            else if (collision.gameObject.right != null) { collision.gameObject.any = collision.gameObject.right; }
+            else if (collision.gameObject.left != null) { collision.gameObject.any = collision.gameObject.left; }
+        }
+
+        else { collision.value.any = false; collision.gameObject.any = null; }
+
     }
 
     private GameObject TopCollider()

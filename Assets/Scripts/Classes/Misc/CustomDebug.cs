@@ -24,6 +24,16 @@ namespace UnityEngine
             {"Time", false }
         };
 
+        public static bool IsTagActive(string tag)
+        {
+            foreach (KeyValuePair<string, bool> item in tags)
+            {
+                if (item.Key == tag && item.Value) { return true; }
+            }
+
+            return false;
+        }
+
         #region Extras
         public static bool Active { get { return active; } set { active = value; } }
         public static void EnableTag(string tag, bool value)

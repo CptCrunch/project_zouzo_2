@@ -136,7 +136,7 @@ public class UIManager : MonoBehaviour {
                 #endregion
 
                 // --- [ set healthbar ] ---
-                // check if objet is visible
+                // check if objet is visible and set its size
                 if (userInterfaces[i].active) { userInterfaces[i].transform.GetChild(childHealthBar).gameObject.GetComponent<Scrollbar>().size = playerVitals.CurrHealth / playerVitals.MaxHealth; }
 
                 // set hp text
@@ -226,26 +226,20 @@ public class UIManager : MonoBehaviour {
             }
         }
 
-        /*/
-                    -- [ FPS Counter ] --
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            if (GameManager._instance.showFPS)
-            {
-                GameManager._instance.showFPS = false;
-            }
+        /*/ --- [ FPS Counter ] ---
+        // toggle pfs
+        if(Input.GetKeyDown(KeyCode.F)) { GameManager._instance.showFPS != GameManager._instance.showFPS; }
 
-            else
-            {
-                GameManager._instance.showFPS = true;
-            }
-        }
-
+        // --- [ show pfs ] ---
         if (GameManager._instance.showFPS)
         {
+            // set pfs visible
             fpsCount.enabled = true;
 
+            // add trameCount
             frameCount++;
+
+            // save Time.deltaTime
             dt += Time.deltaTime;
 
             if (dt > 1.0f / updateRate)

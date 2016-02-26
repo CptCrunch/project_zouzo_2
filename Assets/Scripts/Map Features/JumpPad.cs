@@ -10,7 +10,7 @@ public class JumpPad : MonoBehaviour {
 	
 	// Update is called once per frame
     void Update() {
-
+        /*
         RaycastHit2D[] rays = new RaycastHit2D[3]{
             Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + GetComponent<BoxCollider2D>().bounds.size.y / 2 + 0.01f), Vector2.up, 0.01f),
             Physics2D.Raycast(new Vector2(transform.position.x + GetComponent<BoxCollider2D>().bounds.size.x / 2, transform.position.y + GetComponent<BoxCollider2D>().bounds.size.y / 2 + 0.01f), Vector2.up, 0.01f),
@@ -28,8 +28,8 @@ public class JumpPad : MonoBehaviour {
                     rayHit = true;
                 }
             }
-        }
+        }*/
 
-        if (rayHit) { objectHit.collider.gameObject.GetComponent<Player>().velocity.y = strength; }
+        if (gameObject.GetComponent<RayCollider>().collision.value.top) { objectHit.collider.gameObject.GetComponent<Player>().velocity.y = strength; }
     }
 }
