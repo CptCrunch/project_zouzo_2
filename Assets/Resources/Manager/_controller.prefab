@@ -1,0 +1,791 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &122012
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 456444}
+  - 114: {fileID: 11411430}
+  - 114: {fileID: 11435204}
+  m_Layer: 0
+  m_Name: _controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &456444
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 122012}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11411430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 122012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976bae19c6eb6c94f987156ea5f2e99e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Running: 0
+  registerdStages:
+  - Prototype_Stage01
+  - Prototype_Stage02
+  - Stage_Template
+  playerAmmount: 1
+  abilityLimit: 0
+  damageModifier: 100
+  lifeLimit: 7
+  lifeLosePerDeath: 1
+  lifeLimitPlayer: 0000000000000000
+  timeLimit: 10
+  spawnTag: Player Spawn
+  playerMaxHealth: 100
+  timeDeathSpawn: 2
+  playerInfo:
+  - name: Earth
+    prefab: {fileID: 183932, guid: daa0abed6cd8cfd44981f47d1060ad0d, type: 2}
+    standardSplashart: {fileID: 21300000, guid: 8a514571e0fd61d4aa422b8bca6b1fbf,
+      type: 3}
+    lockedSplashart: {fileID: 21300000, guid: f15d4a5ef4a9df1419928360f4f6b5f3, type: 3}
+    blockedSplashart: {fileID: 21300000, guid: 05e18ba4c3dd2a34d80c05428a970266, type: 3}
+    standardIcon: {fileID: 21300008, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
+    deathIcon: {fileID: 21300010, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
+  - name: Sun
+    prefab: {fileID: 132140, guid: 0e538311351f00449b0d45190e7246e3, type: 2}
+    standardSplashart: {fileID: 21300000, guid: 155137b948fdc9845a98436aa11e1cc3,
+      type: 3}
+    lockedSplashart: {fileID: 21300000, guid: 8bf73d55867ca524299a321779c5550a, type: 3}
+    blockedSplashart: {fileID: 21300000, guid: d0d53f9b49aff04459571c69441ef539, type: 3}
+    standardIcon: {fileID: 21300016, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
+    deathIcon: {fileID: 21300018, guid: 7d623be2cbc10a64a9062c89d3284696, type: 3}
+  playerOnStage:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Tags:
+    Active: 1
+    Main: 1
+    Testing: 0
+    Player: 0
+    Damage: 0
+    Spells: 0
+    Cooldown: 0
+    UI: 0
+    Animation: 0
+    Condition: 0
+    Controles: 0
+    MapFeature: 0
+    Time: 1
+  showFPS: 0
+--- !u!114 &11435204
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 122012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe1ac08a04d2a746b2332e122c292da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilities:
+  - name: Aries
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: Taurus
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: Gemini
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: Cancer
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: Leo
+    damage: 5
+    castTime: 0
+    duration: 0
+    cooldown: 0.5
+    range: 2
+    targets: 1
+    directions: 2
+    icons:
+    - {fileID: 21300004, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
+    - {fileID: 21300006, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
+    - {fileID: 21300008, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
+    travelTime: 0.2
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 3
+    chargeCooldown: 2
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: Virgo
+    damage: 10
+    castTime: 0
+    duration: 0
+    cooldown: 2
+    range: 4
+    targets: 0
+    directions: 2
+    icons:
+    - {fileID: 21300012, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
+    travelTime: 0.2
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 4
+    knockBackTime: 0.3
+    dashStrenght: 2
+    dashTime: 0.2
+    stunTime: 2
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: Libra
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: Scorpio
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: Sagittarius
+    damage: 500
+    castTime: 0
+    duration: 0
+    cooldown: 2
+    range: 6
+    targets: 0
+    directions: 8
+    icons:
+    - {fileID: 21300010, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
+    travelTime: 0
+    bullet: {fileID: 193644, guid: cd83b1fd26d5b2b408c90360880b7752, type: 2}
+    bulletSpeed: 20
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 2
+    minRange: 3
+    stickArrowPerCent: 0.5
+    castSlow: 3
+  - name: Capricorn
+    damage: 20
+    castTime: 0
+    duration: 0
+    cooldown: 1
+    range: 1.5
+    targets: 0
+    directions: 2
+    icons:
+    - {fileID: 21300000, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
+    - {fileID: 21300002, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
+    travelTime: 0.5
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 3
+    knockBackRange: 4
+    knockBackStrenght: 4
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: Aquarius
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: Aquarius
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: Basic
+    damage: 10
+    castTime: 0
+    duration: 0
+    cooldown: 0.5
+    range: 1
+    targets: 1
+    directions: 2
+    icons: []
+    travelTime: 0.1
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  spells:
+  - name: 
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: 
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: 
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: 
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: 
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: 
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: 
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: 
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: 
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: 
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: 
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: 
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+  - name: 
+    damage: 0
+    castTime: 0
+    duration: 0
+    cooldown: 0
+    range: 0
+    targets: 0
+    directions: 0
+    icons: []
+    travelTime: 0
+    bullet: {fileID: 0}
+    bulletSpeed: 0
+    knockUpHeght: 0
+    knockBackRange: 0
+    knockBackStrenght: 0
+    knockBackTime: 0
+    dashStrenght: 0
+    dashTime: 0
+    stunTime: 0
+    charges: 0
+    chargeCooldown: 0
+    timeToGetMaxRange: 0
+    minRange: 0
+    stickArrowPerCent: 0
+    castSlow: 0
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: gameModeList.Array.data[0].name
+      value: Life Limit
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: gameModeList.Array.data[0].lifeLimit
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: gameModeList.Array.data[1].name
+      value: Time Limit
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: gameModeList.Array.data[1].timeLimit
+      value: 60
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 122012}
+  m_IsPrefabParent: 1
