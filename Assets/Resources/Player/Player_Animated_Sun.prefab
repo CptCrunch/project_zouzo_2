@@ -12,6 +12,7 @@ GameObject:
   - 212: {fileID: 21247594}
   - 114: {fileID: 11447046}
   - 114: {fileID: 11428654}
+  - 114: {fileID: 11460432}
   - 95: {fileID: 9569670}
   m_Layer: 9
   m_Name: Player_Animated_Sun
@@ -27,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 132140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.26510954, y: -.684473991, z: 0}
+  m_LocalPosition: {x: -4.2651095, y: -0.684474, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -39,12 +40,13 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 132140}
   m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -.00499999989, y: 0}
+  m_Offset: {x: -0.005, y: 0}
   serializedVersion: 2
-  m_Size: {x: .550000012, y: 1}
+  m_Size: {x: 0.55, y: 1}
 --- !u!95 &9569670
 Animator:
   serializedVersion: 3
@@ -76,6 +78,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   input: {x: 0, y: 0}
   playerAxis: KB
+  onStageIndex: 0
   name: Sun
   type: Sun
   maxHealth: 20
@@ -92,17 +95,18 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   maxJumpHeight: 4
   minJumpHeight: 1
-  timeToJumpApex: .400000006
+  timeToJumpApex: 0.4
   wallJumpClimb: {x: 8.5, y: 20}
   wallJumpOff: {x: 8.5, y: 7}
   wallLeap: 15
   wallSlideSpeedMax: 3
-  wallStickTime: .25
+  wallStickTime: 0.25
   gamerulesDisabled: 0
   _animator: {fileID: 0}
   flipEnable: 1
-  hitColor: {r: .926470578, g: .183931664, b: .183931664, a: 1}
-  changebackTime: .200000003
+  hitColor: {r: 0.9264706, g: 0.18393166, b: 0.18393166, a: 1}
+  changebackTime: 0.2
+  playerAbilitiesScript: {fileID: 0}
 --- !u!114 &11447046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -123,6 +127,18 @@ MonoBehaviour:
   verticalRaySpacing: 0
   collider: {fileID: 0}
   playerInput: {x: 0, y: 0}
+--- !u!114 &11460432
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 132140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4608fb698895dc342a0f09b86ce4266f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackEnable: 1
 --- !u!212 &21247594
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -141,14 +157,18 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300016, guid: 7cfb1151c36690946bbb61e26dfd3daa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -128,6 +128,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 498742}
+  - 114: {fileID: 11482006}
   m_Layer: 0
   m_Name: PlayerUI (3)
   m_TagString: Untagged
@@ -161,6 +162,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 461818}
+  - 114: {fileID: 11497164}
   m_Layer: 0
   m_Name: PlayerUI (4)
   m_TagString: Untagged
@@ -978,6 +980,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 441270}
+  - 114: {fileID: 11489028}
   m_Layer: 0
   m_Name: PlayerUI (2)
   m_TagString: Untagged
@@ -2220,6 +2223,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 408780}
+  - 114: {fileID: 11494178}
   m_Layer: 0
   m_Name: PlayerUI (1)
   m_TagString: Untagged
@@ -6843,6 +6847,20 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Scrollbar+ScrollEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &11482006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8914ee6430a35ef479ec0801d2f2af05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: 
+  playerCharacter: 
+  indexOfUserInterfaces: 0
 --- !u!114 &11482880
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7263,6 +7281,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 0
+--- !u!114 &11489028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8914ee6430a35ef479ec0801d2f2af05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: 
+  playerCharacter: 
+  indexOfUserInterfaces: 0
 --- !u!114 &11489588
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7534,6 +7566,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11494178
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8914ee6430a35ef479ec0801d2f2af05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: 
+  playerCharacter: 
+  indexOfUserInterfaces: 0
 --- !u!114 &11494470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7574,6 +7620,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 1.5, y: 1.5}
   m_UseGraphicAlpha: 1
+--- !u!114 &11497164
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8914ee6430a35ef479ec0801d2f2af05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: 
+  playerCharacter: 
+  indexOfUserInterfaces: 0
 --- !u!114 &11497512
 MonoBehaviour:
   m_ObjectHideFlags: 1

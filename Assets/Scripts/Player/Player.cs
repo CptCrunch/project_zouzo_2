@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
         playerAbilitiesScript = gameObject.GetComponent<PlayerAbilities>();
 
         if (GameManager._instance != null && GameManager._instance.playerMaxHealth != 0) { maxHealth = GameManager._instance.playerMaxHealth; }
-        if (GameManager._instance != null && GameManager._instance.lifeLimit != 0) { lives = GameManager._instance.lifeLimit; }
+        /*if (GameManager._instance != null && GameManager._instance.lifeLimit != 0) { lives = GameManager._instance.lifeLimit; }*/
 
         // create playerVitals
         playerVitals = new LivingEntity(gameObject, name, type, moveSpeed, slowedSpeed, maxHealth, lives);
@@ -431,29 +431,22 @@ public class Player : MonoBehaviour
         }
     }
 
-    private IEnumerator IDie() {
+    private IEnumerator IDie()
+    {
         GetComponent<Animator>().enabled = false;
         gamerulesDisabled = true;
         flipEnable = false;
+
+        // sub life
+        playerVitals.Life -= 1;
+        CustomDebug.Log("Lifes:" + playerVitals.Life, "Testing");
+
         yield return new WaitForSeconds(GameManager._instance.timeDeathSpawn);
-        /*switch(type) {
-            case "Earth":
-                if(GameManager._instance.lifeLimitPlayer[0] > 0) {
-                    GameManager._instance.SpawnNewPlayer(gameObject);
-                }
-                break;
-            case "Sun":
-                if (GameManager._instance.lifeLimitPlayer[1] > 0) {
-                    GameManager._instance.SpawnNewPlayer(gameObject);
-                }
-                break;
-        }*/
 
-        if (playerVitals.Life > 0)
-        {
-            GameManager._instance.SpawnNewPlayer(gameObject);
-        }
+        // respawn player if his lifes are higher than 0
+        if (playerVitals.Life > 0) { GameManager._instance.SpawnNewPlayer(gameObject); }
 
+        // destroy player
         Destroy(gameObject);
         yield return null;
     }

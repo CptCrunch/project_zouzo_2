@@ -202,26 +202,16 @@ public class GameManager : MonoBehaviour {
 
     #region Spawn new player
     // --- [ Spawn new player ] ---
-    public void SpawnNewPlayer(GameObject playerGO) {
-        StartCoroutine(ISpawnNewPlayer(playerGO));
-    }
+    public void SpawnNewPlayer(GameObject playerGO) { StartCoroutine(ISpawnNewPlayer(playerGO)); }
 
-    private IEnumerator ISpawnNewPlayer(GameObject playerGO) {
-        //Subtract Lifes
-        /*switch(playerGO.GetComponent<Player>().type) {
-            case "Earth": lifeLimitPlayer[0] -= lifeLosePerDeath; CustomDebug.Log("Lifes:" + lifeLimitPlayer[0], "Testing"); break;
-            case "Sun": lifeLimitPlayer[1] -= lifeLosePerDeath; CustomDebug.Log("Lifes:" + lifeLimitPlayer[0], "Testing"); break;
-        }*/
-
-        playerGO.GetComponent<Player>().playerVitals.Life--;
-        CustomDebug.Log("Lifes:" + playerGO.GetComponent<Player>().playerVitals.Life, "Testing");
-
+    private IEnumerator ISpawnNewPlayer(GameObject playerGO)
+    {
         //Instantiate new player
         GameObject go = Instantiate(GetPlayerPrefabByName(playerGO.GetComponent<Player>().playerVitals.Character), playerSpawn[Random.Range(0, playerSpawn.Length)].transform.position, Quaternion.identity) as GameObject;
         //Add to playerOnStage array
         playerOnStage[playerGO.GetComponent<Player>().onStageIndex] = go;
         //Set correct lifes
-        go.GetComponent<Player>().lives = playerGO.GetComponent<Player>().lives;
+        go.GetComponent<Player>().playerVitals.Life = playerGO.GetComponent<Player>().playerVitals.Life;
         //Disable the new object for the animation
         go.GetComponent<Player>().gamerulesDisabled = true;
         //Transfer the abilies to the new player
@@ -261,6 +251,18 @@ public class GameManager : MonoBehaviour {
         }
 
         return new PlayerInfo();
+    }
+
+    public GameObject GetStagePrefabByName(string _name)
+    {
+        foreach (GameObject player in playerOnStage)
+        {
+            if (player != null)
+            {
+                if (player.GetComponent<Player>().playerVitals.Character == _name) { return player; }
+            }
+        }
+        return null;
     }
 
     #region Info Getter
