@@ -5,15 +5,19 @@ public class Spikes : MonoBehaviour {
 
     public int damage;
     public float invulnTime;
+    public Color rayColor = Color.cyan;
 
-    [Tooltip("accepted parameters: right, left, top, bottom")]
+    /*[Tooltip("accepted parameters: right, left, top, bottom")]
     public string colliderDirction;
 
     void Start() { if (colliderDirction != "right" && colliderDirction != "left" && colliderDirction != "top" && colliderDirction != "bottom") { Debug.LogError(gameObject.name + " spikes has wrong collider direction parameter"); } }
-
+    */
     void Update()
     {
-        Vector3 rayOrigin = new Vector3(0,0,0);
+        if (gameObject.GetComponent<RayCollider>().showRays != CustomDebug.IsTagActive("MapFeature")) { gameObject.GetComponent<RayCollider>().showRays = CustomDebug.IsTagActive("MapFeature"); }
+        if (gameObject.GetComponent<RayCollider>().rayColor != rayColor) { gameObject.GetComponent<RayCollider>().rayColor = rayColor; }
+
+        /*Vector3 rayOrigin = new Vector3(0,0,0);
         Vector3 rayDirection = new Vector3(0, 0, 0);
         float rayRange = 0;
 
@@ -72,6 +76,25 @@ public class Spikes : MonoBehaviour {
                     // call disableInvuln
                     StartCoroutine(disableInvuln(vitals));
                 }
+            }
+        }*/
+
+        if (gameObject.GetComponent<RayCollider>().collision.value.any)
+        {
+            // get player vitals
+            LivingEntity vitals = gameObject.GetComponent<RayCollider>().collision.gameObject.any.transform.gameObject.GetComponent<Player>().playerVitals;
+
+            // check if invulnerable
+            if (!vitals.Invuln)
+            {
+                // deal damage
+                vitals.GetDamage(damage);
+
+                // enable invulnerability
+                vitals.Invuln = true;
+
+                // call disableInvuln
+                StartCoroutine(disableInvuln(vitals));
             }
         }
     }

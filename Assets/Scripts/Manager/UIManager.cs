@@ -8,6 +8,22 @@ public class UIManager : MonoBehaviour {
 
     public GameObject[] userInterfaces = new GameObject[4];
 
+    // ui variables
+    // ui children
+    private int childHealthBar = 0;
+    private int childHPText = 1;
+    private int childPlayerIcon = 3;
+    private int childSpell1Icon = 4;
+    private int childSpell2Icon = 5;
+    private int childSpell3Icon = 6;
+    private int childLiveContainer = 8;
+
+    // children from Spells
+    private int childeCCF = 0; // charge cooldown frame
+    private int childCooldown = 1;
+    private int childCooldownText = 2;
+    private int childChargeCount = 3;
+
     // --- [ FPS Counter ] ---
     public Text fpsCount;
     int frameCount = 0;
@@ -36,14 +52,21 @@ public class UIManager : MonoBehaviour {
             {
                 // enable UI
                 userInterfaces[i].active = true;
-            }
-        }
 
-        // --- [ set player Icons ] ---
-        for (int i = 0; i < userInterfaces.Length; i++)
-        {
-            // check if objet is visible
-            if (userInterfaces[i].active) { userInterfaces[i].transform.GetChild(2).gameObject.GetComponent<Image>().overrideSprite = GameManager._instance.GetPlayerStandardIconByName(playerOnStage[i].GetComponent<Player>().playerVitals.Character); }
+                // get PlayerUI script
+                PlayerUI playerUIScript = userInterfaces[i].GetComponent<PlayerUI>();
+
+                // transfer index of the ui and the name and character of the player, to the PlayerUI script
+                playerUIScript.indexOfUserInterfaces = i;
+                playerUIScript.playerName = playerOnStage[i].GetComponent<Player>().playerVitals.Name;
+                playerUIScript.playerCharacter = playerOnStage[i].GetComponent<Player>().playerVitals.Character;
+            }
+
+            else
+            {
+                // disable UI
+                userInterfaces[i].active = false;
+            }
         }
     }
 	
@@ -64,20 +87,26 @@ public class UIManager : MonoBehaviour {
                 // get player vitals
                 LivingEntity playerVitals = playerOnStage[i].GetComponent<Player>().playerVitals;
 
+                // --- [ set lifes ] ---
+                UpdateLifes(playerVitals.Character);
+
                 // --- [ set healthbar ] ---
-                // check if objet is visible
-                if (userInterfaces[i].active) { userInterfaces[i].transform.GetChild(0).gameObject.GetComponent<Scrollbar>().size = playerVitals.CurrHealth / playerVitals.MaxHealth; }
+                // check if objet is visible and set its size
+                if (userInterfaces[i].active) { userInterfaces[i].transform.GetChild(childHealthBar).gameObject.GetComponent<Scrollbar>().size = playerVitals.CurrHealth / playerVitals.MaxHealth; }
+
+                // set hp text
+                userInterfaces[i].transform.GetChild(childHPText).gameObject.GetComponent<Text>().text = playerVitals.CurrHealth + " / " + playerVitals.MaxHealth;
 
                 // --- [ set death icon ] ---
-                if (playerVitals.CurrHealth <= 0) { if (userInterfaces[i].transform.GetChild(2).gameObject.GetComponent<Image>() != GameManager._instance.GetPlayerDeathIconByName(playerVitals.Character)) { userInterfaces[i].transform.GetChild(2).gameObject.GetComponent<Image>().overrideSprite = GameManager._instance.GetPlayerDeathIconByName(playerVitals.Character); } }
+                if (playerVitals.CurrHealth <= 0) { if (userInterfaces[i].transform.GetChild(childPlayerIcon).gameObject.GetComponent<Image>() != GameManager._instance.GetPlayerDeathIconByName(playerVitals.Character)) { userInterfaces[i].transform.GetChild(childPlayerIcon).gameObject.GetComponent<Image>().overrideSprite = GameManager._instance.GetPlayerDeathIconByName(playerVitals.Character); } }
 
                 // -- [ set standard icon ] ---
-                else { if (userInterfaces[i].transform.GetChild(2).gameObject.GetComponent<Image>() != GameManager._instance.GetPlayerStandardIconByName(playerVitals.Character)) { userInterfaces[i].transform.GetChild(2).gameObject.GetComponent<Image>().overrideSprite = GameManager._instance.GetPlayerStandardIconByName(playerVitals.Character); } }
+                else { if (userInterfaces[i].transform.GetChild(childPlayerIcon).gameObject.GetComponent<Image>() != GameManager._instance.GetPlayerStandardIconByName(playerVitals.Character)) { userInterfaces[i].transform.GetChild(childPlayerIcon).gameObject.GetComponent<Image>().overrideSprite = GameManager._instance.GetPlayerStandardIconByName(playerVitals.Character); } }
 
                 // --- [ set spell icons ] ---
-                Image spellOneIcon = userInterfaces[i].transform.GetChild(3).gameObject.GetComponent<Image>();
-                Image spellTwoIcon = userInterfaces[i].transform.GetChild(4).gameObject.GetComponent<Image>();
-                Image spellThreeIcon = userInterfaces[i].transform.GetChild(5).gameObject.GetComponent<Image>();
+                Image spellOneIcon = userInterfaces[i].transform.GetChild(childSpell1Icon).gameObject.GetComponent<Image>();
+                Image spellTwoIcon = userInterfaces[i].transform.GetChild(childSpell2Icon).gameObject.GetComponent<Image>();
+                Image spellThreeIcon = userInterfaces[i].transform.GetChild(childSpell3Icon).gameObject.GetComponent<Image>();
 
                 Image[] spellIcons = new Image[3] { spellOneIcon, spellTwoIcon, spellThreeIcon };
 
@@ -91,66 +120,82 @@ public class UIManager : MonoBehaviour {
                         // check if icon has correct sprite
                         if (spellIcons[o].sprite != ability.Icons[ability.SpellCount])
                         {
+                            // set icon visible
                             spellIcons[o].gameObject.active = true;
+                            // set correcht icon
                             spellIcons[o].sprite = ability.Icons[ability.SpellCount];
                         }
+
+                        // --- [ cooldown text ] ---
+                        if (ability.CurrCooldown > 0)
+                        {
+                            // set cooldown text to visible, if it isn't yet
+                            if (!spellIcons[o].transform.GetChild(childCooldownText).gameObject.active) { spellIcons[o].transform.GetChild(childCooldownText).gameObject.active = true; }
+                            // set cooldown
+                            spellIcons[o].transform.GetChild(childCooldownText).gameObject.GetComponent<Text>().text = ability.CurrCooldown.ToString();
+                        }
+
+                        else { if (spellIcons[o].transform.GetChild(childCooldownText).gameObject.active) { spellIcons[o].transform.GetChild(childCooldownText).gameObject.active = false; } }
+
+                        // --- [ charge counter ] ---
+                        if (ability.ID == 5)
+                        {
+                            // transfer leo spell
+                            Leo leo = (Leo)ability;
+                            // check if charge counter is visible, if not set it visible
+                            if (!spellIcons[o].transform.GetChild(childChargeCount).gameObject.active) { spellIcons[o].transform.GetChild(childChargeCount).gameObject.active = true; }
+                            // set charge counter
+                            spellIcons[o].transform.GetChild(childChargeCount).gameObject.GetComponent<Text>().text = leo.CurrCharge.ToString();
+
+                            // set frame visible if it isn't
+                            if (!spellIcons[o].transform.GetChild(childeCCF).gameObject.active) { spellIcons[o].transform.GetChild(childeCCF).gameObject.active = true; }
+                            // set fill amount
+                            spellIcons[o].transform.GetChild(childeCCF).gameObject.GetComponent<Image>().fillAmount = leo.CurrChargeCooldown / leo.MaxChargeCooldown;
+                        }
+
+                        else
+                        {
+                            // set charge frame invisible, if it isn't yet 
+                            if (spellIcons[o].transform.GetChild(childeCCF).gameObject.active) { spellIcons[o].transform.GetChild(childeCCF).gameObject.active = false; }
+                            // set charge counter invisible, if it isn't yet 
+                            if (spellIcons[o].transform.GetChild(childChargeCount).gameObject.active) { spellIcons[o].transform.GetChild(childChargeCount).gameObject.active = false; }
+                        }
+
+                        // set the cooldown image sizte
+                        spellIcons[o].transform.GetChild(childCooldown).gameObject.GetComponent<Scrollbar>().size = ability.CurrCooldown / ability.MaxCooldown;// set the cooldown image sizte
+                        spellIcons[o].transform.GetChild(childCooldown).gameObject.GetComponent<Scrollbar>().size = ability.CurrCooldown / ability.MaxCooldown;
                     }
 
-                    // set icon invislible if the player has no ability in slot 1
+                    // --- [ set icon invislible ] ---
                     else
                     {
+                        // check if the icon is already invislible
                         if (spellIcons[o].gameObject.active)
                         {
+                            // set icon invisible
                             spellIcons[o].gameObject.active = false;
+                            // remove the icons sprite
                             spellIcons[o].sprite = null;
                         }
-                    }
-
-                    if (ability.CurrCooldown > 0)
-                    {
-                        spellIcons[o].transform.GetChild(0).gameObject.active = true;
-                        spellIcons[o].transform.GetChild(0).gameObject.GetComponent<Text>().text = ability.CurrCooldown.ToString();
-                    }
-
-                    else
-                    {
-                        if (spellIcons[o].transform.GetChild(0).gameObject.active) { spellIcons[o].transform.GetChild(0).gameObject.active = false; }
-                    }
-
-                    if (ability.ID == 5)
-                    {
-                        Leo leo = (Leo)ability;
-                        if (!spellIcons[o].transform.GetChild(1).gameObject.active) { spellIcons[o].transform.GetChild(1).gameObject.active = true; }
-                        spellIcons[o].transform.GetChild(1).gameObject.GetComponent<Text>().text = leo.CurrCharge.ToString();
-                    }
-
-                    else
-                    {
-                        if (spellIcons[o].transform.GetChild(1).gameObject.active) { spellIcons[o].transform.GetChild(1).gameObject.active = false; }
                     }
                 }
             }
         }
 
-        /*/ -- [ FPS Counter ] --
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            if (GameManager._instance.showFPS)
-            {
-                GameManager._instance.showFPS = false;
-            }
+        /*/ --- [ FPS Counter ] ---
+        // toggle pfs
+        if(Input.GetKeyDown(KeyCode.F)) { GameManager._instance.showFPS != GameManager._instance.showFPS; }
 
-            else
-            {
-                GameManager._instance.showFPS = true;
-            }
-        }
-
+        // --- [ show pfs ] ---
         if (GameManager._instance.showFPS)
         {
+            // set pfs visible
             fpsCount.enabled = true;
 
+            // add trameCount
             frameCount++;
+
+            // save Time.deltaTime
             dt += Time.deltaTime;
 
             if (dt > 1.0f / updateRate)
@@ -167,6 +212,22 @@ public class UIManager : MonoBehaviour {
         {
             fpsCount.enabled = false;
         }*/
+    }
+
+    public void UpdateLifes(string _character)
+    {
+        GetUserInterfaceFromPlayerCharacter(_character).GetComponent<PlayerUI>().UpdateLifes();
+    }
+
+    private GameObject GetUserInterfaceFromPlayerCharacter(string _character)
+    {
+        foreach (GameObject ui in userInterfaces)
+        {
+            string playerCharacter = ui.GetComponent<PlayerUI>().playerCharacter;
+            // check if ui is players ui
+            if (playerCharacter == _character) { return ui; }
+        }
+        return null;
     }
 
     // --- [ Timer ] ---

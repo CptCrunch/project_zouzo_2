@@ -81,8 +81,8 @@ public class GameManager : MonoBehaviour {
         // check if scene is a stage and start OnStage metod if so
         if (IsStage()) { OnStage(); }
 
-        //Set Life Limit for every player
-        for(int i = 0; i < lifeLimitPlayer.Length; i++) { lifeLimitPlayer[i] = lifeLimit; }
+        /*/ set fife Limit for every player
+        for(int i = 0; i < lifeLimitPlayer.Length; i++) { lifeLimitPlayer[i] = lifeLimit; }*/
     }
 
     void Update()
@@ -91,19 +91,24 @@ public class GameManager : MonoBehaviour {
         {
             timeLimit -= Time.deltaTime;
             CustomDebug.Log(timeLimit.ToString("f0"), "Time");
-            //UIManager.Instance.SetTimer(timeLimit);
+            /*UIManager.Instance.SetTimer(timeLimit);*/
 
-            if(timeLimit <= 0) {
-                EndGame();
+            // --- [ end game ] ---
+            if (timeLimit <= 10)
+            {
+                // warn player that the game will end shortly
+                Debug.Log("Game will end in <color=red>" + timeLimit + "</color> secounds");
+
+                // check if game ends
+                if (timeLimit <= 0) { EndGame(); }
             }
 
-            foreach (int i in lifeLimitPlayer) {
-                if (i <= 0) {
-                    EndGame();
-                }
+            // makes no sence to me, we need to check if only one player has more lifes than one, not if one has no lifes
+            foreach (int i in lifeLimitPlayer)
+            {
+                if (i <= 0) { EndGame(); }
             }
         }
-
     }
 
     // Create All Player when the level loads
@@ -138,9 +143,16 @@ public class GameManager : MonoBehaviour {
         }
 
         // --- [ register player on stage ] ---
+        int onStageIndex = 0;
         foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
         {
+            // get Player script
+            Player playerSript = player.GetComponent<Player>();
+
             Util.IncludeGameObject(playerOnStage, player);
+            playerSript.onStageIndex = onStageIndex;
+            playerSript.playerVitals.Life = lifeLimit;
+            onStageIndex++;
         }
     }
 
@@ -190,19 +202,16 @@ public class GameManager : MonoBehaviour {
 
     #region Spawn new player
     // --- [ Spawn new player ] ---
-    public void SpawnNewPlayer(GameObject playerGO) {
-        StartCoroutine(ISpawnNewPlayer(playerGO));
-    }
+    public void SpawnNewPlayer(GameObject playerGO) { StartCoroutine(ISpawnNewPlayer(playerGO)); }
 
-    private IEnumerator ISpawnNewPlayer(GameObject playerGO) {
-        //Subtract Lifes
-        switch(playerGO.GetComponent<Player>().type) {
-            case "Earth": lifeLimitPlayer[0] -= lifeLosePerDeath; CustomDebug.Log("Lifes:" + lifeLimitPlayer[0], "Testing"); break;
-            case "Sun": lifeLimitPlayer[1] -= lifeLosePerDeath; CustomDebug.Log("Lifes:" + lifeLimitPlayer[0], "Testing"); break;
-        }
-
+    private IEnumerator ISpawnNewPlayer(GameObject playerGO)
+    {
         //Instantiate new player
-        GameObject go = Instantiate(GetPlayerPrefabByName(playerGO.GetComponent<Player>().type), playerSpawn[Random.Range(0, playerSpawn.Length)].transform.position, Quaternion.identity) as GameObject;
+        GameObject go = Instantiate(GetPlayerPrefabByName(playerGO.GetComponent<Player>().playerVitals.Character), playerSpawn[Random.Range(0, playerSpawn.Length)].transform.position, Quaternion.identity) as GameObject;
+        //Add to playerOnStage array
+        playerOnStage[playerGO.GetComponent<Player>().onStageIndex] = go;
+        //Set correct lifes
+        go.GetComponent<Player>().playerVitals.Life = playerGO.GetComponent<Player>().playerVitals.Life;
         //Disable the new object for the animation
         go.GetComponent<Player>().gamerulesDisabled = true;
         //Transfer the abilies to the new player
@@ -242,6 +251,18 @@ public class GameManager : MonoBehaviour {
         }
 
         return new PlayerInfo();
+    }
+
+    public GameObject GetStagePrefabByName(string _name)
+    {
+        foreach (GameObject player in playerOnStage)
+        {
+            if (player != null)
+            {
+                if (player.GetComponent<Player>().playerVitals.Character == _name) { return player; }
+            }
+        }
+        return null;
     }
 
     #region Info Getter

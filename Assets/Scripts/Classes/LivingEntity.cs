@@ -65,6 +65,7 @@ public class LivingEntity
     public float MoveSpeed { get { return currSpeed; } }
     public string Name { get { return name; } }
     public string Character { get { return character; } }
+    public int Life { get { return life; } set { life = value; } }
     public float CurrHealth { get { return currHealth; } }
     public float MaxHealth { get { return maxHealth; } }
 

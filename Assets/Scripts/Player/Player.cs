@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     [Tooltip("Define Controller: P1, P2, P3, P4, KB")]
     public string playerAxis;
+    [HideInInspector] public int onStageIndex;
 
     #region Player Vitals
     [Header("Player Vitals:")]
@@ -65,10 +66,6 @@ public class Player : MonoBehaviour
     [HideInInspector] public bool gamerulesDisabled = false;
     #endregion
 
-    #region Ability Variables
-    
-    #endregion
-
     #region Animations 
     [HideInInspector] public Animator _animator;
     private bool mirror = false;
@@ -98,7 +95,7 @@ public class Player : MonoBehaviour
         playerAbilitiesScript = gameObject.GetComponent<PlayerAbilities>();
 
         if (GameManager._instance != null && GameManager._instance.playerMaxHealth != 0) { maxHealth = GameManager._instance.playerMaxHealth; }
-        if (GameManager._instance != null && GameManager._instance.lifeLimit != 0) { lives = GameManager._instance.lifeLimit; }
+        /*if (GameManager._instance != null && GameManager._instance.lifeLimit != 0) { lives = GameManager._instance.lifeLimit; }*/
 
         // create playerVitals
         playerVitals = new LivingEntity(gameObject, name, type, moveSpeed, slowedSpeed, maxHealth, lives);
@@ -185,13 +182,13 @@ public class Player : MonoBehaviour
 
         // --- [ Condition Animations ] ---
         _animator.SetBool("Stunned", playerVitals.Stunned);
-
         _animator.SetBool("KnockUp", playerVitals.KnockUped);
-
         _animator.SetBool("KnockBack", playerVitals.KnockBacked);
 
-        if (playerVitals.KnockBacked) {
-            if ((!mirror && velocity.x < 0) || (mirror && velocity.x > 0)) {
+        if (playerVitals.KnockBacked)
+        {
+            if ((!mirror && velocity.x < 0) || (mirror && velocity.x > 0))
+            {
                 ConditionFlip();
                 flipEnable = false;
             }
@@ -426,31 +423,30 @@ public class Player : MonoBehaviour
     #region Die
     public void Die()
     {
-        if (!dead) {
+        if (!dead)
+        {
             CustomDebug.Log("Died", "Testing");
             _animator.SetTrigger("Death");
             dead = true;
         }
     }
 
-    private IEnumerator IDie() {
+    private IEnumerator IDie()
+    {
         GetComponent<Animator>().enabled = false;
         gamerulesDisabled = true;
         flipEnable = false;
+
+        // sub life
+        playerVitals.Life -= 1;
+        CustomDebug.Log("Lifes:" + playerVitals.Life, "Testing");
+
         yield return new WaitForSeconds(GameManager._instance.timeDeathSpawn);
-        switch(type) {
-            case "Earth":
-                if(GameManager._instance.lifeLimitPlayer[0] > 0) {
-                    GameManager._instance.SpawnNewPlayer(gameObject);
-                }
-                break;
-            case "Sun":
-                if (GameManager._instance.lifeLimitPlayer[1] > 0) {
-                    GameManager._instance.SpawnNewPlayer(gameObject);
-                }
-                break;
-        }
-       
+
+        // respawn player if his lifes are higher than 0
+        if (playerVitals.Life > 0) { GameManager._instance.SpawnNewPlayer(gameObject); }
+
+        // destroy player
         Destroy(gameObject);
         yield return null;
     }
