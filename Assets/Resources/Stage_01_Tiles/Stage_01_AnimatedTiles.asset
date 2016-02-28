@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 149c1fd3f6decae4cb6adbe6d74327ac, type: 3}
+  m_Name: Stage_01_AnimatedTiles
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 458004, guid: f12cf2d14b29e134eb4e1880ff0ea984, type: 2}
+  - {fileID: 495170, guid: 44ccc0d3bccedb6469c2efd91a5fd542, type: 2}
+  - {fileID: 489556, guid: 0fe06aa274caecc44a2f2f932e4ca941, type: 2}
+  - {fileID: 466080, guid: 299f1b13b1edfee429e7b48e678e3069, type: 2}
+  - {fileID: 453558, guid: 6e6b42bb10eb53845bc24cc502ed3547, type: 2}
