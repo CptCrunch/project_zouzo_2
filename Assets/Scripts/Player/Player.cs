@@ -54,9 +54,11 @@ public class Player : MonoBehaviour
 
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
-    public float wallLeap;
+    /*public float wallLeap;*/
     public float wallSlideSpeedMax = 3;
     public float wallStickTime = .25f;
+
+    private bool wallJumpEnable = false;
 
     float timeToWallUnstick;
     #endregion
@@ -280,6 +282,45 @@ public class Player : MonoBehaviour
                 flipEnable = true;
             }
 
+            // check if player wants to move away from wall
+            if (wallSliding && ((input.x < 0 && wallDirX > 0) || (input.x > 0 && wallDirX < 0)))
+            {
+                // disable sticking
+                wallSliding = false;
+                // enable wall jump
+                wallJumpEnable = true;
+            }
+
+            // --- [ disable wall sticky ] ---
+            if (wallSliding)
+            {
+                if (Input.GetAxisRaw(playerAxis + "_Vertical") < 0)
+                {
+                    wallSliding = false;
+                    velocity.x = -wallDirX;
+                }
+            }
+
+            // check if wall jump is enabled
+            if (wallJumpEnable)
+            {
+                // check if player has offset collision
+                if (gameObject.GetComponent<RayCollider>().collision.value.left || gameObject.GetComponent<RayCollider>().collision.value.right)
+                {
+                    if (Input.GetKey(playerControles[0]))
+                    {
+                        // jump
+                        velocity.x = -wallDirX * wallJumpOff.x;
+                        velocity.y = wallJumpOff.y;
+                        // disable wall jump
+                        wallJumpEnable = false;
+                    }
+                }
+
+                // disable walljump
+                else { wallJumpEnable = false; }
+            }
+
             // --- [ jumps ] ---
             // check if jump button is pressed
             if (Input.GetKeyDown(playerControles[0]))
@@ -307,7 +348,7 @@ public class Player : MonoBehaviour
                         velocity.y = wallJumpOff.y;
                     }
 
-                    // --- [ wall leap ] ---
+                    /*/ --- [ wall leap ] ---
                     // check if player is aiming away from wall
                     else
                     {
@@ -326,13 +367,13 @@ public class Player : MonoBehaviour
                             velocity.x = -wallDirX * wallLeap;
                             velocity.y = wallLeap / 4;
                         }
-                    }
+                    }*/
                 }
 
                 // set wallslide animation off
                 else { _animator.SetBool("WallSlide", false); }
 
-                // --- [ jump on floor ] ---
+                // --- [ jumping on floor ] ---
                 // check if player is on floor
                 if (controller.collisions.below)
                 {

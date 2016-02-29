@@ -216,7 +216,10 @@ public class UIManager : MonoBehaviour {
 
     public void UpdateLifes(string _character)
     {
-        GetUserInterfaceFromPlayerCharacter(_character).GetComponent<PlayerUI>().UpdateLifes();
+        if (GetUserInterfaceFromPlayerCharacter(_character) != null)
+        {
+            GetUserInterfaceFromPlayerCharacter(_character).GetComponent<PlayerUI>().UpdateLifes();
+        }
     }
 
     private GameObject GetUserInterfaceFromPlayerCharacter(string _character)

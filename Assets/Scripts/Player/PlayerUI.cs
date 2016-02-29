@@ -38,7 +38,7 @@ public class PlayerUI : MonoBehaviour {
     public void UpdateLifes()
     {
         LivingEntity playerVitals = GameManager._instance.GetStagePrefabByName(playerCharacter).GetComponent<Player>().playerVitals;
-        Debug.Log("UI: " + playerVitals.Life);
+
         #region lifes
         // --- [ set lives ] ---
         #region additional

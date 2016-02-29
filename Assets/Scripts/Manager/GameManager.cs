@@ -55,6 +55,9 @@ public class GameManager : MonoBehaviour {
         playerNames = new string[playerInfo.Length];
         // set playerNames
         for (int i = 0; i < playerInfo.Length; i++) { playerNames[i] = playerInfo[i].name; }
+        // check if scene is a stage and start OnStage metod if so
+
+        if (IsStage()) { OnStage(); }
     }
 
     public GameObject[] PlayerOnStage { get { return playerOnStage; } set { PlayerOnStage = value; } }
@@ -78,9 +81,6 @@ public class GameManager : MonoBehaviour {
         CustomDebug.EnableTag("Time", Tags.Time);
         #endregion
 
-        // check if scene is a stage and start OnStage metod if so
-        if (IsStage()) { OnStage(); }
-
         /*/ set fife Limit for every player
         for(int i = 0; i < lifeLimitPlayer.Length; i++) { lifeLimitPlayer[i] = lifeLimit; }*/
     }
@@ -101,12 +101,6 @@ public class GameManager : MonoBehaviour {
 
                 // check if game ends
                 if (timeLimit <= 0) { EndGame(); }
-            }
-
-            // makes no sence to me, we need to check if only one player has more lifes than one, not if one has no lifes
-            foreach (int i in lifeLimitPlayer)
-            {
-                if (i <= 0) { EndGame(); }
             }
         }
     }

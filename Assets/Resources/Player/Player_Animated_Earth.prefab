@@ -14,6 +14,7 @@ GameObject:
   - 114: {fileID: 11488288}
   - 114: {fileID: 11484232}
   - 95: {fileID: 9579960}
+  - 114: {fileID: 11416902}
   m_Layer: 9
   m_Name: Player_Animated_Earth
   m_TagString: Player
@@ -28,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 183932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.647207, y: -6.3213067, z: 0}
+  m_LocalPosition: {x: 3.3608904, y: -0.6930632, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -64,6 +65,28 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11416902
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 183932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfeaf6478218ee94292eda2408b9f880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkTag: Ground
+  enableTop: 0
+  enableBottom: 0
+  enableRight: 1
+  enableLeft: 1
+  offsetTop: 0
+  offsetBottom: 0.3
+  offsetRight: 0.3
+  offsetLeft: 0
+  showRays: 0
+  rayColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &11420560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -110,6 +133,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   input: {x: 0, y: 0}
   playerAxis: KB
+  onStageIndex: 0
   name: Earth
   type: Earth
   maxHealth: 100
@@ -129,7 +153,6 @@ MonoBehaviour:
   timeToJumpApex: 0.4
   wallJumpClimb: {x: 8.5, y: 20}
   wallJumpOff: {x: 15, y: 15}
-  wallLeap: 15
   wallSlideSpeedMax: 3
   wallStickTime: 0.25
   gamerulesDisabled: 0

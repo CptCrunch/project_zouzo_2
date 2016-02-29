@@ -14,6 +14,10 @@ public class PlayerSelection : MonoBehaviour
     private int playerCount = 0;
     private int playerLockedCount = 0;
 
+    public Sprite notConnectetFrame;
+    public Sprite[] connectedFrame = new Sprite[4];
+    public Sprite[] lockedFrame = new Sprite[4];
+
     /* Player Splashart Backup
     #region Player Splashart
     public Sprite[] notConnectedImg = new Sprite[4];
@@ -224,6 +228,8 @@ public class PlayerSelection : MonoBehaviour
                     characterPicture[i].UpdateCharacter();
                     // show chars
                     characterHolder[i].overrideSprite = scrollSplasharts[i];
+                    // set frame
+                    characterHolder[i].transform.GetChild(0).gameObject.GetComponent<Image>().overrideSprite = connectedFrame[i];
                     break;
                 }
             }
@@ -245,6 +251,8 @@ public class PlayerSelection : MonoBehaviour
                     if (characterPicture[i].IsLocked) { DelockCharacter(characterPicture[i]); }
                     // set disconnected picture
                     characterHolder[characterPicture[i].Index].overrideSprite = notConnectedImg[characterPicture[i].Index];
+                    // set standard frame
+                    characterHolder[characterPicture[i].Index].transform.GetChild(0).GetComponent<Image>().overrideSprite = notConnectetFrame;
                     // delite palyer
                     characterPicture[i] = null;
                     // sub one from player count
@@ -294,6 +302,8 @@ public class PlayerSelection : MonoBehaviour
             scrollSplasharts[character.PictureNumber] = GameManager._instance.GetPlayerBlockedSplashartByName(character.Character);
             // replace the players splashart to the locked one
             characterHolder[character.Index].overrideSprite = GameManager._instance.GetPlayerLockedSplashartByName(character.Character);
+            // set locked frame
+            characterHolder[character.Index].transform.GetChild(0).GetComponent<Image>().overrideSprite = lockedFrame[character.Index];
             // set the isLocked variable of the instance to true
             character.IsLocked = true;
             // update character
@@ -336,6 +346,8 @@ public class PlayerSelection : MonoBehaviour
                 if (!picture.IsLocked)
                 {
                     characterHolder[picture.Index].overrideSprite = scrollSplasharts[picture.PictureNumber];
+                    // set not locked frame
+                    characterHolder[picture.Index].transform.GetChild(0).GetComponent<Image>().overrideSprite = connectedFrame[picture.Index];
                 }
             }
         }
