@@ -71,6 +71,18 @@ public class AbilityManager : MonoBehaviour
 
     public Attacks CreateAquarius(GameObject caster) { return null; }
     public Attacks CreatePisces(GameObject caster) { return null; }
+
+    public Sprite GetOrbByName(string _name)
+    {
+        foreach (Abilities ability in spells)
+        {
+            if (ability.name == _name)
+            {
+                return ability.orbs;
+            }
+        }
+        return null;
+    }
 }
 
 
@@ -78,6 +90,7 @@ public class AbilityManager : MonoBehaviour
 public struct Abilities
 {
     public string name;
+    public bool active;
     public int damage;
     [Tooltip("the time it takes the spell to start [time in seconds]")]
     public float castTime;
@@ -92,6 +105,7 @@ public struct Abilities
     [Range(2, 8)]
     public uint directions;
     public Sprite[] icons;
+    public Sprite orbs;
 
     [Header("Meeles")]
     [Tooltip("the time that the spell needs to reach max range (0 is instand) [time in seconds]")]

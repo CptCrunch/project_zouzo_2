@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour {
 
     public CharacterPicture[] charPics = new CharacterPicture[4];
     public GameObject[] playerOnStage = new GameObject[4] { null, null, null, null };
+    private int playerOnStageAmount = 0;
     #endregion
 
     [Header("Debug")]
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public GameObject[] PlayerOnStage { get { return playerOnStage; } set { PlayerOnStage = value; } }
+    public int PlayerOnStageAmount { get { return playerOnStageAmount; } }
 
     void Start()
     {
@@ -90,14 +92,14 @@ public class GameManager : MonoBehaviour {
         if(Running)
         {
             timeLimit -= Time.deltaTime;
-            CustomDebug.Log(timeLimit.ToString("f0"), "Time");
+            /*CustomDebug.Log(timeLimit.ToString("f0"), "Time");*/
             /*UIManager.Instance.SetTimer(timeLimit);*/
 
             // --- [ end game ] ---
             if (timeLimit <= 10)
             {
                 // warn player that the game will end shortly
-                Debug.Log("Game will end in <color=red>" + timeLimit + "</color> secounds");
+                //Debug.Log("Game will end in <color=red>" + timeLimit + "</color> secounds");
 
                 // check if game ends
                 if (timeLimit <= 0) { EndGame(); }
@@ -110,12 +112,12 @@ public class GameManager : MonoBehaviour {
     {
         // check if scene is a stage and start OnStage metod if so
         if (IsStage()) { OnStage(); }
-
-        StartCoroutine(WaitCoroutine());
     }
 
     public void OnStage()
     {
+        StartCoroutine(WaitCoroutine());
+
         // find all spawns
         playerSpawn = GameObject.FindGameObjectsWithTag(spawnTag);
 
@@ -144,6 +146,7 @@ public class GameManager : MonoBehaviour {
             Player playerSript = player.GetComponent<Player>();
 
             Util.IncludeGameObject(playerOnStage, player);
+            playerOnStageAmount++;
             playerSript.onStageIndex = onStageIndex;
             playerSript.playerVitals.Life = lifeLimit;
             onStageIndex++;
@@ -222,7 +225,7 @@ public class GameManager : MonoBehaviour {
     public void EndGame()
     {
         CustomDebug.Log("<color=red> Game End </color>", "Main");
-        Running = false;
+        //Running = false;
     }
 
     public bool IsStage()
