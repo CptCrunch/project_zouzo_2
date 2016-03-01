@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &121034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 401054}
+  - 114: {fileID: 11401058}
+  m_Layer: 0
+  m_Name: Orb Spawn4 (1)
+  m_TagString: Orb
+  m_Icon: {fileID: -3545028842045912814, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &130038
 GameObject:
   m_ObjectHideFlags: 0
@@ -24,8 +40,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 419974}
+  - 114: {fileID: 11473180}
   m_Layer: 0
-  m_Name: Orb Spawn
+  m_Name: Orb Spawn2
   m_TagString: Orb
   m_Icon: {fileID: -3545028842045912814, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -39,8 +56,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400466}
+  - 114: {fileID: 11418752}
   m_Layer: 0
-  m_Name: Orb Spawn
+  m_Name: Orb Spawn4 (2)
   m_TagString: Orb
   m_Icon: {fileID: -3545028842045912814, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -54,8 +72,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 448844}
+  - 114: {fileID: 11482702}
   m_Layer: 0
-  m_Name: Orb Spawn
+  m_Name: Orb Spawn1
   m_TagString: Orb
   m_Icon: {fileID: -3545028842045912814, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -69,8 +88,25 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 434462}
+  - 114: {fileID: 11450304}
   m_Layer: 0
-  m_Name: Orb Spawn
+  m_Name: Orb Spawn3
+  m_TagString: Orb
+  m_Icon: {fileID: -3545028842045912814, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &199462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 477976}
+  - 114: {fileID: 11497318}
+  m_Layer: 0
+  m_Name: Orb Spawn4
   m_TagString: Orb
   m_Icon: {fileID: -3545028842045912814, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -83,11 +119,23 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154632}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.7, y: 4.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 426242}
-  m_RootOrder: 3
+  m_RootOrder: 5
+--- !u!4 &401054
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 121034}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.76, y: 4.91, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 426242}
+  m_RootOrder: 4
 --- !u!4 &419974
 Transform:
   m_ObjectHideFlags: 1
@@ -95,7 +143,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142518}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -22.84, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 426242}
@@ -107,12 +155,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 130038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.13588953, y: .104392946, z: 2.51854134}
+  m_LocalPosition: {x: 3.1358895, y: 0.104392946, z: 2.5185413}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 448844}
   - {fileID: 419974}
   - {fileID: 434462}
+  - {fileID: 477976}
+  - {fileID: 401054}
   - {fileID: 400466}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -123,7 +173,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -14.3, y: -7.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 426242}
@@ -135,11 +185,53 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156600}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 15.98, y: 1.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 426242}
   m_RootOrder: 0
+--- !u!4 &477976
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199462}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.32, y: -7.35, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 426242}
+  m_RootOrder: 3
+--- !u!114 &11401058
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 121034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 761ca203f15fb80438cd04b77d4d414a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxCooldown: 2
+  despawnTime: 4
+  nextDespawn: 0
+  orb: {fileID: 0}
+--- !u!114 &11418752
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 761ca203f15fb80438cd04b77d4d414a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxCooldown: 2
+  despawnTime: 4
+  nextDespawn: 0
+  orb: {fileID: 0}
 --- !u!114 &11437536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,8 +245,78 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orbTag: Orb
   orbPrefab: {fileID: 122882, guid: 55c639cec24383348b353fbdc076f033, type: 2}
+  orbMax: 4
+  orbCount: 0
+  spawnCooldown: 15
+  spawnActiveTime: 7
+  timeToStartSelfSpawn: 3
+  standardSpawns:
+  - {fileID: 156600}
+  - {fileID: 142518}
+  - {fileID: 168536}
+  - {fileID: 199462}
+  enableSelfSpawning: 0
   orbSprites: []
-  spawnRate: 1.5
+--- !u!114 &11450304
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 761ca203f15fb80438cd04b77d4d414a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxCooldown: 2.5
+  despawnTime: 4
+  nextDespawn: 0
+  orb: {fileID: 0}
+--- !u!114 &11473180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 142518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 761ca203f15fb80438cd04b77d4d414a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxCooldown: 2.5
+  despawnTime: 4
+  nextDespawn: 0
+  orb: {fileID: 0}
+--- !u!114 &11482702
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 156600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 761ca203f15fb80438cd04b77d4d414a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxCooldown: 2.5
+  despawnTime: 4
+  nextDespawn: 0
+  orb: {fileID: 0}
+--- !u!114 &11497318
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 761ca203f15fb80438cd04b77d4d414a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxCooldown: 2.5
+  despawnTime: 4
+  nextDespawn: 0
+  orb: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -46,26 +46,26 @@ public class SpellBullet : MonoBehaviour {
             case "upRight":
                 collider.size = new Vector2(colliderBiggestSide, colliderBiggestSide);
                 spriteRenderer.sprite = bulletSprites[2];
-                //spriteRenderer.flipX = true;
+                spriteRenderer.flipX = true;
                 break;
             case "right":
-                //spriteRenderer.flipX = true;
+                spriteRenderer.flipX = true;
                 break;
             case "downRight":
                 collider.size = new Vector2(colliderBiggestSide, colliderBiggestSide);
                 spriteRenderer.sprite = bulletSprites[2];
-                //spriteRenderer.flipX = true;
-                //spriteRenderer.flipY = true;
+                spriteRenderer.flipX = true;
+                spriteRenderer.flipY = true;
                 break;
             case "down":
                 collider.size = new Vector2(colliderSiteY, colliderSiteX);
                 spriteRenderer.sprite = bulletSprites[1];
-                //spriteRenderer.flipY = true;
+                spriteRenderer.flipY = true;
                 break;
             case "downLeft":
                 collider.size = new Vector2(colliderBiggestSide, colliderBiggestSide);
                 spriteRenderer.sprite = bulletSprites[2];
-                //spriteRenderer.flipY = true;
+                spriteRenderer.flipY = true;
                 break;
             case "left":
                 break;
@@ -156,16 +156,16 @@ public class SpellBullet : MonoBehaviour {
                             {
                                 collider.size = new Vector2(colliderSiteY, colliderSiteX);
                                 spriteRenderer.sprite = bulletSprites[1];
-                                //spriteRenderer.flipX = false;
+                                spriteRenderer.flipX = false;
 
                                 if (Util.Aim8Direction(new Vector2(spellDir.y, spellDir.x)) == "upRight" || Util.Aim8Direction(new Vector2(spellDir.y, spellDir.x)) == "upLeft")
                                 {
-                                  //  spriteRenderer.flipY = false;
+                                    spriteRenderer.flipY = false;
                                 }
 
                                 else
                                 {
-                                    //spriteRenderer.flipY = true;
+                                    spriteRenderer.flipY = true;
                                 }
                             }
 
@@ -173,16 +173,16 @@ public class SpellBullet : MonoBehaviour {
                             {
                                 collider.size = new Vector2(colliderSiteX, colliderSiteY);
                                 spriteRenderer.sprite = bulletSprites[0];
-                                //spriteRenderer.flipY = false;
+                                spriteRenderer.flipY = false;
 
                                 if (Util.Aim8Direction(new Vector2(spellDir.y, spellDir.x)) == "upRight" || Util.Aim8Direction(new Vector2(spellDir.y, spellDir.x)) == "downRight")
                                 {
-                                  //  spriteRenderer.flipX = true;
+                                    spriteRenderer.flipX = true;
                                 }
 
                                 else
                                 {
-                                    //spriteRenderer.flipX = false;
+                                    spriteRenderer.flipX = false;
                                 }
                             }
                         }

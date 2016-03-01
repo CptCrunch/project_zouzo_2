@@ -82,9 +82,9 @@ MonoBehaviour:
   enableRight: 1
   enableLeft: 1
   offsetTop: 0
-  offsetBottom: 0.3
+  offsetBottom: 0
   offsetRight: 0.3
-  offsetLeft: 0
+  offsetLeft: 0.3
   showRays: 0
   rayColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &11420560
@@ -234,6 +234,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: maxHealth
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: offsetBottom
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: offsetLeft
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
