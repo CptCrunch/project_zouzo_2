@@ -7,7 +7,6 @@ public class OrbSpawner : MonoBehaviour
     //Singleton
     private static OrbSpawner _instance = null;
     public static OrbSpawner Instance { get { return _instance; } }
-    void Awake() { if(_instance == null) { _instance = this; } else { Destroy(gameObject); } }
 
     //Orb Spawn
     [Header("Orbs")]
@@ -15,6 +14,7 @@ public class OrbSpawner : MonoBehaviour
     public GameObject orbPrefab;
     [Tooltip("maximum amount of orbs, at once, on the stage")]
     public int orbMax = 4;
+    private int secondWaveSpawn;
     [HideInInspector] public int orbCount = 0;
 
     [Header("Spawns")]
@@ -33,9 +33,9 @@ public class OrbSpawner : MonoBehaviour
     public Sprite[] orbSprites;
 
     public bool showDebugCooldowns = false;
+
+    #region oldStuff
     /*private int random;*/
-
-
 
     /*private AbilityOrbValues[] spawnPointsCheck = new AbilityOrbValues[4]
     { new AbilityOrbValues(null, null),new AbilityOrbValues(null, null), new AbilityOrbValues(null, null), new AbilityOrbValues(null, null) };*/
@@ -66,6 +66,13 @@ public class OrbSpawner : MonoBehaviour
             spawnPointsCheck[random].Active = true;
         }
     } */
+    #endregion
+
+    void Awake()
+    {
+        if (_instance == null) { _instance = this; } else { Destroy(gameObject); }
+        secondWaveSpawn = orbMax;
+    }
 
     void Start()
     {
@@ -94,6 +101,7 @@ public class OrbSpawner : MonoBehaviour
             }
         }
 
+        // --- [ transfer variables ] ---
         foreach (GameObject spawn in spawnPoints)
         {
             spawn.GetComponent<OrbSpawn>().despawnTime = spawnActiveTime;
@@ -104,6 +112,7 @@ public class OrbSpawner : MonoBehaviour
         for (int i = 0; i < GameManager._instance.PlayerOnStageAmount; i++)
         {
             CreateOrbs(standardSpawns[i]);
+            secondWaveSpawn--;
         }
     }
 
@@ -122,7 +131,7 @@ public class OrbSpawner : MonoBehaviour
                 enableSelfSpawning = true;
 
                 // create more orbs
-                while (orbCount < orbMax) { SpawnOrb(); }
+                for (int i = 0; i < secondWaveSpawn; i++) {SpawnOrb(); }
             }
         }
     }
