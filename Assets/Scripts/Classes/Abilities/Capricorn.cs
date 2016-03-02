@@ -11,7 +11,7 @@ public class Capricorn : Attacks {
     private bool airCast = false;
 
     public Capricorn(GameObject caster, Sprite[] icons, int damage, float castTime, float travleTime, float duration, float cooldown, float range, int targets, uint spellDir, float height, float knockBackRange, float knockBackStrenght) : base(
-        caster, 10, icons, "capricorn", "CC", targets, damage, castTime, travleTime, duration, cooldown, range, spellDir)
+        caster, 10, icons, "Capricorn", "CC", targets, damage, castTime, travleTime, duration, cooldown, range, spellDir)
     {
         this.height = height;
         this.knockBackRange = knockBackRange;

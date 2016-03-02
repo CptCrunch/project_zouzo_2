@@ -166,9 +166,18 @@ public class OrbSpawner : MonoBehaviour
 
         // create orb
         GameObject orb = Instantiate(orbPrefab, _spawn.transform.position, Quaternion.identity) as GameObject;
-        orb.GetComponent<Animator>().SetInteger("animationID", AbilityManager.Instance.GetSpellID(spawnableOrbs[Random.Range(0, spawnableOrbs.Length)]));
-        Debug.Log(orb.GetComponent<SpriteRenderer>().sprite.name);
 
+        // get random spell
+        string randomSpell = spawnableOrbs[Random.Range(0, spawnableOrbs.Length)];
+        // transfer spell type
+        orb.GetComponent<AbilityOrb>().spellType = randomSpell;
+        // set animation
+        orb.GetComponent<Animator>().SetInteger("animationID", AbilityManager.Instance.GetSpellID(randomSpell));
+
+        // transfer spawn
+        orb.GetComponent<AbilityOrb>().spawn = _spawn.GetComponent<OrbSpawn>();
+
+        // add orb
         _spawn.GetComponent<OrbSpawn>().SetNewOrb(orb);
     }
 }
