@@ -22,13 +22,37 @@ public class OrbSpawn : MonoBehaviour {
             {
                 if (currCooldown <= 0) { if (OrbSpawner.Instance.enableSelfSpawning && alowedToSpawn) { if (OrbSpawner.Instance.SpawnOrb()) { alowedToSpawn = false; } } }
                 currCooldown -= Time.deltaTime;
+
+                transform.GetChild(0).GetComponent<TextMesh>().text = gameObject.name + "\n" + currCooldown.ToString();
+                if (currCooldown > 0)
+                {
+                    transform.GetChild(0).GetComponent<TextMesh>().color = Color.red;
+                }
+
+                else
+                {
+                    transform.GetChild(0).GetComponent<TextMesh>().color = Color.green;
+                }
             }
 
             else
             {
                 if (nextDespawn > 0) { nextDespawn -= Time.deltaTime; }
                 else { DeliteOrb(); }
+
+                transform.GetChild(0).GetComponent<TextMesh>().text = gameObject.name + "\n" + nextDespawn.ToString();
+                transform.GetChild(0).GetComponent<TextMesh>().color = Color.blue;
             }
+        }
+
+        if (alowedToSpawn)
+        {
+            transform.GetChild(0).GetComponent<TextMesh>().fontSize = 20;
+        }
+
+        else
+        {
+            transform.GetChild(0).GetComponent<TextMesh>().fontSize = 10;
         }
     }
 

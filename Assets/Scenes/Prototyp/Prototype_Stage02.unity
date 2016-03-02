@@ -429,6 +429,82 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 319ca724ee3e7b5418614109f6621279, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &19690239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 19690240}
+  - 23: {fileID: 19690242}
+  - 102: {fileID: 19690241}
+  m_Layer: 0
+  m_Name: Orb Cooldown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &19690240
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 19690239}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.3, z: -2.5185413}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_Children: []
+  m_Father: {fileID: 774535762}
+  m_RootOrder: 0
+--- !u!102 &19690241
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 19690239}
+  m_Text: Orb Spawn 3
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 4
+  m_Alignment: 1
+  m_TabSize: 4
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+--- !u!23 &19690242
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 19690239}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!1001 &21907456
 Prefab:
   m_ObjectHideFlags: 0
@@ -979,6 +1055,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56499619fa6e5ce4d9b8b8487672774a, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &55938394 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 401054, guid: 58146610b0b904f42b2b1d445a947b3d, type: 2}
+  m_PrefabInternal: {fileID: 1459875864}
 --- !u!1001 &58096387
 Prefab:
   m_ObjectHideFlags: 0
@@ -3351,6 +3431,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56499619fa6e5ce4d9b8b8487672774a, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &195334416 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 419974, guid: 58146610b0b904f42b2b1d445a947b3d, type: 2}
+  m_PrefabInternal: {fileID: 1459875864}
 --- !u!1001 &196701389
 Prefab:
   m_ObjectHideFlags: 0
@@ -8370,15 +8454,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -.113999367
+      value: -0.11399937
       objectReference: {fileID: 0}
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -.39695549
+      value: -0.3969555
       objectReference: {fileID: 0}
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -.0854886994
+      value: -0.0854887
       objectReference: {fileID: 0}
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_LocalRotation.x
@@ -8398,7 +8482,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 165844, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_Name
@@ -8508,15 +8592,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 10.5169449
+      value: 10.516945
       objectReference: {fileID: 0}
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4.24495792
+      value: 4.244958
       objectReference: {fileID: 0}
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -.0854886994
+      value: -0.0854887
       objectReference: {fileID: 0}
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_LocalRotation.x
@@ -8536,7 +8620,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 165844, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
+      propertyPath: m_Name
+      value: Player Spawn (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
@@ -14929,6 +15017,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56499619fa6e5ce4d9b8b8487672774a, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &774535762 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 434462, guid: 58146610b0b904f42b2b1d445a947b3d, type: 2}
+  m_PrefabInternal: {fileID: 1459875864}
 --- !u!1001 &777492656
 Prefab:
   m_ObjectHideFlags: 0
@@ -15055,6 +15147,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eb3a662364134b84ab47262987b256a7, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &779097555 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 477976, guid: 58146610b0b904f42b2b1d445a947b3d, type: 2}
+  m_PrefabInternal: {fileID: 1459875864}
 --- !u!1001 &784145688
 Prefab:
   m_ObjectHideFlags: 0
@@ -15248,10 +15344,10 @@ Transform:
   m_LocalPosition: {x: 5.0139995, y: 4.8469553, z: 0.0854887}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1896449757}
+  - {fileID: 1009342708}
   - {fileID: 458074470}
   - {fileID: 465766276}
-  - {fileID: 1009342708}
-  - {fileID: 1896449757}
   m_Father: {fileID: 0}
   m_RootOrder: 7
 --- !u!1001 &805499824
@@ -16148,6 +16244,82 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56499619fa6e5ce4d9b8b8487672774a, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &858890441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 858890442}
+  - 23: {fileID: 858890444}
+  - 102: {fileID: 858890443}
+  m_Layer: 0
+  m_Name: Orb Cooldown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &858890442
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 858890441}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.3, z: -2.5185413}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2127597610}
+  m_RootOrder: 0
+--- !u!102 &858890443
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 858890441}
+  m_Text: Orb Spawn 6
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 4
+  m_Alignment: 1
+  m_TabSize: 4
+  m_FontSize: 10
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+--- !u!23 &858890444
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 858890441}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!1001 &859710056
 Prefab:
   m_ObjectHideFlags: 0
@@ -17566,6 +17738,82 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56499619fa6e5ce4d9b8b8487672774a, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &933358446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 933358447}
+  - 23: {fileID: 933358449}
+  - 102: {fileID: 933358448}
+  m_Layer: 0
+  m_Name: Orb Cooldown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &933358447
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 933358446}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.3, z: -2.5185413}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_Children: []
+  m_Father: {fileID: 55938394}
+  m_RootOrder: 0
+--- !u!102 &933358448
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 933358446}
+  m_Text: Orb Spawn 5
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 4
+  m_Alignment: 1
+  m_TabSize: 4
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+--- !u!23 &933358449
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 933358446}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!1001 &936669269
 Prefab:
   m_ObjectHideFlags: 0
@@ -19313,15 +19561,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -10.3739996
+      value: -10.374
       objectReference: {fileID: 0}
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -.196955204
+      value: -0.1969552
       objectReference: {fileID: 0}
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -.0854886994
+      value: -0.0854887
       objectReference: {fileID: 0}
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_LocalRotation.x
@@ -19341,7 +19589,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 165844, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_Name
@@ -21842,6 +22090,82 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f12cf2d14b29e134eb4e1880ff0ea984, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1146620296
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1146620297}
+  - 23: {fileID: 1146620299}
+  - 102: {fileID: 1146620298}
+  m_Layer: 0
+  m_Name: Orb Cooldown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1146620297
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1146620296}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.3, z: -2.5185413}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_Children: []
+  m_Father: {fileID: 779097555}
+  m_RootOrder: 0
+--- !u!102 &1146620298
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1146620296}
+  m_Text: Orb Spawn 4
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 4
+  m_Alignment: 1
+  m_TabSize: 4
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+--- !u!23 &1146620299
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1146620296}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!1001 &1151934695
 Prefab:
   m_ObjectHideFlags: 0
@@ -23896,6 +24220,82 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4acbede7c219e474e860a06cb7ac28ce, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1278091252
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1278091255}
+  - 23: {fileID: 1278091254}
+  - 102: {fileID: 1278091253}
+  m_Layer: 0
+  m_Name: Orb Cooldown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!102 &1278091253
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1278091252}
+  m_Text: Orb Spawn 1
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 4
+  m_Alignment: 1
+  m_TabSize: 4
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+--- !u!23 &1278091254
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1278091252}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!4 &1278091255
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1278091252}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.3, z: -2.5185413}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1352718707}
+  m_RootOrder: 0
 --- !u!1001 &1279835715
 Prefab:
   m_ObjectHideFlags: 0
@@ -24956,6 +25356,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56499619fa6e5ce4d9b8b8487672774a, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &1352718707 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 448844, guid: 58146610b0b904f42b2b1d445a947b3d, type: 2}
+  m_PrefabInternal: {fileID: 1459875864}
 --- !u!1001 &1353534359
 Prefab:
   m_ObjectHideFlags: 0
@@ -27298,6 +27702,14 @@ Prefab:
     - target: {fileID: 426242, guid: 58146610b0b904f42b2b1d445a947b3d, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 121034, guid: 58146610b0b904f42b2b1d445a947b3d, type: 2}
+      propertyPath: m_Name
+      value: Orb Spawn5
+      objectReference: {fileID: 0}
+    - target: {fileID: 154632, guid: 58146610b0b904f42b2b1d445a947b3d, type: 2}
+      propertyPath: m_Name
+      value: Orb Spawn6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 58146610b0b904f42b2b1d445a947b3d, type: 2}
@@ -30634,25 +31046,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56499619fa6e5ce4d9b8b8487672774a, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1660720631 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 132222, guid: b3d938f58e985734fb0d4a50e6ef1b9b, type: 2}
-  m_PrefabInternal: {fileID: 1270329776}
---- !u!114 &1660720633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1660720631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 761ca203f15fb80438cd04b77d4d414a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxCooldown: 2
-  despawnTime: 4
-  nextDespawn: 0
-  orb: {fileID: 0}
 --- !u!1001 &1660826469
 Prefab:
   m_ObjectHideFlags: 0
@@ -34099,6 +34492,84 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 567d85e8de8c97f49966279e2cb41fe1, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1870773159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1870773160}
+  - 23: {fileID: 1870773162}
+  - 102: {fileID: 1870773161}
+  m_Layer: 0
+  m_Name: Orb Cooldown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1870773160
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1870773159}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.3, z: -2.5185413}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_Children: []
+  m_Father: {fileID: 195334416}
+  m_RootOrder: 0
+--- !u!102 &1870773161
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1870773159}
+  m_Text: 'Orb Spawn 2
+
+'
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 4
+  m_Alignment: 1
+  m_TabSize: 4
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+--- !u!23 &1870773162
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1870773159}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!1001 &1871098889
 Prefab:
   m_ObjectHideFlags: 0
@@ -34540,11 +35011,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.41304493
+      value: 3.413045
       objectReference: {fileID: 0}
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -.0854886994
+      value: -0.0854887
       objectReference: {fileID: 0}
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_LocalRotation.x
@@ -34564,7 +35035,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 461336, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 165844, guid: f81d991ed1f346b4daa5917156bea915, type: 2}
       propertyPath: m_Name
@@ -38925,6 +39396,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56499619fa6e5ce4d9b8b8487672774a, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &2127597610 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400466, guid: 58146610b0b904f42b2b1d445a947b3d, type: 2}
+  m_PrefabInternal: {fileID: 1459875864}
 --- !u!1001 &2128116269
 Prefab:
   m_ObjectHideFlags: 0
