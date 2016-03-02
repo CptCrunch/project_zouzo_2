@@ -31,6 +31,8 @@ public class OrbSpawner : MonoBehaviour
     private string[] spawnableOrbs = new string[0];
 
     public Sprite[] orbSprites;
+
+    public bool showDebugCooldowns = false;
     /*private int random;*/
 
 
@@ -77,7 +79,7 @@ public class OrbSpawner : MonoBehaviour
             if (AbilityManager.Instance.spells[i].active)
             {
                 // check if spell isn't a basic
-                if (AbilityManager.Instance.spells[i].name != "basic")
+                if (AbilityManager.Instance.spells[i].name != "Basic")
                 {
                     string[] saveOldOrb = spawnableOrbs;
                     spawnableOrbs = new string[spawnableOrbs.Length + 1];
@@ -164,7 +166,9 @@ public class OrbSpawner : MonoBehaviour
 
         // create orb
         GameObject orb = Instantiate(orbPrefab, _spawn.transform.position, Quaternion.identity) as GameObject;
-        orb.GetComponent<SpriteRenderer>().sprite = AbilityManager.Instance.GetOrbByName(spawnableOrbs[Random.Range(0, spawnableOrbs.Length)]);
+        //orb.GetComponent<SpriteRenderer>().sprite = AbilityManager.Instance.GetOrbByName(spawnableOrbs[Random.Range(0, spawnableOrbs.Length )]);
+        orb.GetComponent<Animator>().SetInteger("animationID", AbilityManager.Instance.GetSpellID(spawnableOrbs[Random.Range(0, spawnableOrbs.Length)]));
+        Debug.Log(orb.GetComponent<SpriteRenderer>().sprite.name);
 
         _spawn.GetComponent<OrbSpawn>().SetNewOrb(orb);
     }

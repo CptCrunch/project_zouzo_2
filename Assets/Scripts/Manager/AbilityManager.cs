@@ -83,6 +83,18 @@ public class AbilityManager : MonoBehaviour
         }
         return null;
     }
+
+    public int GetSpellID(string _name)
+    {
+        for (int i = 0; i < spells.Length; i++)
+        {
+            if (spells[i].name == _name)
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
 }
 
 

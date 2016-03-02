@@ -224,7 +224,7 @@ public class GameManager : MonoBehaviour {
 
     public void EndGame()
     {
-        CustomDebug.Log("<color=red> Game End </color>", "Main");
+        //CustomDebug.Log("<color=red> Game End </color>", "Main");
         //Running = false;
     }
 

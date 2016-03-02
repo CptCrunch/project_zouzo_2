@@ -225,7 +225,7 @@ MonoBehaviour:
     - {fileID: 21300004, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
     - {fileID: 21300006, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
     - {fileID: 21300008, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
-    orbs: {fileID: 21300010, guid: 4230c3134b95abe4090bdaff01e3a54d, type: 3}
+    orbs: {fileID: 21300102, guid: 7f88b3ab51b8ac6499aa38ba42097c65, type: 3}
     travelTime: 0.2
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -253,7 +253,7 @@ MonoBehaviour:
     directions: 2
     icons:
     - {fileID: 21300012, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
-    orbs: {fileID: 21300022, guid: cf1bbaa49e8dd814e816473471381697, type: 3}
+    orbs: {fileID: 21300050, guid: 7f88b3ab51b8ac6499aa38ba42097c65, type: 3}
     travelTime: 0.2
     bullet: {fileID: 0}
     bulletSpeed: 0
@@ -335,7 +335,7 @@ MonoBehaviour:
     directions: 8
     icons:
     - {fileID: 21300010, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
-    orbs: {fileID: 21300000, guid: b3cefa9d2bd1b814b91bd1a842edafa7, type: 3}
+    orbs: {fileID: 21300024, guid: 7f88b3ab51b8ac6499aa38ba42097c65, type: 3}
     travelTime: 0
     bullet: {fileID: 193644, guid: cd83b1fd26d5b2b408c90360880b7752, type: 2}
     bulletSpeed: 20
@@ -364,7 +364,7 @@ MonoBehaviour:
     icons:
     - {fileID: 21300000, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
     - {fileID: 21300002, guid: 85f0b1b8006b28c4087ef399fadb41f7, type: 3}
-    orbs: {fileID: 21300012, guid: 4230c3134b95abe4090bdaff01e3a54d, type: 3}
+    orbs: {fileID: 21300076, guid: 7f88b3ab51b8ac6499aa38ba42097c65, type: 3}
     travelTime: 0.5
     bullet: {fileID: 0}
     bulletSpeed: 0

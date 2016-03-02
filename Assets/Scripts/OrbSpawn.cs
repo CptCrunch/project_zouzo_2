@@ -3,35 +3,35 @@ using System.Collections;
 
 public class OrbSpawn : MonoBehaviour {
 
-    public float maxCooldown = 0f;
+    [HideInInspector] public float maxCooldown = 0f;
     private float currCooldown = 0;
 
-    public float despawnTime = 0f;
-    public float nextDespawn = 0;
+    [HideInInspector] public float despawnTime = 0f;
+    [HideInInspector] public float nextDespawn = 0;
 
     private bool alowedToSpawn = false;
 
     [HideInInspector] public GameObject orb = null;
-	
+
 	// Update is called once per frame
 	void Update ()
     {
+        if (!OrbSpawner.Instance.showDebugCooldowns) { if (transform.GetChild(0).gameObject.active) { transform.GetChild(0).gameObject.active = false; } }
+        else { if(!transform.GetChild(0).gameObject.active) transform.GetChild(0).gameObject.active = true; }
+
         if (GameManager._instance.Running)
         {
+            if (OrbSpawner.Instance.enableSelfSpawning && alowedToSpawn && currCooldown <= 0) { if (OrbSpawner.Instance.SpawnOrb()) { alowedToSpawn = false; } }
             if (orb == null)
             {
-                if (currCooldown <= 0) { if (OrbSpawner.Instance.enableSelfSpawning && alowedToSpawn) { if (OrbSpawner.Instance.SpawnOrb()) { alowedToSpawn = false; } } }
                 currCooldown -= Time.deltaTime;
 
-                transform.GetChild(0).GetComponent<TextMesh>().text = gameObject.name + "\n" + currCooldown.ToString();
-                if (currCooldown > 0)
+                // --- [ over head de bug ] ---
+                if (OrbSpawner.Instance.showDebugCooldowns)
                 {
-                    transform.GetChild(0).GetComponent<TextMesh>().color = Color.red;
-                }
-
-                else
-                {
-                    transform.GetChild(0).GetComponent<TextMesh>().color = Color.green;
+                    transform.GetChild(0).GetComponent<TextMesh>().text = gameObject.name + "\n" + currCooldown.ToString();
+                    if (currCooldown > 0) { transform.GetChild(0).GetComponent<TextMesh>().color = Color.red; }
+                    else { transform.GetChild(0).GetComponent<TextMesh>().color = Color.green; }
                 }
             }
 
@@ -40,19 +40,20 @@ public class OrbSpawn : MonoBehaviour {
                 if (nextDespawn > 0) { nextDespawn -= Time.deltaTime; }
                 else { DeliteOrb(); }
 
-                transform.GetChild(0).GetComponent<TextMesh>().text = gameObject.name + "\n" + nextDespawn.ToString();
-                transform.GetChild(0).GetComponent<TextMesh>().color = Color.blue;
+                // --- [ over head de bug ] ---
+                if (OrbSpawner.Instance.showDebugCooldowns)
+                {
+                    transform.GetChild(0).GetComponent<TextMesh>().text = gameObject.name + "\n" + nextDespawn.ToString();
+                    transform.GetChild(0).GetComponent<TextMesh>().color = Color.blue;
+                }
             }
         }
 
-        if (alowedToSpawn)
+        // --- [ over head de bug ] ---
+        if (OrbSpawner.Instance.showDebugCooldowns)
         {
-            transform.GetChild(0).GetComponent<TextMesh>().fontSize = 20;
-        }
-
-        else
-        {
-            transform.GetChild(0).GetComponent<TextMesh>().fontSize = 10;
+            if (alowedToSpawn) { transform.GetChild(0).GetComponent<TextMesh>().fontSize = 35; }
+            else { transform.GetChild(0).GetComponent<TextMesh>().fontSize = 30; }
         }
     }
 
