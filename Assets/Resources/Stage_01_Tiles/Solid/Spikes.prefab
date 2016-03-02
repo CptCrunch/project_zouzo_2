@@ -56,9 +56,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfeaf6478218ee94292eda2408b9f880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkTag: Player
+  checkTag:
+  - Player
   enableTop: 0
-  enableBottom: 0
+  enableBottom: 1
   enableRight: 0
   enableLeft: 0
   offsetTop: 0
@@ -80,7 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   invulnTime: 1
-  colliderDirction: 
+  rayColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!212 &21299268
 SpriteRenderer:
   m_ObjectHideFlags: 1

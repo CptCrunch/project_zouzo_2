@@ -1,43 +1,71 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &122882
+--- !u!1 &100162
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 436944}
-  - 212: {fileID: 21282056}
-  - 61: {fileID: 6182572}
-  - 114: {fileID: 11426208}
-  - 114: {fileID: 11401538}
-  - 95: {fileID: 9532116}
+  - 4: {fileID: 466662}
+  - 212: {fileID: 21206600}
+  - 61: {fileID: 6168726}
+  - 114: {fileID: 11480752}
+  - 114: {fileID: 11418966}
   m_Layer: 0
-  m_Name: Orb_Prefab
+  m_Name: portalLeftEntry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &436944
+--- !u!1 &189694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 475798}
+  - 61: {fileID: 6173158}
+  m_Layer: 8
+  m_Name: BackWall
+  m_TagString: Ground
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &466662
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122882}
+  m_GameObject: {fileID: 100162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.817092, y: 1.2295983, z: 0}
-  m_LocalScale: {x: 3.2, y: 3.2, z: 1}
-  m_Children: []
+  m_LocalPosition: {x: 18.01, y: -6.48, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_Children:
+  - {fileID: 475798}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!61 &6182572
+--- !u!4 &475798
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 189694}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 466662}
+  m_RootOrder: 0
+--- !u!61 &6168726
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122882}
+  m_GameObject: {fileID: 100162}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -45,30 +73,27 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2}
---- !u!95 &9532116
-Animator:
-  serializedVersion: 3
+  m_Size: {x: 0.64, y: 0.96}
+--- !u!61 &6173158
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122882}
+  m_GameObject: {fileID: 189694}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b7d0d1fab1f1e9a40b0f74fe4f322b9a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11401538
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.28, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.08, y: 0.96}
+--- !u!114 &11418966
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122882}
+  m_GameObject: {fileID: 100162}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfeaf6478218ee94292eda2408b9f880, type: 3}
@@ -76,40 +101,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkTag:
   - Player
-  enableTop: 1
-  enableBottom: 1
+  - Spell
+  enableTop: 0
+  enableBottom: 0
   enableRight: 1
-  enableLeft: 1
+  enableLeft: 0
   offsetTop: 0
   offsetBottom: 0
-  offsetRight: 0
+  offsetRight: -0.5
   offsetLeft: 0
   showRays: 0
   rayColor: {r: 1, g: 0, b: 0, a: 1}
---- !u!114 &11426208
+--- !u!114 &11480752
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122882}
+  m_GameObject: {fileID: 100162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a80d90c252149743acfe0b36b1765d4, type: 3}
+  m_Script: {fileID: 11500000, guid: f61dfd1b884f58b4f8fdd62360a7b8ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellType: 
-  spawn: {fileID: 0}
---- !u!212 &21282056
+  partner: {fileID: 0}
+--- !u!212 &21206600
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122882}
+  m_GameObject: {fileID: 100162}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7e92fe90261722048926a621f93a8c49, type: 2}
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -124,8 +149,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300000, guid: 7690138513a83814aa2a6ddeb3adb2f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -137,38 +162,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
-      propertyPath: checkTag.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalScale.x
-      value: 3.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalScale.y
-      value: 3.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalPosition.x
+      propertyPath: showRays
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: checkTag
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: checkTag.Array.data[0]
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: enableTop
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 122882}
+  m_RootGameObject: {fileID: 100162}
   m_IsPrefabParent: 1
