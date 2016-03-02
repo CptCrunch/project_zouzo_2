@@ -13,8 +13,8 @@ GameObject:
   - 114: {fileID: 11420560}
   - 114: {fileID: 11488288}
   - 114: {fileID: 11484232}
-  - 95: {fileID: 9579960}
   - 114: {fileID: 11416902}
+  - 95: {fileID: 9579960}
   m_Layer: 9
   m_Name: Player_Animated_Earth
   m_TagString: Player
@@ -29,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 183932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.3608904, y: -0.6930632, z: 0}
+  m_LocalPosition: {x: -2.8083904, y: 5.5323305, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

@@ -3,10 +3,29 @@ using System.Collections;
 
 public class AbilityOrb : MonoBehaviour {
 
-    public AbilityOrbValues point;
+    public string spellType;
+    public OrbSpawn spawn;
+
+    private bool picUpEnable = false;
+
+    void Update()
+    {
+        if (picUpEnable)
+        {
+            if (gameObject.GetComponent<RayCollider>().collision.value.any)
+            {
+                spawn.DeliteOrb();
+                gameObject.GetComponent<RayCollider>().collision.gameObject.any.GetComponent<PlayerAbilities>().SwitchSpell(spellType);
+            }
+        }
+    }
+
+    public void EnablePickUp() { picUpEnable = true; }
+
+    /*public AbilityOrbValues point;
     //private string[] attacks = new string[12] { "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Saggitarius", "Capricorn", "Aquarius", "Pisces" };
     private string[] attacks = new string[4] { "Leo", "Virgo","Saggitarius", "Capricorn"};
-    public string chosenAttackName;
+    public string chosenAttackName;*/
 
     /*private Attacks GetRandomAttack(GameObject caster)
     {
@@ -29,8 +48,8 @@ public class AbilityOrb : MonoBehaviour {
         }
 
         return attack;
-    }*/
-
+    }
+    
     private Attacks GetRandomAttack(GameObject caster)
     {
         Attacks attack = null;
@@ -51,7 +70,7 @@ public class AbilityOrb : MonoBehaviour {
         chosenAttackName = attacks[Random.Range(0, attacks.Length)];
 
         if (OrbSpawner.Instance.orbSprites.Length > 0) {
-            /*switch(chosenAttackName)
+            switch(chosenAttackName)
             {
                 case "Aries": SetSprite(OrbSpawner.Instance.orbSprites[0]); break;
                 case "Taurus": SetSprite(OrbSpawner.Instance.orbSprites[1]); break;
@@ -65,7 +84,7 @@ public class AbilityOrb : MonoBehaviour {
                 case "Capricorn": SetSprite(OrbSpawner.Instance.orbSprites[8]); break;
                 case "Aquarius": SetSprite(OrbSpawner.Instance.orbSprites[9]); break;
                 case "Pisces": SetSprite(OrbSpawner.Instance.orbSprites[10]); break;
-            }*/
+            }
 
             switch (chosenAttackName) {
                 case "Leo": SetSprite(OrbSpawner.Instance.orbSprites[0]); break;
@@ -96,5 +115,5 @@ public class AbilityOrb : MonoBehaviour {
     {
         point.Active = false;
         Destroy(gameObject);
-    }
+    }*/
 }

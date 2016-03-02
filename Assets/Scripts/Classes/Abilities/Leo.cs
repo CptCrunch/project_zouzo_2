@@ -13,7 +13,7 @@ public class Leo : Attacks {
     private float animReset = 0.0f;
 
     public Leo(GameObject caster, Sprite[] icons, int damage, float castTime, float delay, float duration, float cooldown, float range, int targets, uint spellDir, int maxCharge, float maxChargeCooldown) : base(
-        caster, 5, icons, "leo", "meele", targets, damage, castTime, delay, duration, cooldown, range, spellDir)
+        caster, 5, icons, "Leo", "meele", targets, damage, castTime, delay, duration, cooldown, range, spellDir)
     {
         instanceCount++;
         this.maxCharge = maxCharge;
