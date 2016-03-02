@@ -42,7 +42,7 @@ public class RayCollider : MonoBehaviour
     [HideInInspector] public directions collision;
 
     [Header("Tag")]
-    public string checkTag = "";
+    public string[] checkTag = new string[0];
 
     [Header("Enable Collision")]
     public bool enableTop = true;
@@ -160,15 +160,22 @@ public class RayCollider : MonoBehaviour
             // check if variable is not empty
             if (hit != null)
             {
-                // check if we should check the tag
-                if (checkTag != "")
+                // check if entry isn't you
+                if (hit != gameObject)
                 {
-                    // check tag
-                    if (hit.tag == checkTag)    {   return hit.gameObject;  }
-                }
+                    // check if we should check the tag
+                    if (checkTag.Length > 0)
+                    {
+                        foreach (string tag in checkTag)
+                        {
+                            // check tag
+                            if (hit.tag == tag) { return hit.gameObject; }
+                        }
+                    }
 
-                // return GameObject if we do not need to check the tag
-                else { return hit.gameObject; }
+                    // return GameObject if we do not need to check the tag
+                    else { return hit.gameObject; }
+                }
             }
         }
 
@@ -195,15 +202,22 @@ public class RayCollider : MonoBehaviour
             // check if variable is not empty
             if (hit != null)
             {
-                // check if we should check the tag
-                if (checkTag != "")
+                // check if entry isn't you
+                if (hit != gameObject)
                 {
-                    // check tag
-                    if (hit.tag == checkTag) { return hit.gameObject; }
-                }
+                    // check if we should check the tag
+                    if (checkTag.Length > 0)
+                    {
+                        foreach (string tag in checkTag)
+                        {
+                            // check tag
+                            if (hit.tag == tag) { return hit.gameObject; }
+                        }
+                    }
 
-                // return GameObject if we do not need to check the tag
-                else { return hit.gameObject; }
+                    // return GameObject if we do not need to check the tag
+                    else { return hit.gameObject; }
+                }
             }
         }
 
@@ -230,15 +244,22 @@ public class RayCollider : MonoBehaviour
             // check if variable is not empty
             if (hit != null)
             {
-                // check if we should check the tag
-                if (checkTag != "")
+                // check if entry isn't you
+                if (hit != gameObject)
                 {
-                    // check tag
-                    if (hit.tag == checkTag) { return hit.gameObject; }
-                }
+                    // check if we should check the tag
+                    if (checkTag.Length > 0)
+                    {
+                        foreach (string tag in checkTag)
+                        {
+                            // check tag
+                            if (hit.tag == tag) { return hit.gameObject; }
+                        }
+                    }
 
-                // return GameObject if we do not need to check the tag
-                else { return hit.gameObject; }
+                    // return GameObject if we do not need to check the tag
+                    else { return hit.gameObject; }
+                }
             }
         }
 
@@ -265,15 +286,22 @@ public class RayCollider : MonoBehaviour
             // check if variable is not empty
             if (hit != null)
             {
-                // check if we should check the tag
-                if (checkTag != "")
+                // check if entry isn't you
+                if (hit != gameObject)
                 {
-                    // check tag
-                    if (hit.tag == checkTag) { return hit.gameObject; }
-                }
+                    // check if we should check the tag
+                    if (checkTag.Length > 0)
+                    {
+                        foreach (string tag in checkTag)
+                        {
+                            // check tag
+                            if (hit.tag == tag) { return hit.gameObject; }
+                        }
+                    }
 
-                // return GameObject if we do not need to check the tag
-                else { return hit.gameObject; }
+                    // return GameObject if we do not need to check the tag
+                    else { return hit.gameObject; }
+                }
             }
         }
 
